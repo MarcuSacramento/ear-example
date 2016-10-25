@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+
+	<style>
+	.label_tabela_custom {
+	white-space: normal !important;
+	font-size: 1.1em !important;
+	word-break: break-all !important;
+	}
+	</style>
+
+	<ui:define name="breadcrumb"> > 
+		<h:link	title="GERENCIAMENTO" value="GERENCIAMENTO" outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > PESQUISAS
+	</ui:define>
+
+
+	<ui:define name="conteudo">
+    	 
+		<div class="atlas-miolo-logado">
+			<h2>Mensageria XXX</h2>
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h:head>
+				<title>Mensageria | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+
+			<p>Verifique e preencha os campos abaixo para realizar
+				pesquisa das ultimas mensagens enviadas:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+
+				<legend>Data do envio</legend>
+
+				<div class="atlas-miolo-logado-linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<h:outputText styleClass="label" value="De" /> <br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-dual">
+						<p:calendar locale="pt"
+							value="#{manterMensageriaBean.filtroDataInicio}"
+							id="inputDataDe" style="font-family: open_sanssemibold, Arial, Helvetica, sans-serif;
+							font-size: 1.1em !important;" size="15" title="Data de Início"
+							navigator="true" pattern="dd/MM/yyyy" >
+							</p:calendar>
+
+					</div>
+
+					<div style="float: left !important; margin-left: -20px !important;">
+						<h:outputText styleClass="label" value="Ate" /> <br />
+					</div>
+					<div style="margin-left: -20px !important;"
+						class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha">
+						<p:calendar locale="pt"
+							value="#{manterMensageriaBean.filtroDataFim}" size="15" title="Data Fim"
+							id="inputDataAte" style="font-family: open_sanssemibold, Arial, Helvetica, sans-serif;
+							font-size: 1.1em !important;"
+							navigator="true" pattern="dd/MM/yyyy" >				
+						</p:calendar>
+							
+					</div>
+
+					<div style="float: left !important; margin-left: 28px !important;">
+						<h:commandButton value="PESQUISAR"	
+							action="#{manterMensageriaBean.pesquisarMensagens()}"
+							styleClass="atlas-button-interno" id="mostrarTabela"
+							title="Clique para pesquisar as ultimas mensagem enviadas"
+							style="font-size: 1.2em !important;" />
+
+						<h:commandButton value="LIMPAR"	
+							action="#{manterMensageriaBean.limparPesquisa()}"
+							styleClass="atlas-button-interno" id="limparPesquisa"
+							title="Clique para limpar os campos de pesquisa"
+							style="font-size: 1.2em !important;" />
+					</div>
+				</div>
+
+			</fieldset>
+
+			<div>
+				<ui:include src="/admin/gerenciamento/mensageria/tabelaEnvioMensagem.xhtml" />
+			</div>
+
+			<div class="atlas-miolo-logado-lista-acoes">
+				<div class="atlas-miolo-logado-inline">
+				</div>
+
+				<div class="atlas-miolo-logado-inline">
+					<h:commandButton
+						action="#{manterMensageriaBean.novaMensagem()}"
+						value="NOVA MENSAGEM" styleClass="atlas-button-interno"
+						rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('019')}"
+						id="atlas-botao-novo" title="Clique para enviar uma nova mensagem"
+						ajax="false" style="font-size: 1.2em !important;" />
+				</div>
+
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

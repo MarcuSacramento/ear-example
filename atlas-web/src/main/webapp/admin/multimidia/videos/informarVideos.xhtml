@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+
+	<ui:define name="breadcrumb"> > <h:link title="MULTIMÍDIA"
+			value="MULTIMÍDIA" outcome="/admin/multimidia/exibirMultimidia.xhtml" /> > 
+			
+			<h:link title="VÍDEOS" value="VÍDEOS >"
+			outcome="/admin/multimidia/videos/exibirVideos.xhtml" /> NOVO VÍDEO
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<script type="text/javascript">
+		//<![CDATA[
+			function contarDescricao(box,valor,campospan){ 
+				var contador = valor - box.length; 
+				document.getElementById(campospan).innerHTML = contador; 
+				
+				if(box.length >= valor){ 
+					document.getElementById(campospan).innerHTML = "Limite excedido"; 
+					document.getElementById("inputDescricao").value = document.getElementById("inputDescricao").value.substr(0,valor); 
+				}	 
+			}
+		//]]>	
+		</script>
+	
+		<style>
+			div.div-miolo2 {
+			display: block;
+			clear: both;
+			border-bottom: 1px solid rgba(22,89,191,1);
+			min-height: 108px;
+			padding-top: 0.8em;		
+			}
+		</style>
+
+	<div class="atlas-miolo-logado">
+
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+						
+			<h2>Vídeos</h2>
+
+			<h:head>
+				<title>Novo Vídeo | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+
+			<p>Verifique e preencha os campos abaixo para realizar o cadastro
+				de um novo Vídeo:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados do Vídeo</legend>
+				<div class="atlas-miolo-logado-linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="input-Video-Titulo">Título:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+
+						<h:inputText id="input-Video-Titulo" maxlength="128"
+							value="#{manterVideoBean.entidade.nome}"
+							styleClass="atlas-input-formata atlas-input-520" 
+							title="Informe o Título do Vídeo"/>
+							
+						<p:watermark for="input-Video-Titulo"
+							value="Título do Vídeo" />
+
+					</div>
+				</div>
+
+				<div
+					class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-video-url">URL de
+							referência:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText id="atlas-formulario-video-url"
+							value="#{manterVideoBean.entidade.url}" maxlength="256"
+							title="Informe a URL de referência do Vídeo"
+							styleClass="atlas-input-formata atlas-input-520" />
+						<p:watermark for="atlas-formulario-video-url"
+							value="URL de referência do Vídeo" />
+					</div>
+				</div>
+
+				<div
+					class="div-miolo2">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="inputDescricao">Descrição:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputTextarea rows="4"	id="inputDescricao"
+							onkeyup="this.value = this.value.substring(0, 500);"
+							onkeypress="contarDescricao(this.value,500,'totalDescricao')"
+							value="#{manterVideoBean.entidade.descricao}"
+							style="font-size: 1.2em !important;"
+							styleClass="atlas-input-formata atlas-input-520"/>
+						<span id="totalDescricao" class="atlas_textarea_formata_contador" />
+						<p:watermark for="inputDescricao"	value="Descrição do Vídeo" />
+					</div>
+						
+				</div>
+
+				<div
+					class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full"></div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+					
+						<h:selectBooleanCheckbox
+							value="#{manterVideoBean.entidade.telaInicialBoolean}"
+							id="atlas-formulario-video-principal" >
+						</h:selectBooleanCheckbox> <label
+							for="atlas-formulario-video-principal">Manter este vídeo
+							como padrão da tela principal</label><br />
+
+					</div>
+				</div>
+				
+				</fieldset>
+
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Data do Cadastro</legend>
+					<div class="atlas-miolo-logado-linha-label-dual">
+						<label for="atlas-formulario-video-data-cadastro">Data de
+							Cadastro:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-dual">
+						<h:outputLabel
+							value="#{manterVideoBean.entidade.dataPublicacaoFormatada}"
+							id="atlas-formulario-video-data-cadastro"
+							title="Data de Cadastro"
+							style="	border: 1px solid rgb(22, 89, 201) !important; color: rgb(22, 89, 201) !important;
+							font-family: Verdana, Geneva, sans-serif !important; font-size: 1.3em !important;
+							float: rigth !important; background-color: transparent !important;
+							border: transparent !important; ">
+						</h:outputLabel>
+
+					</div>
+
+			</fieldset>
+
+			<div class="atlas-miolo-logado-lista-acoes">
+					<div class="atlas-miolo-logado-inline">
+						<h:commandButton
+							rendered="#{manterVideoBean.existeVideoPrincipalDiferente() and manterVideoBean.entidade.getTelaInicialBoolean() and autenticarUsuarioBean.isPossuiAcessoAdministrador('007')}"
+							value="#{manterVideoBean.entidade.id == null ? 'CADASTRAR' : 'SALVAR'}"
+							action="#{manterVideoBean.salvar()}"
+							styleClass="atlas-button-interno" partialSubmit="false"
+							process="@form" update="@form"
+							title="Clique para cadastrar um novo Vídeo"
+							onclick="return confirm('Já existe um vídeo marcado como padrão, deseja substituir?')">
+						</h:commandButton>
+
+						<h:commandButton
+							rendered="#{!(manterVideoBean.existeVideoPrincipalDiferente() and manterVideoBean.entidade.getTelaInicialBoolean()) and autenticarUsuarioBean.isPossuiAcessoAdministrador('007')}"
+							value="#{manterVideoBean.entidade.id == null ? 'CADASTRAR' : 'SALVAR'}"
+							title="Clique para cadastrar um novo Vídeo"
+							action="#{manterVideoBean.salvar()}"
+							styleClass="atlas-button-interno" partialSubmit="false"
+							process="@form" update="@form">
+						</h:commandButton>
+
+						<h:commandButton action="#{manterVideoBean.cancelar()}"
+							value="CANCELAR" styleClass="atlas-button-interno"
+							partialSubmit="true" process="@form" update="@form"
+							immediate="true"
+							title="Clique para cancelar o cadastro do novo Vídeo" />
+
+					</div>
+
+				</div>
+ 
+			
+		</div>
+	</ui:define>
+</ui:composition>

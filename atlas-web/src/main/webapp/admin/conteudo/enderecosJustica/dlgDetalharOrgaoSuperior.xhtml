@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<style>
+div.atlas-miolo-logado-linha-label-full-filtro{
+	float: left !important;
+	width: 150px!important;
+}
+</style>
+
+<!-- ================================== DIALOG DADOS DO ÓRGÃO SUPERIOR ================================== -->
+<p:dialog header="Dados do órgão superior"
+	widgetVar="dlgDetalharOrgaoSuperior" width="800px;" height="600px;"
+	style="z-index:5;" resizable="false">
+	<p:panel id="pnl-detalhar-orgao-superior" style="border: 0px !important;">
+		<div class="atlas-miolo-logado">
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label style="font-size: 1.2em; color: rgb(0, 0, 0);">Sigla:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<div>
+						<h:outputText value="#{manterOrgaoBean.entidade.orgaoSuperior.sigla}" />
+					</div>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label style="font-size: 1.2em; color: rgb(0, 0, 0);">Tipo de Órgão:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<div>
+						<h:outputText value="#{manterOrgaoBean.nomeTipoOrgaoDoOrgaoSuperior}" />
+					</div>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label style="font-size: 1.2em; color: rgb(0, 0, 0);">Situação do Registro:</label><br />
+				</div>
+	
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<div>
+						<h:outputText value="#{manterOrgaoBean.entidade.orgaoSuperior.indicadorSituacaoFormatada}" />
+					</div>
+				</div>
+			</div>
+	
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label style="font-size: 1.2em; color: rgb(0, 0, 0);">Nome:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<div>
+						<h:outputText value="#{manterOrgaoBean.entidade.orgaoSuperior.nome}" />
+					</div>
+				</div>
+			</div>
+			<div
+				class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label style="font-size: 1.2em; color: rgb(0, 0, 0);">Endereço:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<div>
+						<h:outputText value="#{manterOrgaoBean.entidade.orgaoSuperior.endereco}" />
+					</div>
+				</div>
+			</div>
+	
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label style="font-size: 1.2em; color: rgb(0, 0, 0);">Bairro:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<div>
+						<h:outputText value="#{manterOrgaoBean.entidade.orgaoSuperior.bairro}" />
+					</div>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label style="font-size: 1.2em; color: rgb(0, 0, 0);">CEP:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<div>
+						<h:outputText value="#{manterOrgaoBean.entidade.orgaoSuperior.cep}" />
+					</div>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label style="font-size: 1.2em; color: rgb(0, 0, 0);">Município:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<div>
+						<h:outputText value="#{manterOrgaoBean.entidade.orgaoSuperior.municipio.nome} - " />
+						<h:outputText value="#{manterOrgaoBean.entidade.orgaoSuperior.municipio.uf.sigla}" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</p:panel>
+</p:dialog>
+</html>

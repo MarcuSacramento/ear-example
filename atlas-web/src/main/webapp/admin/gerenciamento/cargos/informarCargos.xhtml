@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+
+	<ui:define name="breadcrumb"> > <h:link
+			title="GERENCIAMENTO" value="GERENCIAMENTO"
+			outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > 
+			
+			<h:link title="CARGOS" value="CARGOS >"
+			outcome="/admin/gerenciamento/cargos/exibirCargos.xhtml" /> NOVO CARGO
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<div class="atlas-miolo-logado">
+			<h2>Cargos</h2>
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h:head>
+				<title>Novo Cargo | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+
+			<p>Verifique e preencha o campo abaixo para realizar a
+				atualização do cargo:</p>
+
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados do cargo</legend>
+				<div class="atlas-miolo-logado-linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-cargo">Cargo:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText value="#{manterCargoBean.entidade.nome}"
+							id="atlas-formulario-cargo" title="Informe o nome do Cargo"
+							styleClass="atlas-input-formata atlas-input-520" maxlength="41"/>
+						<p:watermark for="atlas-formulario-cargo"
+							value="Nome do Cargo" />
+					</div>
+				</div>
+				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label style="font-size: 1.2em !important; color: rgb(0, 0, 0) !important">Tratamento:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText value="#{manterCargoBean.entidade.tratamento}"
+							id="atlas-formulario-tratamento"
+							title="Informe o tratamento do Cargo" maxlength="60"
+							styleClass="atlas-input-formata atlas-input-520" />
+						<p:watermark for="atlas-formulario-tratamento"
+							value="Nome do Tratamento" />
+					</div>
+				</div>
+
+			</fieldset>
+			
+							<div class="atlas-miolo-logado-lista-acoes">
+					<atlas:barraBotoesCadastro bean="#{manterCargoBean}"
+						funcionalidade="018" />
+				</div>
+
+		</div>
+	</ui:define>
+</ui:composition>

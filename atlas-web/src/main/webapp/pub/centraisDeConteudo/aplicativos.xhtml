@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link title="CENTRAIS DE CONTEÚDOS" value="CENTRAIS DE CONTEÚDOS" outcome="/pub/centraisDeConteudo/exibirCentraisDeConteudos.xhtml" /> > APLICATIVOS</ui:define>
+	<ui:define name="conteudo">
+	<div class="atlas-miolo">
+		<h:head>
+			<title>Aplicativos</title>
+		</h:head>
+		<h2> Aplicativos </h2>
+	
+		<div class="atlas-miolo-conteudo-limpo">       
+		        
+		        	<div class="atlas-miolo-conteudo-bloco-aplicativos">
+		        	
+		                <div class="atlas-miolo-conteudo-bloco-aplicativos-imagem">		                	
+		                    <a href="http://www.aplicativos.gov.br/" target="_blank"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/aplicativo.png" alt="Portal de Aplicativos do Governo Federal" title="Portal de Aplicativos do Governo Federal" border="0" /></a>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-aplicativos-texto">
+								<a href="http://www.aplicativos.gov.br/" target="_blank"><center>Portal de Aplicativos do Governo Federal</center> </a>  		                
+		               
+		                </div>
+		            </div>
+				
+		        <div class="atlas-miolo-conteudo-bloco-linha-infografico">
+		        		        
+		            <div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">
+		                		                	
+		                    <a href="https://play.google.com/store/apps/details?id=br.gov.mj.atlasJustica" target="_blank"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/andoid1.png" alt="Atlas da Justiça Versão Andorid" title="Atlas da Justiça Versão Andorid" border="0" /></a>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+								<a href="https://play.google.com/store/apps/details?id=br.gov.mj.atlasJustica" target="_blank"><center>Atlas da Justiça Versão Andorid</center></a>		                
+		                </div>
+		            </div>
+		            <div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">
+		                    <a href="https://itunes.apple.com/us/app/atlas-de-acesso-a-justica/id962472793" target="_blank"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/apple.png" alt="Atlas da Justiça Versão IOS" title="Atlas da Justiça Versão IOS" border="0" /></a>
+		               
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+		                   	<a href="https://itunes.apple.com/us/app/atlas-de-acesso-a-justica/id962472793" target="_blank"><Center>Atlas da Justiça <br /> Versão IOS</Center>  </a>
+		                </div>
+		            </div>
+		            <div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">		                	
+		                    <a href="https://www.microsoft.com/pt-br/store/apps/atlas-de-acesso-%C3%A0-justi%C3%A7a/9nblgggzq5bc" target="_blank"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/windows.png" alt="Atlas da Justiça Versão Windows Phone" title="Atlas da Justiça Versão Windows Phone" border="0" /></a>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+		                    	<a href="https://www.microsoft.com/pt-br/store/apps/atlas-de-acesso-%C3%A0-justi%C3%A7a/9nblgggzq5bc" target="_blank"><center>Atlas da Justiça Versão Windows Phone</center></a>
+		                </div>
+		            </div>
+				</div>
+		    </div>
+		</div>
+	</ui:define>
+</ui:composition>

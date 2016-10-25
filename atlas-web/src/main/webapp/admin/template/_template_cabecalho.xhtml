@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<div class="atlas-cabecalho-container-linha">
+	<nav class="atlas-cabecalho-container-acessibilidade">
+		<ul>
+<!-- 			<li><a href="#atlas-ancora-conteudo" class="atlas-ancora">Ir para o conteúdo <span>1</span> </a>
+         
+			</li> -->
+
+		</ul>
+	</nav>
+
+	<nav class="atlas-cabecalho-container-acessibilidade-info">
+		<ul>
+			<li
+				class="atlas-cabecalho-container-acessibilidade-info-acessibilidade">
+				<h:link title="Acessibilidade" value="Acessibilidade" outcome="/admin/sobreOSite/acessibilidade/exibirAcessibilidade.xhtml" /> 
+							
+			</li>
+			<li class="atlas-cabecalho-container-acessibilidade-info-alto-contraste"> 
+				<a href="#{acessibilidadeBean.getTextoContraste()}" accesskey="5" title="Alterar o contraste da tela - Tecla de atalho 5">Alto Contraste</a>
+			</li>
+			<li class="atlas-cabecalho-container-acessibilidade-info-mapa-do-site">
+				<h:link title="Mapa do site" value="Mapa do site" outcome="/admin/sobreOSite/mapaDoSite/exibirMapaDoSite.xhtml" />	
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<div class="atlas-cabecalho-container-linha">
+	<div class="atlas-cabecalho-container-orgao">
+		<hgroup>
+			<a href="../.." title="Atlas de Acesso à Justiça"> <img
+				src="${facesContext.externalContext.requestContextPath}/admin/_imagens/_logo/logo_atlas_branco.png"
+				alt="Clique para acessar o Atlas"
+				title="Clique para acessar o Atlas" style="border:none;"/>
+			</a>
+			<br />
+			<a href="../.." title="Atlas de Acesso à Justiça"><font size="4">MINISTÉRIO
+					DA JUSTIÇA</font></a>
+		</hgroup>
+	</div>
+
+    <div class="atlas-cabecalho-container-administracao">
+        Área Administrativa
+    </div>
+
+	<div class="atlas-cabecalho-container-redes-sociais">
+		<ul>
+			<li
+				class="atlas-cabecalho-container-redes-sociais-item atlas-cabecalho-container-redes-sociais-twitter">
+				<a href="https://twitter.com/JusticaGovBR" target="_blank">Twitter</a>
+			</li>
+			<li
+				class="atlas-cabecalho-container-redes-sociais-item atlas-cabecalho-container-redes-sociais-youtube">
+				<a href="http://youtube.com/JusticaGovBR" target="_blank">YouTube</a>
+			</li>
+			<li
+				class="atlas-cabecalho-container-redes-sociais-item atlas-cabecalho-container-redes-sociais-facebook">
+				<a href="http://facebook.com/JusticaGovBR" target="_blank">Facebook</a>
+			</li>
+			<li
+				class="atlas-cabecalho-container-redes-sociais-item  atlas-cabecalho-container-redes-sociais-flickr">
+				<a href="http://flickr.com/justicagovbr" target="_blank">Flickr</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</html>

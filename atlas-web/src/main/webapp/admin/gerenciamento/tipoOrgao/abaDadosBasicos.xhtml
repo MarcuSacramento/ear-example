@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+	<div class="atlas-miolo-logado-linha">
+		<div class="atlas-miolo-logado-linha-label-full">
+			<label for="inputNomeTipoOrgao">Nome:*</label><br />
+		</div>
+		<div class="atlas-miolo-logado-linha-campo-full">
+			<h:inputText
+				value="#{manterTipoOrgaoBean.entidade.nome}" id="inputNomeTipoOrgao"
+				maxlength="128" title="Informe o nome do Tipo de órgão"
+				styleClass="atlas-input-formata atlas-input-520" />
+			<p:watermark for="inputNomeTipoOrgao"	value="Nome do tipo de órgão" />
+		</div>
+	</div>
+	<div class="div-miolo atlas-miolo-logado-linha-destaque atlas-miolo-logado-linha-textarea">
+		<div class="atlas-miolo-logado-linha-label-full">
+			<label for="inputDescricaoTipoOrgao">Descrição:</label><br />
+		</div>
+		<div class="atlas-miolo-logado-linha-campo-full">
+			<h:inputTextarea value="#{manterTipoOrgaoBean.entidade.descricao}"
+				rows="5" cols="30" maxlength="400"
+				autoResize="false" style="font-size: 1.2em !important;"
+				styleClass="atlas-textarea-formata atlas-input-520"
+				id="inputDescricaoTipoOrgao" />
+			<p:watermark for="inputDescricaoTipoOrgao" value="Descrição do tipo de órgão" />
+		</div>
+	</div>
+</ui:composition>

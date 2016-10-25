@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+	<style>
+.label_tabela_custom {
+	white-space: normal !important;
+	font-size: 1.1em !important;
+}
+</style>
+
+
+   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> </link>
+	
+
+	<div>
+	
+		<h:panelGroup id="atlas_linha2" layout="block">
+			<atlas:dataTable bean="manterOrgaoBean" id="dataTableTermos2" value="#{manterOrgaoBean.orgaos}">
+				<p:column headerText="Órgão" styleClass="label_tabela_custom">
+					<h:outputText value="#" style="font-size: small; width:10px !important;" />
+				</p:column>
+
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton action="#" update=":form:atlas_linha" value="" ajax="false"
+						style="height: 22px !important;" styleClass="icone" />
+				</p:column>
+
+			</atlas:dataTable>
+		</h:panelGroup>
+	</div>
+
+</ui:composition>

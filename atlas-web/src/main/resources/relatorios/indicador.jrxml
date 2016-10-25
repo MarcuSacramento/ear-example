@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="indicador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e5a90f77-8bbb-418c-84be-85f0420768d6">
+	<property name="ireport.zoom" value="1.1000000000000003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="27"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="FUNDO" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="regiao" class="java.lang.String"/>
+	<parameter name="ano" class="java.lang.String"/>
+	<parameter name="descritivo" class="java.lang.String"/>
+	<field name="ano" class="java.lang.Integer"/>
+	<field name="uf" class="java.lang.String"/>
+	<field name="resultado" class="java.math.BigDecimal"/>
+	<field name="resultadoCalculado" class="java.math.BigDecimal"/>
+	<pageHeader>
+		<band height="48" splitType="Stretch">
+			<image scaleImage="RetainShape">
+				<reportElement uuid="3c065ff5-3afe-4c21-9d51-fa5e6d5397d9" x="0" y="0" width="555" height="48"/>
+				<imageExpression><![CDATA[$P{FUNDO}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="fd62b293-1a93-4d6f-80f5-f531ac6a374f" x="0" y="0" width="171" height="48"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="117" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0b37f43c-5b81-4fb1-aa3c-d8fe4c1b0328" x="14" y="47" width="157" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indicador:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b08c9176-07a8-4856-a0e1-e142d3912663" x="14" y="72" width="157" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abrangência Geográfica:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a53ba420-6fbf-46cb-9e28-6df0fe99beac" x="14" y="97" width="157" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ec3e3176-f9e6-4168-83c3-cbc07bdd2342" x="171" y="42" width="373" height="30"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2515a96b-1b92-40cf-99d4-1e944e693025" x="171" y="72" width="373" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{regiao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2a154c16-5238-42c7-9f6e-7240a3ee7605" x="171" y="97" width="373" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ano}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="08b60252-9804-4bbd-b9b2-cf31fe922b97" x="151" y="8" width="253" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Indicadores]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ff160ebe-4500-491e-b487-5dfd68cba671" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="63" y="5" width="428" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{descritivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="28" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy - HH:mm:ss">
+				<reportElement uuid="e41bda17-85ce-40dd-bbdc-1171500c6983" x="14" y="4" width="137" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f2534c58-4ed5-4368-8e8f-b7a98d156340" x="366" y="4" width="112" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="a8503c54-d6a7-425e-98b2-78c617085258" x="478" y="4" width="65" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="268">
+			<barChart>
+				<chart theme="default">
+					<reportElement uuid="81e9c440-c23a-4bcc-8d89-97f8e1b489a4" mode="Transparent" x="0" y="7" width="555" height="261"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend position="Bottom"/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$P{titulo}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{uf}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{resultadoCalculado}]]></valueExpression>
+						<labelExpression><![CDATA[new DecimalFormat("0.##").format($F{resultadoCalculado}.doubleValue())]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true" isShowTickLabels="true" isShowTickMarks="true">
+					<plot labelRotation="0.0">
+						<seriesColor seriesOrder="0" color="#0099CC"/>
+						<seriesColor seriesOrder="1" color="#FF3333"/>
+						<seriesColor seriesOrder="2" color="#FFFF33"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat labelRotation="0.0">
+						<axisFormat labelColor="#000000" verticalTickLabels="true">
+							<labelFont>
+								<font size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat tickLabelColor="#000000" verticalTickLabels="false">
+							<labelFont>
+								<font size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

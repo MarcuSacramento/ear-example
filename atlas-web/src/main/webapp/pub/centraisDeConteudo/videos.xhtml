@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link title="CENTRAIS DE CONTEÚDOS" value="CENTRAIS DE CONTEÚDOS" outcome="/pub/centraisDeConteudo/exibirCentraisDeConteudos.xhtml" /> > VÍDEOS</ui:define>
+	<ui:define name="conteudo">
+		<div class="atlas-miolo">
+			#{exibirMultimidiaBean.init()}
+			<h:head>
+				<title>Centrais de Vídeos</title>
+			</h:head>
+			
+			<h2>Centrais de Vídeos</h2>
+		
+			<div class="atlas-miolo-conteudo-limpo">
+		    	<div class="atlas-miolo-conteudo-video">
+				    <div class="atlas-miolo-conteudo-video-destaque">
+						<ui:repeat var="multimidiaPrincipal" value="#{exibirMultimidiaBean.videoTelaPrincipal}">
+					        <iframe width="450" height="340" src="#{multimidiaPrincipal.url}" frameborder="0" allowfullscreen="true" />
+							<p class="atlas-miolo-conteudo-video-destaque-titulo">#{multimidiaPrincipal.nome}</p>
+							<p>#{multimidiaPrincipal.descricao}</p>
+						</ui:repeat>
+					</div>
+					<div class="atlas-miolo-conteudo-video-lista">
+						<ui:repeat var="multimidia" value="#{exibirMultimidiaBean.multimidias}" size="1">
+							<div class="atlas-miolo-conteudo-video-lista-item">
+						        <iframe width="120" height="80" src="#{multimidia.url}" frameborder="0" allowfullscreen="true" />
+					     		<a href="#{multimidia.url}" target="_blanck">#{multimidia.descricao}</a>
+			                </div>
+						</ui:repeat>
+					</div>
+				</div>
+		        <div class="atlas-miolo-conteudo-video-todos">
+		            <h:link outcome="/pub/centraisDeConteudo/exibirVideos.xhtml">
+		            	Acesse a lista completa
+			        	<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link_videos.png" />
+			        </h:link>
+		       	</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

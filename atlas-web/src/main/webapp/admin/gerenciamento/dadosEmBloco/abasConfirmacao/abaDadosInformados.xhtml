@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+	
+	<div class="atlas-tabela-simples">
+		<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque" style="margin-top: 0.1em !important;">
+			<div class="atlas-miolo-logado-linha-label-full"> <label style="float: left !important; width: 120px !important;
+			font-size: 1.1em !important; margin-top: -0.3em !important;">Órgão Superior:</label></div>
+			
+			<div style="margin-top: 0.6em !important; font-size: 1.1em !important;">
+				<h:outputText
+					value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoSuperior.nomeReduzido}"
+					style="margin-left: -2.5em !important;"
+					rendered="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoSuperior ne null}" />
+			</div>
+			
+		</div>
+		
+		<div class="atlas-miolo-logado-linha" style="margin-top: -1em !important;">
+			<div class="atlas-miolo-logado-linha-label-full"><label style="float: left !important; width: 120px !important;
+			font-size: 1.1em !important; margin-top: -0.3em !important;">Sigla:</label></div>
+			
+			<div style="margin-top: 0.6em !important; font-size: 1.1em !important;">
+				<h:outputText value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.sigla}" style="margin-left: -2.5em !important;"/>
+			</div>
+			
+		</div>
+		
+		<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque" style="margin-top: 0.1em !important;">
+			<div class="atlas-miolo-logado-linha-label-full"> <label style="float: left !important; width: 120px !important;
+			font-size: 1.1em !important; margin-top: -0.3em !important;">Descrição:</label></div>
+			
+			<div style="margin-top: 0.6em !important; font-size: 1.1em !important;">
+				<h:outputText value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.descricao}" style="margin-left: -2.5em !important;" />
+			</div>
+			
+		</div>
+		
+		<div class="atlas-miolo-logado-linha" >
+			<div class="atlas-miolo-logado-linha-label-full"><label style="float: left !important; width: 120px !important;
+			font-size: 1.1em !important; margin-top: -0.1em !important;">Homepage:</label></div>
+			
+			<div style="margin-top: 0.6em !important; font-size: 1.1em !important;">
+				<h:outputText value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.homePage}" style="margin-left: -2.5em !important;"/>
+			</div>
+			
+		</div>
+		
+		<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque" style="margin-top: 0.1em !important;">
+			<div class="atlas-miolo-logado-linha-label-full"> <label style="float: left !important; width: 120px !important;
+			font-size: 1.1em !important; margin-top: -0.1em !important;">Email:</label></div>
+			
+			<div style="margin-top: 0.6em !important; font-size: 1.1em !important;">
+				<h:outputText value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.email}" style="margin-left: -2.5em !important;" />
+			</div>
+			
+		</div>
+			
+		<div class="atlas-miolo-logado-linha" >
+				<div class="atlas-miolo-logado-linha-label-full"><label style="float: left !important; width: 120px !important;
+				font-size: 1.1em !important; margin-top: -0.1em !important;">Tipo órgão:</label></div>
+				
+				<div style="margin-top: 0.6em !important; font-size: 1.1em !important;">
+					<h:outputText value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.tipoOrgao.nome}" style="margin-left: -2.5em !important;"/>
+				</div>
+				
+		</div>
+	</div>
+	<p:dataTable var="tema"
+		value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.temas}"
+		styleClass="atlas-tabela-simples"
+		emptyMessage="Nenhum registro encontrado">
+		<p:column headerText="Temas">
+			<h:outputText value="#{tema.nome}" />
+		</p:column>
+	</p:dataTable>
+	<p:dataTable var="servico"
+		value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.servicos}"
+		styleClass="atlas-tabela-simples"
+		emptyMessage="Nenhum registro encontrado">
+		<p:column headerText="Servicos">
+			<h:outputText value="#{servico.nome}" />
+		</p:column>
+	</p:dataTable>
+	<p:dataTable var="representante"
+		value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.representantes}"
+		styleClass="atlas-tabela-simples"
+		emptyMessage="Nenhum registro encontrado">
+		<f:facet name="header">Representantes</f:facet>
+		<p:column headerText="Divulgável">
+			<h:outputText value="Sim" rendered="#{representante.divulgavel}" />
+			<h:outputText value="Não" rendered="#{!representante.divulgavel}" />
+		</p:column>
+		<p:column headerText="Nome">
+			<h:outputText value="#{representante.nome}" />
+		</p:column>
+		<p:column headerText="Cargo">
+			<h:outputText value="#{representante.cargo}" />
+		</p:column>
+		<p:column headerText="Email">
+			<h:outputText value="#{representante.email}" />
+		</p:column>
+		<p:column headerText="Telefone 1">
+			<h:outputText value="#{representante.primeiroDdd} - " />
+			<h:outputText value="#{representante.primeiroTelefone}" />
+		</p:column>
+		<p:column headerText="Telefone 2">
+			<h:outputText value="#{representante.segundoDdd} - " />
+			<h:outputText value="#{representante.segundoTelefone}" />
+		</p:column>
+	</p:dataTable>
+</ui:composition>

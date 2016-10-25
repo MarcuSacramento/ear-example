@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="AtlasJPA" transaction-type="JTA">
+		<jta-data-source>java:jboss/datasources/atlasDS</jta-data-source>
+		
+		<properties>
+			<property name="hibernate.dialect" value="br.gov.atlas.util.AtlasDialect" />
+			<property name="hibernate.connection.charSet" value="UTF-8" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.jdbc.use_streams_for_binary" value="false" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.connection.autocommit" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.archive.autodetection" value="class, hbm"/>
+			
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<!--
+			<property name="hibernate.ejb.event.post-insert" value="org.hibernate.ejb.event.EJB3PostInsertEventListener,org.hibernate.envers.event.AuditEventListener" />
+			<property name="hibernate.ejb.event.post-update" value="org.hibernate.ejb.event.EJB3PostUpdateEventListener,org.hibernate.envers.event.AuditEventListener" />
+			<property name="hibernate.ejb.event.post-delete" value="org.hibernate.ejb.event.EJB3PostDeleteEventListener,org.hibernate.envers.event.AuditEventListener" />
+			<property name="hibernate.ejb.event.pre-collection-update" value="org.hibernate.envers.event.AuditEventListener" />
+			<property name="hibernate.ejb.event.pre-collection-remove" value="org.hibernate.envers.event.AuditEventListener" />
+			<property name="hibernate.ejb.event.post-collection-recreate" value="org.hibernate.envers.event.AuditEventListener" /> 
+			-->
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="Tema3JPA" transaction-type="JTA">
+		<jta-data-source>java:jboss/datasources/tema3DS</jta-data-source>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.archive.autodetection" value="class"/>
+		</properties>
+	</persistence-unit> 
+</persistence>
+

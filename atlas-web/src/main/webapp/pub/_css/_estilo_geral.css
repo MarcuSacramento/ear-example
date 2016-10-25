@@ -1,0 +1,113 @@
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação dos padrões da página                                                     **
+** @data: 20/05/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+/* Definições para as fontes */
+@import url("_estilo_fontes.css");
+
+/* Definições para CSS Reset */
+@import url("_estilo_css_reset.css");   
+
+/* Definições para o Cabeçalho */
+@import url("_estilo_cabecalho.css");
+
+/* Definições para o menu do topo */
+@import url("_estilo_menu_topo.css");
+
+/* Definições para o breadcrumb */
+@import url("_estilo_breadcrumb.css");
+
+/* Definições para os formulários */
+@import url("_estilo_formularios.css");
+
+/* Definições para as tabelas */
+@import url("_estilo_tabelas.css");
+
+/* Definições para as mensagens */
+@import url("_estilo_mensagens.css");
+
+/* Definições para a paginação */
+@import url("_estilo_paginacao.css");
+
+/* Definições para o conteúdo */
+@import url("_estilo_conteudo.css");
+
+/* Definições para o menu lateral */
+@import url("_estilo_menu_lateral.css");
+
+/* Definições para o miolo */
+@import url("_estilo_miolo.css");
+
+/* Definições para a página inicial */
+@import url("_estilo_pagina_inicial.css");
+
+/* Definições para a página enderecos */
+@import url("_estilo_pagina_enderecos.css");
+
+/* Definições para a página dicionario */
+@import url("_estilo_pagina_dicionario.css");
+
+/* Definições para a página parceiros */
+@import url("_estilo_pagina_parceiros.css");
+
+/* Definições para a página infografico */
+@import url("_estilo_pagina_infografico.css");
+
+/* Definições para a página publicacoes */
+@import url("_estilo_pagina_publicacao.css");
+
+/* Definições para a página video */
+@import url("_estilo_pagina_video.css");
+
+/* Definições para o rodapé */
+@import url("_estilo_rodape.css");
+
+/* Definições para a busca */
+@import url("_estilo_pagina_busca.css");
+
+body{
+	background-color: rgba(255,255,255,1);
+    color: rgba(0,0,0,1);
+    font-size: 62.5%;
+    font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+.atlas-oculta-informacao{
+	display: none;
+	background: transparent;
+	background-image: none;
+	border: none;
+	height: 0.1em;
+	overflow: hidden;
+	padding: 0;
+	margin: -0.1em 0 0 -0.1em;
+	width: 1px;
+}
+
+div.atlas-menu-ico-topo{
+	clear: both;
+	width: 100%;
+	text-align: right;
+	font-size: 1.4em;
+	margin-bottom: 1em;
+	padding-top: 1em;
+}
+
+	div.atlas-menu-ico-topo a{
+		padding-left: 0.2em;
+		text-decoration: none;
+		color: rgba(119,119,119,1);
+	}
+	
+.semBorda tr, .semBorda td {
+	border: none !important;
+}

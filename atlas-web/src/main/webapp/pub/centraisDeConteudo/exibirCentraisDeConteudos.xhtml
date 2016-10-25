@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > CENTRAIS DE CONTEÚDOS</ui:define>
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Centrais de Conteúdos</title>
+		</h:head>
+		
+		<div class="atlas-miolo">
+			<h2>Centrais de Conteúdos</h2>
+		    <p>Aqui você encontrará informações sobre:</p>
+		    <ul class="atlas-miolo-bloco">
+	           	<li>
+		    		<h:link outcome="/pub/centraisDeConteudo/publicacoes.xhtml" value="Publicações" title="Publicações" />
+				</li>
+				<li>
+					<h:link outcome="/pub/centraisDeConteudo/aplicativos.xhtml" value="Aplicativos" title="Aplicativos"/>
+				</li>
+		        <li>
+		    		<h:link outcome="/pub/centraisDeConteudo/indicadores.xhtml" value="Indicadores" title="Indicadores" />
+				</li>
+				<li>
+					<h:link outcome="/pub/centraisDeConteudo/videos.xhtml" value="Vídeos" title="Vídeos" />
+				</li>
+		    </ul>
+		</div>		
+	</ui:define>
+</ui:composition>

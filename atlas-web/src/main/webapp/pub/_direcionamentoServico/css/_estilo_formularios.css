@@ -1,0 +1,281 @@
+@charset="utf-8";
+/**************************************************************************************
+**                                                                                   **
+** @autor: Narmer Abouhassan                                                         **
+** @brief: Formatação dos formulários                                                **
+** @data: 01/07/2013                                                                 **
+**                                                                                   **
+***************************************************************************************/
+
+label{
+	line-height: 25px;
+	font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+	font-size: 1.3em;
+}
+
+.atlas-checkbox-label{
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+	font-size: 1.3em;
+	color: rgba(0,0,0,1);
+}
+
+.atlas-select-formata{
+	background-color: rgba(255,255,255,1);
+	border: 1px solid rgba(21,89,191,1);
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+	color: rgba(21,89,191,1);
+	padding: 0.5em;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+	.atlas-select-formata:focus{
+		background-color: rgba(255,255,191,1);
+		border: 1px solid rgba(247,150,30,1);
+		color: rgba(255,102,0,1);
+	}
+
+.atlas-input-formata{
+	background-color: rgba(255,255,255,1);
+	border: 1px solid rgba(21,89,191,1);
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+	color: rgba(21,89,191,1);
+	padding: 0.5em;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+	.atlas-input-formata:focus{
+		background-color: rgba(255,255,191,1);
+		border: 1px solid rgba(247,150,30,1);
+		color: rgba(255,102,0,1);
+	}
+
+.atlas-textarea-formata{
+	background-color: rgba(255,255,255,1);
+	border: 1px solid rgba(21,89,191,1);
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+	color: rgba(21,89,191,1);
+	padding: 0.5em;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+	.atlas-textarea-formata:focus{
+		background-color: rgba(255,255,191,1);
+		border: 1px solid rgba(247,150,30,1);
+		color: rgba(255,102,0,1);
+	}
+	
+	.atlas-textarea-formata-disabled{
+		background-color: transparent;
+		border: transparent;
+	}
+	
+	.atlas-textarea-formata-altura-50{ height: 50px; }
+	.atlas-textarea-formata-altura-100{ height: 100px; }
+	
+.atlas-button-filtrar{
+	background-color: rgba(21,89,191,1);
+	border: 1px solid rgba(21,89,191,1);
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+	color: rgba(255,255,255,1);
+	padding: 0.5em 1.5em;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+	.atlas-button-filtrar:hover{
+		background-color: rgba(21,89,191,1);
+		border: 1px solid rgba(238,239,241,1);
+		color: rgba(204,204,204,1);
+		cursor: pointer;
+	}
+
+.atlas-button-filtrar[disabled]{
+	background-color: rgba(204,204,204,1);
+	border: 1px solid rgba(21,89,191,1);
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+	color: rgba(21,89,191,1);
+	padding: 0.5em 1.5em;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+	.atlas-button-filtrar[disabled]:hover{
+		background-color: rgba(204,204,204,1);
+		border: 1px solid rgba(238,239,241,1);
+		color: rgba(0,0,0,1);
+		cursor: pointer;
+	}
+	
+.atlas-button-filtrar-bloqueado{
+	background-color: rgba(204,204,204,1);
+	border: 1px solid rgba(21,89,191,1);
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+	color: rgba(21,89,191,1);
+	padding: 0.5em 1.5em;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+	.atlas-button-filtrar-bloqueado:hover{
+		background-color: rgba(204,204,204,1);
+		border: 1px solid rgba(238,239,241,1);
+		color: rgba(0,0,0,1);
+		cursor: pointer;
+	}
+	
+.atlas-button-limpar{
+	background-color: rgba(21,89,191,1);
+	border: 1px solid rgba(238,239,241,1);
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+	color: rgba(255,255,255,1);
+	padding: 0.5em 1.5em;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+	.atlas-button-limpar:hover{
+		background-color: rgba(21,89,191,1);
+		border: 1px solid rgba(21,89,191,1);
+		color: rgba(204,204,204,1);
+		cursor: pointer;
+	}
+
+.atlas-button-voltar{
+	background-color: rgba(21,89,191,1);
+	border: 1px solid rgba(21,89,191,1);
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+	color: rgba(255,255,255,1);
+	padding: 0.5em 1.5em;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+	.atlas-button-voltar:hover{
+		background-color: rgba(21,89,191,1);
+		border: 1px solid rgba(238,239,241,1);
+		color: rgba(204,204,204,1);
+		cursor: pointer;
+	}
+
+.ui-datagrid-no-border .ui-datagrid-content {
+	border: none;
+	background: none;
+}
+
+.ui-widget-content-no-border .ui-widget-content{
+	border: none;
+}
+
+.atlas-tabelas-fieldset-01{
+	border: 1px solid rgba(21,89,191,1);
+	padding: 0.25em;
+}
+	.atlas-tabelas-fieldset-01 legend{
+		padding: 0.5em;
+		font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+		font-size: 1.3em;
+		color: rgba(21,89,191,1);
+	}
+
+.atlas-select-10, .atlas-input-10, .atlas-textarea-10, .atlas-button-10 { width: 10px; }
+	.atlas-select-20, .atlas-input-20, .atlas-textarea-20, .atlas-button-20 { width: 20px; }
+	.atlas-select-30, .atlas-input-30, .atlas-textarea-30, .atlas-button-30 { width: 30px; }
+	.atlas-select-40, .atlas-input-40, .atlas-textarea-40, .atlas-button-40 { width: 40px; }
+	.atlas-select-50, .atlas-input-50, .atlas-textarea-50, .atlas-button-50 { width: 50px; }
+	.atlas-select-60, .atlas-input-60, .atlas-textarea-60, .atlas-button-60 { width: 60px; }
+	.atlas-select-70, .atlas-input-70, .atlas-textarea-70, .atlas-button-70 { width: 70px; }
+	.atlas-select-80, .atlas-input-80, .atlas-textarea-80, .atlas-button-80 { width: 80px; }
+	.atlas-select-90, .atlas-input-90, .atlas-textarea-90, .atlas-button-90 { width: 90px; }
+.atlas-select-100, .atlas-input-100, .atlas-textarea-100, .atlas-button-100 { width: 100px; }
+	.atlas-select-110, .atlas-input-110, .atlas-textarea-110, .atlas-button-110 { width: 110px; }
+	.atlas-select-120, .atlas-input-120, .atlas-textarea-120, .atlas-button-120 { width: 120px; }
+	.atlas-select-130, .atlas-input-130, .atlas-textarea-130, .atlas-button-130 { width: 130px; }
+	.atlas-select-140, .atlas-input-140, .atlas-textarea-140, .atlas-button-140 { width: 140px; }
+	.atlas-select-150, .atlas-input-150, .atlas-textarea-150, .atlas-button-150 { width: 150px; }
+	.atlas-select-160, .atlas-input-160, .atlas-textarea-160, .atlas-button-160 { width: 160px; }
+	.atlas-select-170, .atlas-input-170, .atlas-textarea-170, .atlas-button-170 { width: 170px; }
+	.atlas-select-180, .atlas-input-180, .atlas-textarea-180, .atlas-button-180 { width: 180px; }
+	.atlas-select-190, .atlas-input-190, .atlas-textarea-190, .atlas-button-190 { width: 190px; }
+.atlas-select-200, .atlas-input-200, .atlas-textarea-200, .atlas-button-200 { width: 200px; }
+	.atlas-select-210, .atlas-input-210, .atlas-textarea-210, .atlas-button-210 { width: 210px; }
+	.atlas-select-220, .atlas-input-220, .atlas-textarea-220, .atlas-button-220 { width: 220px; }
+	.atlas-select-230, .atlas-input-230, .atlas-textarea-230, .atlas-button-230 { width: 230px; }
+	.atlas-select-240, .atlas-input-240, .atlas-textarea-240, .atlas-button-240 { width: 240px; }
+	.atlas-select-250, .atlas-input-250, .atlas-textarea-250, .atlas-button-250 { width: 250px; }
+	.atlas-select-260, .atlas-input-260, .atlas-textarea-260, .atlas-button-260 { width: 260px; }
+	.atlas-select-270, .atlas-input-270, .atlas-textarea-270, .atlas-button-270 { width: 270px; }
+	.atlas-select-280, .atlas-input-280, .atlas-textarea-280, .atlas-button-280 { width: 280px; }
+	.atlas-select-290, .atlas-input-290, .atlas-textarea-290, .atlas-button-290 { width: 290px; }
+.atlas-select-300, .atlas-input-300, .atlas-textarea-300, .atlas-button-300 { width: 300px; }
+	.atlas-select-310, .atlas-input-310, .atlas-textarea-310, .atlas-button-310 { width: 310px; }
+	.atlas-select-320, .atlas-input-320, .atlas-textarea-320, .atlas-button-320 { width: 320px; }
+	.atlas-select-330, .atlas-input-330, .atlas-textarea-330, .atlas-button-330 { width: 330px; }
+	.atlas-select-340, .atlas-input-340, .atlas-textarea-340, .atlas-button-340 { width: 340px; }
+	.atlas-select-350, .atlas-input-350, .atlas-textarea-350, .atlas-button-350 { width: 350px; }
+	.atlas-select-360, .atlas-input-360, .atlas-textarea-360, .atlas-button-360 { width: 360px; }
+	.atlas-select-370, .atlas-input-370, .atlas-textarea-370, .atlas-button-370 { width: 370px; }
+	.atlas-select-380, .atlas-input-380, .atlas-textarea-380, .atlas-button-380 { width: 380px; }
+	.atlas-select-390, .atlas-input-390, .atlas-textarea-390, .atlas-button-390 { width: 390px; }
+.atlas-select-400, .atlas-input-400, .atlas-textarea-400, .atlas-button-400 { width: 400px; }
+	.atlas-select-410, .atlas-input-410, .atlas-textarea-410, .atlas-button-410 { width: 410px; }
+	.atlas-select-420, .atlas-input-420, .atlas-textarea-420, .atlas-button-420 { width: 420px; }
+	.atlas-select-430, .atlas-input-430, .atlas-textarea-430, .atlas-button-430 { width: 430px; }
+	.atlas-select-440, .atlas-input-440, .atlas-textarea-440, .atlas-button-440 { width: 440px; }
+	.atlas-select-450, .atlas-input-450, .atlas-textarea-450, .atlas-button-450 { width: 450px; }
+	.atlas-select-460, .atlas-input-460, .atlas-textarea-460, .atlas-button-460 { width: 460px; }
+	.atlas-select-470, .atlas-input-470, .atlas-textarea-470, .atlas-button-470 { width: 470px; }
+	.atlas-select-480, .atlas-input-480, .atlas-textarea-480, .atlas-button-480 { width: 480px; }
+	.atlas-select-490, .atlas-input-490, .atlas-textarea-490, .atlas-button-490 { width: 490px; }
+.atlas-select-500, .atlas-input-500, .atlas-textarea-500, .atlas-button-500 { width: 500px; }
+	.atlas-select-510, .atlas-input-510, .atlas-textarea-510, .atlas-button-510 { width: 510px; }
+	.atlas-select-520, .atlas-input-520, .atlas-textarea-520, .atlas-button-520 { width: 520px; }
+	.atlas-select-530, .atlas-input-530, .atlas-textarea-530, .atlas-button-530 { width: 530px; }
+	.atlas-select-540, .atlas-input-540, .atlas-textarea-540, .atlas-button-540 { width: 540px; }
+	.atlas-select-550, .atlas-input-550, .atlas-textarea-550, .atlas-button-550 { width: 550px; }
+	.atlas-select-560, .atlas-input-560, .atlas-textarea-560, .atlas-button-560 { width: 560px; }
+	.atlas-select-570, .atlas-input-570, .atlas-textarea-570, .atlas-button-570 { width: 570px; }
+	.atlas-select-580, .atlas-input-580, .atlas-textarea-580, .atlas-button-580 { width: 580px; }
+	.atlas-select-590, .atlas-input-590, .atlas-textarea-590, .atlas-button-590 { width: 590px; }
+.atlas-select-600, .atlas-input-600, .atlas-textarea-600, .atlas-button-600 { width: 600px; }
+	.atlas-select-610, .atlas-input-610, .atlas-textarea-610, .atlas-button-610 { width: 610px; }
+	.atlas-select-620, .atlas-input-620, .atlas-textarea-620, .atlas-button-620 { width: 620px; }
+	.atlas-select-630, .atlas-input-630, .atlas-textarea-630, .atlas-button-630 { width: 630px; }
+	.atlas-select-640, .atlas-input-640, .atlas-textarea-640, .atlas-button-640 { width: 640px; }
+	.atlas-select-650, .atlas-input-650, .atlas-textarea-650, .atlas-button-650 { width: 650px; }
+	.atlas-select-660, .atlas-input-660, .atlas-textarea-660, .atlas-button-660 { width: 660px; }
+	.atlas-select-670, .atlas-input-670, .atlas-textarea-670, .atlas-button-670 { width: 670px; }
+	.atlas-select-680, .atlas-input-680, .atlas-textarea-680, .atlas-button-680 { width: 680px; }
+	.atlas-select-690, .atlas-input-690, .atlas-textarea-690, .atlas-button-690 { width: 690px; }
+.atlas-select-700, .atlas-input-700, .atlas-textarea-700, .atlas-button-700 { width: 700px; }
+	.atlas-select-710, .atlas-input-710, .atlas-textarea-710, .atlas-button-710 { width: 710px; }
+	.atlas-select-720, .atlas-input-720, .atlas-textarea-720, .atlas-button-720 { width: 720px; }
+	.atlas-select-730, .atlas-input-730, .atlas-textarea-730, .atlas-button-730 { width: 730px; }
+	.atlas-select-740, .atlas-input-740, .atlas-textarea-740, .atlas-button-740 { width: 740px; }
+	.atlas-select-750, .atlas-input-750, .atlas-textarea-750, .atlas-button-750 { width: 750px; }
+	.atlas-select-760, .atlas-input-760, .atlas-textarea-760, .atlas-button-760 { width: 760px; }
+	.atlas-select-770, .atlas-input-770, .atlas-textarea-770, .atlas-button-770 { width: 770px; }
+	.atlas-select-780, .atlas-input-780, .atlas-textarea-780, .atlas-button-780 { width: 780px; }
+	.atlas-select-790, .atlas-input-790, .atlas-textarea-790, .atlas-button-790 { width: 790px; }
+.atlas-select-800, .atlas-input-800, .atlas-textarea-800, .atlas-button-800 { width: 800px; }
+	.atlas-select-810, .atlas-input-810, .atlas-textarea-810, .atlas-button-810 { width: 810px; }
+	.atlas-select-820, .atlas-input-820, .atlas-textarea-820, .atlas-button-820 { width: 820px; }
+	.atlas-select-830, .atlas-input-830, .atlas-textarea-830, .atlas-button-830 { width: 830px; }
+	.atlas-select-840, .atlas-input-840, .atlas-textarea-840, .atlas-button-840 { width: 840px; }
+	.atlas-select-850, .atlas-input-850, .atlas-textarea-850, .atlas-button-850 { width: 850px; }
+	.atlas-select-860, .atlas-input-860, .atlas-textarea-860, .atlas-button-860 { width: 860px; }
+	.atlas-select-870, .atlas-input-870, .atlas-textarea-870, .atlas-button-870 { width: 870px; }
+	.atlas-select-880, .atlas-input-880, .atlas-textarea-880, .atlas-button-880 { width: 880px; }
+	.atlas-select-890, .atlas-input-890, .atlas-textarea-890, .atlas-button-890 { width: 890px; }
+.atlas-select-900, .atlas-input-900, .atlas-textarea-900, .atlas-button-900 { width: 900px; }
+	.atlas-select-910, .atlas-input-910, .atlas-textarea-910, .atlas-button-910 { width: 910px; }
+	.atlas-select-920, .atlas-input-920, .atlas-textarea-920, .atlas-button-920 { width: 920px; }
+	.atlas-select-930, .atlas-input-930, .atlas-textarea-930, .atlas-button-930 { width: 930px; }
+	.atlas-select-940, .atlas-input-940, .atlas-textarea-940, .atlas-button-940 { width: 940px; }
+	.atlas-select-950, .atlas-input-950, .atlas-textarea-950, .atlas-button-950 { width: 950px; }
+	.atlas-select-960, .atlas-input-960, .atlas-textarea-960, .atlas-button-960 { width: 960px; }
+	.atlas-select-970, .atlas-input-970, .atlas-textarea-970, .atlas-button-970 { width: 970px; }
+	.atlas-select-980, .atlas-input-980, .atlas-textarea-980, .atlas-button-980 { width: 980px; }
+	.atlas-select-990, .atlas-input-990, .atlas-textarea-990, .atlas-button-990 { width: 990px; }

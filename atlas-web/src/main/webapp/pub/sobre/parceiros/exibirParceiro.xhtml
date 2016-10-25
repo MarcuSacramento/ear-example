@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link title="SOBRE" value="SOBRE" outcome="/pub/sobre/exibirSobre.xhtml" /> > PARCEIROS</ui:define>
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Parceiros</title>
+		</h:head>
+		<div class="atlas-miolo">
+			#{exibirParceiroBean.init()}
+			<h2> Parceiros </h2>
+			<div class="atlas-miolo-conteudo-limpo">
+		    	<h3>Parceiros do Atlas de Acesso à Justiça</h3>
+				<ui:repeat var="linha" value="#{exibirParceiroBean.parceiroLinhaComTresRegistros}">
+			    	<div class="atlas-miolo-conteudo-bloco-linha">
+		    		    <div class="atlas-miolo-conteudo-bloco-parceiro">
+			                <div class="atlas-miolo-conteudo-bloco-parceiro-imagem">
+			                	<a href="#{linha.registroEsquerda.homepageComProtocolo}" target="_blank"> 	
+					            	<p:graphicImage styleClass="atlas_banner_imagem" alt="#{linha.registroEsquerda.nome}" height="130px" width="230px"
+										title="#{linha.registroEsquerda.nome}" value="#{manterParceiroBean.imagem}">
+										<f:param name="parceiroId" value="#{linha.registroEsquerda.id}" />
+									</p:graphicImage>
+								</a>
+			                </div>
+			                <div class="atlas-miolo-conteudo-bloco-parceiro-texto">
+		                    	<a href="#{linha.registroEsquerda.homepageComProtocolo}" target="_blank">#{linha.registroEsquerda.nome}</a>
+			                </div>
+			            </div>
+			            <h:panelGroup rendered="#{linha.registroCentro.nome != null}">  
+			    		    <div class="atlas-miolo-conteudo-bloco-parceiro">
+				                <div class="atlas-miolo-conteudo-bloco-parceiro-imagem">
+									<a href="#{linha.registroCentro.homepageComProtocolo}"	target="_blank"> 
+										<p:graphicImage styleClass="atlas_banner_imagem" alt="#{linha.registroCentro.nome}" height="130px" width="230px"
+											title="#{linha.registroCentro.nome}" value="#{manterParceiroBean.imagem}">
+											<f:param name="parceiroId" value="#{linha.registroCentro.id}" />
+										</p:graphicImage>
+									</a>
+				                </div>
+				                <div class="atlas-miolo-conteudo-bloco-parceiro-texto">
+			                    	<a href="#{linha.registroCentro.homepageComProtocolo}" target="_blank">#{linha.registroCentro.nome}</a>
+				                </div>
+				            </div>
+	                    </h:panelGroup>
+	                    <h:panelGroup rendered="#{linha.registroDireita.nome != null}">
+			    		    <div class="atlas-miolo-conteudo-bloco-parceiro">
+				                <div class="atlas-miolo-conteudo-bloco-parceiro-imagem">
+									<a href="#{linha.registroDireita.homepageComProtocolo}"	target="_blank"> 
+										<p:graphicImage	styleClass="atlas_banner_imagem" alt="#{linha.registroDireita.nome}" height="130px" width="230px"
+											title="#{linha.registroDireita.nome}" value="#{manterParceiroBean.imagem}">
+											<f:param name="parceiroId" value="#{linha.registroDireita.id}" />
+										</p:graphicImage>
+									</a>
+				                </div>
+				                <div class="atlas-miolo-conteudo-bloco-parceiro-texto">
+				                    <a href="#{linha.registroDireita.homepageComProtocolo}"	target="_blank">#{linha.registroDireita.nome}</a>
+				                </div>
+				            </div>
+				        </h:panelGroup>
+					</div>
+				</ui:repeat>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas_admin.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:head>
+			<title>Admin | Órgãos</title>
+		</h:head>
+
+		<div class="atlas_geral_miolo_breadcrumb">
+			<div class="atlas_geral_miolo_breadcrumb_conteudo">
+				<p:breadCrumb>
+					<p:menuitem value="Home" action="/admin/home?faces-redirect=true" />
+					<p:menuitem value="Órgãos" action="#" />
+				</p:breadCrumb>
+			</div>		
+		</div>
+		
+		<div class="atlas_geral_miolo">
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas_mensagem_positivo"
+				warnClass="atlas_mensagem_alerta" errorClass="atlas_mensagem_erro" />
+
+			<h2>Órgãos</h2>
+
+			<div class="atlas_linha_acoes">
+				<h:commandButton action="#{manterOrgaoBean.novo()}" update="@form"
+					value="NOVO" id="atlas_botao_novo" styleClass="atlas_button"
+					title="Clique para cadastrar um novo órgão" />
+
+				<h:panelGroup styleClass="atlas_button_download" id="imprimirOrgaos">
+
+					<h:commandButton action="#{manterOrgaoBean.exportarRelatorio()}"
+						value="BAIXAR:" id="atlas_botao_baixar" styleClass="atlas_button"
+						title="Clique para baixar o relatório no formato escolhido." />
+
+					<h:selectOneMenu value="#{manterOrgaoBean.formatoSelecionado}"
+						styleClass="atlas_select_formata_download" id="atlas_download"
+						title="Escolha o formato para importar os dados">
+
+						<f:selectItem itemLabel="PDF" itemValue="pdf" />
+						<f:selectItem itemLabel="XLS" itemValue="xls" />
+
+						<p:ajax update="atlas_botao_baixar" />
+
+					</h:selectOneMenu>
+
+				</h:panelGroup>
+			</div>
+
+			<h:panelGroup class="atlas_coluna_filtro" id="atlas_coluna_filtro"
+				layout="block">
+				<table class="atlas_tabela_filtro">
+
+					<tbody>
+						<tr class="atlas_tabela_filtro_linha">
+							<td colspan="2" class="atlas_tabela_filtro_linha_marca"><h:outputLabel
+									value="Nome do Órgão: " /> <br /> <h:inputText
+									value="#{manterOrgaoBean.termoPesquisa}" id="campoPesquisa"
+									styleClass="atlas_input_formata_fonte atlas_input_210" /></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_filtro_linha">
+							<td colspan="2" class="atlas_tabela_filtro_linha_marca"><h:outputLabel
+									value="Informação de Coordenadas: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.carregarOrgaosInformacaoLatitudeLongitude}"
+									styleClass="atlas_select_formata atlas_select_210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Sem informação" itemValue="S" />
+									<f:selectItem itemLabel="Com informação" itemValue="C" />
+									<f:selectItem itemLabel="Ambos" itemValue="A" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas_tabela_filtro_linha">
+							<td colspan="2" class="atlas_tabela_filtro_linha_marca"><h:outputLabel
+									value="Erro de informação: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.carregarOrgaosErro}"
+									styleClass="atlas_select_formata atlas_select_210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Sem erro na informação" itemValue="S" />
+									<f:selectItem itemLabel="Com erro na informação" itemValue="C" />
+									<f:selectItem itemLabel="Ambos" itemValue="A" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_filtro_linha">
+							<td colspan="2" class="atlas_tabela_filtro_linha_marca"><h:outputLabel
+									value="Situação do registro: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.carregarOrgaosSituacaoRegistro}"
+									styleClass="atlas_select_formata atlas_select_210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Proposto" itemValue="0" />
+									<f:selectItem itemLabel="Em análise" itemValue="1" />
+									<f:selectItem itemLabel="Disponível" itemValue="2" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_filtro_linha">
+							<td colspan="2" class="atlas_tabela_filtro_linha_marca"><h:outputLabel
+									value="Tipo Órgão: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.tipoOrgao}"
+									converter="selectItemConverter"
+									styleClass="atlas_select_formata atlas_select_210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.tiposOrgaos}"
+										var="tipoOrgao" itemLabel="#{tipoOrgao.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_filtro_linha">
+							<td colspan="2" class="atlas_tabela_filtro_linha_marca"><h:outputLabel
+									value="Estado: " /> <br /> <h:selectOneMenu id="ufs"
+									value="#{manterOrgaoBean.uf}"
+									styleClass="atlas_select_formata atlas_select_210"
+									converter="selectItemConverter">
+									<p:ajax event="change" update="municipios" process="@this" />
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.ufs}" var="uf"
+										itemLabel="#{uf.nome}" itemValue="#{uf}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_filtro_linha">
+							<td colspan="2" class="atlas_tabela_filtro_linha_marca"><h:outputLabel
+									value="Município: " /> <br /> <h:selectOneMenu
+									id="municipios" value="#{manterOrgaoBean.municipio}"
+									styleClass="atlas_select_formata atlas_select_210"
+									converter="selectItemConverter">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.municipios}"
+										var="municipio" itemLabel="#{municipio.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_filtro_linha">
+							<td colspan="2"><h:commandButton
+									action="#{manterOrgaoBean.pesquisarTermo()}" value="PESQUISAR"
+									styleClass="atlas_button_filtro">
+									<f:ajax execute=":form:atlas_coluna_filtro"
+										render="atlas_linha" />
+								</h:commandButton> 
+								<h:outputLabel value="  " /> <h:commandButton
+									action="#{manterOrgaoBean.limpar()}" value="LIMPAR"
+									update="@form"
+									styleClass="atlas_button_filtro">
+								</h:commandButton> <h:outputLabel value="  " /></td>
+
+						</tr>
+					</tbody>
+				</table>
+
+			</h:panelGroup>
+
+			<div class="atlas_coluna_consulta">
+				<h:panelGroup class="atlas_linha" id="atlas_linha" layout="block">
+					<atlas:dataTable bean="manterOrgaoBean" id="dataTableTermos"
+						value="#{manterOrgaoBean.orgaos}">
+						<p:column width="30%" headerText="Nome Órgão"
+							sortBy="#{registro.nome}">
+							<h:outputText value="#{registro.nome}" rendered="#{!registro.problemaResolvido}" style="color:red;" />
+							<h:outputText value="#{registro.nome}" rendered="#{registro.problemaResolvido}" />
+						</p:column>
+
+						<p:column width="20%" headerText="Tipo Órgão"
+							sortBy="#{registro.tipoOrgao}">
+							<h:outputText value="#{registro.tipoOrgao.nome}" />
+						</p:column>
+
+						<p:column width="15%" headerText="Estado"
+							sortBy="#{registro.municipio.uf}">
+							<h:outputText value="#{registro.municipio.uf.nome}" />
+						</p:column>
+
+						<p:column width="15%" headerText="Municipio"
+							sortBy="#{registro.municipio}">
+							<h:outputText value="#{registro.municipio.nome}" />
+						</p:column>
+
+						<p:column headerText="" width="10%">
+							<h:commandButton action="#{manterOrgaoBean.editar(registro.id)}"
+								update="@form" value="ALTERAR" styleClass="atlas_button" />
+						</p:column>
+
+						<p:column headerText="" width="10%">
+							<h:commandButton action="#{manterOrgaoBean.excluir(registro)}"
+								update="@form" value="EXCLUIR" styleClass="atlas_button"
+								onclick="if (!confirm('#{msg.MSG5}')) return false;" />
+						</p:column>
+					</atlas:dataTable>
+				</h:panelGroup>
+			</div>
+
+			<div class="atlas_linha_clear" />
+
+		</div>
+	</ui:define>
+</ui:composition>

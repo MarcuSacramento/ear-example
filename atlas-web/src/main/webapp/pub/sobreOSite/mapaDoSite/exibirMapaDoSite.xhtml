@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link title="SOBRE O SITE" value="SOBRE O SITE" outcome="/pub/sobreOSite/exibirSobreOSite.xhtml" /> > MAPA DO SITE</ui:define>
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Mapa do site</title>
+		</h:head>
+		<div class="atlas-miolo">
+			<h2>Mapa do site</h2>
+			<div class="atlas-miolo-conteudo">
+	    		<h3>Uma visão geral do conteúdo disponível no site</h3>
+		        <h4>Sobre</h4>
+		        <ul class="atlas-miolo-conteudo-lista">
+				   	<li>
+			        	<h:link title="O Atlas"	value="O Atlas"	outcome="/pub/sobre/oAtlas/exibirOAtlas.xhtml" />
+			    	</li>
+			        <li>
+			    		<h:link title="Encontre um endereço da Justiça." value="Endereços da Justiça" outcome="/pub/sobre/portasDaJustica/consultarPortasDaJustica.xhtml" />
+					</li>
+			        <li>
+			           	<h:link title="ABC dos Direitos" value="ABC dos Direitos" outcome="/pub/sobre/dicionario/exibirDicionario.xhtml" />
+			        </li>
+			        <li>
+			        	<h:link title="Projetos" value="Projetos" outcome="/pub/sobre/projetos/exibirProjeto.xhtml" />
+					</li>
+			        <li>
+			        	<h:link title="Parceiros" value="Parceiros"	outcome="/pub/sobre/parceiros/exibirParceiro.xhtml" />
+					</li>
+		        </ul>
+		        
+		        <h4>Centrais de Conteúdos</h4>
+	            <ul class="atlas-miolo-conteudo-lista">
+	            	<li>
+			    		<h:link outcome="/pub/centraisDeConteudo/publicacoes.xhtml" value="Publicações" title="Publicações" />
+					</li>
+					<li>
+			    		<h:link outcome="/pub/centraisDeConteudo/aplicativos.xhtml" value="Aplicativos" title="Aplicativos" />
+					</li>
+			        <li>
+			    		<h:link outcome="/pub/centraisDeConteudo/indicadores.xhtml" value="Indicadores" title="Indicadores" />
+		                <ul class="atlas-miolo-conteudo-lista-sublista">
+			                <li><h:link outcome="/pub/centraisDeConteudo/indicadores_preDefinidos.xhtml" title="Pré Definidos" value="Pré Definidos" /></li>
+			                <li><h:link outcome="/pub/centraisDeConteudo/indicadores_relatoriosAnual.xhtml" title="Relatórios" value="Relatórios" /></li>
+			                <li><h:link outcome="/pub/centraisDeConteudo/indicadores_referencias.xhtml" title="Referênciass" value="Referências" /></li>
+		                </ul>
+					</li>
+					<li>
+						<h:link outcome="/pub/centraisDeConteudo/videos.xhtml" value="Vídeos" title="Vídeos" />
+					</li>
+	            </ul>
+		        
+		        <h4>Sobre o site</h4>
+	            <ul class="atlas-miolo-conteudo-lista">
+			        <li><h:link title="Acessibilidade"	value="Acessibilidade"	outcome="/pub/sobreOSite/acessibilidade/exibirAcessibilidade.xhtml" /></li>
+			        <li><h:link title="Mapa do site"	value="Mapa do site"	outcome="/pub/sobreOSite/mapaDoSite/exibirMapaDoSite.xhtml" /></li>
+	            </ul>
+			</div>
+	    </div>
+	</ui:define>
+</ui:composition>

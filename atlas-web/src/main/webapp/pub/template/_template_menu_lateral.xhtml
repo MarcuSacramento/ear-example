@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h1>Menu de navegação</h1>
+<nav class="atlas-menu-lateral-bloco">
+	<h2>Mapas</h2>
+    <ul>
+    	<li class="atlas-menu-lateral-bloco-destaque-li-final">
+    		<h:link title="Encontre um mapa da Justiça." value="Mapa da Justiça" outcome="/pub/sobre/portasDaJustica/consultarPortasDaJustica.xhtml" />
+   		</li>    
+    	<li class="atlas-menu-lateral-bloco-destaque-li-final">
+    		<h:link title="Mapa do consumidor." value="Mapa do Consumidor" outcome="/pub/sobre/mapaConsumidor/consultarMapaConsumidor.xhtml" />
+   		</li>    
+    </ul>
+</nav>
+
+<nav class="atlas-menu-lateral-bloco">
+	<h2>Sobre</h2>
+    <ul>
+    	<li>
+        	<h:link title="O Atlas"	value="O Atlas" outcome="/pub/sobre/oAtlas/exibirOAtlas.xhtml" />
+    	</li>
+        <li>
+    		<h:link title="Encontre um endereço da Justiça." value="Endereços da Justiça" outcome="/pub/sobre/portasDaJustica/consultarPortasDaJustica.xhtml" />
+		</li>
+        <li>
+           	<h:link title="ABC dos Direitos" value="ABC dos Direitos" outcome="/pub/sobre/dicionario/exibirDicionario.xhtml">
+				<f:param name="interna" value="dicionario" />
+				<f:param name="subinterna" value="consulta" />
+           	</h:link>
+        </li>
+        <li>
+        	<h:link title="Projetos" value="Projetos" outcome="/pub/sobre/projetos/exibirProjeto.xhtml" />
+		</li>
+        <li>
+        	<h:link title="Parceiros" value="Parceiros"	outcome="/pub/sobre/parceiros/exibirParceiro.xhtml" />
+		</li>
+    </ul>
+</nav>
+
+<nav class="atlas-menu-lateral-bloco-central-de-conteudo">
+	<h2>Centrais de Conteúdos</h2>
+    <ul>
+    	<li>
+    		<h:link outcome="/pub/centraisDeConteudo/publicacoes.xhtml">
+				<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_menu/ico_publicacoes.png"
+				alt="Clique para acessar Publicações" title="Clique para acessar Publicações" />Publicações
+				 <f:param name="somentePublicacoesConsumidor" value="false" />
+			</h:link>
+		</li>
+		<li>			
+			<h:link outcome="/pub/centraisDeConteudo/aplicativos.xhtml">
+				<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_menu/ico_aplicativos.png"
+				alt="Clique para acessar Aplicativos" title="Clique para acessar Aplicativos" />Aplicativos
+			</h:link>
+			
+		</li>
+        <li>
+        	<h:link outcome="/pub/centraisDeConteudo/indicadores.xhtml">
+				<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_menu/ico_infograficos.png"
+				alt="Clique para acessar Indicadores" title="Clique para acessar Indicadores" />Indicadores
+			</h:link>
+		</li>
+		<li>
+			<h:link outcome="/pub/centraisDeConteudo/videos.xhtml">
+				<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_menu/ico_videos.png"
+				alt="Clique para acessar Vídeos" title="Clique para acessar Vídeos" />Vídeos
+			</h:link>
+		</li>
+    </ul>
+</nav>
+</html>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+	<h:panelGroup>
+	
+	<div class="atlas_linha">
+		<h:panelGroup rendered="#{not empty manterOrgaoBean.entidade.problemas}">
+			<br />
+			<br />
+			<h:outputText value="Erro detectado e informado pelo usuário:" />
+			<br />
+			<br />
+			<p:dataTable value="#{manterOrgaoBean.entidade.problemas}" var="problema" style="width: ">
+				<p:column headerText="Tipo de Problema" style="white-space:normal !important; vertical-align:middle;">
+					<h:outputText value="#{problema.tipoProblemaFormatado}" />
+				</p:column>
+				<p:column headerText="Descrição" style="white-space:normal !important; vertical-align:middle !important;">
+					<h:outputText value="#{problema.descricao}" />
+				</p:column>
+				<p:column headerText="Observação">
+					<h:inputTextarea 	value="#{problema.observacao}" rows="2" cols="50"
+										styleClass="atlas-input-formata atlas-input-250" 
+										onkeydown="limitTextArea(this, 100);"
+										onkeyup="limitTextArea(this, 100);"
+										id="atlas-formulario-erro-observacao" />
+					<p:watermark for="atlas-formulario-erro-observacao" value="Informe uma observação sobre o erro" />
+				</p:column>
+				<p:column headerText="Resolvido" style="vertical-align:middle;">
+					<h:selectOneMenu value="#{problema.statusProblema}"
+					styleClass="atlas-select-formata atlas-select-120">
+						<f:selectItem itemLabel="Não" itemValue="N" />
+						<f:selectItem itemLabel="Sim" itemValue="S" />
+					</h:selectOneMenu>
+				</p:column>
+			</p:dataTable>
+	
+		</h:panelGroup>
+	</div>
+	</h:panelGroup>
+	
+</ui:composition>

@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link
+			title="GERENCIAMENTO" value="GERENCIAMENTO"
+			outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > 
+			
+			<h:link title="DADOS EM BLOCO" value="DADOS EM BLOCO >"
+			outcome="/admin/gerenciamento/dadosEmBloco/exibirDadosEmBloco.xhtml" /> ATUALIZAÇÃO EM BLOCO
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<style>
+		.atlas-tabela-simples td{
+			white-space: normal !important;
+		}
+		.atlas-mensagem-dados-informados{
+			font-weight: bold !important;
+		}
+		</style>
+		<script type="text/javascript" src="../_javascript/validacaoCampo.js"></script>
+		<script type="text/javascript" src="jquery-1.2.6.pack.js"></script>
+		<script type="text/javascript" src="jquery.maskedinput-1.1.4.pack.js"></script>
+		<div class="atlas-miolo-logado">
+			<h2>Atualização Em Bloco</h2>
+
+			<p:growl id="growl" showDetail="true" sticky="true" />
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h:head>
+				<title>Admin | Atualização em bloco</title>
+			</h:head>
+
+			<div class="atlas-miolo-logado-lista-acoes">
+				<div class="atlas-miolo-logado-inline">
+					<h:commandButton value="VOLTAR"
+						action="#{manterDadosEmBlocoBean.voltarCadastro()}" ajax="false"
+						partialSubmit="true" process="@form" update="@form"
+						immediate="true" styleClass="atlas-button-interno" />
+					<h:outputText value=" " />
+					<h:commandButton value="CONFIRMA"
+						action="#{manterDadosEmBlocoBean.confirma()}"
+						styleClass="atlas-button-interno" ajax="false" />
+				</div>
+			</div>
+
+			<P />
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Confirma a alteração em bloco com os dados
+					informados:</legend>
+			</fieldset>
+
+
+			<!-- ============================================= ABA DADOS INFORMADOS ============================================= -->
+			<p:tabView>
+				<p:tab title="Dados informados">
+					<ui:include src="/admin/gerenciamento/dadosEmBloco/abasConfirmacao/abaDadosInformados.xhtml" />
+				</p:tab>
+				<!-- ============================================= ABA ORGAOS ============================================= -->
+				<p:tab title="Órgãos selecionados"
+					rendered="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.alteracaoPorSelecao}">
+					<p:dataTable var="orgao"
+						value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaosSelecionados}"
+						styleClass="atlas-tabela-simples" rowIndexVar="contador"
+						emptyMessage="Nenhum registro encontrado">
+						<p:column headerText="#">
+							<h:outputText value="#{contador + 1}" />
+						</p:column>
+						<p:column headerText="Sigla">
+							<h:outputText value="#{orgao.sigla}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{orgao.nome}" />
+						</p:column>
+						<p:column headerText="Descricao">
+							<h:outputText value="#{orgao.descricao}" />
+						</p:column>
+						<p:column headerText="Tipo">
+							<h:outputText value="#{orgao.tipoOrgao.nome}" />
+						</p:column>
+						<p:column headerText="E-mail">
+							<h:outputText value="#{orgao.descricaoEmailInstitucional}" />
+						</p:column>
+						<p:column headerText="Homepage">
+							<h:outputText value="#{orgao.homePage}" />
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+				<!-- ============================================= ABA ORGAOS RESUMO ============================================= -->
+				<p:tab title="Resumo da alteração"
+					rendered="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.alteracaoPorSelecao}">
+					<h:outputText value="Temas alterados! Verifique as informações na aba DADOS INFORMADOS." styleClass="atlas-mensagem-dados-informados"
+						rendered="#{not empty manterDadosEmBlocoBean.dadosEmBlocoDTO.temas}"/><br />
+					<h:outputText value="Servicos alterados! Verifique as informações na aba DADOS INFORMADOS." styleClass="atlas-mensagem-dados-informados"
+						rendered="#{not empty manterDadosEmBlocoBean.dadosEmBlocoDTO.servicos}"/><br />
+					<h:outputText value="Representantes alterados! Verifique as informações na aba DADOS INFORMADOS." styleClass="atlas-mensagem-dados-informados" 
+						rendered="#{not empty manterDadosEmBlocoBean.dadosEmBlocoDTO.representantes}"/><br />
+					
+					<p:dataTable var="orgao"
+						value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaosSelecionadosResumo}"
+						styleClass="atlas-tabela-simples" rowIndexVar="contador"
+						emptyMessage="Nenhum registro encontrado">
+						<p:column headerText="#">
+							<h:outputText value="#{contador + 1}" />
+						</p:column>
+						<p:column headerText="Sigla">
+							<h:outputText value="#{orgao.sigla}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{orgao.nome}" />
+						</p:column>
+						<p:column headerText="Descricao">
+							<h:outputText value="#{orgao.descricao}" />
+						</p:column>
+						<p:column headerText="Tipo">
+							<h:outputText value="#{orgao.tipoOrgao.nome}" />
+						</p:column>
+						<p:column headerText="E-mail">
+							<h:outputText value="#{orgao.descricaoEmailInstitucional}" />
+						</p:column>
+						<p:column headerText="Homepage">
+							<h:outputText value="#{orgao.homePage}" />
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+				<!-- ============================================= ABA ORGAOS POR FILTRO ============================================= -->
+				<p:tab title="Alterar todos"
+					rendered="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.alteracaoPorFiltro}">
+					<h2>
+						<h:outputText
+							value="Todos os #{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoFiltro.qtdRegistros} registros recuperados pelo filtro informado abaixo serão alterados!" />
+					</h2>
+					<table class="atlas-tabela-simples">
+						<tbody>
+							<tr class="atlas-tabela-simples-linha-02">
+								<td class="atlas-tabela-simples-label"><label>Nome
+										do órgão:</label></td>
+								<td colspan="2"><h:outputText
+										value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoFiltro.nome}" /></td>
+							</tr>
+							<tr class="atlas-tabela-simples-linha-01">
+								<td class="atlas-tabela-simples-label"><label>Informação
+										de coordenadas:</label></td>
+								<td colspan="2"><h:outputText
+										value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoFiltro.orgaosComLatitudeLongitudeDescricao}" /></td>
+							</tr>
+							<tr class="atlas-tabela-simples-linha-02">
+								<td class="atlas-tabela-simples-label"><label>Erro
+										de informação:</label></td>
+								<td colspan="2"><h:outputText
+										value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoFiltro.orgaosComErroDescricao}" /></td>
+							</tr>
+							<tr class="atlas-tabela-simples-linha-01">
+								<td class="atlas-tabela-simples-label"><label>Situação
+										do registro:</label></td>
+								<td colspan="2"><h:outputText
+										value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoFiltro.orgaosSituacaoRegistroDescricao}" /></td>
+							</tr>
+							<tr class="atlas-tabela-simples-linha-02">
+								<td class="atlas-tabela-simples-label"><label>Tipo
+										de órgão:</label></td>
+								<td colspan="2"><h:outputText
+										value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoFiltro.tipoOrgao.nome}" /></td>
+							</tr>
+							<tr class="atlas-tabela-simples-linha-01">
+								<td class="atlas-tabela-simples-label"><label>Tema:</label></td>
+								<td colspan="2"><h:outputText
+										value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoFiltro.tema.nome}" /></td>
+							</tr>
+							<tr class="atlas-tabela-simples-linha-02">
+								<td class="atlas-tabela-simples-label"><label>Estado:</label></td>
+								<td colspan="2"><h:outputText
+										value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoFiltro.uf.nome}" /></td>
+							</tr>
+							<tr class="atlas-tabela-simples-linha-01">
+								<td class="atlas-tabela-simples-label"><label>Município:</label></td>
+								<td colspan="2"><h:outputText
+										value="#{manterDadosEmBlocoBean.dadosEmBlocoDTO.orgaoFiltro.municipio.nome}" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</p:tab>
+			</p:tabView>
+
+		</div>
+	</ui:define>
+</ui:composition>

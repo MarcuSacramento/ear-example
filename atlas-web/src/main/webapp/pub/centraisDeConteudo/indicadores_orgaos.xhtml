@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="CENTRAIS DE CONTEÚDOS" value="CENTRAIS DE CONTEÚDOS"	outcome="/pub/centraisDeConteudo/exibirCentraisDeConteudos.xhtml" /> > 
+		<h:link title="INDICADORES" value="INDICADORES" outcome="/pub/centraisDeConteudo/indicadores.xhtml" /> > MAPA POR ORGAOS 
+	</ui:define>
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Indicadores - Mapa por Órgãos</title>
+		</h:head>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/pub/_javascript/geolocalizacao.js" />
+		<script type="text/javascript">
+			function agruparMarcadores() {
+				map = cliMap.getMap();
+				var markers = cliMap.cfg.markers;
+				var markerCluster = new MarkerClusterer(map, markers);
+			}
+		</script>
+		<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
+		<div class="atlas-miolo">		
+			<h2>Mapa</h2>
+			#{carregarOrgaosBean.carregarCombos()}			
+			<h:panelGroup id="atlas-miolo-conteudo-filtro" layout="block" styleClass="atlas-miolo-conteudo-filtro">
+				<br />
+				<p>Para visualizar o(s) órgão(s) desejado(s) selecione os dados nas combos abaixo:</p>
+				<h:panelGroup id="atlas_geral_miolo_linha" styleClass="atlas-geral-miolo-linha">
+				    <h4>Filtro</h4>
+					<h:panelGrid styleClass="atlas-miolo-conteudo-filtro" columns="2">
+						<h:panelGroup>
+							<h:outputLabel value="Ramos:" for="ramos" />
+							<br />
+							<h:selectOneMenu id="ramos" value="#{carregarOrgaosBean.ramo}"
+								converter="selectItemConverter"
+								styleClass="atlas-select-330 atlas-select-formata">
+								<p:ajax event="change" update="tipos plotar" process="@this" />
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{carregarOrgaosBean.ramos}" var="ramo"
+									itemLabel="#{ramo.nome}" itemValue="#{ramo}" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+	
+						<h:panelGroup>
+							<h:outputLabel value="Tipos de Órgãos:" for="tipos" />
+							<br />
+							<h:selectOneMenu id="tipos"
+								value="#{carregarOrgaosBean.tipoOrgaoPesquisa}"
+								converter="selectItemConverter"
+								styleClass="atlas-select-330 atlas-select-formata">
+								<f:selectItem itemLabel="Todos" />
+								<f:selectItems value="#{carregarOrgaosBean.tipoOrgaos}"
+									var="tipo" itemLabel="#{tipo.nome}" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							<h:outputLabel value="Temas:" for="temas" />
+							<br />
+							<h:selectOneMenu id="temas" 
+								value="#{carregarOrgaosBean.tema}"
+								converter="selectItemConverter"	
+								styleClass="atlas-select-330 atlas-select-formata">
+								<p:ajax event="change" process="@this" update="plotar" />
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{carregarOrgaosBean.temas}"
+									var="tema" itemLabel="#{tema.nome}" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+					</h:panelGrid>
+					<h4>Visualização</h4>
+				    <h:panelGrid bostyle="margin-bottom:10px" columns="1">
+				        <h:selectOneRadio style="width:300px" id="idVisualizacaoMapa" value="#{carregarOrgaosBean.visualizacaoMapa}" layout="custom">
+							<f:selectItem itemLabel="Órgãos agrupados"     itemValue="A"/>
+							<f:selectItem itemLabel="Círculo/Raio" itemValue="R"/>
+				        </h:selectOneRadio>
+				    </h:panelGrid>
+				</h:panelGroup>	
+			</h:panelGroup>
+			<br />
+			<div class="atlas-miolo-conteudo-inicio">
+				<p:commandButton id="plotar" value="Plotar Órgãos"
+								disabled="#{carregarOrgaosBean.desabilitarBotaoPlotar()}"
+								update="mapa messages"
+								actionListener="#{carregarOrgaosBean.plotarOrgaos}" 
+								oncomplete="agruparMarcadores()"/>
+			</div>
+			<br />
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"	warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />		
+			<br />
+			<div class="atlas-miolo-conteudo-inicio">
+				<div>
+				<p:gmap id="mapa"
+					center="#{carregarOrgaosBean.latitudeBase}, #{carregarOrgaosBean.longitudeBase}"
+					zoom="#{carregarOrgaosBean.zoom}" type="ROADMAP" widgetVar="cliMap"
+					fitBounds="true" model="#{carregarOrgaosBean.plotarOrgaos()}" 
+					style="width:100%;height:800px">					
+				</p:gmap>
+				</div>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>

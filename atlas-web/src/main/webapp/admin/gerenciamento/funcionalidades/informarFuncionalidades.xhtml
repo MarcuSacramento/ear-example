@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+
+	<ui:define name="breadcrumb"> > <h:link
+			title="GERENCIAMENTO" value="GERENCIAMENTO"
+			outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > 
+			
+			<h:link title="FUNCIONALIDADE" value="FUNCIONALIDADE >"
+			outcome="/admin/gerenciamento/funcionalidades/exibirFuncionalidades.xhtml" /> NOVA FUNCIONALIDADE
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<script type="text/javascript">
+		//<![CDATA[
+			function contarDescricao(box,valor,campospan){ 
+				var contador = valor - box.length; 
+				document.getElementById(campospan).innerHTML = contador; 
+				
+				if(box.length >= valor){ 
+					document.getElementById(campospan).innerHTML = "Limite excedido"; 
+					document.getElementById("inputDescricao").value = document.getElementById("inputDescricao").value.substr(0,valor); 
+				}	 
+			}
+			function contarSaibaMais(box,valor,campospan){ 
+				var contador = valor - box.length; 
+				document.getElementById(campospan).innerHTML = contador; 
+				
+				if(box.length >= valor){ 
+					document.getElementById(campospan).innerHTML = "Limite excedido"; 
+					document.getElementById("inputSaibaMais").value = document.getElementById("inputSaibaMais").value.substr(0,valor); 
+				}	 
+			}
+		//]]>	
+		</script>
+
+		<style>
+			.div-miolo {
+			display: block;
+			clear: both;
+			min-height: 40px;
+			padding-top: 0.8em;
+			}
+
+		</style>
+
+		<div class="atlas-miolo-logado">
+			<h2>Funcionalidade</h2>
+
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h:head>
+				<title>Nova Funcionalidade | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+
+			<p>Verifique e preencha os campos abaixo para realizar a
+				atualização da Funcionalidade:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados da Funcionalidade</legend>
+				
+				<div class="atlas-miolo-logado-linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-Funcionalidade-codigo">Código:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText value="#{manterFuncionalidadeBean.entidade.codigo}"
+							id="atlas-formulario-Funcionalidade-codigo"
+							title="Informe o nome da Funcionalidade"
+							readonly="true"
+							styleClass="atlas-input-formata atlas-input-520" />
+					</div>
+				</div>
+
+				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-Funcionalidade-nome">Nome:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText value="#{manterFuncionalidadeBean.entidade.nome}"
+							id="atlas-formulario-Funcionalidade-nome"
+							title="Informe o nome da Funcionalidade"
+							readonly="#{manterFuncionalidadeBean.alteracaoPermitida}"
+							styleClass="atlas-input-formata atlas-input-520" />
+
+						<p:watermark for="atlas-formulario-Funcionalidade-nome"
+							value="Nome da Funcionalidade" />
+
+					</div>
+				</div>
+
+				<div class="div-miolo atlas-miolo-logado-linha-textarea">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-Funcionalidade-descricao">Descrição:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputTextarea rows="2" id="atlas-formulario-Funcionalidade-descricao"
+							value="#{manterFuncionalidadeBean.entidade.descricao}"
+							onkeypress="contarDescricao(this.value,5632,'totalDescricao')"
+							title="Informe a Descrição da Funcionalidade"
+							style="font-size: 1.2em !important;"
+							styleClass="atlas-input-formata atlas-input-520" />
+						<span id="totalDescricao" class="atlas_textarea_formata_contador" />
+						<p:watermark for="atlas-formulario-Funcionalidade-descricao" value="Descrição da Funcionalidade" />
+
+					</div>
+				</div>
+
+			</fieldset>
+		
+			<div class="atlas-miolo-logado-lista-acoes">
+				<div class="atlas-miolo-logado-inline">
+					<h:commandButton action="#{manterFuncionalidadeBean.salvar()}"
+						rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('012')}"
+						id="atlas-botao-atualizar-funcionalidade"
+						value="#{manterFuncionalidadeBean.entidade.id== null ? 'CADASTRAR' : 'SALVAR'}" styleClass="atlas-button-interno" update="@form"
+						title="Clique para atualizar um Funcionalidade"
+						style="font-size: 1.2em !important;" />
+				</div>
+
+				<div class="atlas-miolo-logado-inline">
+					<h:commandButton action="#{manterFuncionalidadeBean.voltarTelaPesquisa()}"
+						value="CANCELAR" styleClass="atlas-button-interno" update="@form"
+						title="Clique para cancelar a atualização do Funcionalidade"
+						style="font-size: 1.2em !important;" />
+				</div>
+			</div>
+				
+				
+			</div>
+
+	</ui:define>
+</ui:composition>

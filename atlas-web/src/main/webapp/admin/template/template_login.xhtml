@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:ui="http://java.sun.com/jsf/facelets" 
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core" 
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type"	content="application/xhtml+xml; charset=UTF-8" />
+	<link href="${facesContext.externalContext.requestContextPath}/admin/_imagens/_icone/favicon.ico" rel="shortcut icon" />
+	<!-- link href="${facesContext.externalContext.requestContextPath}/pub/_css/estilo_geral.css" rel="stylesheet" type="text/css" / -->
+	<link href=" #{acessibilidadeBean.getUrlCss()}" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/admin/_javascript/controla_fonte.js" />
+
+	<h:outputStylesheet name="estilo_geral.css" library="admin" />
+	<h:outputStylesheet name="estilo_cabecalho.css" library="admin" />
+	<h:outputStylesheet name="estilo_fontes.css" library="admin" />
+	<h:outputStylesheet name="estilo_css_reset.css" library="admin" />
+	<h:outputStylesheet name="estilo_menu_topo.css" library="admin" />
+	<h:outputStylesheet name="estilo_breadcrumb.css" library="admin" />
+	<h:outputStylesheet name="estilo_formularios.css" library="admin" />
+	<h:outputStylesheet name="estilo_tabelas.css" library="admin" />
+	<h:outputStylesheet name="estilo_mensagens.css" library="admin" />
+	<h:outputStylesheet name="estilo_paginacao.css" library="admin" />
+	<h:outputStylesheet name="estilo_conteudo.css" library="admin" />
+	<h:outputStylesheet name="estilo_menu_lateral.css" library="admin" />
+	<h:outputStylesheet name="estilo_miolo.css" library="admin" />
+	<h:outputStylesheet name="estilo_pagina_inicial.css" library="admin" />
+	<h:outputStylesheet name="estilo_pagina_enderecos.css" library="admin" />
+	<h:outputStylesheet name="estilo_pagina_dicionario.css" library="admin" />
+	<h:outputStylesheet name="estilo_pagina_parceiros.css" library="admin" />
+	<h:outputStylesheet name="estilo_pagina_infografico.css" library="admin" />
+	<h:outputStylesheet name="estilo_pagina_publicacao.css" library="admin" />
+	<h:outputStylesheet name="estilo_pagina_video.css" library="admin" />
+	<h:outputStylesheet name="estilo_rodape.css" library="admin" />
+	<h:outputStylesheet name="estilo_pagina_busca.css" library="admin" />
+</h:head>
+<h:body>
+	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+
+	<p:dialog modal="true" widgetVar="statusDialog" draggable="false" closable="false" resizable="false"> 
+		Carregando...
+	</p:dialog>
+
+	<f:loadBundle var="msg"   basename="mensagens" />
+	<f:loadBundle var="atlas" basename="atlas" />
+	<a name="atlas-ancora-topo"></a>
+	<div class="atlas-pagina">
+		<ui:include src="/admin/template/_template_barra_governo.xhtml" />
+		<div class="atlas-cabecalho">
+        	<div class="atlas-cabecalho-container">
+		        <ui:include src="/admin/template/_template_cabecalho.xhtml" />
+            </div>
+        </div>
+		<div class="atlas-menu-topo">
+			<div class="atlas-menu-topo-container">
+				<ul>
+					<li><a href="../.."
+						target="_blank">Acessar o site</a></li>
+				</ul>
+			</div>
+		</div>
+		
+        <div class="atlas-conteudo">
+            <div class="atlas-conteudo-container">
+				<br />    <br />
+                <div class="atlas-miolo">
+                	<a name="atlas-ancora-conteudo"></a>
+                  	<h:form id="form" prependId="false">
+						<p:outputPanel id="page" ajaxRendered="true">
+							<ui:insert name="conteudo" />
+						</p:outputPanel>
+					</h:form>
+                </div>
+			</div>
+        </div>
+		<ui:include src="/admin/template/_template_rodape.xhtml" />
+	</div>
+    <script src="http://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+</h:body>
+
+</html>

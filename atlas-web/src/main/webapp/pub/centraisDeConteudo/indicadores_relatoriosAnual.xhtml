@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="CENTRAIS DE CONTEÚDOS" value="CENTRAIS DE CONTEÚDOS"	outcome="/pub/centraisDeConteudo/exibirCentraisDeConteudos.xhtml" /> > 
+		<h:link title="INDICADORES" value="INDICADORES" outcome="/pub/centraisDeConteudo/indicadores.xhtml" /> > RELATÓRIOS 
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Indicadores - Relatórios</title>
+		</h:head>
+		<div class="atlas-miolo">
+			<h2> Indicadores </h2>
+		
+			<div class="atlas-miolo-conteudo-limpo">
+		        <h3>Relatórios</h3>
+		        
+		        <div class="atlas-miolo-conteudo-bloco-linha-infografico">
+		            <div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">
+		                    <a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/caderno_inaj_2015.pdf" target="_blank"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/caderno_inaj.png" alt="Ano 2015" title="Ano 2015" border="0" /></a>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+		                    <p class="atlas-miolo-conteudo-bloco-infografico-texto-titulo">
+		                    	<a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/caderno_inaj_2015.pdf" target="_blank">Ano 2015</a>
+		                    </p>
+	                    	<a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/caderno_inaj_2015.pdf" target="_blank">
+	                        	Indicadores Nacionais de Acesso à Justiça
+	                        </a>
+		                </div>
+		            </div>
+		            <div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">
+		                    <a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/caderno_inaj_2014.pdf" target="_blank"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/caderno_inaj_2014.png" alt="Ano 2014" title="Ano 2014" border="0" /></a>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+		                    <p class="atlas-miolo-conteudo-bloco-infografico-texto-titulo">
+		                    	<a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/caderno_inaj_2014.pdf" target="_blank">Ano 2014</a>
+		                    </p>
+	                    	<a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/caderno_inaj_2014.pdf" target="_blank">
+	                        	Indicadores Nacionais de Acesso à Justiça
+	                        </a>
+		                </div>
+		            </div>
+					<div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">
+		                    <a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/caderno_inaj_2013.pdf" target="_blank"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/caderno_inaj.png" alt="Ano 2013" title="Ano 2013" border="0" /></a>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+		                    <p class="atlas-miolo-conteudo-bloco-infografico-texto-titulo">
+		                    	<a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/caderno_inaj_2013.pdf" target="_blank">Ano 2013</a>
+		                    </p>
+	                    	<a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/caderno_inaj_2013.pdf" target="_blank">
+	                        	Indicadores Nacionais de Acesso à Justiça
+	                        </a>
+		                </div>
+		            </div>
+				</div>
+		        
+		    </div>
+		</div>
+	</ui:define>
+</ui:composition>

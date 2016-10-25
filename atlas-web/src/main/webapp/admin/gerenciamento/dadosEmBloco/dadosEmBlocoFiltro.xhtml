@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<script>
+		$(document).keydown(function(e) {
+		    if(e.which == 13) {
+		        e.preventDefault();
+		        e.stopPropagation();
+		        $("#buttonPesquisar").click();
+		    }
+		});
+	</script>
+	<div class="atlas-miolo-logado-filtro-linha">
+		<h:panelGroup class="atlas-coluna-filtro" id="atlas_coluna_filtro"
+				layout="block">
+				<table class="atlas-tabela-filtro">
+
+					<tbody>
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Nome do Órgão:" /> <br /> <h:inputText
+									value="#{manterDadosEmBlocoBean.termoPesquisa}" id="campoPesquisaOrgao"
+									maxlength="128"
+									title="Informe o termo"
+									styleClass="atlas-input-formata-fonte atlas-input-160" /></td>
+						</tr>
+
+					<tr class="atlas-tabela-filtro-linha">
+						<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+								value="Informação de Coordenadas: " /> <br /> <h:selectOneMenu
+								value="#{manterDadosEmBlocoBean.filtroInformacao}"
+								title="Selecione o assunto do Termo"
+								styleClass="atlas-select-formata atlas-select-170">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItem itemLabel="Sem informação" itemValue="S" />
+								<f:selectItem itemLabel="Com informação" itemValue="C" />
+								<f:selectItem itemLabel="Ambos" itemValue="A" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr class="atlas-tabela-filtro-linha">
+						<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+								value="Erro de informação: " /> <br /> <h:selectOneMenu
+								value="#{manterDadosEmBlocoBean.carregarOrgaosErro}"
+								converter="selectItemConverter"
+								title="Selecione o assunto do Termo"
+								styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Sem erro na informação" itemValue="S" />
+									<f:selectItem itemLabel="Com erro na informação" itemValue="C" />
+									<f:selectItem itemLabel="Ambos" itemValue="A" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr class="atlas-tabela-filtro-linha">
+						<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+								value="Situação do registro: " /> <br /> <h:selectOneMenu
+								value="#{manterDadosEmBlocoBean.carregarOrgaosSituacaoRegistro}"
+								title="Selecione o assunto do Termo"
+								styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterDadosEmBlocoBean.situacoes}" var="situacao"
+										itemLabel="#{situacao.descricao()}" itemValue="#{situacao.indiceSituacao()}" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr class="atlas-tabela-filtro-linha">
+						<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+								value="Tipo Órgão: " /> <br /> <h:selectOneMenu
+								value="#{manterDadosEmBlocoBean.tipoOrgao}"
+								converter="selectItemConverter"
+								title="Selecione o assunto do Termo"
+								styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterDadosEmBlocoBean.tiposOrgaos}"
+										var="tipoOrgao" itemLabel="#{tipoOrgao.nome}" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr class="atlas-tabela-filtro-linha">
+						<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+								value="Tema: " /> <br /> <h:selectOneMenu
+								value="#{manterDadosEmBlocoBean.tema}"
+								converter="selectItemConverter"
+								title="Selecione o assunto do Termo"
+								styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterDadosEmBlocoBean.temas}"
+										var="tema" itemLabel="#{tema.nome}" />
+							</h:selectOneMenu></td>
+					</tr>
+					
+					<tr class="atlas-tabela-filtro-linha">
+						<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+								value="Serviço: " /> <br /> <h:selectOneMenu
+								value="#{manterDadosEmBlocoBean.servico}"
+								converter="selectItemConverter"
+								title="Selecione o serviço"
+								styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterDadosEmBlocoBean.servicos}"
+										var="servico" itemLabel="#{servico.nome}" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr class="atlas-tabela-filtro-linha">
+						<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+								value="Estado: " /> <br /> <h:selectOneMenu
+								value="#{manterDadosEmBlocoBean.uf}" id="ufs"
+								converter="selectItemConverter"
+								title="Selecione o assunto do Termo"
+								styleClass="atlas-select-formata atlas-select-170">
+									<p:ajax event="change" update="municipios" process="@this" />
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterDadosEmBlocoBean.ufs}" var="uf"
+										itemLabel="#{uf.nome}" itemValue="#{uf}" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr class="atlas-tabela-filtro-linha">
+						<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+								value="Município: " /> <br /> <h:selectOneMenu
+								value="#{manterDadosEmBlocoBean.municipio}" id="municipios"
+								converter="selectItemConverter"
+								title="Selecione o assunto do Termo"
+								styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterDadosEmBlocoBean.municipios}"
+										var="municipio" itemLabel="#{municipio.nome}" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2">
+							   	<p:commandButton id="buttonPesquisar"
+									action="#{manterDadosEmBlocoBean.pesquisarTermo()}" 
+									update=":form:atlas_linha:" 
+									value="PESQUISAR"/>									
+								 
+								<p:commandButton
+									action="#{manterDadosEmBlocoBean.limparPesquisar()}" value="LIMPAR"
+									update=":form:atlas_coluna_filtro atlas_linha:">
+								</p:commandButton>
+							</td>
+								
+						</tr>
+					</tbody>
+				</table>
+			</h:panelGroup>
+	</div>	
+</h:body>
+
+</html>
+
+
+
+
+
+

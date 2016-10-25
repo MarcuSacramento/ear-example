@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="GERENCIAMENTO" value="GERENCIAMENTO"
+			outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > TIPOS DE ÓRGÃO
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<div class="atlas-miolo-logado">
+			#{manterTipoOrgaoBean.init()}
+			
+			<div class="atlas_geral_miolo">
+			
+				<h:messages id="messages" globalOnly="true"
+					infoClass="atlas-mensagem-positivo"
+					warnClass="atlas-mensagem-alerta"
+					errorClass="atlas-mensagem-erro" />
+					
+				<h2>Tipos de órgão</h2>
+
+
+				<div class="atlas-miolo-logado">
+					<section class="atlas-miolo-logado-lista">
+						<div class="atlas-miolo-logado-lista-acoes">
+
+							<div class="atlas-miolo-logado-inline">
+								<p:commandButton
+									action="#{manterTipoOrgaoBean.novoRegistroManterTipoOrgao()}"
+									value="NOVO" id="atlas-botao-novo" ajax="false"
+									title="Clique para cadastrar um novo tipo de órgão" />
+							</div>
+						</div>
+						<ui:include src="/admin/gerenciamento/tipoOrgao/tabela.xhtml" />
+					</section>
+
+					<aside class="atlas-miolo-logado-filtro">
+
+						<fieldset id="atlas-area-filtro" class="atlas-area-filtro">
+							<legend>Filtrar:</legend>
+							<ui:include
+								src="/admin/gerenciamento/tipoOrgao/tipoOrgaoFiltro.xhtml" />
+						</fieldset>
+
+					</aside>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

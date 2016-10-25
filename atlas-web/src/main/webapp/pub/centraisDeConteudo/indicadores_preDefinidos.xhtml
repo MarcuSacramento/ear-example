@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="CENTRAIS DE CONTEÃšDOS" value="CENTRAIS DE CONTEÃšDOS"	outcome="/pub/centraisDeConteudo/exibirCentraisDeConteudos.xhtml" /> > 
+		<h:link title="INDICADORES" value="INDICADORES" outcome="/pub/centraisDeConteudo/indicadores.xhtml" /> > PRÉ DEFINIDOS 
+	</ui:define>
+	<ui:define name="conteudo">
+		<h:head>
+			<link href="${facesContext.externalContext.requestContextPath}/pub/_css/_estilo_justica.css" rel="stylesheet" type="text/css" />
+			<title>Indicadores - Pré Definidos</title>
+		</h:head>
+		
+		<div class="atlas-miolo">
+			<h2>Indicadores</h2>
+
+			<div id="justicas">
+                <div id="jusGeral" class="boxJustica" 
+                     onclick="window.open('http://164.41.222.170:8080/pentaho/api/repos/%3Apublic%3Aatlas%3Ainaj_geral%3A.wcdf/generatedContent?userid=public&amp;password=public','_blank');">
+                     
+                    <h3>Geral</h3>
+                    <ul>
+                        <li>Histórico INAJ</li>
+                        <li>Histórico INAJ s/ EJ</li>
+                        <li>INAJ e IDH</li>
+                    </ul>
+                </div>
+
+                <div id="jusEstadual" class="boxJustica" onclick="window.open('http://164.41.222.170:8080/pentaho/api/repos/%3Apublic%3Aatlas%3Aj_estadual%3A.wcdf/generatedContent?userid=public&amp;password=public','_blank');">
+                    <h3>Justiça Estadual</h3>
+                    <ul>
+                        <li>INAJ</li>
+                        <li>Unidades</li>
+                        <li>Operadores</li>
+                    </ul>
+                </div>
+
+                <div id="jusFederal" class="boxJustica" onclick="window.open('http://164.41.222.170:8080/pentaho/api/repos/%3Apublic%3Aatlas%3Aj_federal%3A.wcdf/generatedContent?userid=public&amp;password=public','_blank');">
+                    <h3>Justiça Federal</h3>
+                    <ul>
+                        <li>INAJ</li>
+                        <li>Unidades</li>
+                        <li>Operadores</li>
+                    </ul>
+                </div>
+
+                <div id="jusTrabalho" class="boxJustica" onclick="window.open('http://164.41.222.170:8080/pentaho/api/repos/%3Apublic%3Aatlas%3Aj_trabalho%3A.wcdf/generatedContent?userid=public&amp;password=public','_blank');">
+                    <h3>Justiça do Trabalho</h3>
+                    <ul>
+                        <li>INAJ</li>
+                        <li>Unidades</li>
+                        <li>Operadores</li>
+                    </ul>
+                </div>
+
+                <div id="jusMulher" class="boxJustica" onclick="window.open('http://164.41.222.170:8080/pentaho/api/repos/%3Apublic%3Aatlas%3Amulher%3A.wcdf/generatedContent?userid=public&amp;password=public','_blank');">
+                    <h3>Justiça da Mulher</h3>
+                    <ul>
+                        <li>INAJ</li>
+                        <li>Unidades</li>
+                        <li>Operadores</li>
+                    </ul>
+                </div>
+
+            </div>
+			
+			
+		</div>
+	</ui:define>
+</ui:composition>

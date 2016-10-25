@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition>
+			
+		<c:if test="#{empty labelWidth}"> 
+			<c:set var="labelWidth" value="auto"/> 
+		</c:if>
+		<c:if test="#{empty width}"> 
+			<c:set var="width" value="205px"/> 
+		</c:if>
+		
+		<c:if test="#{empty layout}"> 
+			<c:set var="layout" value="vertical"/> 
+		</c:if>
+		
+		<c:if test="#{empty rendered}">
+			<c:set var="rendered" value="true" />
+		</c:if> 
+		
+		<c:if test="#{empty required}">
+			<c:set var="required" value="false" />
+		</c:if>
+		<c:if test="#{empty bean}">
+			<c:set var="bean" value="#{autenticarUsuarioBean}" />
+		</c:if>
+		<c:if test="#{empty valueChangeMethod}">
+			<c:set var="valueChangeMethod" value="dummyActionMethod" />
+		</c:if>
+			
+			<p:outputLabel  title="#{label}" styleClass="#{styleClass}" value="#{label}" rendered="#{rendered}"  
+					style="#{layout == 'vertical' ? '' : 'display: inline-block;' } width: #{labelWidth}; text-align: right; white-space: nowrap;">
+				<c:if test="#{required}">
+					<span class="sirt_label_login_requerido" title="Campo de preenchimento obrigatório!">*</span>
+				</c:if>
+			</p:outputLabel>
+								
+			<c:if test="#{(layout == 'vertical' and rendered)}">
+				<br/>
+			</c:if>
+			
+		 <h:selectOneMenu id="#{id}"
+		 				  value="#{value}"
+		 				  valueChangeListener="#{bean[valueChangeMethod]}" 
+	 					  styleClass="sispaj_select_formata"
+	 					  readonly="#{readonly}"
+	 					  rendered="#{rendered}"
+	 					  disabled="#{disabled}"
+	 					  title="#{empty title ? label : title}"
+	 					  style="margin-left: #{layout == 'vertical' ? 0 : 5}px; width: #{width};">
+         	<ui:insert/>
+         	<f:selectItems value="#{valueItens}" var="item" itemValue="#{item}" itemLabel="#{item.label}"/>
+         	<f:converter converterId="selectItemConverter"/>
+         	<f:ajax/>
+         </h:selectOneMenu>
+	</ui:composition>
+</html>

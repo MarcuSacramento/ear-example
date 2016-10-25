@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link	title="GERENCIAMENTO" value="GERENCIAMENTO" outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > 
+		<h:link title="PERFIL" value="PERFIL > #{manterPerfilBean.entidade.id!=null and manterPerfilBean.entidade.id!=0?'EDITAR PERFIL':'NOVO PERFIL'}"	outcome="/admin/gerenciamento/perfil/exibirPerfil.xhtml" /> 
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<style>
+			#inputDataInclusao_input {
+				box-shadow: none;
+				-webkit-box-shadow: none;
+				border: none;
+				padding-top:10px;
+				color: rgb(22, 89, 201);
+			}
+			div.atlas-miolo-logado-linha-campo-full{
+				width: 532px !important;
+			}
+			.atlas-tabela-simples td{
+				border-width: 0px !important;
+				vertical-align: middle !important;
+			}
+			.atlas-tabela-simples td label{
+				line-height:20px;
+				font-family: Arial,sans-serif;
+				font-size: 1.1em;
+			}
+			div.atlas-miolo-logado-linha-campo-dual-observacao{
+				float: left !important;
+				margin-left: 20px !important;
+				width: 620px !important;
+				font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+			}
+			div.atlas-miolo-logado-linha-observacao{
+				display: block !important;
+				clear: both !important;
+				border-bottom: 1px solid rgba(22,89,191,1) !important;
+				min-height: 50px !important;
+				padding-top: 0.8em !important;
+			}
+		</style>
+
+		<div class="atlas-miolo-logado">
+			<h2>Perfil</h2>
+			
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h:head>
+				<title>Novo Perfil | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+
+			<p>Verifique e preencha os campos abaixo para realizar a
+				atualização do perfil:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados do Perfil</legend>
+				<p:tabView>
+					<p:tab title="Dados básicos" id="idDadosBasicos">
+						<div class="atlas-miolo-logado-linha">
+							<div class="atlas-miolo-logado-linha-label-full">
+								<label for="atlas-formulario-perfil-nome" style="font-size:1.2em; color: rgb(0, 0, 0);">Nome:*</label><br />
+							</div>
+							<div class="atlas-miolo-logado-linha-campo-full">
+								<h:inputText value="#{manterPerfilBean.entidade.nome}"
+									id="atlas-formulario-perfil-nome"
+									title="Informe o nome do perfil"
+									styleClass="atlas-input-formata atlas-input-520"
+									style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+									border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+									box-shadow:none; width: 520px !important; font-size: 1.1em !important;"
+									maxlength="30"/>
+								<p:watermark for="atlas-formulario-perfil-nome"
+									value="Nome do Perfil" />
+							</div>
+						</div>
+		
+						<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+							<div class="atlas-miolo-logado-linha-label-full">
+								<label for="atlas-formulario-perfil-descricaoFinalidade" style="font-size:1.2em; color: rgb(0, 0, 0);">Descrição/Finalidade:</label><br />
+							</div>
+							<div class="atlas-miolo-logado-linha-campo-full">
+								<h:inputText value="#{manterPerfilBean.entidade.descricao}"
+									id="atlas-formulario-perfil-descricaoFinalidade"
+									title="Informe a Descrição/Finalidade do Perfil"
+									styleClass="atlas-input-formata atlas-input-520"
+									style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+									border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+									box-shadow:none; width: 520px !important; font-size: 1.1em !important;" maxlength="512"/>
+								<p:watermark for="atlas-formulario-perfil-descricaoFinalidade"
+									value="Nome do Perfil" />
+		
+							</div>
+						</div>
+						<div class="atlas-miolo-logado-linha">
+							<div class="atlas-miolo-logado-linha-label-dual">
+							<label for="atlas-formulario-perfil-descricaoFinalidade" style="font-size:1.2em; color: rgb(0, 0, 0);">Tipo:*</label><br />
+							</div>
+							<div class="atlas-miolo-logado-linha-campo-dual">
+								<h:selectOneMenu id="inputTipoPerfil"
+									value="#{manterPerfilBean.entidade.tipo}"
+									styleClass="atlas-select-formata atlas-select-170"
+									style=" height: 34px !important; background-color: rgb(0,0,0,1) !important; font-size: 1.1em !important;
+									border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;">
+									<f:selectItem itemLabel="Selecione ..." itemValue="" />
+									<f:selectItem itemLabel="Comum" itemValue="C" />
+									<f:selectItem itemLabel="Gestor" itemValue="G" />
+									<f:selectItem itemLabel="Master" itemValue="M" />
+								</h:selectOneMenu>
+							</div>
+							
+						</div>
+						<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+							<div class="atlas-miolo-logado-linha-label-full">
+								<label for="atlas-formulario-perfil-situacao" style="font-size:1.2em; color: rgb(0, 0, 0);">Situação:*</label><br />
+							</div>
+							<div class="atlas-miolo-logado-linha-campo-full">
+								<h:selectOneMenu id="inputSituacaoSituacao"
+									value="#{manterPerfilBean.entidade.situacao}"
+									title="Selecione a Situação do Perfil"
+									styleClass="atlas-select-formata atlas-select-170"
+									style=" height: 34px !important; background-color: rgb(0,0,0,1) !important; font-size: 1.1em !important;
+									border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;">
+									<f:selectItem itemLabel="Selecione ..." itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="A" />
+									<f:selectItem itemLabel="Inativo" itemValue="I" />
+								</h:selectOneMenu>
+		
+							</div>
+						</div>
+						<div class="atlas-miolo-logado-linha-observacao">
+							<div class="atlas-miolo-logado-linha-campo-dual-observacao">
+								<h:outputText value="*Tipo de perfil COMUM: " /><h:outputText value="NÃO consegue editar outros usuários."/><br/>
+								<h:outputText value="*Tipo de perfil GESTOR: Consegue editar SOMENTE usuários RELACIONADOS ao(s) mesmo(s) órgão(s) que o seu." /><br/>
+								<h:outputText value="*Tipo de perfil MASTER: Consegue editar TODOS os usuários." />
+							</div>
+						</div>
+					</p:tab>
+					<!-- =================================================== FUNCIONALIDADES =================================================== -->
+			        <p:tab title="Funcionalidades e níveis de acesso" id="idFuncionalidadeNivelAcesso">
+						<p:dataTable var="funcionalidade" value="#{manterPerfilBean.keySetAsList}" tableStyleClass="atlas-tabela-simples">
+			                <p:column headerText="Funcionalidades" >
+								<h:outputText value="#{funcionalidade.codigo} - #{funcionalidade.nome}" />
+			                </p:column>
+			                <p:column headerText="Nível acesso" style="text-align:center;">
+						        <p:selectOneRadio id="radioNivelAcesso" value="#{manterPerfilBean.funcionalidadeDTO.mapFuncionalidade[funcionalidade]}">
+						            <f:selectItem itemLabel="Sem acesso" itemValue="S" />
+						            <f:selectItem itemLabel="Consulta" itemValue="C" />
+						            <f:selectItem itemLabel="Administrador" itemValue="A" />
+							    </p:selectOneRadio>
+			                </p:column>
+					    </p:dataTable>
+			        </p:tab>
+				</p:tabView>
+			</fieldset>
+						
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Data do Cadastro</legend>
+					<div class="atlas-miolo-logado-linha-label-dual">
+						<label for="inputDataInclusao">Data de Cadastro:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-dual">
+						<p:calendar locale="pt"
+							value="#{manterPerfilBean.entidade.dataExpiracao}"
+							id="inputDataInclusao" style="width:60px; box-shadow: none; font-size:1.1em !important; "
+							styleClass="atlas-input-formata atlas-input-formata-disabled"
+							showOn="none" readonly="true" readonlyInput="true"
+							showButtonPanel="true" navigator="true" pattern="dd/MM/yyyy" />
+					</div>
+			</fieldset>
+
+			<div class="atlas-miolo-logado-lista-acoes">
+				<atlas:barraBotoesCadastro bean="#{manterPerfilBean}" funcionalidade="009"/>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>
+

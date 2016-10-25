@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/pub/template/template_atlas.xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<ui:define name="breadcrumb"> > <h:link title="SOBRE"
+			value="SOBRE" outcome="/pub/sobre/exibirSobre.xhtml" /> > MAPA DO CONSUMIDOR</ui:define>
+
+	<ui:define name="conteudo">
+		<script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/pub/_javascript/geolocalizacao.js" />
+		<script type="text/javascript">
+			var directionsService;
+			var directionsDisplay;
+
+			function inicializar() {
+				directionsService = new google.maps.DirectionsService();
+				directionsDisplay = new google.maps.DirectionsRenderer();
+			}
+
+			function desenharRota(latstart, lngstart, latend, lngend) {
+				if (directionsService == null) {
+					inicializar();
+				}
+				var latlngstart = new google.maps.LatLng(latstart, lngstart);
+				var latlngsend = new google.maps.LatLng(latend, lngend);
+				directionsDisplay.setMap(null);
+				map = cliMap.getMap();
+				directionsDisplay.setMap(map);
+				directionsDisplay.setPanel(document
+						.getElementById("directionsPanel"));
+
+				var request = {
+					origin : latlngstart,
+					destination : latlngsend,
+					travelMode : google.maps.TravelMode.DRIVING,
+					unitSystem: google.maps.UnitSystem.METRIC
+				};
+
+				directionsService.route(request, function(response, status) {
+					if (status == google.maps.DirectionsStatus.OK) {
+						directionsDisplay.setDirections(response);
+					} else{
+						jQuery('#messages').css({'color' : 'red'});
+						jQuery('#messages'). text('Não foi possível traçar uma rota a partir da origem informada.');
+					}
+					
+				});
+
+			}
+
+			function gerarRelatorioRota(){
+				document.getElementById("rota").value=document.getElementById("directionsPanel").innerHTML;
+			}
+		
+			function simularClick(id) {
+				var markers = cliMap.cfg.markers;
+				for ( var i = 0; i != markers.length; i++) {
+					if (markers[i].getZIndex() == id) {
+						google.maps.event.trigger(cliMap.cfg.markers[i],
+								'click');
+					}
+				}
+			}
+
+			function focusMapa(){
+				document.getElementById('atlas_geral_miolo_linha_final_endereco').scrollIntoView()
+			}
+
+			window.onload = function(){
+				if (reverseGeolocation[5]) {
+					$("#geolocalizacao").val(reverseGeolocation[5].formatted_address);
+					atualizarGeolocalizacao();
+					atualizarButtonLocalizar();
+				} else {
+					console.log('Não encontrou resultados para a geolocalização.');
+				}
+			};
+
+			function definirValorOrigem(){
+				$("#enderecoOrigem").val(reverseGeolocation[0].formatted_address);
+			}
+
+		</script>
+
+		<script type="text/javascript"
+			src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<h:head>
+			<title>Mapa do Consumidor</title>
+		</h:head>
+		<h:panelGroup styleClass="atlas-miolo">
+			<h:inputHidden id="geolocalizacao" value="#{mapaConsumidorBean.geolocalizacao}"/>
+			<p:remoteCommand name="atualizarGeolocalizacao" process="geolocalizacao" update="ufs, municipios"/>
+			<p:remoteCommand name="atualizarButtonLocalizar" process="municipios" update="localizar"/>
+			
+			<h2>Mapa do Consumidor</h2>
+
+			<h:panelGroup id="atlas_geral_miolo_linha_final_endereco">
+				<div>
+					<h:messages id="messages" globalOnly="true" style="width:100%"
+						errorClass="atlas-mensagem-erro"
+						infoClass="atlas-mensagem-positivo" />
+				</div>
+
+				<h:panelGroup
+					rendered="#{not empty mapaConsumidorBean.resultadoPesquisa}">
+					<div class="atlas-geral-miolo-linha-final-endereco">
+					    <div class="atlas-miolo-conteudo-filtro">
+					    	<div>
+								<h3>Encontre uma porta da Defesa do Consumidor perto de você</h3>
+								<p>
+									Busque as unidades do <b>Sistema Nacional de Defesa do Consumidor</b> que desejar nos municípios brasileiros, resultados com endereços e contatos completos.
+								</p>
+					    	</div>
+					    </div>
+					    <br/>
+						<div>
+							<!-- INÍCIO MAPA -->
+							<h:panelGroup layout="block">
+								<p:gmap id="mapa"
+									center="#{mapaConsumidorBean.latitudeBase}, #{mapaConsumidorBean.longitudeBase}"
+									zoom="#{mapaConsumidorBean.zoom}" type="ROADMAP"
+									style="height:480px" widgetVar="cliMap" fitBounds="true"
+									model="#{mapaConsumidorBean.mapModel}">
+		
+									<p:ajax event="overlaySelect"
+										listener="#{mapaConsumidorBean.onMarkerSelect}"
+										update=":form:listaOrgaos" />
+									<p:gmapInfoWindow>
+										<div
+											style="text-align: center; display: block; height: 190px; overflow: hidden;">
+											<h:outputText value="#{mapaConsumidorBean.marker.title}"
+												style="font-weight: bold;" />
+											<br />
+											<h:outputText
+												value="#{mapaConsumidorBean.marker.data.enderecoFormatado}" />
+											<br />
+											<h:outputText
+												value="#{mapaConsumidorBean.marker.data.descricaoEmailInstitucional}" />
+											<br />
+											<p:commandLink value="Como chegar? "
+												onclick="definirValorOrigem();dialogComoChegarWidge.show();"></p:commandLink>
+											<br /> <br />
+											<p:commandLink value="Há erro na informação?"
+												onclick="dlg1.show();" onkeydown="AnalizaTeclas()"
+												onkeypress="AnalizaTeclas()"></p:commandLink>
+										</div>
+									</p:gmapInfoWindow>
+								</p:gmap>
+								
+							    <div class="atlas-miolo-conteudo-filtro">
+							    	<div class="atlas-miolo-conteudo-bloco-link">
+							    		<h:outputText value="CLIQUE NO MAPA PARA AMPLIAR A VISUALIZAÇÃO E BUSCAR UNIDADES DE ATENDIMENTO PERTO DE VOCÊ"></h:outputText> <img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link.png" />
+							    	</div>
+							    </div>
+		
+								<h:panelGrid id="directionsPanel" styleClass="directionsPanel"
+									style="width:600px" columns="1" />
+		
+								<h:inputHidden id="rota" value="#{mapaConsumidorBean.rota}" />
+								<h:panelGroup id="imprimirRota">
+									<h:commandButton styleClass="atlas_button_filtrar"
+										value="IMPRIMIR"
+										action="#{mapaConsumidorBean.gerarRelatorioRota()}"
+										onclick="gerarRelatorioRota()"
+										rendered="#{mapaConsumidorBean.podeImprimirRota}"
+										immediate="true">
+									</h:commandButton>
+								</h:panelGroup>
+		
+								<p:dialog id="dialogComoChegar" header="Como chegar?"
+									showEffect="explode" hideEffect="explode"
+									widgetVar="dialogComoChegarWidge" modal="true">
+									<h:panelGroup>
+													Origem:
+													<p:inputText id="enderecoOrigem"
+											value="#{mapaConsumidorBean.enderecoOrigem}"
+											onkeydown="AnalizaTeclas()" />
+										<br />
+										<br />
+										<div align="center">
+											<h:commandButton action="#{mapaConsumidorBean.calcularRota}"
+												value="Traçar">
+												<f:ajax execute="enderecoOrigem"
+													render=":form:mapa :form:messages :form:imprimirRota" />
+											</h:commandButton>
+										</div>
+									</h:panelGroup>
+								</p:dialog>
+		
+								<p:dialog id="basicDialog" header="Qual é o problema?"
+									widgetVar="dlg1" modal="true" height="auto" resizable="true">
+									<p:message for="cometarioErro" id="mensagemErro" display="text" />
+									<h:outputText value="Marque uma ou mais opções abaixo:" />
+									<br />
+									<br />
+									<h:selectManyCheckbox value="${mapaConsumidorBean.tiposErro}"
+										layout="pageDirection" id="selectManyTipoProblema"
+										required="false" onkeydown="AnalizaTeclas()"
+										onkeypress="AnalizaTeclas()">
+										<f:selectItem itemLabel="Endereço incorreto" itemValue="1" />
+										<f:selectItem
+											itemLabel="Localização geográfica incorreta (Latitute/Longitude)"
+											itemValue="2" />
+										<f:selectItem itemLabel="Outros" itemValue="3" />
+									</h:selectManyCheckbox>
+									<label for="cometarioErro">Descrição do erro:*</label>
+									<p:inputTextarea id="cometarioErro"
+										value="${mapaConsumidorBean.comentarioErro}" maxlength="250"
+										style="width:90%" required="true"
+										requiredMessage="Informe o campo Observação." />
+									<br />
+									<h:commandButton action="#{mapaConsumidorBean.enviarErro}"
+										value="Enviar" styleClass="atlas_button_filtrar">
+										<f:ajax execute="basicDialog"
+											render="messages selectManyTipoProblema cometarioErro selectManyTipoProblema mensagemErro" />
+									</h:commandButton>
+								</p:dialog>
+							</h:panelGroup>
+							<!-- FIM MAPA -->
+						</div>
+					</div>
+					<h:panelGroup layout="block"
+						rendered="#{mapaConsumidorBean.localizou}">
+						<p>Foram encontrados os seguintes órgãos:</p>
+
+						<p:dataTable id="listaOrgaos"
+							value="#{mapaConsumidorBean.resultadoPesquisa}" var="orgao"
+							selectionMode="single"
+							selection="#{mapaConsumidorBean.orgaoSelecionado}"
+							rowKey="#{orgao.id}" paginator="true" rows="5" pageLinks="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginatorAlwaysVisible="false" paginatorPosition="bottom">
+							<p:ajax event="rowSelect"
+								listener="#{mapaConsumidorBean.onRowSelect}" />
+							<p:column style="white-space:normal !important;">
+								<h:outputText value="#{orgao.nome} - " />
+								<h:outputText value="#{orgao.endereco} - " />
+								<h:outputText value="#{orgao.bairro} - "
+									rendered="#{orgao.bairroPreenchido}" />
+								<h:outputText value="#{orgao.municipio.nome} - " />
+								<h:outputText value="#{orgao.municipio.uf.sigla}, " />
+								<h:outputText value="#{orgao.cepFormatado}" />
+								<h:outputText value=" - #{orgao.representantesFormatados} " />
+								<h:outputText value=" - #{orgao.contatosFormatados}" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+		<br />
+		<br />
+		<h:panelGroup id="atlas-miolo-conteudo-filtro" layout="block"
+			styleClass="atlas-miolo-conteudo-filtro">
+			<br />
+			<p>Para visualizar o(s) endereço(s) desejado(s) preencha os dados
+				solicitados nos campos abaixo:</p>
+			<h:panelGroup id="atlas_geral_miolo_linha"
+				styleClass="atlas-geral-miolo-linha">
+				<h:panelGrid styleClass="atlas-miolo-conteudo-filtro" columns="2">
+					<h:panelGroup>
+						<h:outputLabel value="Estado:" for="ufs" />
+						<br />
+						<h:selectOneMenu id="ufs" value="#{mapaConsumidorBean.uf}"
+							converter="selectItemConverter"
+							styleClass="atlas-select-330 atlas-select-formata">
+							<p:ajax event="change" update="municipios" process="@this" />
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{mapaConsumidorBean.ufs}" var="uf"
+								itemLabel="#{uf.nome}" itemValue="#{uf}" />
+						</h:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<h:outputLabel value="Município:" for="municipios" />
+						<br />
+						<h:selectOneMenu id="municipios"
+							value="#{mapaConsumidorBean.municipio}"
+							converter="selectItemConverter"
+							styleClass="atlas-select-330 atlas-select-formata">
+							<p:ajax event="change" process="@this" update="localizar" />
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{mapaConsumidorBean.municipios}"
+								var="municipio" itemLabel="#{municipio.nome}" />
+						</h:selectOneMenu>
+					</h:panelGroup>
+					<f:facet name="footer">
+						<h:panelGroup>
+							<h:outputLabel value="Selecione um ou mais tipos de órgãos:" />
+						</h:panelGroup>
+					</f:facet>
+				</h:panelGrid>
+
+				<h:panelGroup styleClass="atlas-miolo-conteudo-filtro">
+					<ui:repeat var="tipoRamo" value="#{mapaConsumidorBean.tiposRamo}">
+						<p:fieldset legend="#{tipoRamo.descricao}"
+							style="width:96%;margin-bottom:5px;"
+							rendered="#{not empty mapaConsumidorBean.getTiposOrgao(tipoRamo.codigo)}">
+								<p:selectManyCheckbox id="tiposOrgao" value="#{mapaConsumidorBean.tiposOrgaoSelecionados}" layout="grid" columns="3">
+									<f:selectItems value="#{mapaConsumidorBean.getTiposOrgao(tipoRamo.codigo)}" var="tipoOrgao" itemLabel="#{tipoOrgao.nome}" itemValue="#{tipoOrgao.id}" />
+									<p:ajax event="change" process="@this, :form:municipios" update=":form:localizar" />
+								</p:selectManyCheckbox>
+						</p:fieldset>
+						<br />
+					</ui:repeat>
+				</h:panelGroup>
+			</h:panelGroup>
+
+
+			<h:panelGroup>
+				<h:panelGrid styleClass="atlas-tabelas-filtro" columns="2">
+					<h:panelGroup>
+						<h:commandButton styleClass="atlas-button-filtrar"
+							value="INFORMAR ÓRGÃO" action="#{mapaConsumidorBean.novoOrgao()}"
+							alt="Clique para informar um novo órgão."
+							title="Clique para informar um novo órgão." immediate="true"
+							disabled="#{!mapaConsumidorBean.localizou}">
+						</h:commandButton>
+					</h:panelGroup>
+					<h:panelGroup styleClass="atlas-tabelas-filtro-alinha-direita">
+						<h:commandButton id="localizar"
+							title="Clique para localizar os órgão desejados"
+							disabled="#{mapaConsumidorBean.desabilitarBotaoLocalizar()}"
+							styleClass="atlas-button-filtrar"
+							action="#{mapaConsumidorBean.carregarOrgaos(true)}"
+							value="LOCALIZAR" onclick="focusMapa();">
+							<f:ajax execute=":form:atlas_geral_miolo_linha"
+								render="mapa listaOrgaos messages directionsPanel imprimirRota atlas-miolo-conteudo-filtro atlas_geral_miolo_linha_final_endereco atlas_geral_miolo_linha" />
+						</h:commandButton>
+
+						<h:outputText value=" " />
+						<h:commandButton action="#{mapaConsumidorBean.limpar()}"
+							title="Clique para limpar os parâmetros de pesquisa"
+							styleClass="atlas-button-filtrar" value="LIMPAR">
+							<f:ajax
+								render="mapa listaOrgaos messages atlas_geral_miolo_linha directionsPanel imprimirRota atlas-miolo-conteudo-filtro localizar atlas_geral_miolo_linha_final_endereco" />
+						</h:commandButton>
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:panelGroup>
+		</h:panelGroup>
+		<br />
+		<div style="clear: both; margin: 0 0 5em 0; height: 310px;">
+
+			<div class="atlas-miolo-conteudo-inicio-bloco-3-1">
+				<h2>Dados Abertos</h2>
+				<img
+					src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_totalizadores.png" height="130" width="230"/>
+				<div style="height: 40px; padding: 0 1em;">
+					<p>Acesse tabelas de órgãos de defesa do consumidor</p>
+				</div>
+				<div class="atlas-miolo-conteudo-bloco-link">
+					<h:link
+						onclick="dlgTotalizadores.show(); return false;">ACESSE OS DADOS ABERTOS<img
+							src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link.png"/>
+					</h:link>
+				</div>
+			</div>
+		
+			<div class="atlas-miolo-conteudo-inicio-bloco-3-2">
+				<h2>Publicações</h2>
+				<img
+					src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_publicacoes.png" />
+				<div style="height: 40px; padding: 0 1em;">
+					<p>Encontre material de referência sobre direitos do
+						consumidor.</p>
+				</div>
+				<div class="atlas-miolo-conteudo-bloco-link">
+					<h:link outcome="/pub/centraisDeConteudo/publicacoes.xhtml">Acesse as Publicações<img
+							src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link.png" />
+						<f:param name="somentePublicacoesConsumidor" value="true" />
+					</h:link>
+				</div>
+			</div>
+
+			<div class="atlas-miolo-conteudo-inicio-bloco-3-3">
+				<h2>Consumidor.gov</h2>
+				<img
+					src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_e_consumidor.jpg" height="130" width="230"/>
+				<div style="height: 40px; padding: 0 1em;">
+					<p>Faça a sua reclamação online.</p>
+				</div>
+				<div class="atlas-miolo-conteudo-bloco-link">
+					<h:link
+						onclick="window.open('http://www.consumidor.gov.br'); return false;">Acesse o consumidor.gov<img
+							src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link.png"/>
+					</h:link>
+				</div>
+			</div>
+		</div>
+		
+		<p:dialog header="Dados Abertos" widgetVar="dlgTotalizadores" style="z-index:5;" resizable="false" modal="true">
+			<h:panelGroup id="panelTotalizadores" layout="block"
+				rendered="#{!mapaConsumidorBean.localizou}">
+				<h:panelGroup>
+					<h4>Totalizadores Brasil</h4>
+					<h:panelGrid columns="3" cellpadding="10" width="100%;">
+						<p:treeTable value="#{mapaConsumidorBean.rootTotalizadorBrasil}" style="width:600px;"
+							var="totalizador">
+							<p:column headerText="Nome"
+								style="width:60%; vertical-align: middle;">
+								<h:outputText value="#{totalizador.nomeTotalizador}" />
+							</p:column>
+							<p:column headerText="Quantidade"
+								style="width:20%; vertical-align: middle; text-align: center;">
+								<h:outputText value="#{totalizador.total}" />
+							</p:column>
+							<p:column headerText="Download"
+								style="width:20%; vertical-align: middle; text-align: center;">
+								
+								<h:commandLink value=""
+									action="#{mapaConsumidorBean.downloadTotalizador(totalizador.id, totalizador.idNoPai, totalizador.nivel)}"
+									immediate="true">
+									<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_icones/excel.png" width="16" height="16"/>
+								</h:commandLink>
+							</p:column>
+						</p:treeTable>
+					</h:panelGrid>
+				</h:panelGroup>
+				<br />
+				<br />
+				<h:panelGroup>
+					<h4>Totalizadores por região</h4>
+					<h:panelGrid columns="2" cellpadding="10" width="100%;">
+						<p:treeTable value="#{mapaConsumidorBean.rootTotalizadorRegiao}" style="width:600px;"
+							var="totalizador" scrollable="true" scrollHeight="150">
+							<p:column headerText="Nome"
+								style="width:60%; vertical-align: middle;">
+								<h:outputText value="#{totalizador.nomeTotalizador}" />
+							</p:column>
+							<p:column headerText="Quantidade"
+								style="width:20%; vertical-align: middle; text-align: center;">
+								<h:outputText value="#{totalizador.total}" />
+							</p:column>
+							<p:column headerText="Download"
+								style="width:20%; vertical-align: middle; text-align: center;">
+								<h:commandLink value=""
+									action="#{mapaConsumidorBean.downloadTotalizador(totalizador.id, totalizador.idNoPai, totalizador.nivel)}"
+									immediate="true">
+									<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_icones/excel.png" width="16" height="16"/>
+								</h:commandLink>
+							</p:column>
+						</p:treeTable>
+					</h:panelGrid>
+				</h:panelGroup>
+			</h:panelGroup>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

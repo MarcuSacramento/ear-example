@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link title="CENTRAIS DE CONTEÚDOS" value="CENTRAIS DE CONTEÚDOS" outcome="/pub/centraisDeConteudo/exibirCentraisDeConteudos.xhtml" /> > VÍDEOS > VÍDEOS - CENTRAIS DE CONTEÚDO</ui:define>
+	<ui:define name="conteudo">
+		<div class="atlas-miolo">
+			#{exibirMultimidiaBean.init()}
+			<h:head>
+				<title>Vídeos - Centrais de Conteúdo</title>
+			</h:head>
+			
+			<h2>Vídeos - Centrais de Conteúdo</h2>
+		
+			<div class="atlas-miolo-conteudo-limpo">
+				<ui:repeat var="multimidia" value="#{exibirMultimidiaBean.multimidias}">
+		            <div class="atlas-miolo-lista-video">
+			                <div class="atlas-miolo-lista-video-data">
+			                    <p class="atlas-miolo-lista-video-data-p"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_calendario.png" title="Data" alt="Data" />#{multimidia.dataPublicacaoFormatada}</p>
+			                    <p class="atlas-miolo-lista-video-data-p"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_multimidia.png" title="Multimidia" alt="Multimidia" />Multimidia</p>
+			                </div>
+			                <div class="atlas-miolo-lista-video-detalha">
+				                <iframe width="450" height="340" src="#{multimidia.url}" frameborder="0" allowfullscreen="true" />
+			                    <p class="atlas-miolo-lista-video-detalha-titulo">#{multimidia.nome}</p>
+			                    <p class="atlas-miolo-lista-video-detalha-descricao">#{multimidia.descricao}</p>
+			                    <p class="atlas-miolo-lista-video-detalha-tag">Tags: <a href="?pagina_id=01">O Atlas</a>, <a href="?pagina_id=01">Acesso à Justiça</a></p>
+			                </div>
+		            </div>
+		        	<div class="atlas-miolo-lista-video-clear"></div>
+			        <!-- <div class="atlas-paginacao atlas-paginacao-miolo"></div> -->
+		        </ui:repeat>
+			</div>	
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html 	xmlns="http://www.w3.org/1999/xhtml" 	xmlns:ui="http://java.sun.com/jsf/facelets" 
+		xmlns:h="http://java.sun.com/jsf/html"	xmlns:f="http://java.sun.com/jsf/core" 
+		xmlns:p="http://primefaces.org/ui">
+	
+<div class="atlas-ancora">
+    <a href="#atlas_ancora_menu" accesskey="1" title="Ir para o menu da página - Tecla de atalho 1"> Ir para o menu</a>
+</div>
+	
+<div class="atlas-ancora">
+	<a href="#atlas-ancora-conteudo" accesskey="1" title="Ir para o conteúdo da página - Tecla de atalho 1"> Ir para o conteúdo </a>
+</div>
+
+<div class="atlas-ancora">
+	<a href="#" onClick="zoomClasse(1)" accesskey="2" title="Aumentar o tamanho da fonte - Tecla de atalho 2"> Aumentar Fonte </a>
+</div>
+
+<div class="atlas-ancora">
+	<a href="#" onClick="zoomClasse(2)" accesskey="3" title="Diminuir o tamanho da fonte - Tecla de atalho 3"> Diminuir Fonte </a>
+</div>
+
+<div class="atlas_acessibilidade_contraste">
+	<a href="#{acessibilidadeBean.getTextoContraste()}" accesskey="5" title="Alterar o contraste da tela - Tecla de atalho 5"> Contraste </a>
+</div>
+
+<div class="atlas_acessibilidade_saiba_mais">
+	<h:link accesskey="5" title="Saiba mais sobre a acessibilidade da página - Tecla de atalho 5" 
+		value="Acessibilidade" outcome="/pub/acessibilidade.xhtml" />
+</div>
+</html>

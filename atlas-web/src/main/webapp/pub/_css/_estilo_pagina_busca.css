@@ -1,0 +1,130 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação da busca                                                                  **
+** @data: 15/06/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+div.atlas-miolo-busca h1{
+	margin: 5px 0;
+	padding-bottom: 0.4em;
+	color: #rgba(26,42,57,1);
+	font-size: 3em;
+}
+
+div.atlas-miolo-busca h2{
+	margin: 5px 0;
+	padding-bottom: 0.4em;
+	color: #rgba(26,42,57,1);
+	font-size: 3em;
+}
+
+	div.atlas-miolo-busca fieldset.atlas-area-busca{
+		border: none;
+		text-align: center;
+		line-height: 1.5em;
+		margin: 1em 0;
+		padding: 0 1em 1em;
+		width: auto;
+	}
+	
+	div.atlas-miolo-busca legend.atlas-area-busca{
+		padding: 0.5em;
+		font-size: 1.1em;
+	}
+	
+	div.atlas-miolo-busca input.atlas-input-busca{
+		font-size: 2.5em !important;
+		padding: 0.1em 0;
+	}
+	
+	div.atlas-miolo-busca input.atlas-botao-busca{
+		font-size: 2.5em !important;
+		padding: 0.1em 0;
+		margin-left: -0.2em;
+	}
+
+div.atlas-miolo-busca-lista{
+	display: block;
+	margin-bottom: 1em;
+	width: 640px;
+	float: left;
+}
+
+	div.atlas-miolo-busca-lista-item{
+		margin-bottom: 2em;
+		font-size: 1.2em !important;
+	}
+	
+		p.atlas-miolo-busca-lista-item-titulo a{
+			color: rgba(32,92,144,1);
+			text-decoration: none;	
+			font-weight: bold;
+		}
+		
+		p.atlas-miolo-busca-lista-item-titulo a:hover{
+			color: rgba(26,42,57,1);
+		}
+		
+		p.atlas-miolo-busca-lista-item-contem{
+			color: rgba(102,102,102,1);
+			font-size: 0.9em !important;
+		}
+		
+		p.atlas-miolo-busca-lista-item-contem a{
+			color: rgba(44,103,205,1);
+			text-decoration: none;	
+		}
+		
+		p.atlas-miolo-busca-lista-item-contem a:hover{
+			color: rgba(26,42,57,1);
+		}
+
+div.atlas-miolo-busca-filtro{
+	display: block;
+	float: right;
+	width: 300px !important;
+	font-size: 1.2em !important;
+}
+
+	p.atlas-miolo-busca-filtro-titulo{
+		font-weight: bold;
+		margin-bottom: 1em;
+	}
+	
+	span.atlas-miolo-busca-lista-item-subtitulo{
+		font-size: 0.9em;
+	}
+	
+	fieldset.atlas-miolo-busca-filtro-fieldset{
+		border: none;
+		font-size: 0.8em;
+		margin-bottom: 4em;
+	}
+	
+		fieldset.atlas-miolo-busca-filtro-fieldset legend{
+			font-size: 1.6em;
+			margin: 1em 0;
+			width: 70%;
+			border-bottom: 1px solid rgba(211,211,211,1);
+		}
+		
+		fieldset.atlas-miolo-busca-filtro-fieldset label{
+			font-size: 1.1em;
+			font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+			line-height: 18px;
+		}
+		
+		fieldset.atlas-miolo-busca-filtro-fieldset a{
+			font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+			line-height: 18px;
+			text-decoration: none;
+			color: rgba(0,0,0,1);
+		}
+		
+			fieldset.atlas-miolo-busca-filtro-fieldset a.atlas-miolo-busca-filtro-fieldset-link-ativo{
+				font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+			}
+	

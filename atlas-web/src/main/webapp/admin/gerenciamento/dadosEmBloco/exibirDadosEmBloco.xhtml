@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+	
+<ui:define name="breadcrumb"> > <h:link title="GERENCIAMENTO" value="GERENCIAMENTO" outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > DADOS EM BLOCO</ui:define>
+
+	<ui:define name="conteudo">
+
+
+		<div class="atlas-miolo-logado">
+			<h2>Dados Em Bloco</h2>
+
+		<h:messages id="messages" globalOnly="true"
+			infoClass="atlas-mensagem-positivo" warnClass="atlas-mensagem-alerta"
+			errorClass="atlas-mensagem-erro" />
+
+			<h:head>
+				<title>Dados Em Bloco | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+			<div class="atlas-miolo-logado">
+				<section class="atlas-miolo-logado-lista">
+					<div class="atlas-miolo-logado-lista-acoes">
+
+
+						<div class="atlas-miolo-logado-inline">
+							<p:commandButton action="#{manterDadosEmBlocoBean.proximo()}"
+								update="@form" value="ALTERAR SELECIONADOS" ajax="false"
+								id="atlas_botao_selecao" styleClass="atlas_button"
+								rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('011')}"
+								title="Alterar órgãos selecionados" />
+
+							<h:outputText value=" " />
+							<p:commandButton
+								action="#{manterDadosEmBlocoBean.proximoPorFiltro()}" ajax="false"
+								update="@form" value="ALTERAR TODOS" id="atlas_botao_filtro"
+								styleClass="atlas_button"
+								rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('011')}"
+								title="Alterar todos os órgãos" />
+						</div>
+
+
+					</div>
+					<ui:include src="/admin/gerenciamento/dadosEmBloco/tabela.xhtml" />
+				</section>
+
+				<aside class="atlas-miolo-logado-filtro">
+
+					<fieldset id="atlas-area-filtro" class="atlas-area-filtro">
+						<legend>Filtrar:</legend>
+						<ui:include src="/admin/gerenciamento/dadosEmBloco/dadosEmBlocoFiltro.xhtml" />
+					</fieldset>
+
+				</aside>
+
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

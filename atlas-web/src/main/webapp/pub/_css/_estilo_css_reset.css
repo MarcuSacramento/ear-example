@@ -1,0 +1,15 @@
+﻿@charset "utf-8";
+/****************************************************************************************
+**                                                                                     **
+** @autor: Narmer Abouhassan                                                           **
+** @data: 25/02/2013                                                                   **
+** @brief: Formatação do CSS Reset que altera os elementos para a padronização nos     **
+** browser                                                                             **
+**                                                                                     **
+****************************************************************************************/
+
+* {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}

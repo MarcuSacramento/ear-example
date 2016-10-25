@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+<h:head>
+	<title>Pub | Detalhes Dicionário</title>
+</h:head>
+<div class="atlas-miolo">
+	<h:messages id="messages" globalOnly="true"
+			infoClass="atlas-mensagem-positivo"
+			warnClass="atlas-mensagem-alerta" 
+			errorClass="atlas-mensagem-erro" />
+	<h2>ABC dos Direitos</h2>
+	<div class="atlas-miolo-conteudo-limpo">
+
+	
+		<p:tabView dynamic="true" cache="true">
+	        <p:tab title="Ler">
+				<div class="atlas-geral-miolo-glossario-resultado">
+					<h3><h:outputText value="#{exibirGlossarioBean.entidade.nome}" /></h3>
+					<p>Significado e mais informações sobre o termo desejado:</p>
+				</div>
+		
+				<div class="atlas-geral-miolo-glossario-resultado-voltar">
+					<h:commandButton value="Voltar" title="Voltar" class="atlas-button-voltar"
+						outcome="history.go(-1)">
+						<f:param name="interna" value="dicionario" />
+						<f:param name="subinterna" value="consulta" />
+					</h:commandButton>
+				</div>
+		
+				<div class="atlas-geral-miolo-glossario-resultado-item">
+					<h4>Conceito</h4>
+					<p>
+						<h:outputText value="#{exibirGlossarioBean.entidade.descricao}" />
+					</p>
+		
+					<h4>Saiba mais</h4>
+					<p>
+						<h:outputText value="#{exibirGlossarioBean.entidade.saibaMais}" />
+					</p>
+		
+					<h4>Você quer conhecer a Constituição, a Lei e outras informações?</h4>
+		
+					<div class="atlas-geral-miolo-glossario-resultado-item-cross">
+						<p>Amplie o seu conhecimento e pesquisa. Encontre mais
+							informações em outros sítios:</p>
+						<ui:repeat value="#{exibirGlossarioBean.entidade.fontesReferencia}" var="fonte" itemType="disc" styleClass="atlas-geral-miolo-glossario-links-resultado-item">
+							<div class="atlas-geral-miolo-glossario-links-resultado-item">
+								<p class="atlas-geral-miolo-glossario-links-titulo">
+									<a href="#{fonte.URL}"><strong>#{fonte.nome}</strong></a><img
+										src="${facesContext.externalContext.requestContextPath}/pub/_imagens/transparente.png"
+										class="atlas-geral-img-link-externo" alt="Sítio externo"
+										title="Sítio externo" />
+								</p>
+								<p class="atlas-geral-miolo-glossario-links-link">
+									<a class="atlas-geral-miolo-glossario-links-link"
+										href="#{fonte.URL}">#{fonte.URL}</a>
+								</p>
+								<p class="atlas-geral-miolo-glossario-links-link">
+									<h:outputText value="#{fonte.legislacao}" />
+								</p>
+								<br />
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
+	        </p:tab>
+	        <p:tab title="Editar">
+				<div class="atlas-geral-miolo-glossario-resultado">
+					<h3><h:outputText value="#{exibirGlossarioBean.entidade.nome}" /></h3>
+					<p>Significado e mais informações sobre o termo desejado:</p>
+				</div>
+		
+				<div class="atlas-geral-miolo-glossario-resultado-voltar">
+					<h:commandButton value="Voltar" title="Voltar" class="atlas-button-voltar"
+						outcome="history.go(-1)">
+						<f:param name="interna" value="dicionario" />
+						<f:param name="subinterna" value="consulta" />
+					</h:commandButton>
+					<p:spacer></p:spacer>
+					<h:commandButton value="Enviar Sugestão" title="Enviar Sugestão" class="atlas-button-voltar" 
+						action="#{exibirGlossarioBean.enviarSugestao()}" update="@form"
+						onclick="if (!confirm('Deseja enviar sugestão?')) return false;" />
+				</div>
+		
+				<div class="atlas-geral-miolo-glossario-resultado-item">
+					<h4>Conceito</h4>
+					<p>
+						<h:inputTextarea value="#{exibirGlossarioBean.entidade.descricao}" rows="5" cols="90" />
+					</p>
+		
+					<h4>Saiba mais</h4>
+					<p>
+						<h:inputTextarea value="#{exibirGlossarioBean.entidade.saibaMais}" rows="5" cols="90" />
+					</p>
+		
+					<h4>Você quer conhecer a Constituição, a Lei e outras informações?</h4>
+		
+					<div class="atlas-geral-miolo-glossario-resultado-item-cross">
+						<p>Amplie o seu conhecimento e pesquisa. Encontre mais
+							informações em outros sítios:</p>
+						
+			<h:dataTable value="#{exibirGlossarioBean.entidade.fontesReferencia}"
+				var="fonte" id="tabelaFontesReferencia"
+				styleClass="atlas-geral-miolo-glossario-links-resultado-item"
+				rendered="#{not empty exibirGlossarioBean.entidade.fontesReferencia}">
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Fonte" />
+					</f:facet>
+					<p:inputText value="#{fonte.nome}" maxlength="256" size="40" 
+						styleClass="atlas_input_formata atlas_input_310" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Referência" />
+					</f:facet>
+					<p:inputText value="#{fonte.URL}" maxlength="1024" size="50"
+						styleClass="atlas_input_formata atlas_input_410" />
+				</h:column>
+
+				<h:column>
+					<h:commandLink action="#{exibirGlossarioBean.remover(fonte)}"
+						title="Clique para excluir a fonte/referência" value="Excluir"
+						styleClass="atlas_button_remove_azul" />
+				</h:column>
+			</h:dataTable>
+
+			<div class="atlas-miolo-conteudo-tag">
+				<h:commandLink value="NOVA FONTE"
+					action="#{exibirGlossarioBean.adicionarNovo()}"
+					title="Clique para acrescentar uma nova referência"
+					styleClass="atlas_button_adiciona_azul" />
+			</div>
+			
+					</div>
+				</div>
+	        </p:tab>
+	    </p:tabView>
+	</div>
+</div>
+</html>

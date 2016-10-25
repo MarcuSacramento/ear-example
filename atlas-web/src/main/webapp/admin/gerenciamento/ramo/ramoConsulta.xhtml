@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:head>
+			<title>Admin | Ramos</title>
+		</h:head>
+	
+		#{manterRamoBean.init()}
+		<div class="atlas_geral_miolo_breadcrumb">
+			<div class="atlas_geral_miolo_breadcrumb_conteudo">
+				<p:breadCrumb>
+					<p:menuitem value="Home" action="/admin/home?faces-redirect=true" />
+					<p:menuitem value="Ramos" action="#" />
+				</p:breadCrumb>
+			</div>
+		</div>
+		<div class="atlas_geral_miolo">
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h2>Ramos</h2>
+
+			<div class="atlas_linha_acoes">
+				<h:commandButton
+					action="#{manterRamoBean.novoRegistroManterRamo()}"
+					update="@form" value="NOVO" styleClass="atlas_button"
+					title="Clique para cadastrar um novo ramo">
+				</h:commandButton>
+			</div>
+
+			<div class="atlas_linha_acoes">
+				<h:panelGroup class="atlas_linha" id="atlas_linha" layout="block">
+
+					<atlas:dataTable id="dataTableRamos" bean="manterRamoBean"
+						value="#{manterRamoBean.ramos}"
+						styleClass="atlas_tabela_simples">
+
+						<p:column headerText="Ramo" width="80%">
+							<h:outputText value="#{registro.nome}" />
+						</p:column>
+
+						<p:column headerText="" width="10%">
+							<h:commandButton
+								action="#{manterRamoBean.editarManterRamo(registro.id)}"
+								value="ALTERAR" styleClass="atlas_button" update="@form" />
+						</p:column>
+
+						<p:column headerText="" width="10%">
+							<h:commandButton
+								onclick="if (!confirm('#{msg.MSG5}')) return false;"
+								action="#{manterRamoBean.excluirRamo(registro)}"
+								rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('010')}"
+								value="EXCLUIR" styleClass="atlas_button" update="@form" />
+						</p:column>
+					</atlas:dataTable>
+				</h:panelGroup>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>

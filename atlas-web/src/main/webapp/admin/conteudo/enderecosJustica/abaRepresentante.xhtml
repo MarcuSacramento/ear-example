@@ -1,0 +1,335 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+	<p:messages id="messages" redisplay="false"
+		infoClass="atlas-mensagem-positivo"
+		warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+	<div>
+       	<p:commandButton value="ADICIONAR" 
+	       	onclick="dlgInformarRepresentante.show();" 
+       		actionListener="#{manterOrgaoBean.limparFiltroDlgRepresentante}"
+       		update="painelRepresentante" />
+	</div>
+	
+	<br />
+	<p:dataTable var="representante"
+		value="#{manterOrgaoBean.listaComRepresentantes}"
+		emptyMessage="Nenhum registro encontrado"
+		style="border: 1px solid #45897A; border-top: none;"
+		id="tabelaRepresentantes" >
+
+		<p:column headerText="Nome" width="30%">
+			<h:outputText value="#{representante.nomeLimitado}"  />
+		</p:column>
+
+		<p:column headerText="Cargo" tyleClass="label_tabela_custom" width="20%">
+			<h:outputText value="#{representante.cargo.nome}"/>
+		</p:column>
+		
+		<p:column headerText="Divulgável" width="10%">
+			<h:outputText value="SIM" rendered="#{representante.divulgavel}" />
+			<h:outputText value="NÃO" rendered="#{!representante.divulgavel}" />
+		</p:column>
+		
+		<p:column headerText="DDD 1" width="10%">
+			<h:outputText value="#{representante.primeiroDdd}" />
+		</p:column>
+
+		<p:column headerText="Telefone 1" width="20%">
+			<h:outputText value="#{representante.primeiroTelefone}" />
+		</p:column>
+
+		<p:column headerText="" style="width:21px !important;">
+			<p:commandButton ajax="true" value="" style="height: 22px !important;"
+				onclick="dlgInformarRepresentante.show();" update=":form:tabView:painelRepresentante" styleClass="icone2">
+				<f:setPropertyActionListener value="#{representante}" 
+        			target="#{manterOrgaoBean.representanteEmFoco}" />
+			</p:commandButton>
+		</p:column>
+
+		<p:column headerText="" style="width:21px !important;">
+			<p:commandButton action="#{manterOrgaoBean.excluirRepresentante(representante)}"
+				update=":form:atlas_linha" value="" style="height: 22px !important;" styleClass="icone"
+				ajax="false" onclick="if (!confirm('#{msg.MSG5}')) return false;" /> 
+		</p:column>
+		
+	</p:dataTable >
+	<p:dialog header="Informar representante" widgetVar="dlgInformarRepresentante" width="800px;" height="600px;" style="z-index:5;" resizable="false" modal="true" closable="true" onHide="">
+		<p:ajax event="close" update=":form:tabView:painelRepresentante" resetValues="true" />
+		<p:panel id="painelRepresentante" style="border: none !important; ">
+			<h:messages id="messagesDialog" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+				
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-divulgavel-representante" style="font-size:1.2em; color: rgb(0, 0, 0);">Divulgável:*</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:selectOneMenu id="atlas-formulario-divulgavel-representante"
+						value="#{manterOrgaoBean.representanteEmFoco.statusDivulgacao}"
+						styleClass="atlas-select-formata atlas-select-170"
+						name="atlas-formulario-divulgavel-representante"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important; font-size: 1.1em !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;">
+						<f:selectItem itemLabel="SIM" itemValue="S" />
+						<f:selectItem itemLabel="NÃO" itemValue="N" />
+					</h:selectOneMenu>
+				
+				</div>
+			</div>
+		
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-representante-desinencia" style="font-size:1.2em; color: rgb(0, 0, 0);">Desinência:</label><br />
+				</div>
+			
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:inputText maxlength="5" id="atlas-formulario-representante-desinencia"
+						name="atlas-formulario-representante-desinencia"
+						value="#{manterOrgaoBean.representanteEmFoco.desinencia}"
+						styleClass="atlas-input-formata atlas-input-150"
+						style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 155px !important; font-size: 1.1em !important;"/>
+					<p:watermark for="atlas-formulario-representante-desinencia"
+						value="Desinência" />
+				</div>
+			</div>
+		
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-representante-vocativo" style="font-size:1.2em; color: rgb(0, 0, 0);">Vocativo:</label><br />
+				</div>
+			
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:inputText maxlength="40" id="atlas-formulario-representante-vocativo"
+						name="atlas-formulario-representante-vocativo"
+						value="#{manterOrgaoBean.representanteEmFoco.vocativo}"
+						styleClass="atlas-input-formata atlas-input-250"
+						style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 255px !important; font-size: 1.1em !important;"/>
+					<p:watermark for="atlas-formulario-representante-vocativo"
+						value="Vocativo" />
+				</div>
+			</div>
+		
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-representante-pronome" style="font-size:1.2em; color: rgb(0, 0, 0);">Pronome:</label><br />
+				</div>
+			
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:inputText maxlength="40" id="atlas-formulario-representante-pronome"
+						name="atlas-formulario-representante-pronome"
+						value="#{manterOrgaoBean.representanteEmFoco.pronome}"
+						styleClass="atlas-input-formata atlas-input-250"
+						style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 255px !important; font-size: 1.1em !important;"/>
+					<p:watermark for="atlas-formulario-representante-pronome"
+						value="Pronome" />
+				</div>
+			</div>
+		
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-nome-representante" style="font-size:1.2em; color: rgb(0, 0, 0);">Nome:*</label><br />
+				</div>
+			
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:inputText maxlength="512" id="atlas-formulario-nome-representante"
+						name="atlas-formulario-nome-representante"
+						value="#{manterOrgaoBean.representanteEmFoco.nome}"
+						styleClass="atlas-input-formata atlas-input-470"
+						style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 520px !important; font-size: 1.1em !important;"/>
+					<p:watermark for="atlas-formulario-nome-representante"
+						value="Nome do representante" />
+				</div>
+			</div>
+			
+				
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-representante-cargo" style="font-size:1.2em; color: rgb(0, 0, 0);">Cargo:*</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:selectOneMenu id="atlas-formulario-representante-cargo"
+						value="#{manterOrgaoBean.representanteEmFoco.cargo}"
+						converter="selectItemConverter"
+						styleClass="atlas-select-formata atlas-select-270"
+						name="atlas-formulario-representante-divulgavel"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important; font-size: 1.1em !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;">
+						<f:selectItem itemLabel="Selecione" /> 
+						<f:selectItems value="#{manterOrgaoBean.cargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}"/>
+		 				<p:ajax update="atlas-formulario-representante-tratamento" />
+					</h:selectOneMenu>
+				</div>
+			</div>
+		
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-representante-tratamento" style="font-size:1.2em; color: rgb(0, 0, 0);">Tratamento:</label><br />
+				</div>
+			
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:inputText maxlength="40" id="atlas-formulario-representante-tratamento"
+						name="atlas-formulario-representante-tratamento"
+						value="#{manterOrgaoBean.representanteEmFoco.cargo.tratamento}"
+						styleClass="atlas-input-formata atlas-input-250"
+						style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 255px !important; font-size: 1.1em !important;"
+						readonly="true"/>
+				</div>
+			</div>
+			
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-representante-email01" style="font-size:1.2em; color: rgb(0, 0, 0);">Email (01):</label><br />
+				</div>
+			
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:inputText maxlength="512" id="atlas-formulario-representante-email01"
+						name="atlas-formulario-representante-email01"
+						value="#{manterOrgaoBean.representanteEmFoco.email}"
+						styleClass="atlas-input-formata atlas-input-470"
+						style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 520px !important; font-size: 1.1em !important;"/>
+					<p:watermark for="atlas-formulario-representante-email01"
+						value="Email do representante" />
+				</div>
+			</div>
+			
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-representante-email02" style="font-size:1.2em; color: rgb(0, 0, 0);">Email (02):</label><br />
+				</div>
+			
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:inputText maxlength="512" id="atlas-formulario-representante-email02"
+						name="atlas-formulario-representante-email02"
+						value="#{manterOrgaoBean.representanteEmFoco.segundoEmail}"
+						styleClass="atlas-input-formata atlas-input-470"
+						style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 520px !important; font-size: 1.1em !important;"/>
+					<p:watermark for="atlas-formulario-representante-email02"
+						value="Email do representante" />
+				</div>
+			</div>
+			
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-dual">
+					<label for="atlas-formulario-representante-telefone-ddd-01" style="font-size:1.2em; color: rgb(0, 0, 0);">Telefone (01):</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual-telefone">
+					<p:inputMask id="atlas-formulario-representante-telefone-ddd-01"
+						value="#{manterOrgaoBean.representanteEmFoco.primeiroDdd}" mask="999"
+						title="Informe o DDD do Telefone do Representante"
+						styleClass="atlas-input-formata atlas-input-30"
+						style="	width: 25px !important; height: 20px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						font-family: Verdana, Geneva, sans-serif !important; margin: 0em 0.2em 0em !important; box-shadow:none;"
+						size="3" maxlength="3" />
+					<p:watermark for="atlas-formulario-representante-telefone-ddd-01"
+						value="999" />
+		
+					<p:inputMask
+						value="#{manterOrgaoBean.representanteEmFoco.primeiroTelefone}"
+						id="atlas-formulario-representante-telefone-01" mask="9999-9999?9"
+						styleClass="atlas-input-formata atlas-input-110"
+						name="atlas-formulario-representante-telefone-01"
+						title="Informe o Telefone (01) do Representante"
+						style="	width: 120px !important; height: 20px !important; background-color: rgb(0,0,0,1) !important;
+							border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+							font-family: Verdana, Geneva, sans-serif !important; box-shadow:none;" />
+					<p:watermark for="atlas-formulario-representante-telefone-01"
+						value="9999-9999" />
+				</div>
+				<div class="atlas-miolo-logado-linha-label-dual-telefone-tipo">
+					<label for="atlas-formulario-representante-telefone-tipo-01" style="font-size:1.2em; color: rgb(0, 0, 0);">Tipo:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual-telefone-tipo atlas-miolo-logado-linha-campo-dual-alinha">
+					<h:selectOneMenu id="atlas-formulario-representante-telefone-tipo-01"
+						value="#{manterOrgaoBean.representanteEmFoco.primeiroTipoTelefone}"
+						styleClass="atlas-select-formata atlas-select-170"
+						title="Selecione o Tipo do Telefone (01) do Representante"
+						name="atlas-formulario-representante-telefone-tipo-01"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important; font-size: 1.1em !important;">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItem itemLabel="Celular" itemValue="C" />
+						<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+						<f:selectItem itemLabel="Fax" itemValue="F" />
+					</h:selectOneMenu>
+				</div>
+			</div>
+			
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-dual">
+					<label for="atlas-formulario-representante-telefone-ddd-02" style="font-size:1.2em; color: rgb(0, 0, 0);">Telefone (02):</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual-telefone">
+					<p:inputMask id="atlas-formulario-representante-telefone-ddd-02"
+						value="#{manterOrgaoBean.representanteEmFoco.segundoDdd}" mask="999"
+						title="Informe o DDD do Telefone (02) do Representante"
+						styleClass="atlas-input-formata atlas-input-30"
+						style="	width: 25px !important; height: 20px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						font-family: Verdana, Geneva, sans-serif !important; margin: 0em 0.2em 0em !important; box-shadow:none;"
+						size="3" maxlength="3" />
+					<p:watermark for="atlas-formulario-representante-telefone-ddd-02"
+						value="999" />
+		
+					<p:inputMask
+						value="#{manterOrgaoBean.representanteEmFoco.segundoTelefone}"
+						id="atlas-formulario-representante-telefone-02" mask="9999-9999?9"
+						styleClass="atlas-input-formata atlas-input-110"
+						name="atlas-formulario-representante-telefone-02"
+						title="Informe o Telefone (02) do Representante"
+						style="	width: 120px !important; height: 20px !important; background-color: rgb(0,0,0,1) !important;
+							border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+							font-family: Verdana, Geneva, sans-serif !important; box-shadow:none;" />
+					<p:watermark for="atlas-formulario-representante-telefone-02"
+						value="9999-9999" />
+				</div>
+				<div class="atlas-miolo-logado-linha-label-dual-telefone-tipo">
+					<label for="atlas-formulario-representante-telefone-tipo-02" style="font-size:1.2em; color: rgb(0, 0, 0);">Tipo:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual-telefone-tipo atlas-miolo-logado-linha-campo-dual-alinha">
+					<h:selectOneMenu id="atlas-formulario-representante-telefone-tipo-02"
+						value="#{manterOrgaoBean.representanteEmFoco.segundoTipoTelefone}"
+						styleClass="atlas-select-formata atlas-select-170"
+						title="Selecione o Tipo do Telefone (02) do Representante"
+						name="atlas-formulario-representante-telefone-tipo-02"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+						font-size: 1.1em !important; border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItem itemLabel="Celular" itemValue="C" />
+						<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+						<f:selectItem itemLabel="Fax" itemValue="F" />
+					</h:selectOneMenu>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-lista-acoes">
+				<p:commandButton id="btnSalvarRepresentante" value="SALVAR"
+					actionListener="#{manterOrgaoBean.adicionarRepresentanteAction}" update="messagesDialog, tabelaRepresentantes"/>
+			</div>
+		</p:panel>
+	</p:dialog>
+	
+	
+</ui:composition>

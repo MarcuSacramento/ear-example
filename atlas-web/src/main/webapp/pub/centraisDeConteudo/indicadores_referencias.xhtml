@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="CENTRAIS DE CONTEÚDOS" value="CENTRAIS DE CONTEÚDOS"	outcome="/pub/centraisDeConteudo/exibirCentraisDeConteudos.xhtml" /> > 
+		<h:link title="INDICADORES" value="INDICADORES" outcome="/pub/centraisDeConteudo/indicadores.xhtml" /> > REFERÊNCIAS 
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Indicadores - Referências</title>
+		</h:head>
+		
+			<div class="atlas-miolo">
+				<h2> Indicadores </h2>
+				
+				#{exibirDownloadBean.init()}
+				
+				<div class="atlas-miolo-conteudo-limpo">
+					<!-- REFERÊNCIAS -->
+			        <h3>Referências</h3>
+			        <h4>Os objetivos dos indicadores são:</h4>
+			        <ol class="atlas-miolo-conteudo-lista atlas-miolo-conteudo-lista-alfabetica"> 
+			        	<li>Acesso à Justiça e Pessoas da Classe D e E (AJDE): é mostrar a evolução do acesso á justiça das pessoas menos favorecidas economicamente (situadas nas classes D e E - segundo tabela da Associação Brasileira de Empresas de Pesquisa ABEP).</li>
+			            <li>Estruturação do Sistena Justiça (ESJ): mostrar a evolução da estrutura composta pelos membros que compõem o Sistema Justiça, incluindo os operadores de direito e os servidores.</li>
+			            <li>Distribuição e Execução Orçamentária (DEOr): mostrar a evolução da relação entre a distribuição e a execução orçamentária do Sistema Justiça.</li>
+			            <li>Mediação e Conciliação (MeCo): é mostrar a evolução da quantidade de núcleos e centros de mediação e conciliação criados dentro dos Tribunais de Justiça e Federais a partir da resolução CNJ 125/2010.</li>
+			        </ol>
+			        
+	        		<!-- LISTA DE DOWNLOADS -->
+			        <h4>Downloads:</h4>
+				    <div class="atlas-geral-miolo-glossario-resultado-item-cross">
+	   					<ui:repeat var="linha" value="#{exibirDownloadBean.multimidias}">
+			        	    <div class="atlas-geral-miolo-glossario-links-resultado-item">
+			        	    	<p>
+					                <h:commandLink value="#{linha.nome}">
+					                	<p:fileDownload value="#{exibirDownloadBean.getFile(linha.id)}" />
+					                </h:commandLink>
+					                <BR />      #{linha.descricao}
+			        	    	</p>
+							</div>
+						</ui:repeat>
+		            </div>
+					
+					<!-- PAGINAÇÃO -->
+					<element>
+						<center>
+							<div class="atlas-paginacao">
+								<ul class="atlas-paginacao atlas-paginacao-max-interna">
+									 <li class="atlas-paginacao-link-direcional">
+									 	<h:commandLink value="PRIMEIRO » "	action="#{exibirDownloadBean.goToFirstPage()}"
+										styleClass="#{exibirDownloadBean.nomeStyleClassPrimeiraPagina}"
+										title="Ir para a primeira página" alt="Ir para a primeira página"
+										disabled="#{exibirDownloadBean.isPrimeiraPaginaSelecionada()}" /> 
+									</li>
+									<li class="atlas-paginacao-link-direcional"> 
+										<h:commandLink  value="ANTERIOR" action="#{exibirDownloadBean.goToPreviousPage()}"
+										styleClass="#{exibirDownloadBean.nomeStyleClassPaginaAnterior}"
+										title="Página Anterior" alt="Página Anterior"
+										disabled="#{exibirDownloadBean.isPrimeiraPaginaSelecionada()}" /> 
+									</li>
+									
+									<ui:repeat var="link" value="#{exibirDownloadBean.listaDeLinksDasPaginas}">
+										<li class="atlas-paginacao-link-ativo #{exibirDownloadBean.classePaginaAtual(link.paginaAlvo)}">
+										<h:commandLink	action="#{exibirDownloadBean.setCurrentPage(link.paginaAlvo)}"
+											value="#{link.paginaAlvo}" class="#{link.nomeClasseCss}"
+											title="Ir para a página #{link.paginaAlvo}" /> </li>
+									</ui:repeat>
+						
+									 <li class="atlas-paginacao-link-direcional"> 
+									 	<h:commandLink value="PRÓXIMO » " action="#{exibirDownloadBean.goToNextPage()}"
+										styleClass="#{exibirDownloadBean.nomeStyleClassProximaPagina}"
+										title="Próxima Página" alt="Próxima Página"
+										disabled="#{exibirDownloadBean.isUltimaPaginaSelecionada()}" /> 
+									</li>
+										
+									 <li class="atlas-paginacao-link-direcional">
+									 	<h:commandLink value="ÚLTIMA » " action="#{exibirDownloadBean.goToLastPage()}"
+										styleClass="#{exibirDownloadBean.nomeStyleClassUltimaPagina}"
+										title="Ir para a última página" alt="Ir para a última página"
+										disabled="#{exibirDownloadBean.isUltimaPaginaSelecionada()}" /> 
+									</li>
+								</ul>
+							</div>
+						</center>
+					</element>
+					
+					<!-- FONTES -->
+					<h4>Fontes:</h4>
+			        <div class="atlas-geral-miolo-glossario-resultado-item-cross">
+			            <div class="atlas-geral-miolo-glossario-links-resultado-item">
+			            	<p><a href="http://www.abep.org/novo/Content.aspx?SectionID=84" target="_blank" title="Clique para acessar em uma nova aba/guia o Portal ABEP">Portal ABEP - Associação Brasileira da Empresas de Pesquisa<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/transparente.png" class="atlas-geral-img-link-externo" alt="Sítio externo" title="Sítio externo" /></a></p>
+			                <p><a href="http://www.oab.org.br" target="_blank" title="Clique para acessar em uma nova aba/guia o">OAB - Ordem dos Advogados do Brasil<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/transparente.png" class="atlas-geral-img-link-externo" alt="Sítio externo" title="Sítio externo" /></a></p>
+			                <p><a href="http://www.cnj.jus.br" target="_blank" title="Clique para acessar em uma nova aba/guia o sítio do CNJ">CNJ - Conselho Nacional de Justiça<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/transparente.png" class="atlas-geral-img-link-externo" alt="Sítio externo" title="Sítio externo" /></a></p>
+			                <p><a href="http://www.cnmp.mp.br/portal/" target="_blank" title="Clique para acessar em uma nova aba/guia o sítio do CNPM">CNPM - Conselho Nacional do Ministério Público<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/transparente.png" class="atlas-geral-img-link-externo" alt="Sítio externo" title="Sítio externo" /></a></p>
+			                <p><a href="http://www.ipea.gov.br/portal/" target="_blank" title="Clique para acessar em uma nova aba/guia o sítio do IPEA">IPEA - Instituto de Pesquisa Econômica Aplicada<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/transparente.png" class="atlas-geral-img-link-externo" alt="Sítio externo" title="Sítio externo" /></a></p>
+			                <p><a href="http://portal.mj.gov.br/main.asp?View={F84E8F0E-EACC-42C5-AE68-3CE0E1A483BC}&amp;BrowserType=NN&amp;LangID=pt-br&amp;params=itemID%3D%7B768DE2EF-F446-4A9D-94E4-EA76D5084F9E%7D%3B&amp;UIPartUID=%7B2868BA3C-1C72-4347-BE11-A26F70F4CB26%7D" target="_blank" title="Clique para acessar em uma nova aba/guia o da Senacon do MJ">MJ - Ministério da Justiça - Secretaria Nacional do Consumidor (Senacon)<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/transparente.png" class="atlas-geral-img-link-externo" alt="Sítio externo" title="Sítio externo" /></a></p>
+			            </div>
+			        </div>
+				</div>
+			</div>
+	</ui:define>
+</ui:composition>

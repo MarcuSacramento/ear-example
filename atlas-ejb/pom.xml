@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <artifactId>atlas-parent</artifactId>
+      <groupId>br.gov.atlas</groupId>
+      <version>0.0.1-SNAPSHOT</version>
+   </parent>
+
+   <artifactId>atlas-ejb</artifactId>
+   <packaging>ejb</packaging>
+
+   <name>Atlas EJB module</name>
+
+   <properties>
+      <project.build.sourceEncoding>CP1252</project.build.sourceEncoding>
+      <java.version>1.7</java.version>
+      <wtp.version>3.5.2</wtp.version>
+      <filename>atlas-ejb.jar</filename>
+   </properties>
+
+   <dependencies>
+
+      <dependency>
+         <groupId>net.sf.jasperreports</groupId>
+         <artifactId>jasperreports</artifactId>
+         <version>5.2.0</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.resteasy</groupId>
+         <artifactId>resteasy-jaxrs</artifactId>
+         <version>2.3.1.GA</version>
+      </dependency>
+
+      <dependency>
+         <groupId>com.googlecode.json-simple</groupId>
+         <artifactId>json-simple</artifactId>
+         <version>1.1</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.codehaus.jackson</groupId>
+         <artifactId>jackson-jaxrs</artifactId>
+         <version>1.9.12</version>
+      </dependency>
+
+      <dependency>
+         <groupId>javax</groupId>
+         <artifactId>javaee-api</artifactId>
+         <version>6.0</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-core</artifactId>
+         <version>4.3.7.Final</version>
+         <scope>provided</scope>
+         <!-- Exclusion devido a erro no deploy da aplicação devido a incompatibilidade do antlr do servidor, possível problema na ordenação-->
+         <exclusions>
+            <exclusion>
+               <groupId>antlr</groupId>
+               <artifactId>antlr</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-validator</artifactId>
+         <version>4.2.0.Final</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate.common</groupId>
+         <artifactId>hibernate-commons-annotations</artifactId>
+         <version>4.0.4.Final</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate.javax.persistence</groupId>
+         <artifactId>hibernate-jpa-2.0-api</artifactId>
+         <version>1.0.1.Final</version>
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-entitymanager</artifactId>
+         <version>4.3.7.Final</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-envers</artifactId>
+         <version>4.3.7.Final</version>
+         <scope>provided</scope>
+      </dependency> 
+
+   </dependencies>
+
+   
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.jboss.as.plugins</groupId>
+            <artifactId>jboss-as-maven-plugin</artifactId>
+            <configuration>
+               <filename>atlas-ejb.jar</filename>
+            </configuration>
+         </plugin>
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.0.2</version>
+            <configuration>
+               <source>${java.version}</source>
+               <target>${java.version}</target>
+               <encoding>${project.build.sourceEncoding}</encoding>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-ejb-plugin</artifactId>
+            <version>2.3</version>
+            <configuration>
+               <ejbVersion>3.0</ejbVersion>
+            </configuration>
+         </plugin>
+
+      </plugins>
+</build>
+</project>

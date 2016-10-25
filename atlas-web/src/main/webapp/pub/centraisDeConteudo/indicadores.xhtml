@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link title="CENTRAIS DE CONTEÚDOS" value="CENTRAIS DE CONTEÚDOS" outcome="/pub/centraisDeConteudo/exibirCentraisDeConteudos.xhtml" /> > INDICADORES</ui:define>
+	<ui:define name="conteudo">
+	<div class="atlas-miolo">
+		<h:head>
+			<title>Indicadores</title>
+		</h:head>
+		<h2> Indicadores </h2>
+	
+		<div class="atlas-miolo-conteudo-limpo">
+		        <h3>Indicadores da Justiça no Brasil</h3>
+		        <p>A partir de um amplo banco de dados aberto para consulta e utilização, é possível conhecer, em números e gráficos, indicadores e variáveis sobre o Sistema de Justiça e os aspectos sociais da população brasileira, além da distribuição da execução orçamentária, dos atores que compõem o sistema e de como está estruturado o sistema de justiça no país. Pesquise e conheça.</p>
+		        
+		        <div class="atlas-miolo-conteudo-bloco-linha-infografico">
+		            <div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">		                	
+		                    <h:link outcome="/pub/centraisDeConteudo/indicadores_preDefinidos.xhtml"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_infografico_predefinido.png" alt="Infográfico - Pré Definidos" title="Infográfico - Pré Definidos" border="0" /></h:link>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+		                    <p class="atlas-miolo-conteudo-bloco-infografico-texto-titulo">
+		                    	<h:link outcome="/pub/centraisDeConteudo/indicadores_preDefinidos.xhtml">Gráficos</h:link>
+		                    </p>
+		                    	<h:link outcome="/pub/centraisDeConteudo/indicadores_preDefinidos.xhtml">
+			                    	Aqui podem ser acessados os infográficos dos principais indicadores de acesso à Justiça. Os indicadores possuem finalidade, gráfico e dimensões próprias, demonstradas em cada caso.
+		                        </h:link>
+		                </div>
+		            </div>
+		            <div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">		                	
+		                    <h:link outcome="/pub/centraisDeConteudo/monitoramentoIndicadores.xhtml"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_infografico_prototipo.png" alt="InfogrÃ¡fico - RelatÃ³rios" title="InfogrÃ¡fico - RelatÃ³rios" border="0" /></h:link>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+		                    <p class="atlas-miolo-conteudo-bloco-infografico-texto-titulo">
+		                    	<h:link outcome="/pub/centraisDeConteudo/monitoramentoIndicadores.xhtml">Relatórios</h:link>
+		                    </p>
+		                    	<h:link outcome="/pub/centraisDeConteudo/monitoramentoIndicadores.xhtml">
+		                    		Aqui podem ser encontradas os índices, operadores e tipos de orgãos a nivel Brasil, Regional, Estadual e Municipal.
+		                        </h:link>
+		                </div>
+		            </div> 
+		            <div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">		                	
+		                    <h:link outcome="/pub/centraisDeConteudo/indicadores_referencias.xhtml"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_infografico_referencia.png" alt="Infográfico - Referências" title="Infográfico - Referências" border="0" /></h:link>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+		                    <p class="atlas-miolo-conteudo-bloco-infografico-texto-titulo">
+		                    	<h:link outcome="/pub/centraisDeConteudo/indicadores_referencias.xhtml">Referências</h:link>
+		                    </p>
+		                    	<h:link outcome="/pub/centraisDeConteudo/indicadores_referencias.xhtml">
+		                    		Aqui podem ser encontradas as fontes e material básico utilizado na concepção e no cálculo dos indicadores, bem como as bases de dados de referência.
+		                        </h:link>
+		                </div>
+		            </div>
+				</div>
+				<div class="atlas-miolo-conteudo-bloco-linha-infografico">
+					<div class="atlas-miolo-conteudo-bloco-infografico">
+		                <div class="atlas-miolo-conteudo-bloco-infografico-imagem">
+		                    <h:link outcome="/pub/centraisDeConteudo/indicadores_relatoriosAnual.xhtml"><img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_infografico_relatorio_anual.png" alt="InfogrÃ¡fico - RelatÃ³rios 2013" title="InfogrÃ¡fico - RelatÃ³rios 2013" border="0" /></h:link>
+		                </div>
+		                <div class="atlas-miolo-conteudo-bloco-infografico-texto">
+		                    <p class="atlas-miolo-conteudo-bloco-infografico-texto-titulo">
+		                    	<h:link outcome="/pub/centraisDeConteudo/indicadores_relatoriosAnual.xhtml">Caderno</h:link>
+		                    </p>
+		                    	<h:link outcome="/pub/centraisDeConteudo/indicadores_relatoriosAnual.xhtml">
+		                    		Aqui podem ser encontrados os relatórios anuais publicados, com a descrição dos conceitos básicos utilizados, metodologia de coleta e principais resultados.
+		                        </h:link>
+		                </div>
+		            </div>
+
+				</div>
+		    </div>
+		</div>
+	</ui:define>
+</ui:composition>

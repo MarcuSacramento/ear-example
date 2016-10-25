@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioOrgaosJustica" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e5707e07-cdc5-413f-a742-0f656ba3b0e7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="ROTA" class="java.lang.String"/>
+	<parameter name="FUNDO" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="municipio.nome" class="java.lang.String"/>
+	<field name="municipio.uf.nome" class="java.lang.String"/>
+	<field name="cep" class="java.lang.Integer"/>
+	<field name="contatosFormatados" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="48" splitType="Stretch">
+			<image scaleImage="RetainShape">
+				<reportElement uuid="5df1969f-3c9c-439c-9017-0a01798b82e1" x="0" y="0" width="555" height="48"/>
+				<imageExpression><![CDATA[$P{FUNDO}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="24cbe0d4-28cc-4ae2-acc1-48fe0fb1fe4d" x="0" y="0" width="171" height="48"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="20">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="a2367fe8-f4c2-4170-92de-65244fd5a0dd" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="481f8d98-732b-4469-bb15-bccb4eadd0c0" x="515" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ac1ad11d-c765-4d6b-9887-51ec88f8ac1a" x="435" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="91" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="dd668869-da83-4280-97fe-1ae6dbb21d88" x="0" y="0" width="555" height="91" isPrintWhenDetailOverflows="true"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$P{ROTA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

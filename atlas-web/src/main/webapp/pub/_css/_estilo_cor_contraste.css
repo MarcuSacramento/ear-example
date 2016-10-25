@@ -1,0 +1,834 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação do contraste                                                              **
+** @data: 15/06/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+
+/* Arquivo: _estilo_geral.css */
+body{
+	background-color: rgba(0,0,0,1);
+    color: rgba(255,255,255,1);
+}
+
+	div.atlas-menu-ico-topo a{
+		color: rgba(255,255,255,1);
+	}
+
+
+/* Arquivo: _estilo_breadcrumb.css */
+
+div.atlas-conteudo-breadcrumb-container{
+	color: rgba(255,255,255,1);
+}
+
+	span.atlas-conteudo-breadcrumb-container-inicial{
+		color: rgba(255,255,255,1);
+	}
+
+	div.atlas-conteudo-breadcrumb-container a{
+		color: rgba(255,255,255,1);
+	}
+	
+	div.atlas-conteudo-breadcrumb-container a:hover{
+		color: rgba(255,255,255,1);
+		text-decoration: underline;
+	}
+
+/* Arquivo: _estilo_cabecalho.css */
+
+div.atlas-cabecalho{
+	background-color: rgba(0,0,0,1);
+	color: rgba(255,255,255,1);
+}
+	
+	nav.atlas-cabecalho-container-acessibilidade a{
+		color: rgba(255,255,255,1);
+	}
+		
+	nav.atlas-cabecalho-container-acessibilidade a:hover{
+		color: rgba(255,255,255,1);
+		text-decoration: underline;
+	}
+	
+		nav.atlas-cabecalho-container-acessibilidade span{
+			background-color: rgba(0,0,0,1);
+			color: rgba(255,255,255,1);
+		}
+	
+	nav.atlas-cabecalho-container-acessibilidade-info{
+		border-bottom: 1px dotted rgba(255,255,255,1);
+	}
+	
+		nav.atlas-cabecalho-container-acessibilidade-info a{
+			color: rgba(255,255,255,1)
+		}
+		
+		nav.atlas-cabecalho-container-acessibilidade-info a:hover{
+			color: rgba(255,255,255,1);
+			text-decoration: underline;
+		}
+
+div.atlas-cabecalho-container-orgao a{
+	color: rgba(255,255,255,1);
+}
+
+div.atlas-cabecalho-container-busca{
+	background: rgba(0,0,0,1);
+	border: 1px solid rgba(255,255,255,1);
+}
+	
+	div.atlas-cabecalho-container-busca fieldset .atlas-cabecalho-form-busca-campo{
+		background-color: rgba(0,0,0,1);
+		color: rgba(255,255,255,1);
+	}
+	
+	div.atlas-cabecalho-container-busca fieldset .atlas-cabecalho-form-busca-botao{
+		background-image: url(../_imagens/_cabecalho/ico_busca_contraste.png);
+		background-color: rgba(0,0,0,1);
+	}
+
+	li.atlas-cabecalho-container-redes-sociais-twitter a{
+		background-image: url(../_imagens/_cabecalho/ico_twitter_contraste.png);
+	}
+	
+	li.atlas-cabecalho-container-redes-sociais-facebook a{
+		background-image: url(../_imagens/_cabecalho/ico_facebook_contraste.png);
+	}
+	
+	li.atlas-cabecalho-container-redes-sociais-flickr a{
+		background-image: url(../_imagens/_cabecalho/ico_flickr_contraste.png);
+	}
+	
+	li.atlas-cabecalho-container-redes-sociais-youtube a{
+		background-image: url(../_imagens/_cabecalho/ico_youtube_contraste.png);
+	}
+
+/* Arquivo: _estilo_conteudo.css */
+
+div.atlas-conteudo{
+	background-color: rgba(0,0,0,1);
+}
+
+div.atlas-conteudo-container{
+	color: rgba(255,255,255,1);
+}
+
+div.atlas-miolo{
+	color: rgba(255,255,255,1);
+}
+
+div.atlas-miolo-busca{
+	color: rgba(255,255,255,1);
+}
+
+/* Arquivo: _estilo_menu_lateral.css */
+
+nav.atlas-menu-lateral h2 {
+	border-top: 4px solid rgba(255,255,255,1);
+	border-bottom: 1px solid rgba(255,255,255,1);
+	color: rgba(255,255,255,1);
+	background: rgba(0,0,0,1);
+}
+
+nav.atlas-menu-lateral-bloco-destaque ul{
+	border-bottom: 1px solid rgba(255,255,255,1);
+}
+
+	nav.atlas-menu-lateral-bloco-destaque li{
+		border-top: 1px solid rgba(255,255,255,1);
+	}
+	
+	nav.atlas-menu-lateral-bloco-destaque li a{
+		color: rgba(255,255,255,1);
+	}
+
+	nav.atlas-menu-lateral-bloco li{
+		border-bottom: 1px solid rgba(255,255,255,1);
+	}
+	
+	nav.atlas-menu-lateral-bloco li a{
+		color: rgba(255,255,255,1);
+	}
+
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li{
+		border-bottom: 1px solid rgba(255,255,255,1);
+	}
+	
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li a{
+		color: rgba(255,255,255,1);
+	}
+	
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li img.atlas-menu-lateral-bloco-central-de-conteudo-publicacoes{
+		background-image: url(../_imagens/_menu/ico_publicacoes_contraste.png);
+	}
+	
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li img.atlas-menu-lateral-bloco-central-de-conteudo-aplicativos{
+		background-image: url(../_imagens/_menu/ico_aplicativos_contraste.png);
+	}
+	
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li img.atlas-menu-lateral-bloco-central-de-conteudo-infograficos{
+		background-image: url(../_imagens/_menu/ico_infograficos_contraste.png);
+	}
+	
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li img.atlas-menu-lateral-bloco-central-de-conteudo-videos{
+		background-image: url(../_imagens/_menu/ico_videos_contraste.png);
+	}
+
+/* Arquivo: _estilo_menu_topo.css */
+
+div.atlas-menu-topo{
+	background-color: rgba(51,51,51,1);
+}
+
+	div.atlas-menu-topo-container a{
+		color: rgba(255,255,255,1);
+	}
+	
+	div.atlas-menu-topo-container a:hover{
+		color: rgba(255,255,255,1);
+		text-decoration: underline;
+	}
+
+/* Arquivo: _estilo_rodape.css */
+
+footer.atlas-rodape{
+	background-color: rgba(0,0,0,1);
+	color: rgba(255,255,255,1);
+}
+	
+footer.atlas-rodape-governo{
+	background-color: rgba(51,51,51,1);
+	color: rgba(255,255,255,1);
+}
+
+	footer.atlas-rodape-governo-container{
+		width: 960px;
+		margin: 0 auto;
+		display: block;
+		padding: 2em 0;
+		height: 50px;
+	}
+	
+	nav.atlas-rodape-bloco a:hover{
+		text-decoration: underline;
+	}
+	
+footer.atlas-rodape-cms{
+	background-color: rgba(0,0,0,1);
+	color: rgba(255,255,255,1);
+}
+
+	footer.atlas-rodape-cms-container a{
+		color: rgba(255,255,255,1);
+	}
+	
+	footer.atlas-rodape-cms-container a:hover{
+		text-decoration: underline
+	}
+
+/* Arquivo: _estilo_miolo.css */
+
+div.atlas-miolo-conteudo{
+	border-bottom: 2px solid rgba(255,255,255,1);
+}
+
+div.atlas-miolo h2 {
+	border-top: 4px solid rgba(255,255,255,1);
+	border-bottom: 1px solid rgba(255,255,255,1);
+	color: rgba(255,255,255,1);
+	background: rgba(0,0,0,1);
+}
+
+div.atlas-miolo h4{
+	color: rgba(255,255,255,1);
+	border-top: 4px solid rgba(255,255,255,1);
+	border-bottom: 1px solid rgba(255,255,255,1);
+}
+
+
+div.atlas-miolo-conteudo-bloco-link{
+	border-top: 2px solid rgba(255,255,255,1);
+	border-bottom: 1px solid rgba(255,255,255,1);
+	color: rgba(255,255,255,1);
+	background: rgba(0,0,0,1);
+}
+
+	div.atlas-miolo-conteudo-bloco-link a{
+		color: rgba(255,255,255,1);
+	}
+	
+	div.atlas-miolo-conteudo-bloco-link a:hover{
+		text-decoration: underline;
+	}
+		
+	div.atlas-miolo-conteudo-bloco-link img.atlas-miolo-conteudo-bloco-link-img{
+		background-image: url(../_imagens/_miolo/ico_bloco_link_contraste.png);
+	}
+
+div.atlas-miolo p{
+	color: rgba(255,255,255,1);
+}
+
+	div.atlas-miolo ol.atlas-miolo-conteudo-lista li{
+		color: rgba(255,255,255,1);
+	}
+	
+	div.atlas-miolo ol.atlas-miolo-conteudo-lista li a{
+		color: rgba(255,255,255,1);
+	}
+	
+		div.atlas-miolo ol.atlas-miolo-conteudo-lista li a:hover{
+			text-decoration: underline;
+		}
+
+	div.atlas-miolo ul.atlas-miolo-conteudo-lista li{
+		color: rgba(255,255,255,1);
+	}
+	
+	div.atlas-miolo ul.atlas-miolo-conteudo-lista li a{
+		color: rgba(255,255,255,1);
+	}
+	
+		div.atlas-miolo ul.atlas-miolo-conteudo-lista li a:hover{
+			text-decoration: underline;
+		}
+
+div.atlas-miolo-conteudo-tag{
+	border-bottom: 1px solid rgba(255,255,255,1);
+	color: rgba(255,255,255,1);
+}
+
+	div.atlas-miolo-conteudo-tag a{
+		border: 1px solid rgba(255,255,255,1);
+		background-color: rgba(0,0,0,1);
+		color: rgba(255,255,255,1);
+	}
+
+.atlas-geral-img-link-externo {
+	background-image: url(../_imagens/_icones/icon_site_ext_contraste.png);
+}
+
+ul.atlas-miolo-bloco a{
+	color: rgba(255,255,255,1);
+}
+
+ul.atlas-miolo-bloco a:hover{
+	color: rgba(255,255,255,1);
+	text-decoration: underline;
+}
+
+div.atlas-menu-ico-topo img.atlas-menu-ico-topo-img{
+	background-image: url(../_imagens/_miolo/ico_topo_contraste.png);
+}
+
+/* Arquivo: _estilo_paginacao.css */
+
+	ul.atlas-paginacao li.atlas-paginacao-link-ativo{
+		border: 1px solid rgba(255,255,255,1);
+	}
+	
+		ul.atlas-paginacao li.atlas-paginacao-link-ativo a{
+			color: rgba(255,255,255,1) !important;
+		}
+	
+	ul.atlas-paginacao li.atlas-paginacao-link-atual{
+		color: rgba(255,255,255,1) !important;
+	}
+
+		ul.atlas-paginacao li.atlas-paginacao-link-pontos a{
+			color: rgba(255,255,255,1) !important;
+		}
+		
+		ul.atlas-paginacao li.atlas-paginacao-link-direcional a{
+			color: rgba(255,255,255,1) !important;
+		}
+		
+			ul.atlas-paginacao li.atlas-paginacao-link-direcional a:hover{
+				color: rgba(255,255,255,1) !important;
+			}
+
+/* Arquivo: _estilo_formularios.css */
+
+.atlas-checkbox-label{
+	color: rgba(255,255,255,1);
+}
+
+.atlas-select-formata{
+	background-color: rgba(0,0,0,1);
+	border: 1px solid rgba(255,255,255,1);
+	color: rgba(255,255,255,1);
+}
+	.atlas-select-formata:focus{
+		background-color: rgba(255,255,255,1);
+		border: 1px solid rgba(0,0,0,1);
+		color: rgba(0,0,0,1);
+	}
+
+.atlas-input-formata{
+	background-color: rgba(0,0,0,1);
+	border: 1px solid rgba(255,255,255,1);
+	color: rgba(255,255,255,1);
+}
+	.atlas-input-formata:focus{
+		background-color: rgba(255,255,255,1);
+		border: 1px solid rgba(0,0,0,1);
+		color: rgba(0,0,0,1);
+	}
+
+.atlas-textarea-formata{
+	background-color: rgba(0,0,0,1);
+	border: 1px solid rgba(255,255,255,1);
+	color: rgba(255,255,255,1);
+}
+	.atlas-textarea-formata:focus{
+		background-color: rgba(255,255,255,1);
+		border: 1px solid rgba(0,0,0,1);
+		color: rgba(0,0,0,1);
+	}
+	
+	.atlas-textarea-formata-disabled{
+		background-color: transparent;
+		border: transparent;
+	}
+
+.atlas-button-filtrar{
+	background-color: rgba(255,255,255,1);
+	border: 1px solid rgba(0,0,0,1);
+	color: rgba(0,0,0,1);
+}
+	.atlas-button-filtrar:hover{
+		background-color: rgba(0,0,0,1);
+		border: 1px solid rgba(255,255,255,1);
+		color: rgba(255,255,255,1);
+	}
+
+.atlas-button-filtrar-bloqueado{
+	background-color: rgba(255,255,255,1);
+	border: 1px solid rgba(0,0,0,1);
+	color: rgba(0,0,0,1);
+}
+	.atlas-button-filtrar-bloqueado:hover{
+		background-color: rgba(0,0,0,1);
+		border: 1px solid rgba(255,255,255,1);
+		color: rgba(255,255,255,1);
+	}
+	
+.atlas-button-limpar{
+	background-color: rgba(255,255,255,1);
+	border: 1px solid rgba(0,0,0,1);
+	color: rgba(0,0,0,1);
+}
+	.atlas-button-limpar:hover{
+		background-color: rgba(0,0,0,1);
+		border: 1px solid rgba(255,255,255,1);
+		color: rgba(255,255,255,1);
+	}
+
+.atlas-button-voltar{
+	background-color: rgba(255,255,255,1);
+	border: 1px solid rgba(0,0,0,1);
+	color: rgba(0,0,0,1);
+}
+	.atlas-button-voltar:hover{
+		background-color: rgba(0,0,0,1);
+		border: 1px solid rgba(255,255,255,1);
+		color: rgba(255,255,255,1);
+	}
+
+.atlas-tabelas-fieldset-01{
+	border: 1px solid rgba(255,255,255,1);
+}
+	.atlas-tabelas-fieldset-01 legend{
+		color: rgba(255,255,255,1);
+	}
+
+/* Arquivo: _estilo_mensagens.css */
+
+.atlas-mensagem-positivo{
+	background-color: rgba(0,0,0,1);
+}
+
+	.atlas-mensagem-positivo p{
+		color: rgba(255,255,255,1) !important;
+	}
+
+.atlas-mensagem-erro{
+	background-color: rgba(0,0,0,1);
+}
+
+	.atlas-mensagem-erro p{
+		color: rgba(255,255,255,1) !important;
+	}
+
+.atlas-mensagem-alerta{
+	background-color: rgba(0,0,0,1);
+}
+
+	.atlas-mensagem-alerta p{
+		color: rgba(255,255,255,1) !important;
+	}
+
+/* Arquivo: _estilo_tabelas.css */
+
+	.atlas-tabelas-formulario tr{
+		border-bottom: 1px solid rgba(255,255,255,1);
+	}
+	
+	.atlas-tabelas-formulario td{
+		border-bottom: 1px solid rgba(255,255,255,1);
+	}
+
+		.atlas-tabelas-formulario tr.atlas-tabelas-formulario-tr-linha{
+			background-color: rgba(0,0,0,1);
+		}
+
+/* Arquivo: _estilo_pagina_dicionario.css */
+
+.atlas-geral-miolo-filtro{
+	background: rgba(0,0,0,1);
+	border: 1px solid rgba(255,255,255,1);
+}
+
+	ul.atlas-abas-menu-lista { 
+		color: rgba(255,255,255,1);
+		border-bottom: 1px solid rgba(255,255,255,1);
+	}
+
+	ul.atlas-abas-menu-lista li a{
+		color: rgba(255,255,255,1);
+		border-top: 1px solid rgba(0,0,0,1);
+	}
+
+	ul.atlas-abas-menu-lista li a:hover{
+		color: rgba(255,255,255,1);
+		background-color: rgba(0,0,0,1);
+		border-top: 1px solid (255,255,255,1);
+	}
+
+	ul.atlas-abas-menu-lista li.atlas-abas-menu-lista-ativa a{
+		color: rgba(0,0,0,1);
+		background-color: rgba(255,255,255,1);
+		border-top: 1px solid rgba(255,255,255,1);
+	}
+
+.atlas-geral-miolo-glossario-resultado{
+	color: rgba(255,255,255,1);
+}
+
+	.atlas-geral-miolo-glossario-resultado-item-cross{
+		background-color: rgba(0,0,0,1);
+	}
+	
+	.atlas-geral-miolo-glossario-resultado-item-cross a{
+		color: rgba(255,255,255,1);
+	}
+		
+		.atlas-geral-miolo-glossario-resultado-item-cross a:hover{
+			text-decoration: underline;
+		}
+		
+		.atlas-geral-miolo-glossario-links-resultado-item p.atlas-geral-miolo-glossario-links-titulo a{
+			color: rgba(255,255,255,1);
+		}
+		
+			.atlas-geral-miolo-glossario-links-resultado-item p.atlas-geral-miolo-glossario-links-titulo a:hover{
+				color: rgba(255,255,255,1);
+				text-decoration: underline;
+			}
+
+	p.atlas-geral-miolo-glossario-titulo{
+		color: rgba(255,255,255,1);
+	}
+		p.atlas-geral-miolo-glossario-titulo a{
+			color: rgba(255,255,255,1);
+		}
+		
+			p.atlas-geral-miolo-glossario-titulo a:hover{
+				color: rgba(255,255,255,1);
+				text-decoration: none;
+			}
+			
+			p.atlas-geral-miolo-glossario-links-link{
+				color: rgba(255,255,255,1);
+			}
+
+.atlas-geral-miolo-glossario-paginacao a{
+	color: rgba(255,255,255,1);
+}
+
+.atlas-geral-miolo-glossario-paginacao a:hover{
+	color: rgba(255,255,255,1);
+	text-decoration: underline;
+}
+
+/* Arquivo: _estilo_pagina_busca.css */
+
+div.atlas-miolo-busca h1{
+	color: rgba(255,255,255,1);
+}
+
+div.atlas-miolo-busca h2{
+	color: rgba(255,255,255,1);
+}
+	
+		p.atlas-miolo-busca-lista-item-titulo a{
+			color: rgba(255,255,255,1);
+		}
+		
+		p.atlas-miolo-busca-lista-item-titulo a:hover{
+			color: rgba(255,255,255,1);
+			text-decoration: underline;
+		}
+		
+		p.atlas-miolo-busca-lista-item-contem{
+			color: rgba(255,255,255,1);
+		}
+		
+		p.atlas-miolo-busca-lista-item-contem a{
+			color: rgba(255,255,255,1);
+		}
+		
+		p.atlas-miolo-busca-lista-item-contem a:hover{
+			color: rgba(255,255,255,1);
+			text-decoration: underline;
+		}
+	
+		fieldset.atlas-miolo-busca-filtro-fieldset legend{
+			border-bottom: 1px solid rgba(255,255,255,1);
+		}
+		
+		fieldset.atlas-miolo-busca-filtro-fieldset a{
+			color: rgba(255,255,255,1);
+		}
+				
+		.atlas-input-busca{
+			background-color: rgba(0,0,0,1);
+			border: 1px solid rgba(255,255,255,1);
+			color: rgba(0,0,0,1);
+		}
+			.atlas-input-busca:focus{
+				background-color: rgba(255,255,255,1);
+				border: 1px solid rgba(0,0,0,1);
+				color: rgba(0,0,0,1);
+			}
+			
+		.atlas-botao-busca{
+			background-color: rgba(255,255,255,1);
+			border: 1px solid rgba(0,0,0,1);
+			color: rgba(0,0,0,1);
+		}
+			.atlas-botao-busca:hover{
+				background-color: rgba(0,0,0,1);
+				border: 1px solid rgba(255,255,255,1);
+				color: rgba(255,255,255,1);
+			}
+
+/* Arquivo: _estilo_pagina_enderecos.css */
+
+.atlas-miolo-conteudo-filtro{
+	background-color: rgba(0,0,0,1);
+}
+	.atlas-geral-miolo-linha-coluna-endereco-filtro-origem{
+		background-color: rgba(0,0,0,1);
+	}
+
+	.atlas-geral-miolo-linha-coluna-endereco-filtro a{
+		color: rgba(255,255,255,1);
+	}
+	
+		.atlas-geral-miolo-linha-coluna-endereco-filtro a:hover{
+			color: rgba(255,255,255,1);
+			text-decoration: underline;
+		}
+
+.atlas-geral-miolo-linha-download{
+	border: 1px solid rgba(255,255,255,1);
+	background-color: rgba(0,0,0,1);
+}
+
+	.atlas-button-download{
+		background-color: rgba(255,255,255,1);
+		border: 1px solid rgba(255,255,255,1);
+		color: rgba(0,0,0,1);	}
+
+	.atlas-select-formata-download{
+		background-color: rgba(0,0,0,1);
+		border: 1px solid rgba(0,0,0,1);
+		color: rgba(255,255,255,1);
+	}
+	
+	.atlas-select-formata-download:focus{
+		background-color: rgba(255,255,255,1);
+		border: 1px solid rgba(255,255,255,1);
+		color: rgba(0,0,0,1);
+	}
+	
+/* Arquivo: _estilo_pagina_parceiros.css */
+
+		div.atlas-miolo-conteudo-bloco-parceiro-imagem img{
+			box-shadow: 0px 0px 5px rgba(255,255,255,1);
+		}
+	
+		p.atlas-miolo-conteudo-bloco-parceiro-texto-titulo{
+			color: rgba(255,255,255,1);
+		}
+	
+		div.atlas-miolo-conteudo-bloco-parceiro-texto a{
+			color: rgba(255,255,255,1);
+		}
+		
+			div.atlas-miolo-conteudo-bloco-parceiro-texto a:hover{
+				color: rgba(255,255,255,1);
+				text-decoration: underline;
+			}
+
+/* Arquivo: _estilo_pagina_publicacao.css */
+
+		div.atlas-miolo-conteudo-bloco-publicacao-imagem img{
+			box-shadow: 0px 0px 5px rgba(255,255,255,1);
+		}
+	
+		p.atlas-miolo-conteudo-bloco-publicacao-texto-titulo{
+			color: rgba(255,255,255,1);
+		}
+	
+		div.atlas-miolo-conteudo-bloco-publicacao-texto a{
+			color: rgba(255,255,255,1);
+		}
+		
+			div.atlas-miolo-conteudo-bloco-publicacao-texto a:hover{
+				color: rgba(255,255,255,1);
+				text-decoration: underline;
+			}
+
+/* Arquivo: _estilo_pagina_infografico.css */
+	
+		div.atlas-miolo-conteudo-bloco-infografico-imagem img{
+			box-shadow: 0px 0px 5px rgba(255,255,255,1);
+		}
+	
+		p.atlas-miolo-conteudo-bloco-infografico-texto-titulo{
+			color: rgba(255,255,255,1);
+		}
+	
+		div.atlas-miolo-conteudo-bloco-infografico-texto a{
+			color: rgba(255,255,255,1);
+		}
+		
+			div.atlas-miolo-conteudo-bloco-infografico-texto a:hover{
+				color: rgba(255,255,255,1);
+				text-decoration: underline;
+			}
+
+div.atlas-geral-miolo-filtro-indicador-resultado{
+	background: rgba(0,0,0,1);
+}
+
+/* Arquivo: _estilo_pagina_video.css */
+
+div.atlas-miolo-conteudo-video{
+	background-color: rgba(0,0,0,1);
+	color: rgba(255,255,255,1);
+	border-bottom: 1px dotted rgba(255,255,255,1);
+}
+
+div.atlas-miolo-conteudo-video p{
+	color: rgba(255,255,255,1) !important;
+}
+
+	div.atlas-miolo-conteudo-video p.atlas-miolo-conteudo-video-destaque-titulo{
+		color: rgba(255,255,255,1) !important;
+	}
+
+div.atlas-miolo-conteudo-video-lista{
+	border-left: 1px dotted rgba(255,255,255,1);
+	border-top: 1px dotted rgba(255,255,255,1);
+}
+
+	div.atlas-miolo-conteudo-video-lista-item{
+		border-bottom: 1px dotted rgba(255,255,255,1);
+	}
+
+	div.atlas-miolo-conteudo-video-lista-item a,
+	div.atlas-miolo-conteudo-video-lista-item-final a
+	{
+		color: rgba(255,255,255,1);
+	}
+	
+	div.atlas-miolo-conteudo-video-lista-item a:hover,
+	div.atlas-miolo-conteudo-video-lista-item-final a:hover
+	{
+		color: rgba(255,255,255,1);
+		text-decoration: underline;
+	}
+
+div.atlas-miolo-conteudo-video-todos{
+	background-color: rgba(0,0,0,1);
+	color: rgba(255,255,255,1);
+}
+	
+	div.atlas-miolo-conteudo-video-todos a
+	{
+		color: rgba(255,255,255,1);
+	}
+	
+	div.atlas-miolo-conteudo-video-todos a:hover
+	{
+		color: rgba(255,255,255,1);
+		text-decoration: underline;
+	}
+	
+	div.atlas-miolo-conteudo-video-todos img.atlas-miolo-conteudo-video-todos
+	{
+		background-image: url(../_imagens/_miolo/ico_bloco_link_videos_contraste.png);
+	}
+
+div.atlas-miolo-lista-video-clear{
+	border-bottom: 1px solid rgba(255,255,255,1);
+}
+
+	.atlas-miolo-lista-video-data p.atlas-miolo-lista-video-data-p{
+		color: rgba(255,255,255,1) !important;
+	}
+
+.atlas-miolo-lista-video-detalha{
+	border-left: 1px dotted rgba(255,255,255,1);
+}
+	
+		.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-titulo a{
+			color: rgba(255,255,255,1);
+		}
+		
+		.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-titulo a:hover{
+			color: rgba(255,255,255,1);
+			text-decoration: underline;
+		}
+
+	.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-tag{
+		color: rgba(255,255,255,1);
+	}
+	
+		.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-tag a{
+			color: rgba(255,255,255,1);
+		}
+		
+		.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-tag a:hover{
+			color: rgba(255,255,255,1);
+			text-decoration: underline;
+		}
+
+img.atlas-miolo-lista-video-data-img{
+	background-image: url(../_imagens/_miolo/ico_calendario_contraste.png);
+}
+
+img.atlas-miolo-lista-video-hora-img{
+	background-image: url(../_imagens/_miolo/ico_hora_contraste.png);
+}
+
+img.atlas-miolo-lista-video-multimidia-img{
+	background-image: url(../_imagens/_miolo/ico_multimidia_contraste.png);
+}

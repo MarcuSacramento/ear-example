@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/admin/template/template_atlas_admin.xhtml">
+
+
+	<ui:define name="conteudo">
+	
+		<h:head>
+			<title>Admin | Novo Órgão</title>
+		</h:head>
+
+		<script language="javascript" src="../_javascript/validacaoCampo.js"></script>
+		<script type="text/javascript"
+			src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript"
+			src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
+
+		<script>
+			function limparCamposRepresentanteOrgao()
+			{	
+				limparDadosBasicosPopupRepresentanteOrgao();
+				limparDadosTelefoneRepresentante1();
+				limparDadosTelefoneRepresentante2();
+			}
+ 
+			function limparDadosBasicosPopupRepresentanteOrgao()
+			{
+				$("#inputNomeRepresentante"   ).val("");
+				$("#inputCargoRepresentante"  ).val("");
+				$("#inputEmailRepresentante"  ).val("");
+			}
+
+			function limparDadosTelefoneOrgao1()
+			{
+				$("#inputPrimeiroDddOrgao"		   ).val("");
+				$("#inputPrimeiroTelefoneOrgao"	   ).val("");
+				$("#inputPrimeiroTipoTelefoneOrgao").val("");
+			}
+
+			function limparDadosTelefoneOrgao2()
+			{
+				$("#inputSegundoDddOrgao"		   ).val("");
+				$("#inputSegundoTelefoneOrgao"	   ).val("");
+				$("#inputSegundoTipoTelefoneOrgao" ).val("");
+			}
+
+			function limparDadosTelefoneRepresentante1()
+			{
+				$("#inputPrimeiroDddRepresentante"		   ).val("");
+				$("#inputPrimeiroTelefoneRepresentante"	   ).val("");
+				$("#inputPrimeiroTipoTelefoneRepresentante").val("");
+			}
+
+			function limparDadosTelefoneRepresentante2()
+			{
+				$("#inputSegundoDddRepresentante"		   ).val("");
+				$("#inputSegundoTelefoneRepresentante"	   ).val("");
+				$("#inputSegundoTipoTelefoneRepresentante" ).val("");
+			}
+
+			function limitTextArea(element, limit) {
+				if (element.value.length > limit) {
+					element.value = element.value.substring(0, limit);
+				}
+			}
+			
+			function limparCoordenadas(){
+				$("#inputCoordenadaLatitude_input"		).val("");
+				$("#inputCoordenadaLongitude_input"	   	).val("");
+			} 
+		</script>
+
+
+		<div class="atlas_geral_miolo_breadcrumb">
+			<div class="atlas_geral_miolo_breadcrumb_conteudo">
+				<p:breadCrumb>
+					<p:menuitem value="Home" action="/admin/home?faces-redirect=true" />  
+					<p:menuitem value="Órgãos" action="/admin/manterOrgaoJustica/orgaoConsulta?faces-redirect=true" />
+					<p:menuitem	value="#{manterOrgaoBean.labelAlterarOuCadastrarNovoOrgao()}" action="#" />
+					<!-- value="#{manterOrgaoBean.labelAlterarOuCadastrarNovoOrgao()} action="/admin/manterOrgaoJustica/orgaoCadastro?faces-redirect=true" /> -->
+				</p:breadCrumb>
+			</div>					
+		</div>
+
+		<div class="atlas_geral_miolo">
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas_mensagem_positivo"
+				warnClass="atlas_mensagem_alerta" errorClass="atlas_mensagem_erro" />
+
+			<h2>Órgão</h2>
+
+			<div class="atlas_linha">
+				<table class="atlas_tabela_simples">
+					<tbody>
+
+						<tr>
+							<th colspan="3">Verifique e preencha os campos abaixo para
+								realizar um novo cadastro do órgão:</th>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Sigla:*</label>
+							</td>
+							<td colspan="2"><h:inputText maxlength="20"
+									value="#{manterOrgaoBean.entidade.sigla}"
+									styleClass="atlas_input_formata atlas_input_190" /></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label>Tipo
+									Órgão:*</label></td>
+							<td colspan="2"><h:selectOneMenu
+									value="#{manterOrgaoBean.entidade.tipoOrgao}"
+									converter="selectItemConverter"
+									styleClass="atlas_select_200 atlas_select_formata">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.tiposOrgaos}"
+										var="tipoOrgao" itemValue="#{tipoOrgao}"
+										itemLabel="#{tipoOrgao.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Situação
+									do registro:*</label></td>
+							<td colspan="2"><h:selectOneMenu
+									value="#{manterOrgaoBean.entidade.indicadorSituacao}"
+									styleClass="atlas_select_formata atlas_select_200">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Proposto" itemValue="0" />
+									<f:selectItem itemLabel="Em análise" itemValue="1" />
+									<f:selectItem itemLabel="Disponível" itemValue="2" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label>Nome:*</label>
+							</td>
+							<td colspan="2"><h:inputText maxlength="256" onchange="limparCoordenadas();"
+									value="#{manterOrgaoBean.entidade.nome}"
+									styleClass="atlas_input_formata atlas_input_600" /></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Descrição:*</label>
+							</td>
+							<td colspan="2"><h:inputText maxlength="256"
+									value="#{manterOrgaoBean.entidade.descricao}"
+									styleClass="atlas_input_formata atlas_input_600" /></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label>Estado:*</label>
+							</td>
+							<td colspan="2"><h:selectOneMenu
+									value="#{manterOrgaoBean.uf}" converter="selectItemConverter"
+									styleClass="atlas_select_200 atlas_select_formata">
+									<p:ajax event="change" update="municipiosCadastro"
+										process="@this" />
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.ufs}" var="uf"
+										itemLabel="#{uf.nome}" itemValue="#{uf}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Municipios:*</label>
+							</td>
+							<td colspan="2"><h:selectOneMenu id="municipiosCadastro"
+									converter="selectItemConverter"
+									value="#{manterOrgaoBean.entidade.municipio}"
+									valueChangeListener="#{manterOrgaoBean.assinalarMudancaMunicipioNoCadastro}"
+									styleClass="atlas_select_200 atlas_select_formata">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.municipios}"
+										var="municipio" itemLabel="#{municipio.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label>Endereço:*</label>
+							</td>
+							<td colspan="2"><h:inputText maxlength="512" onchange="limparCoordenadas();"
+									value="#{manterOrgaoBean.entidade.endereco}"
+									styleClass="atlas_input_formata atlas_input_600" /></td>
+						</tr>
+						
+							<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Bairro:*</label>
+							</td>
+							<td colspan="2"><h:inputText maxlength="512" onchange="limparCoordenadas();"
+									value="#{manterOrgaoBean.entidade.bairro}"
+									styleClass="atlas_input_formata atlas_input_600" /></td>
+						</tr>
+							
+
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label>CEP:*</label>
+							</td>
+							<td colspan="2"><p:inputMask mask="99999999" onchange="limparCoordenadas();"
+									styleClass="atlas_input_formata atlas_input_190"
+									value="#{manterOrgaoBean.entidade.cep}" /></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Homepage:</label>
+							</td>
+							<td colspan="2"><h:inputText maxlength="512"
+									value="#{manterOrgaoBean.entidade.homePage}"
+									styleClass="atlas_input_formata atlas_input_600" /></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label>E-mail
+									institucional:</label></td>
+							<td colspan="2"><h:inputText maxlength="512"
+									value="#{manterOrgaoBean.entidade.descricaoEmailInstitucional}"
+									styleClass="atlas_input_formata atlas_input_600" /></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Latitude:</label>
+							</td>
+							<td colspan="2"><pe:inputNumber decimalSeparator="." id="inputCoordenadaLatitude"
+									thousandSeparator=";" minValue="-99.9999999"
+									maxValue="99.9999999"
+									value="#{manterOrgaoBean.entidade.latitude}" decimalPlaces="7">
+								</pe:inputNumber></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label>Longitude:</label>
+							</td>
+							<td colspan="2"><pe:inputNumber decimalSeparator="." id="inputCoordenadaLongitude"
+									thousandSeparator=";" minValue="-999.9999999"
+									maxValue="999.9999999"
+									value="#{manterOrgaoBean.entidade.longitude}" decimalPlaces="7">
+								</pe:inputNumber></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label
+								for="inputPrimeiroDddOrgao">Telefone 1:</label></td>
+							<td colspan="3"><p:inputMask id="inputPrimeiroDddOrgao"
+									value="#{manterOrgaoBean.entidade.primeiroDdd}" mask="999"
+									title="Informe o DDD"
+									styleClass="atlas_input_formata atlas_input_30"
+									style="box-shadow:none;" size="3" /> <h:outputLabel
+									value="    " /> <p:inputMask
+									value="#{manterOrgaoBean.entidade.primeiroNumeroTelefone}"
+									id="inputPrimeiroTelefoneOrgao" mask="9999-9999?9"
+									styleClass="atlas_input_formata atlas_input_120"
+									title="Informe o telefone" style="box-shadow:none;" /> <h:outputLabel
+									value="    " /> <h:selectOneMenu
+									id="inputPrimeiroTipoTelefoneOrgao"
+									value="#{manterOrgaoBean.entidade.primeiroTipoTelefone}"
+									styleClass="atlas_select_formata atlas_select_210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Celular" itemValue="C" />
+									<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+									<f:selectItem itemLabel="Fax" itemValue="F" />
+								</h:selectOneMenu> <h:outputLabel value="    " /> <a
+								href="javascript:limparDadosTelefoneOrgao1();"> Limpar</a></td>
+						</tr>
+
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label
+								for="inputSegundoDddOrgao">Telefone 2:</label></td>
+							<td colspan="3"><p:inputMask id="inputSegundoDddOrgao"
+									mask="999" value="#{manterOrgaoBean.entidade.segundoDdd}"
+									title="Informe o DDD"
+									styleClass="atlas_input_formata atlas_input_30" size="3" /> <h:outputLabel
+									value="    " /> <p:inputMask id="inputSegundoTelefoneOrgao"
+									value="#{manterOrgaoBean.entidade.segundoNumeroTelefone}"
+									mask="9999-9999?9"
+									styleClass="atlas_input_formata atlas_input_120"
+									title="Informe o telefone" style="box-shadow:none;" /> <h:outputLabel
+									value="    " /> <h:selectOneMenu
+									id="inputSegundoTipoTelefoneOrgao"
+									value="#{manterOrgaoBean.entidade.segundoTipoTelefone}"
+									styleClass="atlas_select_formata atlas_select_210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Celular" itemValue="C" />
+									<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+									<f:selectItem itemLabel="Fax" itemValue="F" />
+								</h:selectOneMenu> <h:outputLabel value="    " /> <a
+								href="javascript:limparDadosTelefoneOrgao2();"> Limpar</a></td>
+						</tr>
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Data de Cadastro:</label></td>
+							<td colspan="2"><p:calendar value="#{manterOrgaoBean.entidade.dataCadastro}"></p:calendar></td>
+						</tr>
+						
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label>Data de Atualização:</label></td>
+							<td colspan="2"><h:outputLabel value="#{manterOrgaoBean.entidade.dataAtualizacaoFormatada}" /></td>
+						</tr>
+
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Representante(s):</label>
+							</td>
+							<td colspan="2"><p:dataTable id="listaDeRepresentantes"
+									var="representante"
+									value="#{manterOrgaoBean.listaComRepresentantes}"
+									emptyMessage="Nenhum registro encontrado"
+									style="border: 1px solid #45897A; border-top: none;">
+
+									<p:column headerText="Nome">
+										<h:outputText value="#{representante.nome}" />
+									</p:column>
+
+									<p:column headerText="Cargo">
+										<h:outputText value="#{representante.cargo}" />
+									</p:column>
+
+									<p:column headerText="E-mail">
+										<h:outputText value="#{representante.email}" />
+									</p:column>
+
+									<p:column headerText="" width="*" align="right">
+										<p:commandButton
+											action="#{manterOrgaoBean.setRepresentanteEmFoco(representante)}"
+											value="ALTERAR" styleClass="atlas_primefaces_button"
+											oncomplete="confirmationDialogRepresentanteDoOrgaoWidget.show();"
+											process="@form" update="@form" />
+
+										<p:commandButton
+											action="#{manterOrgaoBean.setRepresentanteEmFoco(representante)}"
+											value="EXCLUIR" styleClass="atlas_button"
+											oncomplete="confirmationDialogExcluirRepresentanteWidget.show();"
+											partialSubmit="true" process="@form" update="@form"
+											immediate="true" />
+									</p:column>
+								</p:dataTable> <br /> <p:commandButton
+									action="#{manterOrgaoBean.inicializarRepresentanteNovo()}"
+									value="NOVO" styleClass="atlas_primefaces_button"
+									oncomplete="confirmationDialogRepresentanteDoOrgaoWidget.show();"
+									process="@form" update="@form" /></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h:panelGroup
+					rendered="#{not empty manterOrgaoBean.entidade.problemas}">
+					<br />
+					<br />
+					<h:outputText value="Erro detectado e informado pelo usuário:" />
+					<br />
+					<br />
+					<p:dataTable value="#{manterOrgaoBean.entidade.problemas}"
+						var="problema" tableStyle="width:100%;">
+						<p:column headerText="Tipo de Problema" style="vertical-align:middle;">
+							<h:outputText value="#{problema.tipoProblemaFormatado}" />
+						</p:column>
+						<p:column headerText="Descrição" style="vertical-align:middle;">
+							<h:outputText value="#{problema.descricao}" />
+						</p:column>
+						<p:column headerText="Observação">
+							<h:inputTextarea 	value="#{problema.observacao}" rows="2" cols="70" 
+												onkeydown="limitTextArea(this, 100);"
+												onkeyup="limitTextArea(this, 100);" />
+						</p:column>
+						<p:column headerText="Resolvido" style="vertical-align:middle;">
+							<h:selectOneMenu value="#{problema.statusProblema}">
+								<f:selectItem itemLabel="Não" itemValue="N" />
+								<f:selectItem itemLabel="Sim" itemValue="S" />
+							</h:selectOneMenu>
+						</p:column>
+					</p:dataTable>
+
+				</h:panelGroup>
+			</div>
+			
+			<!--================================ PESQUISAR COORDENADAS NO MAPA ================================-->
+			<div class="atlas_linha">
+				<h:panelGroup>
+					<table class="atlas_tabela_simples">
+						<tbody>
+							<tr>
+								<th colspan="2"><span style="font-weight: bold; font-size: 14px;"> Pesquisar marcação no mapa por: </span></th>
+							</tr>
+		
+							<tr class="atlas_tabela_simples_linha_02">
+								<td class="atlas_tabela_simples_label coluna_sem_borda">
+									<h:selectManyCheckbox value="#{manterOrgaoBean.parametrosPesquisaMapa}">
+										<f:selectItem itemValue="N" itemLabel="Nome"/>
+										<f:selectItem itemValue="E" itemLabel="Endereço"/>
+										<f:selectItem itemValue="C" itemLabel="CEP"/>
+									</h:selectManyCheckbox>
+								</td>
+								<td>
+									<p:commandButton actionListener="#{manterOrgaoBean.pesquisarCoordenadasAction}"
+													 value="PESQUISAR" 
+													 ajax="true"
+													 update=":form:mapa :form:inputCoordenadaLatitude :form:inputCoordenadaLongitude"
+													 styleClass="atlas_primefaces_button">
+									</p:commandButton>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</h:panelGroup>
+			<!--================================ MAPA COM A MARCAÇÃO DA LATITUDE/LONGITUDE DO ÓRGÃO ================================-->
+				<h:outputText value="Local do órgao informado no mapa!" rendered="#{manterOrgaoBean.entidade.latitudeLongitudePreenchido}" />
+				<br />
+				<h:panelGroup layout="block">
+					<p:gmap id="mapa"
+						rendered="#{manterOrgaoBean.entidade.latitudeLongitudePreenchido}"
+						center="#{manterOrgaoBean.entidade.latitude}, #{manterOrgaoBean.entidade.longitude}"
+						zoom="#{manterOrgaoBean.zoom}" type="ROADMAP"
+						widgetVar="cliMap" fitBounds="true"
+						model="#{manterOrgaoBean.mapModel}"
+						style="height:450px">
+						
+						<p:ajax event="overlaySelect" listener="#{manterOrgaoBean.onMarkerSelect}" />
+		 				<p:gmapInfoWindow>
+							<div style="text-align: center; display: block; height: 190px; overflow: hidden;">
+		
+								<h:outputText value="#{manterOrgaoBean.marker.title}"
+									style="font-weight: bold;" />
+								<br />
+								<h:outputText
+									value="#{manterOrgaoBean.marker.data.endereco}" />
+								<br />
+								<h:outputText
+									value="#{manterOrgaoBean.marker.data.bairro}" />
+								<br />
+								<h:outputText
+									value="	#{manterOrgaoBean.marker.data.municipio.nome} - 
+											#{manterOrgaoBean.marker.data.municipio.uf.sigla}, 
+											#{manterOrgaoBean.marker.data.cep}" />
+								<br /> <a
+									href="#{manterOrgaoBean.marker.data.homePage}"
+									target="_blank">Website</a> <br /> <br />
+								<br />
+							</div>
+						</p:gmapInfoWindow>
+					</p:gmap>
+				</h:panelGroup>
+				<!--================================ FIM MAPA COM A MARCAÇÃO DA LATITUDE/LONGITUDE DO ÓRGÃO ================================-->
+			</div>
+			<br /> <br />
+			<div class="atlas_linha_acoes_glossario_fonte">
+				<atlas:barraBotoesCadastro bean="#{manterOrgaoBean}" />
+			</div>
+			<br />
+		</div>
+
+
+		<p:confirmDialog id="confirmationDialogRepresentanteDoOrgao"
+			widgetVar="confirmationDialogRepresentanteDoOrgaoWidget"
+			global="true" modal="true">
+
+			<table class="atlas_tabela_simples">
+				<tbody>
+					<tr>
+						<th colspan="3"><span
+							style="font-weight: bold; font-size: 14px;"> Representante
+								do Órgão: </span></th>
+					</tr>
+
+					<tr class="atlas_tabela_simples_linha_02">
+						<td class="atlas_tabela_simples_label"><label>Nome:*</label>
+						</td>
+						<td colspan="2"><h:inputText id="inputNomeRepresentante"
+								maxlength="128" size="128" onkeyup="validar(this,'text');"
+								value="#{manterOrgaoBean.representanteEmFoco.nome}"
+								styleClass="atlas_input_formata atlas_input_400" /></td>
+					</tr>
+
+					<tr class="atlas_tabela_simples_linha_02">
+						<td class="atlas_tabela_simples_label"><label>Cargo:*</label>
+						</td>
+						<td colspan="2"><h:selectOneMenu id="inputCargoRepresentante"
+								value="#{manterOrgaoBean.representanteEmFoco.cargo}"
+								styleClass="atlas_select_formata atlas_select_210">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItem itemLabel="Titular" itemValue="Titular" />
+								<f:selectItem itemLabel="Substituto" itemValue="Substituto" />
+								<f:selectItem itemLabel="Outro" itemValue="Outro" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr class="atlas_tabela_simples_linha_02">
+						<td class="atlas_tabela_simples_label"><label>Email:*</label>
+						</td>
+						<td colspan="2"><h:inputText id="inputEmailRepresentante"
+								maxlength="256"
+								value="#{manterOrgaoBean.representanteEmFoco.email}"
+								styleClass="atlas_input_formata atlas_input_400" /></td>
+					</tr>
+
+					<tr class="atlas_tabela_simples_linha_02">
+						<td class="atlas_tabela_simples_label"><label
+							for="inputPrimeiroDddRepresentante">Telefone 1:</label></td>
+						<td colspan="3"><p:inputMask
+								id="inputPrimeiroDddRepresentante"
+								value="#{manterOrgaoBean.representanteEmFoco.primeiroDdd}"
+								title="Informe o DDD" mask="999"
+								styleClass="atlas_input_formata atlas_input_30"
+								style="box-shadow:none;" size="3" /> <h:outputLabel
+								value="    " /> <p:inputMask
+								id="inputPrimeiroTelefoneRepresentante"
+								value="#{manterOrgaoBean.representanteEmFoco.primeiroTelefone}"
+								mask="9999-9999?9"
+								styleClass="atlas_input_formata atlas_input_120"
+								style="box-shadow:none;" title="Informe o telefone" /> <h:outputLabel
+								value="    " /> <h:selectOneMenu
+								id="inputPrimeiroTipoTelefoneRepresentante"
+								value="#{manterOrgaoBean.representanteEmFoco.primeiroTipoTelefone}"
+								styleClass="atlas_select_formata atlas_select_210">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItem itemLabel="Celular" itemValue="C" />
+								<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+								<f:selectItem itemLabel="Fax" itemValue="F" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<tr class="atlas_tabela_simples_linha_02">
+						<td class="atlas_tabela_simples_label"><label
+							for="inputSegundoDddRepresentante">Telefone 2:</label></td>
+						<td colspan="3"><p:inputMask
+								id="inputSegundoDddRepresentante"
+								value="#{manterOrgaoBean.representanteEmFoco.segundoDdd}"
+								title="Informe o DDD" mask="999"
+								styleClass="atlas_input_formata atlas_input_30"
+								style="box-shadow:none;" size="3" /> <h:outputLabel
+								value="    " /> <p:inputMask
+								id="inputSegundoTelefoneRepresentante"
+								value="#{manterOrgaoBean.representanteEmFoco.segundoTelefone}"
+								mask="9999-9999?9"
+								styleClass="atlas_input_formata atlas_input_120"
+								style="box-shadow:none;" /> <h:outputLabel value="    " /> <h:selectOneMenu
+								id="inputSegundoTipoTelefoneRepresentante"
+								value="#{manterOrgaoBean.representanteEmFoco.segundoTipoTelefone}"
+								styleClass="atlas_select_formata atlas_select_210">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItem itemLabel="Celular" itemValue="C" />
+								<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+								<f:selectItem itemLabel="Fax" itemValue="F" />
+							</h:selectOneMenu></td>
+					</tr>
+
+
+					<tr class="atlas_tabela_simples_linha_02">
+						<td colspan="3" align="center"><p:commandButton
+								actionListener="#{manterOrgaoBean.armazenarRepresentanteOuGravarImediatamente}"
+								update="listaDeRepresentantes, page"
+								id="gravarRepresentanteAndFechar" value="Gravar e fechar"
+								styleClass="atlas_primefaces_button"
+								oncomplete="confirmationDialogRepresentanteDoOrgaoWidget.hide();" />
+							<p:commandButton
+								actionListener="#{manterOrgaoBean.armazenarRepresentanteOuGravarImediatamente}"
+								update="listaDeRepresentantes"
+								id="gravarEsteAndIniciarOutroRepresentanteOrgao"
+								value="Gravar este e incluir novo"
+								styleClass="atlas_primefaces_button"
+								oncomplete="limparCamposRepresentanteOrgao();" /> <p:commandButton
+								update="listaDeRepresentantes, page" value="Cancelar"
+								styleClass="atlas_primefaces_button"
+								onclick="confirmationDialogRepresentanteDoOrgaoWidget.hide();" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br />
+			<br />
+
+		</p:confirmDialog>
+
+
+
+		<p:confirmDialog id="confirmationDialogExcluirRepresentante"
+			message="Tem certeza que deseja excluir este representante?"
+			header="Confirmação"
+			widgetVar="confirmationDialogExcluirRepresentanteWidget">
+			<center>
+				<p:commandButton
+					actionListener="#{manterOrgaoBean.excluirRepresentante}"
+					update="messages, listaDeRepresentantes, page"
+					styleClass="atlas_primefaces_button" id="simExcluirRepresentante"
+					value="Sim"
+					oncomplete="confirmationDialogExcluirRepresentanteWidget.hide();" />
+				<p:commandButton styleClass="atlas_primefaces_button"
+					id="naoExcluirRepresentante" value="Não"
+					onclick="confirmationDialogExcluirRepresentanteWidget.hide();" />
+			</center>
+		</p:confirmDialog>
+
+
+
+
+	</ui:define>
+</ui:composition>

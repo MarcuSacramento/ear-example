@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+	<div class="atlas-miolo-logado-linha">
+		<div class="atlas-miolo-logado-linha">
+			<div class="atlas-miolo-logado-linha-label-full-senha">
+				<label for="atlas-formulario-usuario-senha" style="font-size:1.2em; color: rgb(0, 0, 0);">Senha:*</label><BR />
+			</div>
+			<div class="atlas-miolo-logado-linha-campo-dual">
+				<p:password value="#{manterUsuarioBean.senha}" id="atlas-formulario-usuario-senha"
+					title="Informe a senha" autocomplete="off"
+					styleClass="atlas-select-formata atlas-select-170" 
+					style="	background-color: rgb(0,0,0,1) !important;  width:128px;  height: 20px;
+					border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+					font-family: Verdana, Geneva, sans-serif !important; box-shadow:none;" />
+				<p:watermark for="atlas-formulario-usuario-senha" value="Senha do Usuário" />
+			</div>
+		</div>
+		
+		<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+			<div class="atlas-miolo-logado-linha-label-full-senha">
+				<label for="atlas-formulario-usuario-confirmacao-senha" style="font-size:1.2em; color: rgb(0, 0, 0);">Confirmação de Senha:*</label><BR />
+			</div>
+			<div class="atlas-miolo-logado-linha-campo-dual">
+				<p:password value="#{manterUsuarioBean.confirmacaoSenha}"
+					id="atlas-formulario-usuario-confirmacao-senha" title="Informe a senha"
+					styleClass="atlas-select-formata atlas-select-170"
+					style="	background-color: rgb(0,0,0,1) !important;  width:128px;  height: 20px;
+					border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+					font-family: Verdana, Geneva, sans-serif !important; box-shadow:none;" />
+				<p:watermark for="atlas-formulario-usuario-confirmacao-senha" value="Confirmar Senha" />
+			</div>
+		</div>
+	</div>
+</ui:composition>

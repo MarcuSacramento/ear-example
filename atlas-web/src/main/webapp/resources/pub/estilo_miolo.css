@@ -1,0 +1,191 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação do conteúdo                                                               **
+** @data: 20/05/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+div.atlas-miolo-conteudo{
+	border-bottom: 2px solid rgba(0,0,0,1);
+}
+
+div.atlas-miolo h2 {
+	border-top: 4px solid rgba(22,89,191,1);
+	border-bottom: 4px solid rgba(22,89,191,1);
+	color: rgba(22,89,191,1);
+	margin: 0;
+	padding: 8px 8px 24px 10px;
+	border-bottom: none;
+	background: rgba(238,239,241,1);
+	font-weight: normal;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+	font-size: 1.9em;
+	margin-bottom: 1em;
+}
+
+div.atlas-miolo h3{
+	font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+	font-size: 1.9em;
+	margin-bottom: 1em;
+}
+
+div.atlas-miolo h4{
+	font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+	font-size: 1.6em;
+	color: rgba(22,89,191,1);
+	border-bottom: 1px solid rgba(22,89,191,1);
+	margin-bottom: 0.5em;
+}
+
+div.atlas-miolo-conteudo-bloco-link{
+	min-height: 28px;
+	border-top: 2px solid rgba(22,89,191,1);
+	color: rgba(0,0,0,1);
+	margin: 0;
+	padding: 8px 8px 0px 10px;
+	border-bottom: none;
+	background: rgba(238,239,241,1);
+	font-weight: normal;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+	font-size: 1.1em;
+	margin-top: 1em;
+	text-transform: uppercase;
+	text-align: right;
+}
+
+	div.atlas-miolo-conteudo-bloco-link a{
+		color: rgba(0,0,0,1);
+		text-decoration: none;
+	}
+	
+	div.atlas-miolo-conteudo-bloco-link img{
+		vertical-align: middle;
+		margin-top: -0.1em;
+		padding-left: 0.5em;
+	}
+	
+	div.atlas-miolo-conteudo-bloco-link img.atlas-miolo-conteudo-bloco-link-img{
+		background-image: url(../../../pub/_imagens/_miolo/ico_bloco_link.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		width: 20px;
+		height: 20px;
+	}
+
+div.atlas-miolo p{
+	color: rgba(23,41,56,1);
+	font-size: 1.5em;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.25em !important;
+	margin: 0 0 1em 0;
+}
+
+div.atlas-miolo ol.atlas-miolo-conteudo-lista{
+	margin: 0 0 1em 3em;
+	list-style: none;
+}
+
+div.atlas-miolo ol.atlas-miolo-conteudo-lista-alfabetica{
+	list-style-type: lower-alpha;
+}
+
+	div.atlas-miolo ol.atlas-miolo-conteudo-lista li{
+		color: rgba(23,41,56,1);
+		font-size: 1.5em;
+		font-family: Arial, Helvetica, sans-serif;
+		line-height: 1.25em !important;
+		margin: 0 0 1em 0;
+	}
+	
+	div.atlas-miolo ol.atlas-miolo-conteudo-lista li a{
+		color: rgba(23,41,56,1);
+		text-decoration: none;
+	}
+	
+		div.atlas-miolo ol.atlas-miolo-conteudo-lista li a:hover{
+			color: rgba(102,102,102,1);
+		}
+
+div.atlas-miolo ul.atlas-miolo-conteudo-lista{
+	margin: 0 0 1em 3em;
+	list-style: none;
+}
+
+	div.atlas-miolo ul.atlas-miolo-conteudo-lista-sublista li{
+		list-style: none;
+		font-size: 0.9em !important;
+		margin: 1em 0 1em 2em !important;
+	}
+
+	div.atlas-miolo ul.atlas-miolo-conteudo-lista li{
+		color: rgba(23,41,56,1);
+		font-size: 1.5em;
+		font-family: Arial, Helvetica, sans-serif;
+		line-height: 1.25em !important;
+		margin: 0 0 1em 0;
+	}
+	
+	div.atlas-miolo ul.atlas-miolo-conteudo-lista li a{
+		color: rgba(23,41,56,1);
+		text-decoration: none;
+	}
+	
+		div.atlas-miolo ul.atlas-miolo-conteudo-lista li a:hover{
+			color: rgba(102,102,102,1);
+		}
+
+div.atlas-miolo-conteudo-tag{
+	border-bottom: 1px solid rgba(102,102,102,1);
+	color: rgba(21,89,191,1);
+	font-size: 1.2em;
+	padding: 1em;
+}
+
+	div.atlas-miolo-conteudo-tag-titulo{
+		float: left;
+		width: 100px;
+	}
+	
+	div.atlas-miolo-conteudo-tag a{
+		border: 1px solid rgba(102,102,102,1);
+		background-color: rgba(238,239,241,1);
+		color: rgba(21,89,191,1);
+		padding: 0.5em 1.5em;
+		text-decoration: none;
+	}
+
+.atlas-geral-img-link-externo {
+	width: 17px;
+	height: 11px;
+	background-image: url(../../../pub/_imagens/_icones/icon_site_ext.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	border: none;
+	margin-left: 0.2em;
+}
+
+ul.atlas-miolo-bloco{
+	padding-left: 2em;
+	list-style: none;
+}
+
+ul.atlas-miolo-bloco a{
+	font-size: 1.5em;	
+	line-height: 25px;
+	text-decoration: none;
+	color: rgba(22,89,191,1);
+}
+
+ul.atlas-miolo-bloco a:hover{
+	color: rgba(102,102,102,1);
+}
+
+div.atlas-menu-ico-topo img.atlas-menu-ico-topo-img{
+	background-image: url(../../../pub/_imagens/_miolo/ico_topo.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 14px;
+	height: 9px;
+}

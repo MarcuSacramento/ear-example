@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition>
+	
+	<p:outputPanel id="#{id}">
+		<h:outputText rendered="#{empty value.listaPaginada.resultadoRetorno}" value="#{msg.MSG2}"/>
+	</p:outputPanel>
+	
+	<c:if test="#{empty editable}"> 
+		<c:set var="editable" value="false"/> 
+	</c:if>
+	
+	<c:if test="#{empty editMode}"> 
+		<c:set var="editMode" value="cell"/> 
+	</c:if>
+
+	<p:dataTable rowIndexVar="index"
+				 rendered="#{not empty value.listaPaginada.resultadoRetorno}" 
+				 var="registro" 
+				 value="#{value}" 
+				 tableStyleClass="atlas_tabela_simples"
+				 currentPageReportTemplate="Exibindo {endRecord} itens de {totalRecords}" 
+				 rowsPerPageTemplate="10,25,50,100"
+				 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				 paginator="true" 
+				 rows="#{value.listaPaginada.qtdRegistroPorPagina}"
+				 rowKey="#{rowKey}" 
+				 selection="#{selection}" 
+				 lazy="true" 
+				 pageLinks="10"
+				 paginatorAlwaysVisible="true"
+				 paginatorPosition="bottom"
+				 emptyMessage="#{msg.MSG2}"
+				 editable="#{editable}"
+				 editMode="#{editMode}"
+				 >
+
+		<ui:insert/>
+	</p:dataTable>
+	
+</ui:composition>
+</html>

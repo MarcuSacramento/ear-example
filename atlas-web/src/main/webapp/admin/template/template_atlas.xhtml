@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:ui="http://java.sun.com/jsf/facelets" 
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core" 
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type"	content="application/xhtml+xml; charset=UTF-8" />
+	<link href="${facesContext.externalContext.requestContextPath}/admin/_imagens/_icone/favicon.ico" rel="shortcut icon" />
+	<!-- link href="${facesContext.externalContext.requestContextPath}/pub/_css/estilo_geral.css" rel="stylesheet" type="text/css" / -->
+	<link href=" #{acessibilidadeBean.getUrlCss()}" rel="stylesheet" type="text/css"/>
+	
+	<h:outputStylesheet name="estilo_geral.css" library="admin" />
+	<h:outputStylesheet name="estilo_cabecalho.css" library="admin" />
+	<h:outputStylesheet name="estilo_fontes.css" library="admin" />
+	<h:outputStylesheet name="estilo_css_reset.css" library="admin" />
+	<h:outputStylesheet name="estilo_menu_topo.css" library="admin" />
+	<h:outputStylesheet name="estilo_breadcrumb.css" library="admin" />
+	<h:outputStylesheet name="estilo_formularios.css" library="admin" />
+	<h:outputStylesheet name="estilo_tabelas.css" library="admin" />
+	<h:outputStylesheet name="estilo_mensagens.css" library="admin" />
+	<h:outputStylesheet name="estilo_paginacao.css" library="admin" />
+	<h:outputStylesheet name="estilo_conteudo.css" library="admin" />
+	<h:outputStylesheet name="estilo_menu_lateral.css" library="admin" />
+	<h:outputStylesheet name="estilo_miolo.css" library="admin" />
+	<h:outputStylesheet name="estilo_rodape.css" library="admin" />
+	<h:outputStylesheet name="estilo_filtro.css" library="admin" />
+	<h:outputStylesheet name="estilo_pagina_login.css" library="admin" />
+	
+	<script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/admin/_javascript/controla_fonte.js" />
+
+	<script type="text/javascript">
+		//<![CDATA[
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+		ga('create', 'UA-53270862-1', 'acessoajustica.gov.br');
+		ga('send', 'pageview');		
+		//]]>		
+	</script>
+</h:head>
+<h:body>
+	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+
+	<p:dialog modal="true" widgetVar="statusDialog" draggable="false" closable="false" resizable="false"> 
+		Carregando...
+	</p:dialog>
+
+	<f:loadBundle var="msg"   basename="mensagens" />
+	<f:loadBundle var="atlas" basename="atlas" />
+	<a name="atlas-ancora-topo"></a>
+	<div class="atlas-pagina">
+		<ui:include src="/admin/template/_template_barra_governo.xhtml" />
+		<div class="atlas-cabecalho">
+        	<div class="atlas-cabecalho-container">
+		        <ui:include src="/admin/template/_template_cabecalho.xhtml" />
+            </div>
+        </div>
+		<div class="atlas-menu-topo">
+			<div class="atlas-menu-topo-container" >
+			<h:form id="formUsuarioLogado">
+				<h:link id="usuario">
+					<img style="padding-top: 0.2em !important;margin-right: 0.75em;"
+					src="${facesContext.externalContext.requestContextPath}/admin/_imagens/_icones/icon_usuario.png" height="20"
+					class="atlas-geral-menu-img-usuario"/>
+				</h:link>
+				<h:link id="ajuda">
+					<img style="padding-top: 0.2em !important;margin-right: 0.75em;"
+					src="${facesContext.externalContext.requestContextPath}/admin/_imagens/_icones/ajuda.png" height="20"
+					class="atlas-geral-menu-img-usuario"/>
+				</h:link>
+				<p:commandLink id="sair" title="Clique para sair com segurança do sistema" ajax="false"
+							   action="#{autenticarUsuarioBean.logout()}"> 
+					<img style="padding-top: 0.2em !important;margin-right: 0.75em;"
+					src="${facesContext.externalContext.requestContextPath}/admin/_imagens/_icones/sair2.png" height="20"
+					class="atlas-geral-menu-img-usuario"/>
+				</p:commandLink>				
+			    <p:overlayPanel id="painelUsuario" for="usuario" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"
+                   			dismissable="false" showCloseIcon="true">
+			     	<table>
+						<tbody>
+						<tr>
+							<td align="left" class="atlas-tabela-filtro-linha-marca">
+								<h:outputText  value="#{autenticarUsuarioBean.usuarioAutenticado.nome}"/>
+							</td>
+						</tr>
+						<tr>
+							<td align="left" class="atlas-tabela-filtro-linha-marca">									 
+								<h:outputText value="#{autenticarUsuarioBean.usuarioAutenticado.email}"/>
+							</td>
+						</tr>
+						<tr align="center">
+							<td colspan="2" bgcolor="rgba(22,89,191,1)">
+						        <h:link style="color: rgba(255,255,255,1);margin-right: 0.75em;" 
+						            outcome="/admin/gerenciamento/usuarios/alterarSenhaUsuario.xhtml?emailUsuario=#{autenticarUsuarioBean.usuarioAutenticado.email}&amp;logar=false" ajax="false"
+									value="Alterar" 
+									title="Clique para alterar a senha do usuario"/>																
+							</td>
+						</tr>							
+					</tbody>
+					</table>								             			
+			    </p:overlayPanel>
+			   	<p:overlayPanel id="painelAjuda" for="ajuda" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"
+                    			dismissable="false" showCloseIcon="true">
+				     	<table>
+							<tbody>
+							<tr>
+								<td align="left" class="atlas-tabela-filtro-linha-marca">									 
+									<a href="${facesContext.externalContext.requestContextPath}/pub/_downloads/manual_atlas.pdf" target="_blank">
+										<h:outputText value="Manual do Sistema" style="color: #4f4f4f"/>
+									</a>
+								</td>
+							</tr>						
+						</tbody>
+						</table>								             			
+				 </p:overlayPanel>
+				 </h:form>
+			</div>
+		</div>
+		
+        <div class="atlas-conteudo">
+            <div class="atlas-conteudo-container">
+	        	<div class="atlas-conteudo-breadcrumb">
+			        <div class="atlas-conteudo-breadcrumb-container">
+						<span class="atlas-conteudo-breadcrumb-container-inicial">VOCÊ ESTÁ AQUI:</span>
+						<h:link outcome="/admin/gerenciamento/paginaInicial/paginaInicial.xhtml"> ÁREA ADMINISTRATIVA </h:link>
+						<ui:insert name="breadcrumb" />
+		        	</div>
+		        </div>
+		        
+                <nav class="atlas-menu-lateral">
+                	<a name="atlas-ancora-menu"></a>
+                    <ui:include src="/admin/template/_template_menu_lateral.xhtml" />
+                </nav>
+		
+
+				<div class="atlas-miolo">
+                	<a name="atlas-ancora-conteudo"></a>
+                  	<h:form id="form" prependId="false">
+						<p:outputPanel id="page" ajaxRendered="true">
+							<ui:insert name="conteudo" />
+						</p:outputPanel>
+					</h:form>
+                </div>
+				<div class="atlas-menu-ico-topo">
+					<img src="${facesContext.externalContext.requestContextPath}/admin/_imagens/_miolo/ico_topo.png" /><a
+						href="#atlas-ancora-topo">Voltar para o topo</a>
+				</div>
+			</div>
+        </div>
+		<ui:include src="/admin/template/_template_rodape.xhtml" />
+	</div>
+    <script src="http://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+</h:body>
+
+</html>

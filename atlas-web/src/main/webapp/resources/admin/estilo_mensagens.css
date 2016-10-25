@@ -1,0 +1,59 @@
+
+.atlas-mensagem-positivo{
+	background-color: rgba(179,236,168,1);
+	text-align: left;
+	padding: 1em 1em 1em 1em;
+	margin: 0.9em 0;
+}
+
+	.atlas-mensagem-positivo p{
+		font-family: "open_sansbold", Arial, Helvetica, sans-serif !important;
+		color: rgba(0,153,0,1) !important;
+		font-size: 1.3em !important;
+	}
+
+.atlas-mensagem-erro{
+	background-color: rgba(255,185,185,1);
+	text-align: left;
+	padding: 1em 1em 1em 1em;
+	font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+	margin: 0.9em 0;
+	cursor: help;
+}
+
+	.atlas-mensagem-erro p{
+		font-family: "open_sansbold", Arial, Helvetica, sans-serif !important;
+		color: rgba(102,51,0,1) !important;
+		font-size: 1.3em !important;
+	}
+
+.atlas-mensagem-alerta{
+	background-color: rgba(255,255,151,1);
+	text-align: left;
+	padding: 1em 1em 1em 1em;
+	font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+	margin-bottom: 0.5em;
+	cursor: help;
+}
+
+	.atlas-mensagem-alerta p{
+		font-family: "open_sansbold", Arial, Helvetica, sans-serif !important;
+		color: rgba(255,153,0,1) !important;
+		font-size: 1.3em !important;
+	}
+
+.atlas-mensagem-observa{
+	background-color: rgba(0,159,255,0.1);
+	border: 1px dashed rgba(0,159,255,1);
+	text-align: left;
+	padding: 1em 1em 1em 1em;
+	font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+	margin-bottom: 2em;
+	cursor: help;
+}
+
+	.atlas-mensagem-observa p{
+		font-family: "open_sansbold", Arial, Helvetica, sans-serif !important;
+		color: rgba(0,159,255,1) !important;
+		font-size: 1.3em !important;
+	}

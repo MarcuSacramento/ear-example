@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link title="SOBRE" value="SOBRE" outcome="/pub/sobre/exibirSobre.xhtml" /> > O ATLAS</ui:define>
+	<ui:define name="conteudo">
+		<h:head>
+			<title>O Atlas</title>
+		</h:head>
+		<div class="atlas-miolo">
+			<h2>O Atlas</h2>
+			<div class="atlas-miolo-conteudo">
+				<h3>Brasil ganha Atlas de Acesso à Justiça</h3>
+				<p>Facilitar, no dia-a-dia, o acesso ao Sistema de Justiça. Esse é o grande objetivo deste serviço público criado pelo Governo Federal.</p>
+				<p>O Atlas de Acesso à Justiça reúne informações em vídeos e textos que ajudam a conhecer mais e melhor a Justiça. Aqui, é possível consultar o endereço dos órgãos de Justiça mais próximos e saber o que fazer quando temos um problema e precisamos acessá-la.</p>	
+				<p>O Atlas traz também indicadores inéditos que mostram o grau de acesso à Justiça em cada Estado, um importante instrumento para melhorar o funcionamento da Justiça.</p>	
+			</div>
+			<div class="atlas-miolo-conteudo-tag">
+		    	<div class="atlas-miolo-conteudo-tag-titulo">Registrado em:</div>
+		    	<a href="?pagina_id=01">O Atlas</a>
+		        <a href="?pagina_id=01">Acesso à Justiça</a>
+		    </div>
+		    <div class="atlas-miolo-conteudo-tag">
+			    <div class="atlas-miolo-conteudo-tag-titulo">Assuntos:</div>
+		        <a href="?pagina_id=01">O Atlas</a>
+		        <a href="?pagina_id=01">Acesso à Justiça</a>
+		    </div>
+	    </div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:h="http://java.sun.com/jsf/html">
+
+<div class="atlas-conteudo-breadcrumb-container">
+	<nav class="atlas-conteudo-usuario-container-inicial" >
+		<ul style="list-style: none;">
+			<li style="margin-right: 0.75em;">
+				<img style="padding-top: 0.2em !important;"
+				src="${facesContext.externalContext.requestContextPath}/admin/_imagens/_icones/icon_usuario.png" height="20"
+				class="atlas-geral-menu-img-usuario"/>
+	
+	
+				<h:outputText value=" " />
+				<h:link style="color: rgba(255,255,255,1);" title="Clique para alterar a senha do usuario"
+							value="#{autenticarUsuarioBean.usuarioAutenticado.nome}"
+							outcome="/admin/gerenciamento/usuarios/alterarSenhaUsuario.xhtml?emailUsuario=#{autenticarUsuarioBean.usuarioAutenticado.email}&amp;logar=false"/>
+			</li>
+	        <li style="margin-right: 0.75em;">
+	        	<h:link style="color: rgba(255,255,255,1);" title="Clique para sair com segurança do sistema" value="Sair" outcome="/admin/autenticarUsuario/login.xhtml" />
+			</li>
+		</ul>						
+	</nav>
+
+</div>
+</html>

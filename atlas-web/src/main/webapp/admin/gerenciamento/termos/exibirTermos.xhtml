@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link
+			title="GERENCIAMENTO" value="GERENCIAMENTO"
+			outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > TERMOS</ui:define>
+
+	<ui:define name="conteudo">
+
+
+		<div class="atlas-miolo-logado">
+			<h2>Gerenciar Termos</h2>
+
+			<h:head>
+				<title>Gerenciar Termos | Atlas de Acesso à Justiça</title>
+			</h:head>
+			
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+				
+			<div class="atlas-miolo-logado">
+				<section class="atlas-miolo-logado-lista">
+				
+					 
+					<ui:include src="/admin/gerenciamento/termos/tabela.xhtml" />
+				</section>
+
+				<aside class="atlas-miolo-logado-filtro">
+
+					<fieldset id="atlas-area-filtro" class="atlas-area-filtro">
+						<legend>Filtrar:</legend>
+						<ui:include src="/admin/gerenciamento/termos/termoFiltro.xhtml" />
+					</fieldset>
+
+				</aside>
+
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

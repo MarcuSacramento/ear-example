@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+
+	<ui:define name="breadcrumb"> > <h:link title="CONTEÚDO" value="CONTEÚDO" outcome="/admin/conteudo/exibirConteudo.xhtml" /> > 
+		<h:link title="ABC DOS DIREITOS" value="ABC DOS DIREITOS >"	outcome="/admin/conteudo/abcDireitos/exibirAbcDireitos.xhtml" /> NOVO TERMO
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<script type="text/javascript">
+		//<![CDATA[
+			function contarDescricao(box,valor,campospan){ 
+				var contador = valor - box.length; 
+				document.getElementById(campospan).innerHTML = contador; 
+				
+				if(box.length >= valor){ 
+					document.getElementById(campospan).innerHTML = "Limite excedido"; 
+					document.getElementById("inputDescricao").value = document.getElementById("inputDescricao").value.substr(0,valor); 
+				}	 
+			}
+			function contarSaibaMais(box,valor,campospan){ 
+				var contador = valor - box.length; 
+				document.getElementById(campospan).innerHTML = contador; 
+				
+				if(box.length >= valor){ 
+					document.getElementById(campospan).innerHTML = "Limite excedido"; 
+					document.getElementById("inputSaibaMais").value = document.getElementById("inputSaibaMais").value.substr(0,valor); 
+				}	 
+			}
+		//]]>	
+		</script>
+
+		<style>
+			div.div-miolo {
+			display: block;
+			clear: both;
+			min-height: 108px;
+			padding-top: 0.8em;
+			background-color: rgba(238,239,241,1);
+			border-bottom: 1px solid rgba(22,89,191,1);
+			}
+		</style>
+		
+		<style>
+			div.div-miolo-2 {
+			display: block;
+			clear: both;
+			min-height: 108px;
+			padding-top: 0.8em;
+			}
+		</style>
+		
+
+		<div class="atlas-miolo-logado">
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h2>ABC Dos Direitos</h2>
+
+			<h:head>
+				<title>Novo ABC Dos Direitos | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+
+			<p>Verifique e preencha os campos abaixo para atualizar o
+				cadastro do Termo:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados do Termo</legend>
+				<div class="atlas-miolo-logado-linha">
+					<div class="atlas-miolo-logado-linha-label-dual">
+						<label for="atlas-formulario-termo-termo">Termo:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-dual">
+						<h:inputText id="atlas-formulario-termo-termo" maxlength="256"
+							value="#{manterGlossarioBean.entidade.nome}"
+							title="Informe o nome do termo a ser cadastrado"
+							style="font-size: 1.2em !important;"
+							styleClass="atlas-input-formata atlas-input-170" />
+						<p:watermark for="atlas-formulario-termo-termo"
+							value="Nome do Termo" />
+					</div>
+
+					<div class="atlas-miolo-logado-linha-label-dual">
+						<label for="atlas-formulario-termo-assunto">Assunto:*</label><br />
+					</div>
+					<div
+						class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha">
+						<h:selectOneMenu id="atlas-formulario-termo-assunto"
+							value="#{manterGlossarioBean.entidade.assunto}"
+							style="font-size: 1.2em !important;"
+							converter="selectItemConverter"
+							title="Selecione o Assunto do Termo"
+							styleClass="atlas-select-formata atlas-select-170">
+							<f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+							<f:selectItems value="#{manterGlossarioBean.assuntos}"
+								var="assunto" itemValue="#{assunto}" itemLabel="#{assunto.nome}" />
+						</h:selectOneMenu>
+
+					</div>
+				</div>
+
+				<div class="div-miolo">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="inputDescricao">Definição:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputTextarea rows="4" id="inputDescricao"
+							value="#{manterGlossarioBean.entidade.descricao}"
+							onkeypress="contarDescricao(this.value,5632,'totalDescricao')"
+							title="Informe a descrição do termo"
+							style="font-size: 1.2em !important;"
+							styleClass="atlas-input-formata atlas-input-520" />
+						<span id="totalDescricao" class="atlas_textarea_formata_contador" />
+						<p:watermark for="inputDescricao" value="Definição do Termo" />
+
+					</div>
+				</div>
+
+				<div class="div-miolo-2">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="inputSaibaMais">Saiba Mais:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputTextarea rows="4" id="inputSaibaMais"
+							value="#{manterGlossarioBean.entidade.saibaMais}"
+							onkeypress="contarSaibaMais(this.value,5632,'totalSaibaMais')"
+							title="Informe a legislação para o termo"
+							style="font-size: 1.2em !important;"
+							styleClass="atlas-input-formata atlas-input-520" />
+						<span id="totalSaibaMais" class="atlas_textarea_formata_contador" />
+						<img
+							src="${facesContext.externalContext.requestContextPath}/admin/_imagens/transparente.png"
+							title="Campo de preenchimento opcional"
+							class="atlas_img_opcional" />
+						<p:watermark for="inputSaibaMais" value="Saiba Mais sobre o Termo" />
+					</div>
+
+				</div>
+
+			</fieldset>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Nova Fonte</legend>
+
+				<div>
+					<div class="atlas-miolo-logado-linha-label-dual">
+						<h:dataTable value="#{manterGlossarioBean.entidade.fontesReferencia}"
+							var="fonte" id="tabelaFontesReferencia" styleClass="atlas_tabela_simples atlas_tabela_referencia"
+							rowClasses="atlas_tabela_simples_linha_01, atlas_tabela_simples_linha_02"
+							rendered="#{not empty manterGlossarioBean.entidade.fontesReferencia}">
+
+							<h:column>
+								<div class="atlas-miolo-logado-linha-campo-dual">
+									<f:facet name="header">
+										<label style="float: left; width: 154px;">Fonte</label>
+									</f:facet>
+									<div style="width: 344px;">
+										<h:inputText value="#{fonte.nome}" maxlength="600" styleClass="atlas-select-formata atlas-select-310" id="inputFont" />
+										<p:watermark for="inputFont" value="Fonte do Termo" />
+									</div>
+								</div>
+							</h:column>
+							<h:column>
+								<div class="atlas-miolo-logado-linha-campo-dual">
+									<f:facet name="header">
+										<label style="float: left; width: 328px;">Referência</label>
+									</f:facet>
+									<div style="width: 524px; margin-top: -2.7em;">
+										<h:inputText value="#{fonte.URL}" maxlength="1024"	styleClass="atlas-select-formata atlas-select-350" id="inputReferencia" />
+										<p:watermark for="inputReferencia" value="Referência do Termo" />
+									</div>
+								</div>
+							</h:column>
+							<h:column>
+								<div
+									style="float: rigth !important; width: 215px !important; position: block !important;">
+									<BR />
+									<h:commandLink action="#{manterGlossarioBean.remover(fonte)}"
+										title="Clique para excluir a fonte/referência" value="Excluir" />
+								</div>
+							</h:column>
+						</h:dataTable>
+					</div>
+				</div>
+
+				<div
+					style="float: rigth !important; width: 150px !important; position: block !important;">
+					<BR />
+					<h:commandLink value="NOVA FONTE"
+						action="#{manterGlossarioBean.adicionar()}" 
+						title="Clique para acrescentar uma nova referência" />
+				</div>
+			</fieldset>
+			
+			<h2> Sugestões </h2>
+			<h:panelGroup class="atlas_linha" id="atlas_linha_sugestoes" layout="block">
+				<atlas:dataTable bean="manterGlossarioBean" id="dataTableTermos" value="#{manterGlossarioBean.termosGlossarioSelecionados}">
+					<p:column width="5%">
+						<f:facet name="header">
+							<h:outputText value="ID / Data" />
+						</f:facet>
+						<h:outputText value="ID: #{registro.id}" /> - 
+						<h:outputText value="#{registro.dataInclusao}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>  
+					    </h:outputText>  
+					</p:column>
+					<p:column style="white-space:normal !important; font-size: 1.1em !important;" width="20%">
+						<f:facet name="header">
+							<h:outputText value="Definição" />
+						</f:facet>
+						<h:outputText value="#{registro.descricao}" /><BR /><BR />
+						<h:commandButton
+							action="#{manterGlossarioBean.aplicarDefinicao(registro.descricao)}"
+							update="@form" value="Aplicar Definição" styleClass="atlas_button" />
+					</p:column>
+					<p:column style="white-space:normal !important; font-size: 1.1em !important;" width="20%">
+						<f:facet name="header">
+							<h:outputText value="Saiba mais" />
+						</f:facet>
+						<h:outputText value="#{registro.saibaMais}" /> <BR /><BR />
+						<h:commandButton
+							action="#{manterGlossarioBean.aplicarSaibaMais(registro.saibaMais)}"
+							update="@form" value="Aplicar Saiba mais" styleClass="atlas_button" />
+					</p:column>	
+					<p:column headerText="" width="10%">
+						<h:outputText value="&#10004; VERIFICADO" style="color:green; font-weight: bold;" rendered="#{!registro.isProposto()}" />
+						<h:commandButton
+							action="#{manterGlossarioBean.verificado(registro)}" update="@form"
+							value="VERIFICADO" styleClass="atlas_button" 
+							rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('002') and registro.isProposto()}"
+							onclick="if (!confirm('#{msg.MSG30}')) return false;" /><br /><br />
+						<h:commandButton
+							action="#{manterGlossarioBean.excluir(registro)}" update="@form"
+							value="    EXCLUIR    " styleClass="atlas_button" 
+							rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('002')}"
+							onclick="if (!confirm('#{msg.MSG5}')) return false;" />
+					</p:column>
+				</atlas:dataTable>
+			</h:panelGroup>
+			<br /><br />
+		
+			<h2> Sugestões de Fontes</h2>
+			
+			<h:panelGroup class="atlas_linha" id="atlas_linha_fontes_sugestoes" layout="block">
+				<p:outputPanel rendered="#{not empty manterGlossarioBean.fontesSugestoes}">
+					<atlas:dataTable bean="manterGlossarioBean" id="dataTableFontesSugestoes" value="#{manterGlossarioBean.fontesSugestoes}">
+						<p:column width="15%">
+							<f:facet name="header">
+								<h:outputText value="Termo Glossario" />
+							</f:facet>
+							<h:outputText value="ID: #{registro.termoGlossario.id}" />
+						</p:column>
+						<p:column width="37%">
+							<f:facet name="header">
+								<h:outputText value="Fonte" />
+							</f:facet>
+							<h:outputText value="#{registro.nome}" />
+						</p:column>
+						<p:column width="38%">
+							<f:facet name="header">
+								<h:outputText value="Referência" />
+							</f:facet>
+							<h:outputText value="#{registro.URL}" /><BR /><BR />
+						</p:column>
+						<p:column headerText="" width="10%">
+							<h:commandButton
+								action="#{manterGlossarioBean.aplicarFonte(registro)}"
+								update="@form" value="Incluir" styleClass="atlas_button" /><br /><br />
+							<h:commandButton
+								action="#{manterGlossarioBean.excluirFonte(registro)}" update="@all"
+								value="Excluir" styleClass="atlas_button" 
+								onclick="if (!confirm('#{msg.MSG5}')) return false;" />
+						</p:column>
+					</atlas:dataTable>
+				</p:outputPanel>
+			</h:panelGroup>
+			
+			<br /><br />
+
+			<div class="atlas-miolo-logado-lista-acoes">
+				<atlas:barraBotoesCadastro bean="#{manterGlossarioBean}" funcionalidade="002" />				
+			</div>
+	
+	</div>
+
+	</ui:define>
+</ui:composition>

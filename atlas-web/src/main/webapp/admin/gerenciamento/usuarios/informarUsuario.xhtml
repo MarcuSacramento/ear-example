@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<h:head>
+		<title>Novo Usuários | Atlas de Acesso à Justiça</title>
+	</h:head>
+	
+	<ui:define name="breadcrumb"> > <h:link
+			title="GERENCIAMENTO" value="GERENCIAMENTO"
+			outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > 
+			
+			<h:link title="USUÁRIOS" value="USUÁRIOS > #{manterUsuarioBean.entidade.id!=null and manterUsuarioBean.entidade.id!=0 ?'EDITAR USUÁRIO' :'NOVO USUÁRIO' }"
+			outcome="/admin/gerenciamento/usuarios/exibirUsuarios.xhtml" /> 
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+<style>
+div.atlas-miolo-logado-linha-label-full-senha{
+	float: left;
+	width: 180px;
+	text-align: right;
+}
+div.atlas-miolo-logado-linha-label-full{
+	width: 100px !important;
+}
+
+div.atlas-miolo-logado-linha-campo-full{
+	width: 532px !important;
+}
+div.atlas-miolo-logado-linha-campo-dual{
+	width: 175px !important;
+}
+.ui-picklist .ui-picklist-list {
+	width: 240px;
+	height: 150px;
+}
+.ui-picklist td {
+	height: 100px;
+	vertical-align: middle;
+	border-bottom: 0px;
+}
+#inputDataInclusao_input {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	border: none;
+	padding-top:10px;
+	color: rgb(22, 89, 201);
+}
+</style>
+
+		<script type="text/javascript"> 
+				 PrimeFaces.locales['pt'] = {
+					closeText: 'Fechar', prevText: 'Anterior', nextText: 'Próximo', currentText: 'Hoje', 
+					monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'], 
+					monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'], 
+					dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'], 
+					dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'], 
+					dayNamesMin: ['D','S','T','Q','Q','S','S'], 
+					weekHeader: 'Semana', 
+					firstDay: 1, isRTL: false, showMonthAfterYear: false, yearSuffix: '', 
+					timeOnlyTitle: 'Apenas Horas', 
+					timeText: 'Tempo', hourText: 'Hora', minuteText: 'Minuto', secondText: 'Segundo', 
+					currentText: 'Data Atual', ampm: false, 
+					month: 'Mês', 
+					week: 'Semana', 
+					day: 'Dia', 
+					allDayText : 'Todo o Dia'
+			    };
+		</script>
+
+		<div class="atlas-miolo-logado">
+			<h2>Usuários</h2>
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<p>Verifique e preencha os campos abaixo para realizar um novo
+				cadastro de usuário:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados do Usuário</legend>
+				<p:tabView>
+					<p:tab title="Dados Básicos" id="aba-dados-basicos">
+						<ui:include src="/admin/gerenciamento/usuarios/abaDadosBasicos.xhtml" />
+					</p:tab>
+					<p:tab title="Senha" id="aba-senha-usuario" rendered="#{manterUsuarioBean.estahIncluindo}">
+						<ui:include src="/admin/gerenciamento/usuarios/abaSenha.xhtml" />
+					</p:tab>
+					<p:tab title="Órgãos" id="aba-orgaos-relacionados">
+						<ui:include src="/admin/gerenciamento/usuarios/abaOrgaosRelacionados.xhtml" />
+					</p:tab>
+				</p:tabView>
+			</fieldset>
+			
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Data do Cadastro</legend>
+					<div class="atlas-miolo-logado-linha-label-dual">
+						<label for="inputDataInclusao">Data de Cadastro:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-dual">
+						<p:calendar locale="pt"
+							value="#{manterUsuarioBean.entidade.dataInclusao}"
+							id="inputDataInclusao"
+							size="15" showOn="none" readonly="true" readonlyInput="true"
+							title="Data de Cadastro do Usuário" showButtonPanel="true"
+							navigator="true" pattern="dd/MM/yyyy" />
+
+					</div>
+			</fieldset>
+
+			<div class="atlas-miolo-logado-lista-acoes">
+				<atlas:barraBotoesCadastro bean="#{manterUsuarioBean}"  funcionalidade="008" />
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>

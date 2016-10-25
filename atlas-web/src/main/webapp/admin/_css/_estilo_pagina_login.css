@@ -1,0 +1,29 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação do breadcrumb                                                             **
+** @data: 25/07/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+.atlas-miolo-login-form{
+	float: left;
+	width: 300px;
+}
+
+.atlas-miolo-login-form a {
+	font-size: 0.8em;
+	text-decoration: none;
+	color: rgba(21,89,191,1);
+}
+
+	.atlas-miolo-login-form a:hover {
+		color: rgba(102,102,102,1);
+		text-decoration: none;
+	}
+
+.atlas-miolo-login-instrucoes{
+	float: right;
+	width: 600px;
+}

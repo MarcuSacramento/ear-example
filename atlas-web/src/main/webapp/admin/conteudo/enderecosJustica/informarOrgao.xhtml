@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml"
+    xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+	<ui:define name="breadcrumb"> > <h:link
+			title="CONTEÚDO" value="CONTEÚDO"
+			outcome="/admin/conteudo/exibirConteudo.xhtml" /> > 
+			
+			<h:link title="ÓRGÃOS" value="ÓRGÃOS >"
+			outcome="/admin/conteudo/enderecosJustica/exibirOrgao.xhtml" /> NOVO ÓRGÃO
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			$("#atlas-formulario-orgao-cep").mask("99999-999");
+			});
+		</script>
+		<style>
+			.ui-picklist .ui-picklist-list {
+				width: 238px !important;
+				height: 150px !important;
+			}
+			
+			.ui-picklist td {
+				height: 100px !important;
+				vertical-align: middle !important;
+				border-bottom: 0px !important;
+			}
+			
+			.ui-widget-content {
+				border: 1px solid #000 !important;
+			}
+			
+			#inputDataInclusao_input {
+				box-shadow: none !important;
+				-webkit-box-shadow: none !important;
+				border: none !important;
+				color: rgb(22, 89, 201);
+			}
+
+			.atlas_input_formata {
+			border: 1px solid rgb(22, 89, 201) !important;
+			color: rgb(22, 89, 201) !important;
+			font-family: Verdana, Geneva, sans-serif !important;
+			font-size: 1.3em !important;
+			padding: 0.5em 0.4em !important;
+			float: left !important;
+			background-color: transparent !important;
+			border: transparent !important;
+			padding-top:4px !important;
+			}
+			div.atlas-miolo-logado-linha-campo-full{
+				width: 532px !important;
+			}
+			div.atlas-miolo-logado-linha-campo-dual{
+				width: 175px !important;
+			}
+			div.atlas-miolo-logado-linha-campo-dual-telefone{
+				width: 200px;
+				float: left;
+				margin-left: 20px;
+			}
+			div.atlas-miolo-logado-linha-label-dual-telefone-tipo{
+				width: 100px;
+				float: left;
+			}
+			div.atlas-miolo-logado-linha-campo-dual-telefone-tipo{
+				width: 130px;
+				float: left;
+			}
+			.atlas-mensagem-erro-relatado-usuario{
+				color: rgba(242,17,17,1); 
+				font-size: 1.3em !important; 
+				font-weight: bold !important;
+			}
+			
+		</style>
+
+		<div class="atlas-miolo-logado">
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h2>Órgãos</h2>
+
+			<h:head>
+				<title>Novo Órgão | Atlas de Acesso à Justiça</title>
+			</h:head>
+			
+			<p>Verifique e preencha os campos abaixo para realizar um novo cadastro ou alteração de um órgão:</p>
+
+			
+			<p:outputPanel>
+				<h:outputText
+					id="informativo-erro-relatado-usuario"
+					value=" ATENÇÃO - Existe erro relatado pelo usuário que não foi resolvido!"
+					rendered="#{!manterOrgaoBean.entidade.problemaResolvido}"
+					styleClass="atlas-mensagem-erro-relatado-usuario" />
+			</p:outputPanel>
+
+			
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados do órgão
+				</legend>
+				<p:tabView id="tabView">
+					<p:tab title="Dados Básicos" id="aba-dados-basicos">
+						<ui:include src="/admin/conteudo/enderecosJustica/abaDadosBasicos.xhtml" />
+					</p:tab>
+					<p:tab title="Dados Complementares" id="aba-dados-complementares">
+						<ui:include src="/admin/conteudo/enderecosJustica/abaDadosComplementares.xhtml" />
+					</p:tab>
+					<p:tab title="Serviços" id="aba-servicos">
+						<ui:include src="/admin/conteudo/enderecosJustica/abaServicos.xhtml" />
+					</p:tab>
+					<p:tab title="Representantes" id="aba-representantes">
+						<ui:include src="/admin/conteudo/enderecosJustica/abaRepresentante.xhtml" />
+					</p:tab>
+					<p:tab title="Localização Geográfica" id="aba-localizacao-geografica">
+						<ui:include src="/admin/conteudo/enderecosJustica/abaLocalizacaoGeografica.xhtml" />
+					</p:tab>
+				</p:tabView>
+			</fieldset>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Data do Cadastro</legend>
+			
+					<div class="atlas-miolo-logado-linha-label-dual">
+						<label for="atlas-formulario-orgao-data-cadastro">Data de
+							Cadastro:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-dual">
+						<h:outputLabel title="Data de Cadastro do Órgão"
+							id="atlas-formulario-orgao-data-cadastro"
+							value="#{manterOrgaoBean.entidade.dataCadastroFormatada}"
+							styleClass="atlas_input_formata">
+						</h:outputLabel>
+					</div>
+
+
+					<div class="atlas-miolo-logado-linha-label-dual">
+						<label for="atlas-formulario-orgao-data-atualizacao">Data
+							de Atualização: </label> <br />
+					</div>
+
+					<div
+						class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha">
+
+						<h:outputLabel title="Data de Atualização do Órgão"
+							id="atlas-formulario-orgao-data-atualizacao"
+							value="#{manterOrgaoBean.entidade.dataAtualizacaoFormatada}"
+							styleClass="atlas_input_formata">
+						</h:outputLabel>
+
+					</div>
+				
+			</fieldset>
+
+			<div class="atlas-miolo-logado-lista-acoes">
+				<atlas:barraBotoesCadastro bean="#{manterOrgaoBean}"  funcionalidade="001" />
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>

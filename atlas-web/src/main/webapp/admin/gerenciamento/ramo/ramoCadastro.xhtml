@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:head>
+			<title>Admin | Cadastro Ramo</title>
+		</h:head>
+
+		<div class="atlas_geral_miolo_breadcrumb">
+			<div class="atlas_geral_miolo_breadcrumb_conteudo">
+				<p:breadCrumb>
+					<p:menuitem value="Home" action="/admin/home?faces-redirect=true" />
+					<p:menuitem value="Ramo"
+						action="/admin/manterRamo/ramoConsulta?faces-redirect=true" />
+					<p:menuitem value="Novo Ramo" action="#"
+						rendered="#{manterRamoBean.entidade.id == null}" />
+					<p:menuitem value="Alterar" action="#"
+						rendered="#{manterRamoBean.entidade.id != null}" />
+				</p:breadCrumb>
+			</div>
+		</div>
+
+		<div class="atlas_geral_miolo">
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h2>Ramo</h2>
+
+			<div class="atlas_linha">
+				<table class="atlas_tabela_simples">
+					<tbody>
+						<tr class="atlas_tabela_simples_linha_01">
+							<td class="atlas_tabela_simples_label"><label
+								for="inputNomeRamo">Nome:*</label></td>
+							<td colspan="3"><h:inputText
+									value="#{manterRamoBean.entidade.nome}" id="inputNomeRamo"
+									maxlength="100" title="Informe o nome do Ramo"
+									styleClass="atlas_input_formata atlas_input_300" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="atlas_linha_acoes">
+				<div class="atlas_form_botao_inline">
+					<h:commandButton action="#{manterRamoBean.salvar()}"
+						rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('013')}"
+						value="GRAVAR" styleClass="atlas_button" update="@form" />
+				</div>
+
+				<div class="atlas_form_botao_inline">
+					<h:commandButton action="#{manterRamoBean.voltarTelaPesquisa()}"
+						value="CANCELAR" styleClass="atlas_button" update="@form" />
+				</div>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>

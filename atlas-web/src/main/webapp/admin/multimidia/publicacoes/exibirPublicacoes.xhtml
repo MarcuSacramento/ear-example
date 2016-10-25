@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="MULTIMÍDIA" value="MULTIMÍDIA" outcome="/admin/multimidia/exibirMultimidia.xhtml" /> > PUBLICAÇÕES
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<div class="atlas-miolo-logado">
+			<h2>Publicações</h2>
+
+			<h:head>
+				<title>Publicações | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<div class="atlas-miolo-logado">
+				<section class="atlas-miolo-logado-lista">
+					<div class="atlas-miolo-logado-lista-acoes">
+						<div class="atlas-miolo-logado-inline">					
+							<p:commandButton ajax="false" action="#{manterCartilhaBean.novo()}" value="NOVO" id="atlas_botao_novo"
+								title="Clique para cadastrar uma nova Publicação"/>
+						</div>
+					</div>
+					<ui:include src="tabela.xhtml" />
+				</section>
+
+				<aside class="atlas-miolo-logado-filtro">
+					<fieldset id="atlas-area-filtro" class="atlas-area-filtro">
+						<legend>Filtrar:</legend>
+						<ui:include	src="publicacoesFiltro.xhtml" />
+					</fieldset>
+				</aside>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

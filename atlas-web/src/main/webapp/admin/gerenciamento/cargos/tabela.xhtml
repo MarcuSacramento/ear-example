@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+	<style>
+.label_tabela_custom {
+	white-space: normal !important;
+	font-size: 1.1em !important;
+	word-break: break-all !important;
+}
+</style>
+
+	#{manterCargoBean.init()}
+	<div>
+		<h:panelGroup id="atlas_linha" layout="block">
+			<atlas:dataTable bean="manterCargoBean" id="dataTablePerfis"
+				value="#{manterCargoBean.cargos}">
+				<p:column headerText="Tratamento" styleClass="label_tabela_custom">
+					<h:outputText value="#{registro.tratamento}"
+						style="font-size: small;" styleClass="label_tabela" />
+				</p:column>
+
+				<p:column headerText="Cargo" styleClass="label_tabela_custom">
+					<h:outputText value="#{registro.nome}" style="font-size: small" />
+				</p:column>
+
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton
+						action="#{manterCargoBean.editarManterCargo(registro.id)}"
+						ajax="false" value="" style="height: 22px !important;"
+						styleClass="icone2" />
+				</p:column>
+
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton action="#{manterCargoBean.excluirCargo(registro)}"
+						update=":form:atlas_linha" value="" ajax="false"
+						rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('018')}"
+						style="height: 22px !important;" styleClass="icone"
+						onclick="if (!confirm('#{msg.MSG5}')) return false;" />
+				</p:column>
+			</atlas:dataTable>
+		</h:panelGroup>
+	</div>
+</ui:composition>

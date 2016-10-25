@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/pub/template/template_atlas.xhtml">
+	
+	<ui:define name="breadcrumb"> > <h:link title="SOBRE" value="SOBRE" outcome="/pub/sobre/exibirSobre.xhtml" /> > MAPA DA JUSTIÇA</ui:define>
+
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Mapa da Justiça</title>
+		</h:head>
+		<style>
+			.ui-fieldset{
+				padding: 0em;
+			}
+		</style>
+		<h:panelGroup styleClass="atlas-miolo">
+			<script type="text/javascript"
+				src="http://maps.google.com/maps/api/js?sensor=false"></script>
+			<script type="text/javascript"
+				src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
+			<script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/pub/_javascript/geolocalizacao.js" />
+			<script type="text/javascript">
+				var directionsService;
+				var directionsDisplay;
+
+				function inicializar() {
+					directionsService = new google.maps.DirectionsService();
+					directionsDisplay = new google.maps.DirectionsRenderer();
+				}
+	
+				function desenharRota(latstart, lngstart, latend, lngend) {
+					if (directionsService == null) {
+						inicializar();
+					}
+					var latlngstart = new google.maps.LatLng(latstart, lngstart);
+					var latlngsend = new google.maps.LatLng(latend, lngend);
+					directionsDisplay.setMap(null);
+					map = cliMap.getMap();
+					directionsDisplay.setMap(map);
+					directionsDisplay.setPanel(document
+							.getElementById("directionsPanel"));
+	
+					var request = {
+						origin : latlngstart,
+						destination : latlngsend,
+						travelMode : google.maps.TravelMode.DRIVING,
+						unitSystem: google.maps.UnitSystem.METRIC
+					};
+	
+					directionsService.route(request, function(response, status) {
+						if (status == google.maps.DirectionsStatus.OK) {
+							directionsDisplay.setDirections(response);
+						} else{
+							jQuery('#messages').css({'color' : 'red'});
+							jQuery('#messages'). text('Não foi possível traçar uma rota a partir da origem informada.');
+						}
+						
+					});
+	
+				}
+	
+				function adicionarCirculos() {
+	
+					map = cliMap.getMap();
+	
+					var markers = cliMap.cfg.markers;
+	
+					var markerCluster = new MarkerClusterer(map, markers);
+				}
+	
+				function gerarRelatorioRota(){
+					document.getElementById("rota").value=document.getElementById("directionsPanel").innerHTML;
+				}
+				
+				function simularClick(id) {
+					var markers = cliMap.cfg.markers;
+					for ( var i = 0; i != markers.length; i++) {
+						if (markers[i].getZIndex() == id) {
+							google.maps.event.trigger(cliMap.cfg.markers[i],
+									'click');
+						}
+					}
+				}
+
+				function AnalizaTeclas(){
+					var tecla=window.event.keyCode;
+					if (tecla==13) {event.keyCode=0; event.returnValue=false;}
+				}
+				
+				window.onload = function(){
+					if (reverseGeolocation) {
+						$("#geolocalizacao").val(reverseGeolocation[5].formatted_address);
+						atualizarGeolocalizacao();
+						atualizarButtonLocalizar();
+					} else {
+						console.log('Não encontrou resultados para a geolocalização.');
+					}
+				};
+
+				function definirValorOrigem(){
+					$("#enderecoOrigem").val(reverseGeolocation[0].formatted_address);
+				}
+
+			</script>
+			
+			<h2>Mapa da Justiça</h2>
+		
+			<h:panelGroup styleClass="atlas-miolo-conteudo-limpo">
+				<h:inputHidden id="geolocalizacao" value="#{exibirOrgaoJusticaBean.geolocalizacao}"/>
+				<p:remoteCommand name="atualizarGeolocalizacao" process="geolocalizacao" update="ufs, municipios"/>
+				<p:remoteCommand name="atualizarButtonLocalizar" process="municipios" update="localizar"/>
+				
+		    	<h3>Encontre uma porta da Justiça perto de você</h3>
+				<p>Para acessar a Justiça, é preciso conhecer e saber onde estão
+					as portas à disposição das cidadãs e cidadãos. O Atlas de Acesso à
+					Justiça oferece o primeiro serviço público que reúne os endereços
+					completos e os contatos dos órgãos que trabalham para garantir os
+					direitos que todo brasileiro possui. A consulta pode ser feita por
+					cidade e por tipo de porta de acesso (Defensoria Pública,
+					Ministério Público, Justiça Federal, Justiça Estadual etc). Os
+					resultados são apresentados no mapa da cidade, para facilitar o
+					acesso ao local.</p>
+
+				    <div class="atlas-miolo-conteudo-filtro">
+    					<p>Para visualizar o(s) endereço(s) desejado(s) preencha os dados solicitados nos campos abaixo:</p>
+						<h:panelGroup id="atlas_geral_miolo_linha" styleClass="atlas-geral-miolo-linha" >
+							<h:panelGrid styleClass="atlas-miolo-conteudo-filtro" columns="2" >
+								<h:panelGroup>
+									<h:outputLabel value="Estado*:" for="atlas-select-estado"/> <br />
+									<h:selectOneMenu id="ufs" value="#{exibirOrgaoJusticaBean.uf}"
+										converter="selectItemConverter"
+										styleClass="atlas-select-330 atlas-select-formata">
+										<p:ajax event="change" update="municipios" process="@this" />
+										<f:selectItem itemLabel="Selecione" />
+										<f:selectItems value="#{exibirOrgaoJusticaBean.ufs}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}" />
+									</h:selectOneMenu>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<h:outputLabel value="Município*:" for="municipios" /><br />
+									<h:selectOneMenu id="municipios" value="#{exibirOrgaoJusticaBean.municipio}"
+										converter="selectItemConverter"
+										styleClass="atlas-select-330 atlas-select-formata">
+										<p:ajax event="change" process="@this" update="localizar"/>
+										<f:selectItem itemLabel="Selecione" />
+										<f:selectItems value="#{exibirOrgaoJusticaBean.municipios}" var="municipio" itemLabel="#{municipio.nome}" />
+									</h:selectOneMenu>
+								</h:panelGroup>
+								<f:facet name="footer">
+									<h:panelGroup>
+										<h:outputLabel value="Selecione um ou mais tipos de órgãos*:" for="atlas-checkbox"/>
+									</h:panelGroup>
+								</f:facet>
+							</h:panelGrid>
+							
+							<p:tabView activeIndex="#{exibirOrgaoJusticaBean.abaAtual}">
+								<p:ajax event="tabChange" listener="#{exibirOrgaoJusticaBean.onTabChange}"/>
+								
+						        <p:tab title="Pesquisar por Temas" id="temaSearch" disabled="#{exibirOrgaoJusticaBean.abaTemaDesabilitada}">
+						            <h:panelGrid columns="1" cellpadding="10">
+										<p:dataGrid columns="3" var="temaSelecao" styleClass="ui-datagrid-no-border" 
+													value="#{exibirOrgaoJusticaBean.temaSelecao}">
+											<h:selectBooleanCheckbox value="#{temaSelecao.selecionado}">
+												<f:ajax render=":form:localizar" />
+											</h:selectBooleanCheckbox>
+											<h:outputLabel value="#{temaSelecao.tema.nome}" styleClass="atlas-checkbox-label" />
+										</p:dataGrid>
+						            </h:panelGrid>
+						        </p:tab>
+						        <p:tab title="Pesquisar por Tipos de Órgãos" id="tipoOrgaoSearch" disabled="#{exibirOrgaoJusticaBean.abaTipoOrgaoDesabilitada}">
+						            <h:panelGrid columns="1" cellpadding="10">
+						            
+										<p:fieldset legend="Judicial" style="margin-bottom:5px">
+									        <h:panelGrid columns="3">
+												<p:dataGrid columns="3" var="tipoOrgao" styleClass="ui-datagrid-no-border" 
+															value="#{exibirOrgaoJusticaBean.getTipoOrgaoSelecao('1')}">
+													<h:selectBooleanCheckbox value="#{tipoOrgao.selecionado}">
+														<f:ajax render=":form:localizar" />
+													</h:selectBooleanCheckbox>
+													<h:outputLabel value="#{tipoOrgao.tipoOrgao.nome}" styleClass="atlas-checkbox-label" />
+												</p:dataGrid>
+									        </h:panelGrid>
+									    </p:fieldset><br />
+										
+										<p:fieldset legend="Essencial à Justiça" style="margin-bottom:5px">
+									        <h:panelGrid columns="3">
+												<p:dataGrid columns="3" var="tipoOrgao" styleClass="ui-datagrid-no-border" 
+															value="#{exibirOrgaoJusticaBean.getTipoOrgaoSelecao('2')}">
+													<h:selectBooleanCheckbox value="#{tipoOrgao.selecionado}">
+														<f:ajax render=":form:localizar" />
+													</h:selectBooleanCheckbox>
+													<h:outputLabel value="#{tipoOrgao.tipoOrgao.nome}" styleClass="atlas-checkbox-label" />
+												</p:dataGrid>
+									        </h:panelGrid>
+									    </p:fieldset><br />
+										
+										<p:fieldset legend="ExtraJudicial" style="margin-bottom:5px">
+									        <h:panelGrid columns="3">
+												<p:dataGrid columns="3" var="tipoOrgao" styleClass="ui-datagrid-no-border" 
+															value="#{exibirOrgaoJusticaBean.getTipoOrgaoSelecao('3')}">
+													<h:selectBooleanCheckbox value="#{tipoOrgao.selecionado}">
+														<f:ajax render=":form:localizar" />
+													</h:selectBooleanCheckbox>
+													<h:outputLabel value="#{tipoOrgao.tipoOrgao.nome}" styleClass="atlas-checkbox-label" />
+												</p:dataGrid>
+									        </h:panelGrid>
+									    </p:fieldset>
+						            </h:panelGrid>
+						        </p:tab>
+						    </p:tabView>
+							
+							<h:panelGrid styleClass="atlas-tabelas-filtro" columns="2">
+								<h:panelGroup>
+									<h:commandButton
+										id="informar_orgao"
+										styleClass="atlas-button-filtrar" value="INFORMAR ÓRGÃO"
+										disabled="#{!exibirOrgaoJusticaBean.localizou}"
+										action="#{exibirOrgaoJusticaBean.novoOrgao()}"
+										alt="Clique para informar um novo órgão."
+										title="Clique para informar um novo órgão."
+										immediate="true">
+									</h:commandButton>
+								</h:panelGroup>
+	
+								<h:panelGroup styleClass="atlas-tabelas-filtro-alinha-direita">
+									<h:commandButton id="localizar"
+										title="Clique para localizar os órgãos desejados"
+										disabled="#{exibirOrgaoJusticaBean.desabilitarBotaoLocalizar()}"
+										styleClass="atlas-button-filtrar"
+										action="#{exibirOrgaoJusticaBean.carregarOrgaos()}"
+										value="LOCALIZAR">
+										<f:ajax execute=":form:atlas_geral_miolo_linha"
+											render="mapa listaOrgaos messages directionsPanel imprimirOrgaos imprimirRota atlas_geral_miolo_linha_final_endereco informar_orgao" />
+									</h:commandButton>
+									<h:outputText value=" " />
+									<h:commandButton action="#{exibirOrgaoJusticaBean.limpar()}"
+										title="Clique para limpar os parâmetros de pesquisa"
+										styleClass="atlas-button-filtrar" value="LIMPAR">
+										<f:ajax render="mapa listaOrgaos messages atlas_geral_miolo_linha directionsPanel imprimirOrgaos imprimirRota localizar atlas_geral_miolo_linha_final_endereco" />
+									</h:commandButton>
+								</h:panelGroup>
+							</h:panelGrid>
+						</h:panelGroup>
+					</div>
+		    </h:panelGroup>
+		    
+		    
+			<h:panelGroup id="atlas_geral_miolo_linha_final_endereco">
+				<div>
+					<h:messages id="messages" globalOnly="true" style="width:100%"
+						errorClass="atlas-mensagem-erro"
+						infoClass="atlas-mensagem-positivo" />
+				</div>
+				<h:panelGroup rendered="#{not empty exibirOrgaoJusticaBean.resultadoPesquisa}">
+					<div class="atlas-geral-miolo-linha-final-endereco">
+					    <div class="atlas-geral-miolo-linha-coluna-endereco-filtro">
+							<p>Foram encontrados os seguintes órgãos:</p>
+							    
+						    <p:dataTable id="listaOrgaos" 
+								value="#{exibirOrgaoJusticaBean.resultadoPesquisa}" var="orgao" 
+								selectionMode="single" selection="#{exibirOrgaoJusticaBean.orgaoSelecionado}" rowKey="#{orgao.id}" 
+								paginator="true" rows="7" pageLinks="5" 
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								paginatorAlwaysVisible="false" paginatorPosition="bottom">
+								<p:ajax event="rowSelect" listener="#{exibirOrgaoJusticaBean.onRowSelect}" />						        
+						        <p:column style="white-space:normal !important;">
+									<h:outputText value="#{orgao.nome} - " />
+									<h:outputText value="#{orgao.endereco} - " />
+									<h:outputText value="#{orgao.bairro} - " rendered="#{orgao.bairroPreenchido}"/>
+									<h:outputText value="#{orgao.municipio.nome} - " />
+									<h:outputText value="#{orgao.municipio.uf.sigla}, " />
+									<h:outputText value="#{orgao.cepFormatado}" />
+									<h:outputText value=" - #{orgao.representantesFormatados} " />
+									<h:outputText value=" - #{orgao.contatosFormatados}" />
+						        </p:column>						 
+						    </p:dataTable>						    
+					    </div>
+					    <!-- MAPA DEVE ESTAR AQUI -->
+						<div class="atlas-geral-miolo-linha-coluna-endereco-app">
+							<h:panelGroup layout="block">
+								<p:gmap id="mapa"
+									rendered="#{not empty exibirOrgaoJusticaBean.resultadoPesquisa}"
+									center="#{exibirOrgaoJusticaBean.latitudeBase}, #{exibirOrgaoJusticaBean.longitudeBase}"
+									zoom="#{exibirOrgaoJusticaBean.zoom}" type="ROADMAP"
+									widgetVar="cliMap" fitBounds="true"
+									model="#{exibirOrgaoJusticaBean.mapModel}"
+									style="width:480px;height:610px">
+									<p:ajax event="overlaySelect"
+										listener="#{exibirOrgaoJusticaBean.onMarkerSelect}" update=":form:listaOrgaos"/>		
+									<p:gmapInfoWindow>
+										<div style="text-align: center; display: block; height: 190px; overflow: hidden;">		
+											<h:outputText value="#{exibirOrgaoJusticaBean.marker.title}" style="font-weight: bold;" />
+											<br />
+											<h:outputText
+												value="#{exibirOrgaoJusticaBean.marker.data.municipio.nome} - #{exibirOrgaoJusticaBean.marker.data.municipio.uf.sigla}, #{exibirOrgaoJusticaBean.marker.data.cep}" />
+											<br /> 
+												<h:outputText value="#{exibirOrgaoJusticaBean.marker.data.descricaoEmailInstitucional}"  /><br />
+											<p:commandLink value="Como chegar? " onclick="definirValorOrigem();dialogComoChegarWidge.show();"></p:commandLink>
+											<br />
+											<br />	
+											<p:commandLink value="Há erro na informação?"
+												onclick="dlg1.show();" onkeydown="AnalizaTeclas()" onkeypress="AnalizaTeclas()"></p:commandLink>		
+										</div>		
+									</p:gmapInfoWindow>
+								</p:gmap>
+								<h:panelGrid id="directionsPanel" styleClass="directionsPanel"
+									style="width:600px" columns="1" />
+		
+		
+								<h:inputHidden id="rota" value="#{exibirOrgaoJusticaBean.rota}" />
+								<h:panelGroup id="imprimirRota">
+									<h:commandButton styleClass="atlas_button_filtrar"
+										value="IMPRIMIR"
+										action="#{exibirOrgaoJusticaBean.gerarRelatorioRota()}"
+										onclick="gerarRelatorioRota()"
+										rendered="#{exibirOrgaoJusticaBean.podeImprimirRota}"
+										immediate="true">
+									</h:commandButton>
+								</h:panelGroup>
+								
+								<p:dialog id="dialogComoChegar" header="Como chegar?" showEffect="explode" hideEffect="explode"
+									widgetVar="dialogComoChegarWidge" modal="true">
+									<h:panelGroup>
+											Origem:
+											<p:inputText id="enderecoOrigem" value="#{exibirOrgaoJusticaBean.enderecoOrigem}" onkeydown="AnalizaTeclas()" /><br /><br />
+											<div align="center"><h:commandButton action="#{exibirOrgaoJusticaBean.calcularRota}" value="Traçar"  >
+												<f:ajax execute="enderecoOrigem" 
+													render=":form:mapa :form:messages :form:imprimirRota" />
+											</h:commandButton></div>
+									</h:panelGroup>
+								</p:dialog>
+		
+								<p:dialog id="basicDialog" header="Qual é o problema?"
+									widgetVar="dlg1" modal="true" height="auto" resizable="true">
+									<p:message for="cometarioErro" id="mensagemErro" display="text" />
+									<h:outputText value="Marque uma ou mais opções abaixo:" />
+									<br />
+									<br />
+									<h:selectManyCheckbox value="${exibirOrgaoJusticaBean.tiposErro}"
+										layout="pageDirection" id="selectManyTipoProblema"
+										required="false" onkeydown="AnalizaTeclas()" onkeypress="AnalizaTeclas()">
+										<f:selectItem itemLabel="Endereço incorreto" itemValue="1" />
+										<f:selectItem
+											itemLabel="Localização geográfica incorreta (Latitute/Longitude)"
+											itemValue="2" />
+										<f:selectItem itemLabel="Outros" itemValue="3" />
+									</h:selectManyCheckbox>
+									<label for="cometarioErro">Descrição do erro:*</label>
+									<p:inputTextarea id="cometarioErro"
+										value="${exibirOrgaoJusticaBean.comentarioErro}" maxlength="250"
+										style="width:90%" required="true"
+										requiredMessage="Informe o campo Observação." />
+									<br />
+									<h:commandButton action="#{exibirOrgaoJusticaBean.enviarErro}"
+										value="Enviar" styleClass="atlas_button_filtrar">
+										<f:ajax execute="basicDialog"
+											render="messages selectManyTipoProblema cometarioErro selectManyTipoProblema mensagemErro" />
+									</h:commandButton>
+								</p:dialog>
+		
+							</h:panelGroup>
+						</div>
+						<!-- FIM MAPA -->				    
+					</div>
+					<div class="atlas-geral-miolo-linha-download">
+						<div class="atlas-button-download">
+							<h:panelGroup id="imprimirOrgaos">
+								<h:commandButton styleClass="atlas-button-filtrar"
+									value="BAIXAR A PESQUISA ATUAL:"
+									rendered="#{not empty exibirOrgaoJusticaBean.resultadoPesquisa}"
+									action="#{exibirOrgaoJusticaBean.gerarRelatorioOrgaos()}"
+									immediate="true">									
+								</h:commandButton>						        
+				                <h:selectOneMenu id="atlas-download" 
+											   name="atlas-download"									   
+											  value="#{exibirOrgaoJusticaBean.tipoRelatorio}"	
+									     styleClass="atlas-select-formata-download">
+									<f:selectItem itemValue="" itemLabel="Selecione o formato" />
+									<f:selectItem itemValue="pdf" itemLabel="PDF" />
+									<f:selectItem itemValue="xls" itemLabel="XLS" />
+									<f:selectItem itemValue="rtf" itemLabel="RTF" />
+									<p:ajax event="change" update="#{exibirOrgaoJusticaBean.tipoRelatorio}" process="@this" />						
+								</h:selectOneMenu>
+							</h:panelGroup>	
+						</div>				
+					</div>
+			    </h:panelGroup>
+			</h:panelGroup>
+		
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>

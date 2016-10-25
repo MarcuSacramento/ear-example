@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+	<div>
+		<h:panelGroup id="atlas_linha" layout="block">
+			<atlas:dataTable bean="manterDadosEmBlocoBean" id="dataTableTermos"	value="#{manterDadosEmBlocoBean.orgaosPesquisa}"
+				selection="#{manterDadosEmBlocoBean.orgaosSelecionados}" rowKey="#{registro.id}">
+				<p:ajax event="rowSelectCheckbox" process="@this" listener="#{manterDadosEmBlocoBean.onRowSelect}" />
+				<p:ajax event="rowUnselectCheckbox" process="@this"	listener="#{manterDadosEmBlocoBean.onRowUnselect}" />
+				<p:ajax event="toggleSelect" process="@this" listener="#{manterDadosEmBlocoBean.onToggleSelect}" />
+				<p:ajax event="page" process="@this" listener="#{manterDadosEmBlocoBean.onPageChange}" />
+
+				<p:column width="10%" selectionMode="multiple"	style="text-align:center; word-wrap:break-word;" />
+				<p:column width="20%" headerText="Órgão:"  style="white-space:normal !important; font-size: 1.1em !important;">
+					<h:outputText value="#{registro.nome}" rendered="#{!registro.problemaResolvido}" style="font-size: small; color:red;" styleClass="label_tabela"/>
+					<h:outputText value="#{registro.nome}" rendered="#{registro.problemaResolvido}"	style="font-size: small" styleClass="label_tabela" />
+				</p:column>
+
+				<p:column headerText="Tipo Órgão" style="white-space:normal !important; font-size: 1.1em !important;">
+					<h:outputText value="#{registro.tipoOrgao.nome}" style="font-size: small;" styleClass="label_tabela" />
+				</p:column>
+
+				<p:column width="20%" headerText="Estado" style="white-space:normal !important; font-size: 1.1em !important;">
+					<h:outputText value="#{registro.municipio.uf.nome}" style="font-size: small;" styleClass="label_tabela" />
+				</p:column>
+
+				<p:column headerText="Município" style="white-space:normal !important; font-size: 1.1em !important;">
+					<h:outputText value="#{registro.municipio.nome}" style="font-size: small;" styleClass="label_tabela" />
+				</p:column>
+			</atlas:dataTable>
+		</h:panelGroup>
+	</div>
+</ui:composition>

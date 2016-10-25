@@ -1,0 +1,63 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação do breadcrumb                                                             **
+** @data: 20/05/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+div.atlas-miolo-conteudo-inicio-linha-principal{
+	clear: both;
+	margin: 0 0 5em 0;
+	height: 410px;
+}
+
+div.atlas-miolo-conteudo-inicio-linha{
+	clear: both;
+}
+
+div.atlas-miolo-conteudo-inicio-porta-esquerda{
+	float: left;
+	width: 250px;
+}
+
+div.atlas-miolo-conteudo-inicio-porta-esquerda-container{
+	padding: 0 1em;
+}
+
+div.atlas-miolo-conteudo-bloco-mapa-conteudo{
+	height: 210px;
+}
+
+div.atlas-miolo-conteudo-inicio-porta-direita{
+	float: right;
+	width: 480px;
+}
+
+div.atlas-miolo-conteudo-inicio-bloco-3-1{
+	width: 230px;
+	float: left;
+	height: 300px;
+	margin-right: 1.5em;
+}
+
+div.atlas-miolo-conteudo-inicio-bloco-3-2{
+	width: 230px;
+	float: left;
+	height: 300px;
+	margin-right: 1.5em;
+	margin-left: 1.5em;
+}
+
+div.atlas-miolo-conteudo-inicio-bloco-3-3{
+	width: 230px;
+	float: left;
+	height: 400px;
+	margin-left: 1.5em;
+}
+
+div.atlas-miolo-conteudo-inicio-bloco-container{
+	height: 120px;
+	padding: 0 1em;
+}

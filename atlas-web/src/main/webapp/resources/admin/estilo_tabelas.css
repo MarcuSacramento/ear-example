@@ -1,0 +1,155 @@
+
+.atlas-tabelas-filtro{
+	width: 100%;
+	margin-top: 1em;
+}
+
+	.atlas-tabelas-filtro td{
+		vertical-align: bottom;
+	}
+	
+	.atlas-tabelas-filtro td.atlas-tabelas-filtro-alinha-direita{
+		text-align: right;
+	}
+
+.atlas-tabelas-formulario{
+	margin-top: 1em;
+	margin-left: auto;
+	margin-right: auto;
+	border-spacing: 0px;
+}
+
+	.atlas-tabelas-formulario tr{
+		border-bottom: 1px solid #90F;
+	}
+	
+	.atlas-tabelas-formulario td{
+		vertical-align: bottom;
+		text-align: left;
+		padding: 1em;
+		border-bottom: 1px solid rgba(22,89,191,1);
+	}
+
+		.atlas-tabelas-formulario tr.atlas-tabelas-formulario-tr-linha{
+			background-color: rgba(238,239,241,1);
+		}
+	
+	.atlas-tabelas-formulario td.atlas-tabelas-formulario-label{
+		text-align: right;
+		vertical-align: top;
+		padding: 1.4em 0em 1em 4em;
+	}
+	
+	.atlas-tabelas-formulario td.atlas-tabelas-formulario-alinha-direita{
+		text-align: right;
+	}
+
+.atlas-tabela-simples{
+	width: 100%;
+	border-spacing: 0px;
+	font-size: 1.1em;
+}
+
+	.atlas-tabela-simples th{
+		background-color: rgba(21,89,191,1);
+		padding: 0.5em 0.5em;
+		color: #FFF;
+		font-weight: normal;
+		white-space: nowrap;
+	}
+	
+	.atlas-tabela-simples th a{
+		color: #FFF;
+		text-decoration: none;
+		font-weight: normal;
+	}
+	
+		.atlas-tabela-simples th a:hover{
+			color: #EEE;
+			text-decoration: underline;
+		}
+
+	.atlas-tabela-simples-th-ordena-sup{
+		background-image: url(../../../admin/_imagens/_icones/icon_tabela_ordena_sup.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		width: 8px;
+		height: 8px;
+		margin-right: 0.2em;
+	}
+	
+	.atlas-tabela-simples-th-ordena-inf{
+		background-image: url(../../../admin/_imagens/_icones/icon_tabela_ordena_inf.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		width: 8px;
+		height: 8px;
+		margin-right: 0.2em;
+	}
+	
+	.atlas-tabela-simples th.atlas-tabela-simples-titulo{
+		background-color: rgba(21,89,191,1);
+		padding: 1em 1em;
+		color: #FFF;
+		font-weight: normal;
+		font-size: 0.9em;
+	}
+	
+		.atlas-tabela-simples th.atlas-tabela-simples-titulo a{
+			color: #FFF;
+			font-weight: bold;
+			font-size: 1em;
+			text-decoration: none;
+		}
+
+	.atlas-tabela-simples tr.atlas-tabela-simples-linha-01{
+		background-color: rgba(238,239,241,1);
+	}
+	
+	.atlas-tabela-simples tr.atlas-tabela-simples-linha-02{
+		background-color: #FFF;
+		font-size: 1.1em;
+	}
+	
+	.atlas-tabela-simples td{
+		padding: 0.3em 0.5em 0.7em 0.5em;
+		border-bottom: 1px solid rgba(21,89,191,1);
+		line-height: 18px;
+	}
+	
+	.atlas-tabela-simples td.atlas-tabela-simples-label{
+		width: 200px;
+		padding-right: 0.5em;
+		text-align: right;
+		vertical-align: top;
+	}
+	
+	.atlas-tabela-simples td.atlas-tabela-simples-botao{
+		text-align: right;
+		width: 10px;
+		padding-top: 0.5em;
+	}
+	
+	.atlas-tabela-simples td.atlas-tabela-alinha-centro{
+		text-align: center;
+	}
+	
+	.atlas-tabela-simples td.atlas-tabela-alinha-esquerda{
+		text-align: left;
+	}
+	
+	.atlas-tabela-simples td.atlas-tabela-alinha-direita{
+		text-align: right;
+	}
+	
+	.atlas-tabela-simples td.atlas-tabela-alinha-meio{
+		vertical-align: middle;
+	}
+	
+	.atlas-tabela-simples td.atlas-tabela-alinha-topo{
+		vertical-align: top;
+	}
+	
+	.atlas-tabela-simples td.atlas-tabela-alinha-bottom{
+		vertical-align: bottom;
+	}

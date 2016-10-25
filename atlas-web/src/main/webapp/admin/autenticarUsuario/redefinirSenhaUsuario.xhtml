@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_login.xhtml">
+
+	<ui:define name="breadcrumb"> > REDEFINIR SENHA
+
+	</ui:define>
+
+	<ui:define name="conteudo"> 
+
+	<style>
+		.formatacao {
+		width: 200px;
+		padding-right: 0.5em;
+		text-align: right;
+		vertical-align: top;
+		}
+	</style>
+
+		<h:head>
+			<title>Admin | Redefinir Senha</title>
+		</h:head>
+
+		<div class="atlas-miolo">
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+		
+			<h2>Redefinir Senha</h2>
+
+			<div class="atlas-linha">
+				<div class="atlas-tabela-simples">
+						<div class="atlas-tabela-simples-linha-02">
+							<div class="formatacao">
+								<label for="inputEmail">E-mail:*</label>
+							</div>
+							<div style="padding-left: 25em; text-align: left; margin-top: -2.4em;">
+								<p:inputText
+									value="#{redefinirSenhaUsuarioBean.emailInformado}" id="inputEmail"
+									title="Informe o email cadastrado" autocomplete="off"
+									styleClass="atlas-input-formata atlas-input-420"
+									style="box-shadow:none;"/></div>
+						</div>						
+					</div>
+
+				</div>
+			</div>
+			
+			<div style="padding-top: 8px;"></div>
+			
+			<div class="atlas-miolo-logado-lista-acoes" align="center" >
+				<div class="atlas-miolo-logado-inline" style="display: #{redefinirSenhaUsuarioBean.ok ? 'none' : 'block'}">
+					<h:commandButton action="#{redefinirSenhaUsuarioBean.enviarSenha()}" 
+									 value="REDEFINIR SENHA" update="@form" 
+									 styleClass="atlas-button-interno"
+									 style="font-size: 1.2em !important;"/>
+
+					<h:commandButton action="#{redefinirSenhaUsuarioBean.talaInicial()}" 
+									 value="CANCELAR" styleClass="atlas-button-interno" update="@form"
+									 style="font-size: 1.2em !important;"/>
+				</div>
+				<div class="atlas-miolo-logado-inline" style="display: #{redefinirSenhaUsuarioBean.ok  ? 'block' : 'none'}">
+					<h:commandButton action="#{redefinirSenhaUsuarioBean.talaInicial()}" 
+									 value="OK" styleClass="atlas-button-interno" update="@form"
+									 style="font-size: 1.2em !important;"/>
+				</div>
+			</div>
+	</ui:define>
+</ui:composition>
+

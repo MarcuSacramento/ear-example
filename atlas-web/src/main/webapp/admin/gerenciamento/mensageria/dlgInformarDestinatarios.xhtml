@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Incluir Destinatários"
+		widgetVar="dlgInformarDestinatario" width="500px;" height="600px;"
+		style="z-index:5;" resizable="false" modal="true">
+		<p:panel id="painelDestinatario" style="border: none !important; ">
+			<h:messages id="messagesDialog" globalOnly="true"
+				infoClass="atlas-mensagem-positivo" warnClass="atlas-mensagem-alerta"
+				errorClass="atlas-mensagem-erro" />
+	
+	
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-dual">
+					<label for="atlas-formulario-orgao-sigla"
+						style="font-size: 1.1em; color: rgb(0, 0, 0);">Orgão:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual">
+					<div>
+						<h:inputText maxlength="55"
+							value="#{manterMensageriaBean.nomeOrgaoPesquisa}"
+							id="atlas-formulario-orgao-sigla"
+							name="atlas-formulario-orgao-sigla"
+							title="Informe o Nome do Órgão"
+							styleClass="atlas-input-formata atlas-input-150"
+							style=" height: 20px !important; background-color: rgb(0,0,0,1) !important;
+							border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+							box-shadow:none; width: 155px !important; font-size: 1.1em !important;" />
+						<p:watermark for="atlas-formulario-orgao-sigla" value="Nome do Órgão" />
+					</div>
+				</div>
+	
+				<div class="atlas-miolo-logado-linha-label-dual" style="width: 75px !important;">
+					<label for="atlas-formulario-orgao-desinencia"
+						style="font-size: 1.2em; color: rgb(0, 0, 0);">Tipo Orgão:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha" style="text-align: left !important; margin-left: 10px !important;">
+					<h:selectOneMenu value="#{manterMensageriaBean.tipoOrgao}"
+						converter="selectItemConverter"
+						styleClass="atlas-input-formata atlas-input-150"
+						id="atlas-formulario-orgao-desinencia"
+						name="atlas-formulario-orgao-desinencia"
+						title="Selecione o Tipo do Órgão" onchange="dialog.show()"
+						style=" position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 155px !important; font-size: 1.1em !important;">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{manterMensageriaBean.tiposOrgaos}"
+							var="tipoOrgao" itemValue="#{tipoOrgao}"
+							itemLabel="#{tipoOrgao.nome}" />
+					</h:selectOneMenu>
+	
+				</div>
+			</div>
+	
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-dual ">
+					<label for="atlas-formulario-orgao-tipo"
+						style="font-size: 1.2em; color: rgb(0, 0, 0);">Estado:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual">
+					<div>
+						<h:selectOneMenu value="#{manterMensageriaBean.ufCadastro}"
+							converter="selectItemConverter"
+							title="Informe o Estado do Órgão"
+							styleClass="atlas-select-formata atlas-select-170"
+							id="atlas-formulario-orgao-estado"
+							style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+							border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+							box-shadow:none; font-size: 1.1em !important;">
+							<p:ajax event="change" update="municipiosCadastro" process="@this" />
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{manterMensageriaBean.ufs}" var="uf"
+								itemLabel="#{uf.nome}" itemValue="#{uf}" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+	
+	
+	
+				<div>
+					<label for="atlas-formulario-orgao-situacao"
+						style="font-size: 1.2em; color: rgb(0, 0, 0);">Município:</label><br />
+				</div>
+	
+				<div
+					style="float: left !important; text-align: left !important; margin-left: 85px !important; margin-top: -25px;">
+					<h:selectOneMenu id="municipiosCadastro"
+						converter="selectItemConverter"
+						value="#{manterMensageriaBean.municipioCadastro}"
+						styleClass="atlas-select-formata atlas-select-170"
+						title="Selecione o Município do Órgão"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; font-size: 1.1em !important;">
+						<f:ajax
+							listener="#{manterMensageriaBean.alterarFlagEnderecoAlterado}" />
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{manterMensageriaBean.municipios}"
+							var="municipio" itemLabel="#{municipio.nome}" />
+					</h:selectOneMenu>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-dual ">
+					<label for="atlas-formulario-orgao-ambito-atuacao"
+						style="font-size: 1.2em; color: rgb(0, 0, 0);">Âmbito atuação:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual">
+					<div>
+						<h:selectOneMenu value="#{manterMensageriaBean.ambitoAtuacaoOrgao}"
+							converter="selectItemConverter"
+							title="Informe o âmbito de atuação do Órgão"
+							styleClass="atlas-select-formata atlas-select-170"
+							id="atlas-formulario-orgao-ambito-atuacao"
+							style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+							border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+							box-shadow:none; font-size: 1.1em !important;">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{manterMensageriaBean.listaAmbitoAtuacao}" var="ambito"
+								itemLabel="#{ambito.descricao}" itemValue="#{ambito}" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-lista-acoes">
+				<p:commandButton value="PESQUISAR"
+								action="#{manterMensageriaBean.pesquisarDestinatarios()}"
+								update="painelDestinatario" ajax="true" />
+			</div>
+
+			<div class="div-miolo ">
+				<ui:include
+					src="/admin/gerenciamento/mensageria/tabelaInformarMensagem.xhtml" />
+			</div>
+	
+			<div class="atlas-miolo-logado-lista-acoes">
+				<div class="atlas-miolo-logado-inline">
+					<p:commandButton id="btnSalvarDestinatario" value="INCLUIR"
+						actionListener="#{manterMensageriaBean.incluirDestinatariosTabelaAction}"
+						onclick="dlgInformarDestinatario.hide();"
+						update="pnl-destinatarios"
+						styleClass="atlas-button-interno"
+						style="font-size: 1.2em !important;" />
+			
+					<div class="atlas-miolo-logado-inline">
+						<p:commandButton
+							action="#{manterMensageriaBean.voltarTelaCadastro()}"
+							onclick="dlgInformarDestinatario.hide();"
+							value="CANCELAR" styleClass="atlas-button-interno"
+							title="Cancelar"
+							style="font-size: 1.2em !important;" />
+					</div>
+				</div>
+			</div>
+		</p:panel>
+	</p:dialog>
+</html>

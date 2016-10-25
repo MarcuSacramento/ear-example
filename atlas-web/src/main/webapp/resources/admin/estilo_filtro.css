@@ -1,0 +1,48 @@
+
+section.atlas-miolo-logado-lista{
+	display: block;
+	float: left;
+	width: 550px;
+}
+
+aside.atlas-miolo-logado-filtro{
+	display: block;
+	float: right;
+	width: 180px;
+	background-color: rgba(21,89,191,1);
+	margin-top: 0.4em;
+}
+
+	aside.atlas-miolo-logado-filtro fieldset{
+		border: none;
+		padding: 0.4em;
+	}
+	
+	aside.atlas-miolo-logado-filtro legend{
+		border: none;
+		color: rgba(255,255,255,1);
+		font-size: 1.5em;
+		open_sansbold: Arial, Helvetica, sans-serif;
+		padding: 0.5em 0;
+		border-bottom: 1px solid rgba(255,255,255,1);
+		margin-bottom: 1em;
+		width: 100%;
+	}
+	
+	aside.atlas-miolo-logado-filtro label{
+		color: rgba(255,255,255,1);
+		font-size: 1.2em;
+		font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+	}
+	
+	aside.atlas-miolo-logado-filtro input,
+	aside.atlas-miolo-logado-filtro select
+	{
+		font-size: 1.2em;
+		font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+	}
+	
+	.atlas-miolo-logado-filtro-linha{
+		clear: both;
+		margin-bottom: 0.6em;
+	}

@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="MULTIMÍDIA" value="MULTIMÍDIA" outcome="/admin/multimidia/exibirMultimidia.xhtml" /> >			
+		<h:link title="DOWNLOADS" value="DOWNLOADS >" outcome="/admin/multimidia/downloads/exibirDownloads.xhtml" /> NOVO DOWNLOAD
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<script type="text/javascript">
+		//<![CDATA[
+			function contarDescricao(box,valor,campospan){ 
+				var contador = valor - box.length; 
+				document.getElementById(campospan).innerHTML = contador; 
+				
+				if(box.length >= valor){ 
+					document.getElementById(campospan).innerHTML = "Limite excedido"; 
+					document.getElementById("inputDescricao").value = document.getElementById("inputDescricao").value.substr(0,valor); 
+				}	 
+			}
+		//]]>	
+		</script>
+
+		<style>
+			div.div-miolo {
+			display: block;
+			clear: both;
+			min-height: 100px;
+			padding-top: 0.8em;
+			}
+		</style>
+
+		<div class="atlas-miolo-logado">
+		
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"	warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+		
+			<h2>Downloads</h2>
+
+			<h:head>
+				<title>Novo Download | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+			<p >Verifique e preencha os campos abaixo para atualizar o cadastro do Downloads:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Observações</legend>
+				<div class="atlas-miolo-logado-linha">
+					<span class="atlas-miolo-conteudo-observacao" style="font-size:1.1em; font-style: italic !important;">
+						*¹ Selecionar arquivo: Tamanho máximo do arquivo: 10Mb. Extensões permitidas: DOC, DOCX, XLS, XLSX, PDF. 
+					</span>
+				</div>
+			</fieldset>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados do Download</legend>
+ 				<div class="atlas-miolo-logado-linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="inputAssunto" style="font-size:1.2em">Título:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText id="inputNome" maxlength="128"	value="#{manterDownloadBean.entidade.nome}"
+							title="Informe o Título do Download" style="font-size: 1.2em !important;"
+							styleClass="atlas-input-formata atlas-input-520" />
+						<p:watermark for="inputNome" value="Título do Download" />
+					</div>
+				</div>
+
+				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque atlas-miolo-logado-linha-campo-img">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-publicacao-capa" style="font-size:1.2em">Selecionar arquivo:*¹</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<p:fileUpload showButtons="false" auto="true" label="Procurar..." id="atlas-formulario-downloads"
+							update="messages, urlArquivo" fileUploadListener="#{manterDownloadBean.doUpload}"
+							allowTypes="/(\.|\/)(DOC|DOCX|doc|docx|XLS|XLSX|xls|xlsx|PDF|pdf)$/"
+							invalidFileMessage="Tipo de arquivo inválido."	sizeLimit="10485760"
+							styleClass="atlas-input-formata atlas-input-520"
+							invalidSizeMessage="Tamanho do arquivo ultrapassa o limite permitido." />
+							<br /> <br />
+							<div  style="font-size: 1em !important; margin-right: 1cm">
+								<h:outputText id="urlArquivo" value="#{manterDownloadBean.entidade.recurso}" />
+							</div>
+					</div>
+				</div>
+
+				<div class="div-miolo">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="inputDescricao" style="font-size:1.2em">Descrição:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputTextarea rows="4" onkeyup="this.value=this.value.substring(0, 500);"
+							onkeypress="contarDescricao(this.value,500,'totalDescricao')"
+							value="#{manterDownloadBean.entidade.descricao}"
+							title="Informe a descrição do download"
+							id="inputDescricao"	style="font-size: 1.2em !important;"
+							styleClass="atlas-input-formata atlas-input-520"/>
+						<span id="totalDescricao" class="atlas_textarea_formata_contador" />
+						<p:watermark for="inputDescricao"	value="Descrição do Download" />
+					</div>
+				</div>
+				<div class="atlas-miolo-logado-lista-acoes">
+					<atlas:barraBotoesCadastro bean="#{manterDownloadBean}" funcionalidade="006" />
+				</div>
+			</fieldset>
+		</div>
+	</ui:define>
+</ui:composition>

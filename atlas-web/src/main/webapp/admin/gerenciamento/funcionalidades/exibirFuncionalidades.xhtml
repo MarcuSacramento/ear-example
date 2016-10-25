@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link	title="GERENCIAMENTO" value="GERENCIAMENTO" outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > FUNCIONALIDADE
+	</ui:define>
+	
+	<ui:define name="conteudo">
+
+		<style>
+			.atlas-miolo-logado-lista-1 {
+				padding: 0.5em 0.5em;
+				border: 1px solid rgba(22,89,191,1);
+				background: rgba(238,239,241,1);
+				margin-bottom: 0.5em;
+				margin-top: 0.5em;
+				width: 538px;
+			}
+			
+			.div-miolo {
+				display: block;
+				clear: both;
+				min-height: 40px;
+				padding-top: 0.8em;
+			}
+			
+		</style>
+
+		<div class="atlas-miolo-logado">
+			<h2>Funcionalidade</h2>
+
+			<h:head>
+				<title>Funcionalidade | Atlas de Acesso à Justiça</title>
+			</h:head>
+			
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<div class="atlas-miolo-logado">
+				<section class="atlas-miolo-logado-lista">
+					<div class="atlas-miolo-logado-lista-1">
+						<div class="atlas-miolo-logado-inline-2">
+							<p:commandButton action="#{manterFuncionalidadeBean.novoRegistroManterFuncionalidade()}"
+								value="NOVO" id="atlas-botao-novo" ajax="false"
+								title="Clique para cadastrar uma nova funcionalidade">
+							</p:commandButton>
+						</div>
+					</div>
+					<ui:include src="tabela.xhtml" />
+				</section>
+
+				<aside class="atlas-miolo-logado-filtro">
+					<fieldset id="atlas-area-filtro" class="atlas-area-filtro">
+						<legend>Filtrar:</legend>
+						<ui:include src="funcionalidadesFiltro.xhtml" />
+					</fieldset>
+				</aside>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

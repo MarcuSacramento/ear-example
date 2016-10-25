@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link	title="GERENCIAMENTO" value="GERENCIAMENTO" outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > IMPORTAR ÓRGÃO
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<div class="atlas-miolo-logado">
+
+			<h2>Importar órgão</h2>
+
+			<h:head>
+				<title>Importar órgão | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<p>Verifique e preencha os campos abaixo para importar órgão:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Arquivo para importar</legend>
+
+				<div
+					class="atlas-miolo-logado-linha atlas-miolo-logado-linha-campo-img">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-orgao-importar-arquivo" style="font-size:1.2em">Arquivo:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<p:fileUpload id="atlas-formulario-orgao-importar-arquivo"
+							showButtons="false" auto="true" label="Procurar..."
+							update="messages,buttonDownloadArquivo,resumoImportacao"
+							fileUploadListener="#{importarOrgaoBean.realizarImportacaoOrgaos}"
+							allowTypes="/(\.|\/)(XLS|xls)$/"
+							invalidFileMessage="Tipo de arquivo inválido."
+							sizeLimit="10485760"
+							styleClass="atlas-input-formata atlas-input-520"
+							invalidSizeMessage="Tamanho do arquivo ultrapassa o limite permitido."
+							style="font-size: 1em !important;" />
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Resultado da importação</legend>
+
+				<div
+					class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-projetos-site" style="font-size:1.2em">Resumo:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<span class="atlas-miolo-conteudo-observacao"> <p:outputPanel
+								id="resumoImportacao">
+								<h:outputText value="Total de registros: " />
+								<h:outputText value="#{importarOrgaoBean.totalRegistros}" />
+								<br />
+								<h:outputText value="Registros válidos: " />
+								<h:outputText value="#{importarOrgaoBean.registrosValidos}" />
+								<br />
+								<h:outputText value="Registros inválidos: " />
+								<h:outputText value="#{importarOrgaoBean.registrosInvalidos}" />
+							</p:outputPanel>
+						</span>
+					</div>
+				</div>
+				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-projetos-site" style="font-size:1.2em">Arquivo de
+							erros:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<p:commandButton id="buttonDownloadArquivo"
+							action="#{importarOrgaoBean.exportarOrgaosInvalidos()}"
+							value="Download" partialSubmit="true" immediate="true"
+							ajax="false"
+							disabled="#{!importarOrgaoBean.mostrarBotaoDownload}" />
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Planilha modelo</legend>
+
+				<div
+					class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-projetos-site" style="font-size:1.2em">Download:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<a
+							href="${facesContext.externalContext.requestContextPath}/arquivos/modelo_planilha_orgaos.xls"
+							title="Download"> <img
+							src="${facesContext.externalContext.requestContextPath}/admin/_imagens/_icones/excel.png"
+							alt="Download" title="Download" style="border: none;" />
+						</a>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</ui:define>
+</ui:composition>

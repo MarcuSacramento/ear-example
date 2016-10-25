@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pub/template/template_atlas.xhtml">
+
+	
+	<h:head>
+		<title>Pub | Dicionários</title>
+			#{exibirGlossarioBean.init()}
+	</h:head>
+
+<div class="atlas-miolo">
+	<h2> ABC dos Direitos </h2>
+	<div class="atlas-miolo-conteudo-limpo">
+		<h3>Entenda mais sobre os termos jurídicos</h3>
+		<p>O Direito e o Acesso à Justiça apoiam-se em termos e conceitos cuja compreensão é essencial. 
+		Nesta seção, é possível encontrar explicações básicas sobre o jargão do Direito  e conceitos importantes desenvolvidos para a compreensão e mensuração do Acesso à Justiça.
+		</p>
+		<div class="atlas-geral-miolo-filtro">
+			<table class="atlas-tabelas-filtro">
+	            <tr>
+	            	<td colspan="2">
+	                	<label for="atlas-input-pesquisa">Localize termos/palavras:</label>
+	                </td>
+	            </tr>
+	            <tr>
+	                <td><h:inputText value="#{exibirGlossarioBean.termoPesquisa}"
+								title="Informe o termo que deseja localizar"
+								styleClass="atlas-input-formata atlas-input-590" /></td>
+	                <td class="atlas-tabelas-filtro-alinha-direita">                   
+	                    <h:commandButton
+								action="#{exibirGlossarioBean.pesquisarTermo}" value="PESQUISAR"
+								title="Clique para pesquisar o termo desejado"
+								styleClass="atlas-button-filtrar" />
+	                </td>
+	            </tr>	
+	        </table>
+        </div>
+	</div>
+
+	<ul class="atlas-abas-menu-lista">
+		<ui:repeat var="alfabeto"
+			value="#{exibirGlossarioBean.montarAlfabeto()}">
+			<li class="#{alfabeto.nomeClasseCss}"><h:commandLink
+					value="#{alfabeto.letraAtual}"
+					action="#{exibirGlossarioBean.pesquisarTermo(alfabeto.letraAtual)}" />
+			</li>
+		</ui:repeat>
+	</ul>
+
+	<div class="atlas-geral-miolo-glossario-resultado">
+		<p>
+			Listagem com <strong>"#{exibirGlossarioBean.qtdRegistros}"</strong>
+			termos localizados
+		</p>
+	</div>
+
+	<div class="atlas-geral-miolo-glossario-resultado-item">
+		<ui:repeat var="linhaTresRegistros"
+			value="#{exibirGlossarioBean.termosComLinhasDeTresRegistros}">
+			<div class="atlas-geral-miolo-glossario-bloco">
+				<p class="atlas-geral-miolo-glossario-titulo">
+					<h:commandLink value="#{linhaTresRegistros.registroEsquerda.nome}"
+						action="#{exibirGlossarioBean.detalharTermo(linhaTresRegistros.registroEsquerda.id)}">
+						<f:param name="interna" value="dicionario" />
+						<f:param name="subinterna" value="detalhe" />
+					</h:commandLink>
+				</p>
+			</div>
+			<div class="atlas-geral-miolo-glossario-bloco">
+				<p class="atlas-geral-miolo-glossario-titulo">
+					<h:commandLink value="#{linhaTresRegistros.registroCentro.nome}"
+						action="#{exibirGlossarioBean.detalharTermo(linhaTresRegistros.registroCentro.id)}">
+						<f:param name="interna" value="dicionario" />
+						<f:param name="subinterna" value="detalhe" />
+					</h:commandLink>
+				</p>
+			</div>
+			<div class="atlas-geral-miolo-glossario-bloco">
+				<p class="atlas-geral-miolo-glossario-titulo">
+					<h:commandLink value="#{linhaTresRegistros.registroDireita.nome}"
+						action="#{exibirGlossarioBean.detalharTermo(linhaTresRegistros.registroDireita.id)}">
+						<f:param name="interna" value="dicionario" />
+						<f:param name="subinterna" value="detalhe" />
+					</h:commandLink>
+				</p>
+			</div>
+		</ui:repeat>
+	</div>
+
+</div>
+</html>

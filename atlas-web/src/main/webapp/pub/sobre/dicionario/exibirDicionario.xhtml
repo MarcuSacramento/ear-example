@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > <h:link title="SOBRE" value="SOBRE" outcome="/pub/sobre/exibirSobre.xhtml" /> > ABC dos Direitos</ui:define>
+	<ui:define name="conteudo">
+	
+	<f:metadata>
+		<f:viewParam name="subinterna" value="#{menuBean.subInterna}" />
+	</f:metadata>
+	
+	<h:panelGroup rendered="#{menuBean.subInternaConsulta}">
+		<ui:include src="/pub/sobre/dicionario/exibirDicionarioConsulta.xhtml" />
+	</h:panelGroup> 
+	
+ 	<h:panelGroup rendered="#{menuBean.subInternaDetalhe}">
+		<ui:include src="/pub/sobre/dicionario/exibirDicionarioDetalhe.xhtml" />
+	</h:panelGroup>
+
+	</ui:define>
+</ui:composition>

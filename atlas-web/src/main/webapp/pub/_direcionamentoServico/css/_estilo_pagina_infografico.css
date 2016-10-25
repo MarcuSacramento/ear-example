@@ -1,0 +1,99 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação da página infografico                                                       **
+** @data: 09/06/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+div.atlas-miolo-conteudo-bloco-linha-infografico{
+	clear: both;
+	min-height: 300px;
+	margin-bottom: 4em;
+}
+
+div.atlas-miolo-conteudo-bloco-aplicativos{
+	float: left;
+	width: 33%;
+	padding: 3em;
+}
+
+	div.atlas-miolo-conteudo-bloco-aplicativos-imagem{
+		text-align: center;	
+		padding: 1em;
+		
+	}
+	
+		div.atlas-miolo-conteudo-bloco-aplicativos-imagem img{
+			box-shadow: 0px 0px 5px rgba(206,206,191,1);
+			-moz-border-radius: 0.5em;
+			-webkit-border-radius: 0.5em;
+			border-radius: 0.5em;
+		
+		}
+		
+		div.atlas-miolo-conteudo-bloco-aplicativos-texto{
+		text-align: left;	
+		padding: 2em 3em;
+	}
+
+		div.atlas-miolo-conteudo-bloco-aplicativos-texto a{
+		
+			font-size: 1.5em;
+			text-decoration: none;
+			color: rgba(21,89,191,1);
+		}
+		
+			div.atlas-miolo-conteudo-bloco-aplicativos-texto a:hover{
+			margin: 2em;
+				color: rgba(102,102,102,1);
+				text-decoration: none;
+				
+			}
+
+
+div.atlas-miolo-conteudo-bloco-infografico{
+	float: left;
+	width: 33%;
+}
+
+	div.atlas-miolo-conteudo-bloco-infografico-imagem{
+		text-align: center;	
+		padding: 1em;
+	}
+	
+		div.atlas-miolo-conteudo-bloco-infografico-imagem img{
+			box-shadow: 0px 0px 5px rgba(206,206,191,1);
+			-moz-border-radius: 0.5em;
+			-webkit-border-radius: 0.5em;
+			border-radius: 0.5em;
+		}
+	
+	div.atlas-miolo-conteudo-bloco-infografico-texto{
+		text-align: left;	
+		padding: 1em 2em;
+	}
+	
+		p.atlas-miolo-conteudo-bloco-infografico-texto-titulo{
+			font-size: 1.1em !important;
+			font-family: "open_sansbold", Arial, Helvetica, sans-serif !important;
+			color: rgba(0,0,0,1);
+			text-transform: uppercase;
+		}
+	
+		div.atlas-miolo-conteudo-bloco-infografico-texto a{
+			font-size: 1.5em;
+			text-decoration: none;
+			color: rgba(21,89,191,1);
+		}
+		
+			div.atlas-miolo-conteudo-bloco-infografico-texto a:hover{
+				color: rgba(102,102,102,1);
+				text-decoration: none;
+			}
+
+div.atlas-geral-miolo-filtro-indicador-resultado{
+	text-align: center;
+	background: rgba(238,239,241,1);
+}

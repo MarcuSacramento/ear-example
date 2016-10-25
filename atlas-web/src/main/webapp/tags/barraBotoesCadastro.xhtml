@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition>
+	
+		<div class="atlas_linha_acoes">
+			<ui:insert />
+			<div class="atlas-miolo-logado-inline">
+				<h:commandButton value="#{bean.entidade.id == null ? 'CADASTRAR' : 'SALVAR'}"
+				action="#{bean.salvar()}" styleClass="atlas-button-interno"	partialSubmit="false" process="@form" update="@form" 
+				rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador(funcionalidade)}" style="font-size: 1.2em !important;"
+				/>
+			</div>
+			
+			<div class="atlas-miolo-logado-inline">
+				<h:commandButton action="#{bean.cancelar()}" value="CANCELAR" styleClass="atlas-button-interno" partialSubmit="true" 
+					process="@form"	update="@form" immediate="true" style="font-size: 1.2em !important;"/>
+			</div>
+		</div>
+	
+	</ui:composition>
+</html>

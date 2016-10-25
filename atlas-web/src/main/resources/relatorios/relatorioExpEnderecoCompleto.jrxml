@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioExpEnderecoCompleto" pageWidth="1500" pageHeight="595" orientation="Landscape" columnWidth="1500" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0cccc067-76a3-47ad-ba9a-d6c3f6a6d230">
+	<property name="ireport.zoom" value="0.620921323059155"/>
+	<property name="ireport.x" value="212"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="MUNICIPIO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ESTADO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select u.cod_uf,
+       m.nme_municipio,
+       o.nme_orgao,
+       o.cod_sigla_orgao,
+       t.nme_tipo_orgao,
+       case
+         when o.ind_situacao = '0' then 'Proposto'
+	 when o.ind_situacao = '1' then 'Em análise'
+	 when o.ind_situacao = '2' then 'Disponível'
+	 else 'Não é uma porta da justiça'
+       end situacao,
+       o.dsc_endereco,
+       o.dsc_bairro,
+       o.nu_cep,
+       o.nme_homepage,
+       '('||MIN(fone.nu_ddd)||')'|| MIN(fone.nu_telefone) telefone,
+       o.dta_cadastro,
+       o.dta_atualizacao
+from atlas.orgao o
+join atlas.tipo_orgao t on t.id_tipo_orgao = o.id_tipo_orgao
+left join atlas.municipio m on m.id_municipio = o.id_municipio
+left join atlas.uf u on u.id_uf = m.id_uf
+left join atlas.telefone fone on fone.id_orgao = o.id_orgao
+WHERE
+  1 = 1
+  AND CASE WHEN $P{ESTADO} IS NOT NULL THEN u.cod_uf = $P{ESTADO} ELSE 1 = 1 END
+  AND CASE WHEN $P{MUNICIPIO} IS NOT NULL THEN m.nme_municipio = $P{MUNICIPIO} ELSE 1 = 1 END
+group by o.id_orgao,o.cod_sigla_orgao, t.nme_tipo_orgao, o.ind_situacao,
+       o.dsc_desinencia,o.nme_orgao, u.cod_uf, m.nme_municipio,
+       o.dsc_endereco,o.dsc_bairro, o.nu_cep, o.nme_homepage,
+       o.dta_cadastro,o.dta_atualizacao,o.dsc_desinencia
+order by 1,2,3,4]]>
+	</queryString>
+	<field name="cod_uf" class="java.lang.String"/>
+	<field name="nme_municipio" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome do município.]]></fieldDescription>
+	</field>
+	<field name="nme_orgao" class="java.lang.String"/>
+	<field name="cod_sigla_orgao" class="java.lang.String">
+		<fieldDescription><![CDATA[Sigla que identifica o órgão.]]></fieldDescription>
+	</field>
+	<field name="nme_tipo_orgao" class="java.lang.String">
+		<fieldDescription><![CDATA[Representa os tipos de órgão existentes.]]></fieldDescription>
+	</field>
+	<field name="situacao" class="java.lang.String"/>
+	<field name="dsc_endereco" class="java.lang.String">
+		<fieldDescription><![CDATA[Detalhamento do endereço do órgão.]]></fieldDescription>
+	</field>
+	<field name="dsc_bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[Detalhamento do bairro do orgao.]]></fieldDescription>
+	</field>
+	<field name="nu_cep" class="java.lang.String">
+		<fieldDescription><![CDATA[Número do Código de Endereço Postal do Órgão.]]></fieldDescription>
+	</field>
+	<field name="nme_homepage" class="java.lang.String">
+		<fieldDescription><![CDATA[Endereço da página pessoal (sítio) do órgão.]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String"/>
+	<field name="dta_cadastro" class="java.sql.Date">
+		<fieldDescription><![CDATA[Data de cadastro do Calendário.]]></fieldDescription>
+	</field>
+	<field name="dta_atualizacao" class="java.sql.Date">
+		<fieldDescription><![CDATA[Data de atualização dos dados do órgão.]]></fieldDescription>
+	</field>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="28" height="20" uuid="6e990089-f9d2-4938-8b8c-498702c09d81"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="2" width="88" height="20" uuid="ab7c373d-4fbf-4f86-926a-e7dbfa6ddc5d"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MUNICIPIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="2" width="195" height="20" uuid="260514e3-a5ea-4e7b-8f62-b73015b70d6c"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORGAO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="2" width="60" height="20" uuid="adc60a18-435d-46fa-9be1-b7304dfb8200"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIGLA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="2" width="100" height="20" uuid="2742be58-b991-4f88-b97a-6d6a7bc01109"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="471" y="2" width="54" height="20" uuid="ba707dcb-def5-4262-a044-dd717d80564d"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SITUAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="551" y="2" width="274" height="20" uuid="9b7477bb-a467-4be6-bf22-435bbfa8e7dc"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENDEREÇO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="825" y="2" width="56" height="20" uuid="9ae8fb5b-f09a-4559-a816-95702a1e41e0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BAIRRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="881" y="2" width="46" height="20" uuid="a5e850d9-b91c-4023-9ecb-035e4b07c597"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="927" y="2" width="230" height="20" uuid="ae52c171-c201-436e-baad-159462d6e958"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HOMEPAGE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1157" y="2" width="105" height="20" uuid="2763038e-8979-41ae-aa5e-5cc2615d13ba"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1262" y="2" width="87" height="20" uuid="4f4d44bc-4842-4377-8d46-58d99f7c399d"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CADASTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1349" y="2" width="73" height="20" uuid="c140b4e1-04d9-4a57-b609-b5256d75b041"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATUALIZAÇÃO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="28" y="0" width="88" height="20" uuid="c2235f20-7590-4683-b5df-ce9821fbb54c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nme_municipio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="116" y="0" width="195" height="20" uuid="8c875305-7ab5-4490-8db0-cb203f314551"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nme_orgao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="311" y="0" width="60" height="20" uuid="7926ce03-c762-4d3b-adbe-2f998c44e83a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_sigla_orgao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="371" y="0" width="100" height="20" uuid="08dffbcb-afe1-4b58-822c-c193abf0e1e6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nme_tipo_orgao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="471" y="0" width="54" height="20" uuid="7bcb5930-f0ae-4ebb-93c0-16136acd1070"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{situacao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="551" y="0" width="274" height="20" uuid="bf65d045-12aa-4db5-980c-3e8ed65a98e1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dsc_endereco}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="28" height="20" uuid="c922b4f8-9cbf-454b-9cfb-ca52bbba1aad"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_uf}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="825" y="0" width="56" height="20" uuid="fdeef7ee-4e2a-4cda-b99e-4414c640d3cd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dsc_bairro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="881" y="0" width="46" height="20" uuid="7c72f9f3-abef-495a-9a43-2b3a9d40cc4e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nu_cep}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="927" y="0" width="230" height="20" uuid="8cb5becb-a506-4784-bf59-807d5c0d3373"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nme_homepage}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1157" y="0" width="105" height="20" uuid="1433803f-115e-4415-a99d-8a04d7d71f2d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1262" y="0" width="87" height="20" uuid="fb21a23d-030f-4a34-a80e-91a8f84e288c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dta_cadastro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1349" y="0" width="73" height="20" uuid="93f91f50-4172-4d2f-b11c-757b01720023"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dta_atualizacao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

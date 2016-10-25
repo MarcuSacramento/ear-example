@@ -1,0 +1,139 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação do menu lateral                                                           **
+** @data: 20/05/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+/* Formatação da área do menu lateral */
+nav.atlas-menu-lateral{
+	width: 150px;
+	float: left;
+}
+
+/* Formatação do título do container - Menu Lateral */
+nav.atlas-menu-lateral h1{
+	display: none;
+}
+
+/* Formatação dos título do bloco de destaque */
+nav.atlas-menu-lateral-bloco-destaque h2{
+	display: none;
+}
+
+/* Formatação dos títulos dos blocos */
+nav.atlas-menu-lateral h2 {
+	border-top: 4px solid rgba(22,89,191,1);
+	border-bottom: 1px solid rgba(223,223,223,1);
+	color: rgba(22,89,191,1);
+	margin: 0;
+	padding: 8px 8px 24px 10px;
+	background: #edeff1;
+	text-transform: uppercase;
+	font-weight: normal;
+	font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+}
+
+/* Formatação da listagem do bloco de destaque */
+nav.atlas-menu-lateral-bloco-destaque ul{
+	margin-bottom: 5em;
+	border-bottom: 1px solid rgba(223,223,223,1);
+}
+
+	/* Formatação dos itens da listagem do bloco de destaque */
+	nav.atlas-menu-lateral-bloco-destaque li{
+		margin: 0;
+		padding: 0.55em 0;
+		border-top: 1px solid rgba(223,223,223,1);
+		border-bottom: none;
+		list-style: none;
+	}
+	
+	/* Formatação dos links dos itens da listagem do bloco de destaque */
+	nav.atlas-menu-lateral-bloco-destaque li a{
+		font-size: 1.4em;
+		text-decoration: none;
+		color: rgba(44,102,206,1);
+	}
+
+/* Formatação da listagem dos blocos de menu */
+nav.atlas-menu-lateral-bloco ul{
+	margin-bottom: 5em;
+}
+
+	/* Formatação dos itens da listagem do bloco de menu */
+	nav.atlas-menu-lateral-bloco li{
+		margin: 0;
+		padding: 0.55em 1.043em;
+		border-bottom: 1px solid rgba(223,223,223,1);
+		list-style: none;
+	}
+	
+	/* Formatação dos links dos itens da listagem do bloco de menu */
+	nav.atlas-menu-lateral-bloco li a{
+		font-size: 1.4em;
+		text-decoration: none;
+		color: rgba(23,41,56,1);
+	}
+
+/* Formatação da listagem dos blocos do menu central de conteúdo */
+nav.atlas-menu-lateral-bloco-central-de-conteudo ul{
+	margin-bottom: 5em;
+}
+
+	/* Formatação dos itens da listagem do bloco do menu central de conteúdo */
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li{
+		margin: 0;
+		padding: 0.55em 0;
+		border-bottom: 1px solid rgba(223,223,223,1);
+		list-style: none;
+	}
+	
+	/* Formatação dos links dos itens da listagem do bloco do menu central de conteúdo */
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li a{
+		font-size: 1.4em;
+		text-decoration: none;
+		color: rgba(23,41,56,1);
+	}
+	
+	/* Formatação das imagens dos links dos itens da listagem do bloco do menu central de conteúdo */
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li img{
+		border: none;
+		vertical-align: middle;
+		padding: 0 0.943em 0 0 ;
+	}
+	
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li img.atlas-menu-lateral-bloco-central-de-conteudo-publicacoes{
+		width: 40px;
+		height: 40px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-image: url(../../../pub/_imagens/_menu/ico_publicacoes.png);
+	}
+	
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li img.atlas-menu-lateral-bloco-central-de-conteudo-aplicativos{
+		width: 40px;
+		height: 40px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-image: url(../../../pub/_imagens/_menu/ico_aplicativos.png);
+	}
+	
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li img.atlas-menu-lateral-bloco-central-de-conteudo-infograficos{
+		width: 40px;
+		height: 40px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-image: url(../../../pub/_imagens/_menu/ico_infograficos.png);
+	}
+	
+	nav.atlas-menu-lateral-bloco-central-de-conteudo li img.atlas-menu-lateral-bloco-central-de-conteudo-videos{
+		width: 40px;
+		height: 40px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-image: url(../../../pub/_imagens/_menu/ico_videos.png);
+	}

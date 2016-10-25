@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<style>
+		.linha{
+			display: block;
+			clear: both;
+			border-bottom: 1px solid rgba(22,89,191,1);
+			min-height: 60px;
+			padding-top: 0.8em;
+			background-color: rgba(238,239,241,1);
+		}
+	</style>
+		
+	<h:panelGroup>
+			
+		<p:messages redisplay="false" autoUpdate="true"
+		infoClass="atlas-mensagem-positivo"
+		warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+		
+	<div class="atlas_linha">
+		<div>
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<p>1. Caso as coordenadas estejam sem informação, o mapa só aparecerá após SALVAR o órgão.</p>
+				<p>2. Se o local indicado no mapa não corresponder ao endereço do órgão, o ponteiro poderá ser "arrastado" até o local correto.</p>
+			</div>
+		</div>
+		<div class="atlas-miolo-logado-linha">
+			<div class="atlas-miolo-logado-linha-label-dual">
+				<label for="atlas-formulario-orgao-latitude" style="font-size:1.2em; color: rgb(0, 0, 0);">Latitude:</label><br />
+			</div>
+		
+			<div class="atlas-miolo-logado-linha-campo-dual">
+				<pe:inputNumber decimalSeparator="." id="inputCoordenadaLatitude"
+					thousandSeparator=";" minValue="-99.9999999"
+					maxValue="99.9999999"
+					value="#{manterOrgaoBean.entidade.latitude}" decimalPlaces="7"
+					title="Informe o Latitude do Endereço"
+					style="	width: 165px !important; height: 23px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						font-family: Verdana, Geneva, sans-serif !important; box-shadow:none;">
+		
+				</pe:inputNumber>
+				<p:watermark for="inputCoordenadaLatitude" value="Latitude do Endereço" />
+			</div>
+		
+			<div class="atlas-miolo-logado-linha-label-dual">
+				<label for="atlas-formulario-orgao-longitude" style="font-size:1.2em; color: rgb(0, 0, 0);">Longitude:</label><br />
+			</div>
+		
+			<div
+				class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha">
+				<pe:inputNumber decimalSeparator="." id="inputCoordenadaLongitude"
+					thousandSeparator=";" minValue="-999.9999999"
+					maxValue="999.9999999"
+					value="#{manterOrgaoBean.entidade.longitude}" decimalPlaces="7"
+					title="Informe o Longitude do Endereço"
+					name="atlas-formulario-orgao-longitude"
+					style="	width: 165px !important; height: 23px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						font-family: Verdana, Geneva, sans-serif !important; box-shadow:none;">
+				</pe:inputNumber>
+				<p:watermark for="inputCoordenadaLongitude"
+					value="Longitude do Endereço" />
+			</div>
+		
+		</div>
+		<div class="linha">
+			<div class="atlas-miolo-logado-linha-label-dual">
+				<h:selectManyCheckbox value="#{manterOrgaoBean.parametrosPesquisaMapa}" style="font-size:0.9em; color: rgb(0, 0, 0);">
+					<f:selectItem itemValue="N" itemLabel="Nome"/>
+					<f:selectItem itemValue="E" itemLabel="Endereço"/>
+					<f:selectItem itemValue="C" itemLabel="CEP"/>
+				</h:selectManyCheckbox>
+			</div>
+			<div class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha">
+				<p:commandButton actionListener="#{manterOrgaoBean.pesquisarCoordenadasAction}"
+					value="PESQUISAR"
+					update="mapa inputCoordenadaLatitude inputCoordenadaLongitude messages">
+				</p:commandButton>
+			</div>
+		</div>
+		<!--================================ MAPA COM A MARCAÇÃO DA LATITUDE/LONGITUDE DO ÓRGÃO ================================-->
+		<div class="atlas-miolo-logado-linha ">
+			<h:outputText value="Local do órgao informado no mapa!" rendered="#{manterOrgaoBean.entidade.latitudeLongitudePreenchido}" />
+			<br />
+			<h:panelGroup>
+				<p:gmap id="mapa"
+					rendered="#{manterOrgaoBean.entidade.latitudeLongitudePreenchido}"
+					center="#{manterOrgaoBean.entidade.latitude}, #{manterOrgaoBean.entidade.longitude}"
+					zoom="#{manterOrgaoBean.zoom}" type="ROADMAP"
+					widgetVar="cliMap" fitBounds="true"
+					model="#{manterOrgaoBean.draggableModel}"
+					style="width:100%;height:400px">
+					
+					<p:ajax event="overlaySelect" listener="#{manterOrgaoBean.onMarkerSelect}" />
+					<p:ajax event="markerDrag"
+						listener="#{manterOrgaoBean.onMarkerDrag}"
+						update="inputCoordenadaLatitude inputCoordenadaLongitude" />
+	
+					<p:gmapInfoWindow>
+						<div style="text-align: center; display: block; height: 190px; overflow: hidden;">
+		
+							<h:outputText value="#{manterOrgaoBean.marker.title}"
+								style="font-weight: bold;" />
+							<br />
+							<h:outputText
+								value="#{manterOrgaoBean.marker.data.endereco}" />
+							<br />
+							<h:outputText
+								value="#{manterOrgaoBean.marker.data.bairro}" />
+							<br />
+							<h:outputText
+								value="	#{manterOrgaoBean.marker.data.municipio.nome} - 
+										#{manterOrgaoBean.marker.data.municipio.uf.sigla}, 
+										#{manterOrgaoBean.marker.data.cep}" />
+							<br /> <a
+								href="#{manterOrgaoBean.marker.data.homePage}"
+								target="_blank">Website</a> <br /> <br />
+							<br />
+						</div>
+					</p:gmapInfoWindow>
+				</p:gmap>
+			</h:panelGroup>
+		</div>
+	</div>
+	</h:panelGroup>
+
+</ui:composition>

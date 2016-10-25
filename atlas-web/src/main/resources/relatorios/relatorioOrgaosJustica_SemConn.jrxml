@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioOrgaosJustica" columnCount="2" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="270" columnSpacing="15" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e5707e07-cdc5-413f-a742-0f656ba3b0e7">
+	<property name="ireport.zoom" value="1.1000000000000012"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="ESTADO" class="java.lang.String"/>
+	<parameter name="MUNICIPIO" class="java.lang.String"/>
+	<parameter name="FUNDO" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="municipio.nome" class="java.lang.String"/>
+	<field name="municipio.uf.nome" class="java.lang.String"/>
+	<field name="cep" class="java.lang.String"/>
+	<field name="contatosFormatados" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="81" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="61" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="ff4afc52-c0fc-4316-bc2f-a07f4f1a91c1"/>
+				<textElement markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Órgãos encontrados para o Estado: "+($P{ESTADO}==null?"":$P{ESTADO})+", Município: "+($P{MUNICIPIO}==null?"":$P{MUNICIPIO})]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape">
+				<reportElement x="0" y="0" width="555" height="48" uuid="87f85e01-3e7c-49b8-b71b-9fcf71a0b861"/>
+				<imageExpression><![CDATA[$P{FUNDO}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="0" y="0" width="171" height="48" uuid="5b9eeb07-ef8a-4b90-ad3a-c5c937ae72fe"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="57" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="0" width="269" height="11" isPrintWhenDetailOverflows="true" forecolor="#006633" uuid="320a88f6-aa5d-4c09-b2ee-b889f7d086b7"/>
+				<textElement>
+					<font size="8" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="11" width="269" height="13" isPrintWhenDetailOverflows="true" uuid="56b84da1-9571-4ff4-9b57-c9ea23486a42"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="24" width="269" height="13" isPrintWhenDetailOverflows="true" uuid="9df79796-0114-4103-9229-dd40d3b5efcf"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{municipio.nome}+" - "+$F{municipio.uf.nome}+($F{cep}==null?"":", "+$F{cep}+".")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="37" width="269" height="20" isPrintWhenDetailOverflows="true" uuid="c77800fa-1c65-44e5-812f-480a7464966d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contatosFormatados}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="08869e3d-6e83-4d2e-9a21-b6ef6f70e036"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="69d4a115-2e72-423f-b55f-e16b1069e86d"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="34" width="100" height="20" uuid="55da0524-67f5-416f-90ff-768f56e93f9a"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="34" uuid="1c0a7c03-d920-4e17-b03b-fee255eedc82"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="8" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Atlas de Acesso à Justiça
+Desenvolvido em acordo de Cooperação Técnica da Secretaria de Reforma do Judiciário/MJ e FUB/CDT/Laboratório Latitude
+Esplanada dos Ministérios, Bloco T, Edifício Sede. CEP: 70064-900. Brasília-DF.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<div
+		class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+		<div class="atlas-miolo-logado-linha-label-full">
+			<label style="font-size:1.2em; color: rgb(0, 0, 0);">Órgão superior:</label><br />
+		</div>
+		<div class="atlas-miolo-logado-linha-campo-full">
+			<h:panelGroup id="pnl-orgao-superior" layout="block">
+		       	<p:commandButton value="Informar órgão superior" 
+				       	onclick="dlgPesqOrgaoSuperior.show();" 
+			       		actionListener="#{manterOrgaoBean.limparFiltroDlgOrgao}"
+			       		rendered="#{manterOrgaoBean.entidade.orgaoSuperior eq null}" 
+			       		update="pnlFiltroOrgao pnlFiltroResultado" />
+				<h:outputText value="#{manterOrgaoBean.entidade.orgaoSuperior.nomeReduzido} " rendered="#{manterOrgaoBean.entidade.orgaoSuperior ne null}"/>
+				<p:commandButton value="" onclick="dlgDetalharOrgaoSuperior.show();" update="pnl-detalhar-orgao-superior"
+								style="height: 22px !important; display: inline !important;" styleClass="detalhar" 
+								rendered="#{manterOrgaoBean.entidade.orgaoSuperior ne null}"/>
+				<p:commandButton actionListener="#{manterOrgaoBean.removerOrgaoSuperior}" value="" update="pnl-orgao-superior pnl-detalhar-orgao-superior"
+								style="height: 22px !important; display: inline !important;" styleClass="icone" 
+								rendered="#{manterOrgaoBean.entidade.orgaoSuperior ne null}"/>
+			</h:panelGroup>
+		</div>
+	</div>
+
+	<ui:include src="/admin/conteudo/enderecosJustica/dlgInformarOrgaoSuperior.xhtml" />
+	<ui:include src="/admin/conteudo/enderecosJustica/dlgDetalharOrgaoSuperior.xhtml" />
+
+	<div class="atlas-miolo-logado-linha" style="height: 178px;">
+		<div class="atlas-miolo-logado-linha-label-full">
+			<label for="inputTema" style="font-size:1.2em; color: rgb(0, 0, 0);">Tema:</label><br />
+		</div>
+		<div class="atlas-miolo-logado-linha-campo-dual">
+			<p:pickList immediate="true" id="inputTema"
+				value="#{manterOrgaoBean.temasList}" var="tema"
+				itemLabel="#{tema.nome}" itemValue="#{tema}"
+				converter="selectItemConverter"
+				style="  font-size: 1.2em !important; 
+				vertical-align: middle !importanty;"
+				styleClass="atlas-select-formata atlas-select-240"
+				title="Selecione o(s) tema(s) do Órgão" />
+		</div>
+	</div>
+	
+	<div
+		class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+		<div class="atlas-miolo-logado-linha-label-full">
+			<label for="atlas-formulario-orgao-site" style="font-size:1.2em; color: rgb(0, 0, 0);">Site:</label><br />
+		</div>
+		<div class="atlas-miolo-logado-linha-campo-full">
+			<h:inputText maxlength="512" id="atlas-formulario-orgao-site"
+				name="atlas-formulario-orgao-site"
+				value="#{manterOrgaoBean.entidade.homePage}"
+				style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+				border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+				box-shadow:none; width: 520px !important; font-size: 1.1em !important;"
+				styleClass="atlas-input-formata atlas-input-520" />
+			<p:watermark for="atlas-formulario-orgao-site"
+				value="Site do Órgão" />
+		</div>
+	</div>
+	
+	<div class="atlas-miolo-logado-linha">
+		<div class="atlas-miolo-logado-linha-label-full">
+			<label for="atlas-formulario-orgao-email" style="font-size:1.2em; color: rgb(0, 0, 0);">E-mail
+				Institucional:</label><br />
+		</div>
+	
+		<div class="atlas-miolo-logado-linha-campo-full">
+			<h:inputText maxlength="512" id="atlas-formulario-orgao-email"
+				name="atlas-formulario-orgao-email"
+				title="Informe o e-mail Institucional do Órgão"
+				style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+				border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+				box-shadow:none; width: 520px !important; font-size: 1.1em !important;"
+				value="#{manterOrgaoBean.entidade.descricaoEmailInstitucional}"
+				styleClass="atlas-input-formata atlas-input-520" />
+			<p:watermark for="atlas-formulario-orgao-email"
+				value="e-Mail Institucional" />
+		</div>
+	
+	</div>
+	
+	<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+		<div class="atlas-miolo-logado-linha-label-dual">
+			<label for="atlas-formulario-orgao-telefone-ddd-01" style="font-size:1.2em; color: rgb(0, 0, 0);">Telefone
+				(01):</label><br />
+	
+		</div>
+	
+		<div class="atlas-miolo-logado-linha-campo-dual-telefone">
+			<p:inputMask id="atlas-formulario-orgao-telefone-ddd-01"
+				value="#{manterOrgaoBean.entidade.primeiroDdd}" mask="999"
+				title="Informe o DDD do Telefone do Órgão"
+				styleClass="atlas-input-formata atlas-input-30"
+				style="	width: 25px !important; height: 20px !important; background-color: rgb(0,0,0,1) !important;
+				border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+				font-family: Verdana, Geneva, sans-serif !important; margin: 0em 0.2em 0em !important; box-shadow:none;"
+				size="3" maxlength="3" />
+			<p:watermark for="atlas-formulario-orgao-telefone-ddd-01"
+				value="999" />
+	
+			<p:inputMask
+				value="#{manterOrgaoBean.entidade.primeiroNumeroTelefone}"
+				id="atlas-formulario-orgao-telefone-01" mask="9999-9999?9"
+				styleClass="atlas-input-formata atlas-input-110"
+				name="atlas-formulario-orgao-telefone-01"
+				title="Informe o Telefone (01) do Órgão"
+				style="	width: 120px !important; height: 20px !important; background-color: rgb(0,0,0,1) !important;
+					border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+					font-family: Verdana, Geneva, sans-serif !important; box-shadow:none;" />
+			<p:watermark for="atlas-formulario-orgao-telefone-01"
+				value="9999-9999" />
+	
+		</div>
+	
+		<div class="atlas-miolo-logado-linha-label-dual-telefone-tipo">
+			<label for="atlas-formulario-orgao-telefone-tipo-01" style="float: left !important; font-size: 1.2em !important; color: rgb(0, 0, 0) !important">Tipo:</label><br />
+		</div>
+		<div class="atlas-miolo-logado-linha-campo-dual-telefone-tipo atlas-miolo-logado-linha-campo-dual-alinha">
+			<h:selectOneMenu id="atlas-formulario-orgao-telefone-tipo-01"
+				value="#{manterOrgaoBean.entidade.primeiroTipoTelefone}"
+				styleClass="atlas-select-formata atlas-select-170"
+				title="Selecione o Tipo do Telefone (01) do Órgão"
+				style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+				border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+				box-shadow:none; font-size: 1.1em !important;">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItem itemLabel="Celular" itemValue="C" />
+				<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+				<f:selectItem itemLabel="Fax" itemValue="F" />
+			</h:selectOneMenu>
+		</div>
+	</div>
+	
+	<div
+		class="atlas-miolo-logado-linha">
+		<div class="atlas-miolo-logado-linha-label-dual">
+			<label for="atlas-formulario-orgao-telefone-ddd-02" style="font-size:1.2em; color: rgb(0, 0, 0);">Telefone
+				(02):</label><br />
+		</div>
+	
+		<div class="atlas-miolo-logado-linha-campo-dual-telefone">
+			<p:inputMask id="atlas-formulario-orgao-telefone-ddd-02"
+				value="#{manterOrgaoBean.entidade.segundoDdd}" mask="999"
+				title="Informe o DDD do Telefone do Órgão"
+				styleClass="atlas-input-formata atlas-input-30"
+				style="	width: 25px !important; height: 20px !important; background-color: rgb(0,0,0,1) !important;
+				border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+				font-family: Verdana, Geneva, sans-serif !important; margin: 0em 0.2em 0em !important; box-shadow:none;"
+				size="3" maxlength="3" />
+			<p:watermark for="atlas-formulario-orgao-telefone-ddd-02"
+				value="999" />
+	
+			<p:inputMask
+				value="#{manterOrgaoBean.entidade.segundoNumeroTelefone}"
+				id="atlas-formulario-orgao-telefone" mask="9999-9999?9"
+				styleClass="atlas-input-formata atlas-input-110"
+				name="atlas-formulario-orgao-telefone-1"
+				title="Informe o Telefone (01) do Órgão"
+				style="	width: 120px !important; height: 20px !important; background-color: rgb(0,0,0,1) !important;
+					border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+					font-family: Verdana, Geneva, sans-serif !important; box-shadow:none;" />
+			<p:watermark for="atlas-formulario-orgao-telefone"
+				value="9999-9999" />
+		</div>
+	
+		<div class="atlas-miolo-logado-linha-label-dual-telefone-tipo">
+			<label for="atlas-formulario-orgao-telefone-tipo-02" style="font-size:1.2em; color: rgb(0, 0, 0);">Tipo:</label><br />
+		</div>
+		<div class="atlas-miolo-logado-linha-campo-dual-telefone-tipo atlas-miolo-logado-linha-campo-dual-alinha">
+			<h:selectOneMenu id="atlas-formulario-orgao-telefone-tipo-02"
+				value="#{manterOrgaoBean.entidade.segundoTipoTelefone}"
+				styleClass="atlas-select-formata atlas-select-170"
+				title="Selecione o Tipo do Telefone (02) do Órgão"
+				name="atlas-formulario-orgao-telefone-tipo-02"
+				style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+				border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+				box-shadow:none; font-size: 1.1em !important;">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItem itemLabel="Celular" itemValue="C" />
+				<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+				<f:selectItem itemLabel="Fax" itemValue="F" />
+			</h:selectOneMenu>
+	
+		</div>
+	</div>
+</ui:composition>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+
+<h:body>
+	<div class="atlas-miolo-logado-filtro-linha">
+		<h:panelGroup class="atlas-coluna-filtro" id="atlas_coluna_filtro"
+				layout="block">
+				<table class="atlas-tabela-filtro">
+
+					<tbody>
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Nome do Parceiro: " /> <br /> <h:inputText
+									value="#{manterParceiroBean.termoPesquisa}" id="campoPesquisa"
+									styleClass="atlas-input-formata-fonte atlas-input-160" /></td>
+						</tr>
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2">
+							   	<p:commandButton
+									action="#{manterParceiroBean.pesquisarTermo()}" 
+									update=":form:atlas_linha:" 
+									value="PESQUISAR"/>									
+								 
+								<p:commandButton
+									action="#{manterParceiroBean.limparPesquisar()}" value="LIMPAR"
+									update=":form:atlas_coluna_filtro atlas_linha:">
+								</p:commandButton>
+							</td>
+								
+						</tr>
+					</tbody>
+				</table>
+			</h:panelGroup>
+	</div>	
+</h:body>
+
+</html>

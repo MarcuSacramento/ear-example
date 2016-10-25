@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>atlas-parent</artifactId>
+		<groupId>br.gov.atlas</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>atlas-ear</artifactId>
+	<packaging>ear</packaging>
+
+	<name>Atlas EAR module</name>
+
+	<properties>
+		<project.build.sourceEncoding>CP1252</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<wtp.version>3.5.2</wtp.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>artifactory-mj</id>
+			<url>http://cgtimaven.mj.gov.br/artifactory/repo/</url>
+			<snapshots>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>br.gov.atlas</groupId>
+			<artifactId>atlas-web</artifactId>
+			<type>war</type>
+      <scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.gov.atlas</groupId>
+			<artifactId>atlas-ejb</artifactId>
+			<type>ejb</type>
+      <scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>atlas-ear</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<webModule>
+							<groupId>br.gov.atlas</groupId>
+							<artifactId>atlas-web</artifactId>
+							<contextRoot>/atlas</contextRoot>
+						</webModule>
+					</modules>
+				</configuration>
+			</plugin>
+			<!-- <plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+				</configuration>
+			</plugin> -->
+		</plugins>
+	</build>
+	<profiles>
+	<profile>
+         <!-- Profile para subida da aplicação em desenvolvimento e teste a partir do repositório do MJ. Os parametros de Servidor e senhas são configurados via Jenkins-->
+         <id>dev-mj</id>
+         <build>
+            <finalName>${project.artifactId}</finalName>
+            <plugins>
+               <plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<version>6</version>
+						<defaultLibBundleDir>lib</defaultLibBundleDir>
+						<modules>
+							<webModule>
+								<groupId>br.gov.atlas</groupId>
+								<artifactId>atlas-web</artifactId>
+								<contextRoot>/atlas</contextRoot>
+							</webModule>
+						</modules>
+					</configuration>
+				</plugin>
+               <plugin>
+                  <groupId>org.wildfly.plugins</groupId>
+                  <artifactId>wildfly-maven-plugin</artifactId>
+                  <version>${wildfly.plugin.version}</version>
+                  <configuration>
+                     <hostname>${WILDFLYHOSTNAME}</hostname>
+                     <port>9990</port>
+                     <username>${WILDFLYUSERNAME}</username>
+                     <password>${WILDFLYPASSWORD}</password>
+                     <filename>${project.artifactId}.ear</filename>
+                     <domain>
+                        <server-groups>
+                           <server-group>${SERVERGROUP}</server-group>
+                        </server-groups>
+                        <profiles>
+                           <profile>ha</profile>
+                        </profiles>
+                     </domain>
+                     <afterDeployment>
+                        <commands>
+                           <command>/server-group=${SERVERGROUP}:restart-servers</command>
+                        </commands>
+                     </afterDeployment>
+                  </configuration>
+                  <executions>
+                     <execution>
+                        <id>undeploy</id>
+                        <phase>clean</phase>
+                        <goals>
+                           <goal>undeploy</goal>
+                        </goals>
+                        <configuration>
+                           <ignoreMissingDeployment>true</ignoreMissingDeployment>
+                        </configuration>
+                     </execution>
+                     <execution>
+                        <id>deploy</id>
+                        <phase>install</phase>
+                        <goals>
+                           <goal>deploy</goal>
+                        </goals>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+	</profiles>
+</project>

@@ -1,0 +1,207 @@
+
+div.atlas-cabecalho{
+	padding: 14px 0 0 0;
+	background-color: rgba(22,89,191,1);
+	color: #fff;
+}
+
+div.atlas-cabecalho-container{
+	width: 960px;
+	margin: 0 auto;
+	position: relative;
+    overflow: hidden;
+}
+
+div.atlas-cabecalho-container-linha{
+	width: 100%;
+	clear: both;
+}
+
+	nav.atlas-cabecalho-container-acessibilidade{
+		float: left;
+		width: 50%;
+		font-size: 1.1em;
+		font-family: Arial, Helvetica, sans-serif;
+		display: block !important;
+	}
+	
+		nav.atlas-cabecalho-container-acessibilidade a{
+			color: rgba(204,221,244,1);
+			text-decoration: none;
+			padding-right: 1em;
+		}
+		
+		nav.atlas-cabecalho-container-acessibilidade a:hover{
+			color: rgba(255,255,255,1);
+			transition: opacity 1s;
+		}
+		
+		nav.atlas-cabecalho-container-acessibilidade span{
+			background-color: rgba(204,221,244,0.7);
+			color: #0a1857;
+			padding: 0 3px;
+		}
+		
+		nav.atlas-cabecalho-container-acessibilidade ul{
+			list-style: none;
+		}
+	
+			nav.atlas-cabecalho-container-acessibilidade li{
+				display: inline;
+			}
+	
+	nav.atlas-cabecalho-container-acessibilidade-info{
+		float: right;
+		border-bottom: 1px dotted rgba(204,221,244,0.5);
+		font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+		font-size: 1.1em;
+		text-transform: uppercase;
+	}
+	
+		nav.atlas-cabecalho-container-acessibilidade-info ul{
+			list-style: none;
+		}
+		
+			nav.atlas-cabecalho-container-acessibilidade-info li{
+				display: inline;
+			}
+			
+			nav.atlas-cabecalho-container-acessibilidade-info li.atlas-cabecalho-container-acessibilidade-info-acessibilidade{
+				margin-right: 0.75em;
+			}
+			
+			nav.atlas-cabecalho-container-acessibilidade-info li.atlas-cabecalho-container-acessibilidade-info-alto-contraste{
+				margin-right: 0.75em;
+				margin-left: 0.75em;
+			}
+			
+			nav.atlas-cabecalho-container-acessibilidade-info li.atlas-cabecalho-container-acessibilidade-info-mapa-do-site{
+				margin-left: 0.75em;
+			}
+		
+		nav.atlas-cabecalho-container-acessibilidade-info a{
+			color: rgba(204,221,244,1);
+			text-decoration: none;
+		}
+		
+		nav.atlas-cabecalho-container-acessibilidade-info a:hover{
+			color: rgba(255,255,255,1);
+			transition: opacity 1s;
+		}
+
+div.atlas-cabecalho-container-orgao{
+	float: left;
+	width: 50%;
+	margin: 1.2em 0 2.4em 0;
+}
+
+div.atlas-cabecalho-container-orgao a{
+	color: rgba(255,255,255,1);
+	text-decoration: none;
+}
+
+	div.atlas-cabecalho-container-orgao h1{
+		font-size: 3.5em;
+		font-family: "open_sansextrabold", Arial, Helvetica, sans-serif;
+		line-height: 1em;
+		letter-spacing: -0.05em;
+		padding: 0.1em 0 0.2em 0;
+	}
+	
+	div.atlas-cabecalho-container-orgao h2{
+		font-size: 1.25em;
+		font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+	}
+	
+	div.atlas-cabecalho-container-orgao h3{
+		font-size: 1.35em;
+		font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+	}
+
+div.atlas-cabecalho-container-busca{
+	float: right;
+	display: block;
+	float: right;
+	clear: right !important;
+	margin: 1.22em 0 0 0;
+	padding: 0.28em;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #fff;
+	border: 1px solid #CCCCCC;
+}
+
+div.atlas-cabecalho-container-busca form{
+	white-space: nowrap;
+}
+
+	div.atlas-cabecalho-container-busca fieldset{
+		margin: 0;
+		padding: 0;
+		border: none;
+	}
+	
+	div.atlas-cabecalho-container-busca fieldset .atlas-cabecalho-form-busca-campo{
+		padding: 0.3em 0.35em;
+		width: 186px;
+		font-size: 1.2em;
+		font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+		border: none;
+	}
+	
+	div.atlas-cabecalho-container-busca fieldset .atlas-cabecalho-form-busca-botao{
+		background-image: url(../../../pub/../_imagens/_cabecalho/ico_busca.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		width: 20px;
+		height: 24px;
+		border: none;
+		background-color: rgba(255,255,255,1);
+		text-indent: -2000px;
+	}
+
+div.atlas-cabecalho-container-redes-sociais{
+	float: right;
+	clear: right;
+	margin: 1.2em 0;
+}
+
+	div.atlas-cabecalho-container-redes-sociais li.atlas-cabecalho-container-redes-sociais-item{
+		display: inline-block;
+	}
+
+	div.atlas-cabecalho-container-redes-sociais a{
+		display: block;
+		overflow: hidden;
+		margin: 0 0 0 5px;
+		width: 20px;
+		height: 20px;
+		border: none;
+		text-indent: 100%;
+		white-space: nowrap;
+		opacity: .85;
+		filter: alpha(opacity=85);
+		border-radius: 4px;
+	}
+	
+	div.atlas-cabecalho-container-redes-sociais a:hover{
+		opacity: 1;
+		filter: alpha(opacity=100);
+	}
+	
+	li.atlas-cabecalho-container-redes-sociais-twitter a{
+		background-image: url(../../../pub/_imagens/_cabecalho/ico_twitter.png);
+	}
+	
+	li.atlas-cabecalho-container-redes-sociais-facebook a{
+		background-image: url(../../../pub/_imagens/_cabecalho/ico_facebook.png);
+	}
+	
+	li.atlas-cabecalho-container-redes-sociais-flickr a{
+		background-image: url(../../../pub/_imagens/_cabecalho/ico_flickr.png);
+	}
+	
+	li.atlas-cabecalho-container-redes-sociais-youtube a{
+		background-image: url(../../../pub/_imagens/_cabecalho/ico_youtube.png);
+	}

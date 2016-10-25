@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas_form_arquivo.xhtml">
+
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="MULTIMÍDIA" value="MULTIMÍDIA" outcome="/admin/multimidia/exibirMultimidia.xhtml" /> > 
+		<h:link title="PUBLICAÇÕES" value="PUBLICAÇÕES >"	outcome="/admin/multimidia/publicacoes/exibirPublicacoes.xhtml" /> NOVA PUBLICAÇÃO
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<style>
+			div.div-miolo {
+				display: block;
+				clear: both;
+				border-bottom: 1px solid rgba(22,89,191,1);
+				min-height: 40px;
+				padding-top: 0.8em;
+			}
+			
+			.linha{
+				display: block;
+				clear: both;
+				border-bottom: 1px solid rgba(22,89,191,1);
+				min-height: 110px;
+				padding-top: 0.8em;
+			}
+		</style>
+
+		<div class="atlas-miolo-logado">
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"	warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />		
+		
+			<h2>Publicações</h2>
+
+			<h:head>
+				<title>Nova Publicação | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+			<p>Verifique e preencha os campos abaixo para atualizar o cadastro da Publicação:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Observações</legend>
+				<div class="atlas-miolo-logado-linha">
+					<span class="atlas-miolo-conteudo-observacao" style="font-size:1.1em; font-style: italic !important;">
+						*¹ Selecionar imagem: Tamanho máximo da imagem: 100Kb. Extensões permitidas:
+						PNG, GIF, JPEG. Dimensões recomendadas: 230x130px.
+						<br/>
+						*² Selecionar arquivo: Tamanho máximo do arquivo: 15MB. Extensões permitidas:
+						DOC, PDF, PPS, XLS.
+					</span>
+				</div>
+			</fieldset>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados da Publicação</legend>
+				<div class="atlas-miolo-logado-linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-publicacao-nome" style="font-size:1.2em">Publicação:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText maxlength="128" value="#{manterCartilhaBean.entidade.titulo}"
+							id="atlas-formulario-publicacao-nome" styleClass="atlas-input-formata atlas-input-520"
+							title="Informe o Título da Publicação" style="font-size: 1.2em !important;"/>
+						<p:watermark for="atlas-formulario-publicacao-nome"	value="Título da Publicação" />
+					</div>
+				</div>
+
+ 				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque atlas-miolo-logado-linha-campo-img">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-publicacao-capa" style="font-size:1.2em">Selecionar imagem:*¹</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<p:fileUpload id="atlas-formulario-publicacoes-marca"	
+							mode="simple"
+							value="#{manterCartilhaBean.arquivoImagemCartilha}"
+							style="font-size: 1em !important;" styleClass="atlas-input-formata atlas-input-520"/>	
+					</div>
+				</div> 
+ 
+				<div class="linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label style="font-size:1.2em">Imagem selecionada:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<p:outputPanel id="imgPublicacoes">
+							<p:graphicImage value="#{manterCartilhaBean.imagemOpen}" width="77"
+								height="99" rendered="#{manterCartilhaBean.entidade.byteArquivo != null}">
+								<f:param name="cartilhaId" value="#{manterCartilhaBean.entidade.id}" />
+							</p:graphicImage>
+						</p:outputPanel>
+					</div>
+				</div>
+				
+				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-publicacao-local-arquivo"
+							style="font-size: 1.2em">Local do arquivo:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:selectOneRadio id="atlas-formulario-publicacao-local-arquivo"
+							value="#{manterCartilhaBean.arquivoEmLink}">
+							<f:selectItem itemLabel="Link" itemValue="#{true}" />
+							<f:selectItem itemLabel="Upload" itemValue="#{false}" />
+							<f:ajax listener="#{manterCartilhaBean.alterarTipoLocalArquivo}" render="panelArquivo panelLinkArquivo panelArquivoUpload"/>
+						</h:selectOneRadio>
+					</div>
+				</div>
+
+				<h:panelGroup id="panelArquivo">
+					<h:panelGroup id="panelLinkArquivo" rendered="#{manterCartilhaBean.arquivoEmLink}">
+						<div class="atlas-miolo-logado-linha">
+							<div class="atlas-miolo-logado-linha-label-full">
+								<label for="atlas-formulario-publicacao-link" style="font-size:1.2em">Link do Arquivo:*</label><br />
+							</div>
+							<div class="atlas-miolo-logado-linha-campo-full">
+								<h:inputText maxlength="200" value="#{manterCartilhaBean.entidade.linkDoArquivoFisico}"
+									styleClass="atlas-input-formata atlas-input-520" id="atlas-formulario-publicacao-link"
+									style="font-size: 1.2em !important;" title="Informe o Link do Arquivo da Publicação"/>
+								<p:watermark for="atlas-formulario-publicacao-link"	value="http://" />
+							</div>
+						</div>
+					</h:panelGroup>
+						
+					<h:panelGroup id="panelArquivoUpload" rendered="#{!manterCartilhaBean.arquivoEmLink}">
+						<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-campo-img">
+							<div class="atlas-miolo-logado-linha-label-full">
+								<label for="atlas-formulario-publicacao-arquivo" style="font-size:1.2em">Selecionar arquivo:*²</label><br />
+							</div>
+							<div class="atlas-miolo-logado-linha-campo-full">
+								<p:fileUpload id="atlas-formulario-publicacao-arquivo"	
+									mode="simple"
+									value="#{manterCartilhaBean.arquivoCartilha}"
+									style="font-size: 1em !important;" styleClass="atlas-input-formata atlas-input-520"/>	
+							</div>
+						</div>
+					</h:panelGroup>
+				</h:panelGroup>
+								
+				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-publicacao-indicador-consumidor"
+							style="font-size: 1.2em">Direito do consumidor:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:selectOneRadio id="atlas-formulario-publicacao-indicador-consumidor"
+							value="#{manterCartilhaBean.entidade.indicadorConsumidor}">
+							<f:selectItem itemLabel="Sim" itemValue="S" />
+							<f:selectItem itemLabel="Não" itemValue="N" />
+						</h:selectOneRadio>
+					</div>
+				</div>
+			</fieldset>
+
+			<div class="atlas-miolo-logado-lista-acoes">
+				<div class="atlas-miolo-logado-inline">
+					<atlas:barraBotoesCadastro bean="#{manterCartilhaBean}" funcionalidade="005" />
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+

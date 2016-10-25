@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+	
+<style>
+div.atlas-miolo-logado-linha-label-full-filtro{
+	float: left !important;
+	width: 150px!important;
+}
+</style>
+	
+	<p:panel header="Órgãos" id="pnlOrgaosRelacionados">
+       	<p:commandButton value="Pesquisar órgãos" onclick="dlgPesqOrgao.show();" 
+       		actionListener="#{manterUsuarioBean.limparPesquisaOrgao}" update="pnlFiltroResultado pnlFiltroOrgao"
+       		rendered="#{manterUsuarioBean.isPerfilMaster()}"/>
+       	<h:outputText value=" "/>
+		<p:commandButton value="Remover relacionamento" rendered="#{not empty manterUsuarioBean.orgaosUsuario}" 
+			actionListener="#{manterUsuarioBean.removerRelacionamento}" update="pnlOrgaosRelacionados"/>
+		<p:dataTable var="orgao" value="#{manterUsuarioBean.orgaosUsuario}" id="listarOrgaosUsuario"
+			rendered="#{not empty manterUsuarioBean.orgaosUsuario}"
+			rowKey="#{orgao.id}"
+			scrollable="true" scrollHeight="250"
+			selection="#{manterUsuarioBean.orgaosUsuarioSelecionados}">
+
+			<p:column width="5%" selectionMode="multiple" style="text-align:center" />
+			
+			<p:column width="45%" headerText="Nome Órgão">
+				<h:outputText value="#{orgao.nome}"/>
+			</p:column>
+
+			<p:column width="20%" headerText="Tipo Órgão">
+				<h:outputText value="#{orgao.tipoOrgao.nome}" />
+			</p:column>
+
+			<p:column width="15%" headerText="Estado">
+				<h:outputText value="#{orgao.municipio.uf.sigla}" />
+			</p:column>
+
+			<p:column width="15%" headerText="Municipio">
+				<h:outputText value="#{orgao.municipio.nome}" />
+			</p:column>
+		</p:dataTable>
+	</p:panel>
+	<!-- ================================== DIALOG FILTRO DE ÓRGÃO ================================== -->
+	<p:dialog header="Pesquisar órgãos" widgetVar="dlgPesqOrgao" width="800px;" height="600px;" style="z-index:5;" resizable="false">
+		<p:panel id="pnlFiltroOrgao">
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full-filtro">
+					<label for="atlas-formulario-usuario-filtro-nome-orgao" style="font-size:1.2em; color: rgb(0, 0, 0);">Nome do órgão:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual">
+					<p:inputText id="atlas-formulario-usuario-filtro-nome-orgao" value="#{manterUsuarioBean.nomeOrgaoPesquisa}"
+						styleClass="atlas-input-formata" 
+						label="atlas-formulario-usuario-filtro-nome-orgao"
+						style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 158px !important; font-size: 1.1em !important;"/>
+				</div>
+	
+				<div class="atlas-miolo-logado-linha-label-dual">
+					<label for="atlas-formulario-usuario-filtro-coordenadas" style="font-size:1.2em; color: rgb(0, 0, 0);">Inf. de coordenadas:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha">
+		            <h:selectOneMenu value="#{manterUsuarioBean.carregarOrgaosInformacaoLatitudeLongitude}" id="atlas-formulario-usuario-filtro-coordenadas" 
+		            	styleClass="atlas-select-formata atlas-select-170"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 172px !important; font-size: 1.1em !important;">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItem itemLabel="Sem informação" itemValue="S" />
+						<f:selectItem itemLabel="Com informação" itemValue="C" />
+						<f:selectItem itemLabel="Ambos" itemValue="A" />
+					</h:selectOneMenu>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full-filtro">
+					<label for="atlas-formulario-usuario-filtro-erro-informacao" style="font-size:1.2em; color: rgb(0, 0, 0);">Erro de informação:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual">
+		            <h:selectOneMenu value="#{manterUsuarioBean.carregarOrgaosErro}" id="atlas-formulario-usuario-filtro-erro-informacao"
+						styleClass="atlas-select-formata atlas-select-170"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 172px !important; font-size: 1.1em !important;">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItem itemLabel="Sem erro na informação" itemValue="S" />
+						<f:selectItem itemLabel="Com erro na informação" itemValue="C" />
+						<f:selectItem itemLabel="Ambos" itemValue="A" />
+					</h:selectOneMenu>
+				</div>
+	
+				<div class="atlas-miolo-logado-linha-label-dual">
+					<label for="atlas-formulario-usuario-filtro-situacao-registro" style="font-size:1.2em; color: rgb(0, 0, 0);">Situação do registro:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha">
+		            <h:selectOneMenu value="#{manterUsuarioBean.carregarOrgaosSituacaoRegistro}" id="atlas-formulario-usuario-filtro-situacao-registro"
+						styleClass="atlas-select-formata atlas-select-170"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 172px !important; font-size: 1.1em !important;">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{manterUsuarioBean.situacoes}" var="situacao"
+							itemLabel="#{situacao.descricao()}" itemValue="#{situacao.indiceSituacao()}" />
+					</h:selectOneMenu>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full-filtro">
+					<label for="atlas-formulario-usuario-filtro-tipo-orgao" style="font-size:1.2em; color: rgb(0, 0, 0);">Tipo de órgão:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual">
+		            <h:selectOneMenu value="#{manterUsuarioBean.tipoOrgao}" converter="selectItemConverter" id="atlas-formulario-usuario-filtro-tipo-orgao"
+							styleClass="atlas-select-formata atlas-select-170"
+							style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+							border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+							box-shadow:none; width: 172px !important; font-size: 1.1em !important;">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{manterUsuarioBean.tiposOrgaos}" var="tipoOrgao" itemLabel="#{tipoOrgao.nome}" />
+					</h:selectOneMenu>
+				</div>
+	
+				<div class="atlas-miolo-logado-linha-label-dual">
+					<label for="atlas-formulario-usuario-filtro-temas" style="font-size:1.2em; color: rgb(0, 0, 0);">Tema:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha">
+					<h:selectOneMenu value="#{manterUsuarioBean.tema}" converter="selectItemConverter" id="atlas-formulario-usuario-filtro-temas"
+							styleClass="atlas-select-formata atlas-select-170"
+							style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+							border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+							box-shadow:none; width: 172px !important; font-size: 1.1em !important;">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{manterUsuarioBean.temas}" var="tema" itemLabel="#{tema.nome}" />
+					</h:selectOneMenu>
+				</div>
+			</div>            
+			<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+				<div class="atlas-miolo-logado-linha-label-full-filtro">
+					<label for="atlas-formulario-usuario-filtro-estado" style="font-size:1.2em; color: rgb(0, 0, 0);">Estado:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual">
+					<h:selectOneMenu id="atlas-formulario-usuario-filtro-estado" 
+						value="#{manterUsuarioBean.uf}" 
+						styleClass="atlas-select-formata atlas-select-170"
+						converter="selectItemConverter"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 172px !important; font-size: 1.1em !important;">
+						<p:ajax event="change" update="atlas-formulario-usuario-filtro-municipio" process="@this" />
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{manterUsuarioBean.ufs}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}" />
+					</h:selectOneMenu>
+				</div>
+	
+				<div class="atlas-miolo-logado-linha-label-dual">
+					<label for="atlas-formulario-usuario-filtro-municipio" style="font-size:1.2em; color: rgb(0, 0, 0);">Município:</label><br />
+				</div>
+				<div class="atlas-miolo-logado-linha-campo-dual atlas-miolo-logado-linha-campo-dual-alinha">
+					<h:selectOneMenu id="atlas-formulario-usuario-filtro-municipio" 
+						value="#{manterUsuarioBean.municipio}" 
+						styleClass="atlas-select-formata atlas-select-170"
+						converter="selectItemConverter"
+						style=" height: 34px !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 172px !important; font-size: 1.1em !important;">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{manterUsuarioBean.municipios}" var="municipio" itemLabel="#{municipio.nome}" />
+					</h:selectOneMenu>
+				</div>
+			</div>
+			<div class="atlas-miolo-logado-lista-acoes">
+				<p:commandButton value="Pesquisar" update="pnlFiltroResultado" actionListener="#{manterUsuarioBean.pesquisarOrgaos}"/>
+			</div>
+		</p:panel>
+		<p:panel id="pnlFiltroResultado">
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<p:commandButton value="Selecionar órgãos" rendered="#{not empty manterUsuarioBean.orgaosPesquisa}" 
+               	actionListener="#{manterUsuarioBean.popularGridUsuario}" update="pnlOrgaosRelacionados messages"/><br />
+
+			<p:treeTable value="#{manterUsuarioBean.orgaosRootTree}" var="orgao"
+				scrollable="true" scrollHeight="250" selectionMode="checkbox"
+				selection="#{manterUsuarioBean.orgaosSelecionadosTree}" 
+				rendered="#{not empty manterUsuarioBean.orgaosPesquisa}">
+				<p:column width="448px;" headerText="Nome Órgão">
+					<h:outputText value="#{orgao.nome}" />
+				</p:column>
+			</p:treeTable>
+
+			<h:outputText value="Informe ao menos um filtro para realizar a pesquisa!" 
+						rendered="#{empty manterUsuarioBean.orgaosPesquisa}" 
+						id="msgAlerta" style="color: red; font-weight:bold;"/>
+		</p:panel>
+	</p:dialog>
+</ui:composition>

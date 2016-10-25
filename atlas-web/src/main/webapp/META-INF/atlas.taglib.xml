@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee"
+    version="2.0">
+
+	<namespace>http://epaj.dpu.gov.br/tags</namespace> 
+	
+	<tag>
+	  <tag-name>labeledInputText</tag-name>
+	  <source>../tags/labeledText.xhtml</source>
+      <description>Apresenta uma caixa de texto (inputTextarea) associada a uma etiqueta com texto identificador</description>  
+      <attribute>  
+          <name>align</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Alinhamento do texto. Default: left</description>  
+      </attribute>  
+      <attribute>  
+          <name>mask</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Máscara que será aplicado ao campo</description>  
+      </attribute>  
+      <attribute>  
+          <name>title</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Informação a ser exibida para o usuário ao se passar o mouse sobre a caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>onkeypress</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Código JavaScript a ser executado ao se pressionar uma tecla na edição do campo</description>  
+      </attribute>  
+      <attribute>  
+          <name>width</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Largura da caixa de texto. Default: auto</description>  
+      </attribute>  
+      <attribute>  
+          <name>labelWidth</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Largura da etiqueta com o texto identificador. Default: auto</description>  
+      </attribute>  
+      <attribute>  
+          <name>maxlength</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Quantidade máxima de caracteres para digitação na caixa de texto. Default: 100</description>  
+      </attribute>  
+      <attribute>  
+          <name>bean</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Bean a ser usado pelo componente quando o valor do campo for alterado ou quando o usuário pressionar ENTER no campo</description>  
+      </attribute>  
+      <attribute>  
+          <name>method</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Método a ser executado quando o usuário pressionar ENTER no campo</description>  
+      </attribute>  
+      <attribute>  
+          <name>valueChangeMethod</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Método a ser executado quando o valor da caixa de texto for alterado</description>  
+      </attribute>  
+      <attribute>  
+          <name>rendered</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser renderizado (true) ou não (false). Default: true</description>  
+      </attribute>  
+      <attribute>  
+          <name>disabled</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser desabilitado (true) ou não (false). Default: false</description>  
+      </attribute>  
+      <attribute>  
+          <name>readonly</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser bloqueado para edição (true) ou não (false). Default: false</description>  
+      </attribute>  
+      <attribute>  
+          <name>label</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Texto que será apresentado ao lado ou acima da caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>layout</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Layout de apresentação da composição da etiqueta com o texto identificador e a caixa de texto; vertical: etiqueta sobre a caixa de texto; horizontal: etiqueta à esquerda da caixa de texto. Default: horizontal</description>  
+      </attribute>  
+      <attribute>  
+          <name>value</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Valor associado à propriedade value da caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>textStyle</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Estilo específico para o campo texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>inputTextId</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>ID para a caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>required</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Campo obrigatório(default false)</description>  
+      </attribute>  
+	</tag>
+	<tag>  
+        <tag-name>inputText</tag-name>
+	  	<source>../tags/inputText.xhtml</source>
+        <description>Apresenta uma caixa de texto para entrada de dados</description>  
+        <attribute>  
+          <name>mascara</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Mascara que será aplicado ao campo</description>  
+     	</attribute>  
+        <attribute>  
+            <name>align</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Alinhamento do texto. Default: left</description>  
+        </attribute>  
+        <attribute>  
+            <name>title</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Informação a ser exibida para o usuário ao se passar o mouse sobre a caixa de texto</description>  
+        </attribute>  
+        <attribute>  
+            <name>onkeypress</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Código JavaScript a ser executado ao se pressionar uma tecla na edição do campo</description>  
+        </attribute>  
+        <attribute>  
+            <name>onkeyup</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Código JavaScript a ser executado ao se soltar uma tecla na edição do campo</description>  
+        </attribute>  
+        <attribute>  
+            <name>onblur</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Código JavaScript a ser executado quando o objeto perder o foco</description>  
+        </attribute>  
+        <attribute>  
+            <name>onfocus</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Código JavaScript a ser executado quando o objeto ganhar o foco</description>  
+        </attribute>  
+        <attribute>  
+            <name>size</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Número de caracteres usado para determinar a largura do campo</description>  
+        </attribute>  
+        <attribute>  
+            <name>onclick</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Código JavaScript a ser executado quando o objeto for clicado</description>  
+        </attribute>  
+        <attribute>  
+            <name>width</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Largura da caixa de texto. Default: auto</description>  
+        </attribute>  
+        <attribute>  
+            <name>inputTextId</name>  
+            <required>true</required>  
+            <type>java.lang.String</type>
+            <description>ID para a caixa de texto</description>  
+        </attribute>  
+        <attribute>  
+            <name>maxlength</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Quantidade máxima de caracteres para digitação na caixa de texto. Default: 100</description>  
+        </attribute>  
+        <attribute>  
+            <name>bean</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Bean a ser usado pelo componente quando o valor do campo for alterado ou quando o usuário pressionar ENTER no campo</description>  
+        </attribute>  
+        <attribute>  
+            <name>method</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Método a ser executado quando o usuário pressionar ENTER no campo</description>  
+        </attribute>  
+        <attribute>  
+            <name>valueChangeMethod</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Método a ser executado quando o valor da caixa de texto for alterado</description>  
+        </attribute>  
+        <attribute>  
+            <name>rendered</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Indicador se o objeto deve ser renderizado (true) ou não (false). Default: true</description>  
+        </attribute>  
+        <attribute>  
+            <name>disabled</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Indicador se o objeto deve ser desabilitado (true) ou não (false). Default: false</description>  
+        </attribute>  
+        <attribute>  
+            <name>readonly</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Indicador se o objeto deve ser bloqueado para edição (true) ou não (false). Default: false</description>  
+        </attribute>  
+        <attribute>  
+            <name>value</name>  
+            <required>true</required>  
+            <type>java.lang.String</type>
+            <description>Valor associado à propriedade value da caixa de texto</description>  
+        </attribute>  
+        <attribute>  
+            <name>style</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Estilo específico para o campo texto</description>  
+        </attribute>
+        <attribute>  
+            <name>styleClass</name>  
+            <required>false</required>  
+            <type>java.lang.String</type>
+            <description>Classe CSS específica para o campo texto</description>  
+        </attribute>            
+    </tag> 
+    <tag>
+    	<tag-name>irPara</tag-name>
+    	<source>../tags/irPara.xhtml</source>
+        <description>Apresenta o botão voltar</description>  
+        <attribute>  
+           <name>url</name>  
+           <required>true</required>  
+           <type>java.lang.String</type>
+           <description>caminho da página que deseja carregar</description>  
+       </attribute>     
+       <attribute>  
+          <name>breadcrumb</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Descrição que devera aparecer no breadcrumb</description>  
+      </attribute> 
+      <attribute>  
+         <name>rendered</name>  
+         <required>false</required>  
+         <type>java.lang.String</type>
+         <description>Indicador se o objeto deve ser renderizado (true) ou não (false). Default: true</description>  
+     </attribute>      
+     <attribute>  
+         <name>type</name>  
+         <required>false</required>  
+         <type>java.lang.String</type>
+         <description>Indicador se o objeto deve ser um botão (Button) ou link (Link}). valor default: Link</description>  
+     </attribute>      
+     <attribute>  
+         <name>value</name>  
+         <required>true</required>  
+         <type>java.lang.String</type>
+         <description>Nome que será exibido no objeto</description>  
+     </attribute>      
+     <attribute>  
+         <name>styleClass</name>  
+         <required>false</required>  
+         <type>java.lang.String</type>
+         <description>Nome que será exibido no objeto</description>  
+     </attribute>      
+    </tag>
+    <tag>
+	  <tag-name>labeledSelectMany</tag-name>
+	  <source>../tags/labeledSelectMany.xhtml</source>
+      <description>Apresenta uma Combo (SelecManyOne) associada a uma etiqueta com texto identificador</description>
+      <attribute>  
+          <name>id</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Id do elemento tabela.</description>  
+      </attribute>
+      <attribute>  
+          <name>title</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Informação a ser exibida para o usuário ao se passar o mouse sobre a caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>onkeypress</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Código JavaScript a ser executado ao se pressionar uma tecla na edição do campo</description>  
+      </attribute> 
+       <attribute>  
+          <name>bean</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Bean a ser usado pelo componente quando o valor do campo for alterado ou quando o usuário pressionar ENTER no campo</description>  
+      </attribute>   
+      <attribute>  
+          <name>width</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Largura da caixa de texto. Default: auto</description>  
+      </attribute>  
+      <attribute>  
+          <name>labelWidth</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Largura da etiqueta com o texto identificador. Default: auto</description>  
+      </attribute>  
+      <attribute>  
+          <name>valueChangeMethod</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Método a ser executado quando o valor da combo ao ser alterado</description>  
+      </attribute>  
+      <attribute>  
+          <name>rendered</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser renderizado (true) ou não (false). Default: true</description>  
+      </attribute>  
+      <attribute>  
+          <name>disabled</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser desabilitado (true) ou não (false). Default: false</description>  
+      </attribute>  
+      <attribute>  
+          <name>readonly</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser bloqueado para edição (true) ou não (false). Default: false</description>  
+      </attribute>  
+      <attribute>  
+          <name>label</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Texto que será apresentado ao lado ou acima da caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>layout</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Layout de apresentação da composição da etiqueta com o texto identificador e a caixa de texto; vertical: etiqueta sobre a caixa de texto; horizontal: etiqueta à esquerda da caixa de texto. Default: horizontal</description>  
+      </attribute>  
+      <attribute>  
+          <name>value</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Valor associado à propriedade value da combo</description>  
+      </attribute>
+      <attribute>  
+          <name>valueItens</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Valor associado à propriedade value do selectItens(f:selectItems)</description>  
+      </attribute>    
+      <attribute>  
+          <name>required</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Campo obrigatório(default false)</description>  
+      </attribute>  
+	</tag>
+	
+	<tag>
+	  <tag-name>labeledInputTextArea</tag-name>
+	  <source>../tags/labeledTextArea.xhtml</source>
+      <description>Apresenta uma caixa de texto (inputTextarea) associada a uma etiqueta com texto identificador</description>  
+      <attribute>  
+          <name>align</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Alinhamento do texto. Default: left</description>  
+      </attribute>  
+      <attribute>  
+          <name>title</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Informação a ser exibida para o usuário ao se passar o mouse sobre a caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>onkeypress</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Código JavaScript a ser executado ao se pressionar uma tecla na edição do campo</description>  
+      </attribute>  
+      <attribute>  
+          <name>width</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Largura da caixa de texto. Default: auto</description>  
+      </attribute>  
+      <attribute>  
+          <name>labelWidth</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Largura da etiqueta com o texto identificador. Default: auto</description>  
+      </attribute>  
+      <attribute>  
+          <name>maxlength</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Quantidade máxima de caracteres para digitação na caixa de texto. Default: 100</description>  
+      </attribute>  
+      <attribute>  
+          <name>valueChangeMethod</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Método a ser executado quando o valor da caixa de texto for alterado</description>  
+      </attribute>  
+      <attribute>  
+          <name>rendered</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser renderizado (true) ou não (false). Default: true</description>  
+      </attribute>  
+      <attribute>  
+          <name>disabled</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser desabilitado (true) ou não (false). Default: false</description>  
+      </attribute>  
+      <attribute>  
+          <name>readonly</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser bloqueado para edição (true) ou não (false). Default: false</description>  
+      </attribute>  
+      <attribute>  
+          <name>label</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Texto que será apresentado ao lado ou acima da caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>layout</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Layout de apresentação da composição da etiqueta com o texto identificador e a caixa de texto; vertical: etiqueta sobre a caixa de texto; horizontal: etiqueta à esquerda da caixa de texto. Default: horizontal</description>  
+      </attribute>  
+      <attribute>  
+          <name>value</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Valor associado à propriedade value da caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>textStyle</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Estilo específico para o campo texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>required</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Campo obrigatório(default false)</description>  
+      </attribute>  
+	</tag>
+
+	<tag>
+	  <tag-name>dataTable</tag-name>
+	  <source>../tags/dataTable.xhtml</source>
+      <description>Apresenta um dataTable com todas as configurações necessárias para paginação</description>  
+      <attribute>  
+          <name>id</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Id do elemento tabela.</description>  
+      </attribute>
+      <attribute>  
+          <name>value</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Valor associado à propriedade value da tabela</description>  
+      </attribute>
+      <attribute>  
+          <name>bean</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Nome do bean utilizado para listar a tabela.</description>  
+      </attribute>
+	</tag>
+
+	<tag>
+	  <tag-name>botaoFiltrar</tag-name>
+	  <source>../tags/botaoFiltrar.xhtml</source>
+      <description>Apresenta um botão que efetua a pesquisa</description>  
+      <attribute>  
+          <name>id</name>
+          <required>true</required>
+          <type>java.lang.String</type>
+          <description>Id do elemento tabela.</description>  
+      </attribute>
+      <attribute>  
+          <name>update</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Id do elemento que será atualizado</description>  
+      </attribute>
+      <attribute>  
+          <name>bean</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Nome do bean utilizado para listar a tabela.</description>  
+      </attribute>
+	</tag>
+	
+	<tag>
+	  <tag-name>barraBotoesConsultar</tag-name>
+	  <source>../tags/barraBotoesConsultar.xhtml</source>
+      <description>Apresenta a barra com os botões da tela de pesquisa.</description>  
+      <attribute>  
+          <name>bean</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Nome do bean utilizado para listar a tabela.</description>  
+      </attribute>
+      <attribute>  
+          <name>value</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Texto do botão de novo.</description>  
+      </attribute>
+	</tag>
+	
+	<tag>
+	  <tag-name>barraBotoesCadastro</tag-name>
+	  <source>../tags/barraBotoesCadastro.xhtml</source>
+      <description>Apresenta a barra com os botões da tela de pesquisa.</description>  
+      <attribute>  
+          <name>bean</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Nome do bean utilizado para listar a tabela.</description>  
+      </attribute>
+      <attribute>  
+          <name>funcionalidade</name>
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Código da funcionalidade usado no controle de acesso.</description>  
+      </attribute>
+	</tag>
+	
+    <tag>
+	  <tag-name>labeledSelectManyDominio</tag-name>
+	  <source>../tags/labeledSelectManyDominio.xhtml</source>
+      <description>Apresenta uma Combo (SelecManyOne) com o botão de Adicionar nova entidade.</description>
+      <attribute>  
+          <name>id</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Id do elemento tabela.</description>  
+      </attribute>
+      <attribute>  
+          <name>title</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Informação a ser exibida para o usuário ao se passar o mouse sobre a caixa de texto</description>  
+      </attribute>  
+      <attribute>
+          <name>onkeypress</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Código JavaScript a ser executado ao se pressionar uma tecla na edição do campo</description>  
+      </attribute> 
+       <attribute>  
+          <name>bean</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Bean a ser usado pelo componente quando o valor do campo for alterado ou quando o usuário pressionar ENTER no campo</description>  
+      </attribute>   
+       <attribute>  
+          <name>beanEntidadeIncluir</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Bean da entidade que será inserido na ação de adicionar na combo.</description>  
+      </attribute>   
+      <attribute>  
+          <name>width</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Largura da caixa de texto. Default: auto</description>  
+      </attribute>  
+      <attribute>  
+          <name>labelWidth</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Largura da etiqueta com o texto identificador. Default: auto</description>  
+      </attribute>  
+      <attribute>  
+          <name>valueChangeMethod</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Método a ser executado quando o valor da combo ao ser alterado</description>  
+      </attribute>  
+      <attribute>  
+          <name>rendered</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser renderizado (true) ou não (false). Default: true</description>  
+      </attribute>  
+      <attribute>  
+          <name>renderedButton</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o botão será renderizado (true) ou não (false). Default: true</description>  
+      </attribute>  
+      <attribute>  
+          <name>disabled</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser desabilitado (true) ou não (false). Default: false</description>  
+      </attribute>  
+      <attribute>  
+          <name>readonly</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Indicador se o objeto deve ser bloqueado para edição (true) ou não (false). Default: false</description>  
+      </attribute>  
+      <attribute>  
+          <name>label</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Texto que será apresentado ao lado ou acima da caixa de texto</description>  
+      </attribute>  
+      <attribute>  
+          <name>layout</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Layout de apresentação da composição da etiqueta com o texto identificador e a caixa de texto; vertical: etiqueta sobre a caixa de texto; horizontal: etiqueta à esquerda da caixa de texto. Default: horizontal</description>  
+      </attribute>  
+      <attribute>  
+          <name>value</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Valor associado à propriedade value da combo</description>  
+      </attribute>
+      <attribute>  
+          <name>valueItens</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Valor associado à propriedade value do selectItens(f:selectItems)</description>  
+      </attribute>    
+      <attribute>  
+          <name>required</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Campo obrigatório(default false)</description>  
+      </attribute>
+      <attribute>  
+          <name>widthDialog</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Largura do popup. </description>  
+      </attribute>  
+      <attribute>  
+          <name>heightDialog</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Altura do popup. </description>  
+      </attribute>  
+      <attribute>  
+          <name>listaReset</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Nome da lista (no bean) que será restada após a inclusão do elemento. Deve existir o método SET para o atributo no bean.</description>  
+      </attribute>  
+	</tag>
+	
+	<tag>
+	  <tag-name>commandButtonAtivarDesativar</tag-name>
+	  <source>../tags/commandButtonAtivarDesativar.xhtml</source>
+      <description>Apresenta uma caixa de texto (inputTextarea) associada a uma etiqueta com texto identificador</description>
+      <attribute>  
+          <name>bean</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Bean a ser usado pelo componente quando o valor do campo for alterado ou quando o usuário pressionar ENTER no campo</description>  
+      </attribute>  
+      <attribute>  
+          <name>registro</name>  
+          <required>true</required>  
+          <type>java.lang.String</type>
+          <description>Objeto que será atividado/desativado.</description>  
+      </attribute>  
+      <attribute>  
+          <name>align</name>  
+          <required>false</required>  
+          <type>java.lang.String</type>
+          <description>Alinhamento do texto. Default: left</description>  
+      </attribute>
+    </tag>  
+	
+   
+</facelet-taglib>

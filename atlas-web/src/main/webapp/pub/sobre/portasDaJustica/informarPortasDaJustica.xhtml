@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/pub/template/template_atlas.xhtml">
+
+
+	<ui:define name="conteudo">
+		<ui:define name="breadcrumb">
+			<h:commandLink value=" > SOBRE > MAPA DA JUSTIÇA" action="/pub/exibirOrgaoJustica/orgaoConsulta?faces-redirect=true" />
+			<h:commandLink value=" > INFORMAR" action="/pub/manterOrgaoJustica/orgaoCadastro?faces-redirect=true" />
+		</ui:define>		
+		
+		<script language="javascript" src="../../_javascript/validacaoCampo.js"></script>
+		<script>
+			function limparCamposRepresentanteOrgao()
+			{	
+				limparDadosBasicosPopupRepresentanteOrgao();
+				limparDadosTelefoneRepresentante1();
+				limparDadosTelefoneRepresentante2();
+			}
+	
+			function limparDadosBasicosPopupRepresentanteOrgao()
+			{
+				$("#inputNomeRepresentante"   ).val("");
+				$("#inputCargoRepresentante"  ).val("");
+				$("#inputEmailRepresentante"  ).val("");
+			}
+	
+			function limparDadosTelefoneOrgao1()
+			{
+				$("#inputPrimeiroDddOrgao"		   ).val("");
+				$("#inputPrimeiroTelefoneOrgao"	   ).val("");
+				$("#inputPrimeiroTipoTelefoneOrgao").val("");
+			}
+	
+			function limparDadosTelefoneOrgao2()
+			{
+				$("#inputSegundoDddOrgao"		   ).val("");
+				$("#inputSegundoTelefoneOrgao"	   ).val("");
+				$("#inputSegundoTipoTelefoneOrgao" ).val("");
+			}
+	
+			function limparDadosTelefoneRepresentante1()
+			{
+				$("#inputPrimeiroDddRepresentante"		   ).val("");
+				$("#inputPrimeiroTelefoneRepresentant"	   ).val("");
+				$("#inputPrimeiroTipoTelefoneRepresentante").val("");
+			}
+	
+			function limparDadosTelefoneRepresentante2()
+			{
+				$("#inputSegundoDddRepresentante"		   ).val("");
+				$("#inputSegundoTelefoneRepresentante"	   ).val("");
+				$("#inputSegundoTipoTelefoneRepresentante" ).val("");
+			}				
+		</script>
+		<script type="text/javascript">  
+		    function verificaErroRepresentante(){ 			    
+          		var variavel = document.getElementById("isRepresentanteValido").value;
+          		if(variavel == "false"){     		
+       				confirmationDialogRepresentanteDoOrgaoWidget.hide(); 
+          		}
+			}
+		</script>
+
+		<link
+			href="${facesContext.externalContext.requestContextPath}/admin/_css/_estilo_formularios.css"
+			rel="stylesheet" type="text/css" />
+
+		<div class="atlas-geral-miolo">
+
+
+			<!-- #{cadastrarOrgaoBean.init()} -->
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h2>Mapa da Justiça</h2> 
+
+			<div>
+				<h3>Informe uma nova Porta da Justiça</h3>
+				<p>Verifique e preencha os campos abaixo para realizar a solicitação de um novo cadastro de Órgão.</p>    
+				
+				<table class="atlas-tabelas-formulario">
+					<tbody>
+						<tr class="atlas-tabelas-formulario-tr-linha">
+							<td class="atlas-tabelas-formulario-label"><label>Sigla:*</label></td>
+							<td colspan="2"><h:inputText maxlength="20"
+									value="#{cadastrarOrgaoBean.entidade.sigla}"
+									styleClass="atlas-input-450 atlas-input-formata" /></td>
+						</tr>
+
+						<tr>
+							<td class="atlas-tabelas-formulario-label"><label>Tipo Órgão:*</label></td>
+							<td colspan="2"><h:selectOneMenu
+									value="#{cadastrarOrgaoBean.entidade.tipoOrgao}"
+									converter="selectItemConverter"
+									styleClass="atlas-select-460 atlas-select-formata">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{cadastrarOrgaoBean.tiposOrgaos}"
+										var="tipoOrgao" itemValue="#{tipoOrgao}"
+										itemLabel="#{tipoOrgao.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas-tabelas-formulario-tr-linha">
+							<td class="atlas-tabelas-formulario-label"><label>Nome:*</label></td>
+							<td colspan="2"><h:inputText maxlength="128" size="128"
+									value="#{cadastrarOrgaoBean.entidade.nome}"
+									styleClass="atlas-input-450 atlas-input-formata" /></td>
+						</tr>
+
+						<tr>
+							<td class="atlas-tabelas-formulario-label"><label>Descrição:*</label>
+							</td>
+							<td colspan="2"><h:inputText maxlength="256"
+									value="#{cadastrarOrgaoBean.entidade.descricao}"
+									styleClass="atlas-textarea-formata atlas-textarea-450 atlas-textarea-formata-altura-50" /></td>
+						</tr>
+
+						<tr class="atlas-tabelas-formulario-tr-linha">
+							<td class="atlas-tabelas-formulario-label"><label>Estado:*</label>
+							</td>
+							<td colspan="2"><h:selectOneMenu
+									value="#{cadastrarOrgaoBean.uf}"
+									converter="selectItemConverter"
+									styleClass="atlas-select-460 atlas-select-formata">
+									<p:ajax event="change" update="municipiosCadastro"
+										process="@this" />
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{cadastrarOrgaoBean.ufs}" var="uf"
+										itemLabel="#{uf.nome}" itemValue="#{uf}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr>
+							<td class="atlas-tabelas-formulario-label">
+								<label>Municipios:*</label>
+							</td>
+							<td colspan="2">
+								<h:selectOneMenu id="municipiosCadastro"
+									converter="selectItemConverter"
+									value="#{cadastrarOrgaoBean.entidade.municipio}"
+									valueChangeListener="#{cadastrarOrgaoBean.assinalarMudancaMunicipioNoCadastro}"
+									styleClass="atlas-select-460 atlas-select-formata">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{cadastrarOrgaoBean.municipios}"
+										var="municipio" itemLabel="#{municipio.nome}" />
+								</h:selectOneMenu>
+							</td>
+						</tr>
+
+						<tr class="atlas-tabelas-formulario-tr-linha">
+							<td class="atlas-tabelas-formulario-label"><label>Endereço:*</label>
+							</td>
+							<td colspan="2"><h:inputText maxlength="512"
+									value="#{cadastrarOrgaoBean.entidade.endereco}"
+									styleClass="atlas-textarea-formata atlas-textarea-450 atlas-textarea-formata-altura-50" /></td>
+						</tr>
+
+						<tr>
+							<td class="atlas-tabelas-formulario-label"><label>Bairro:*</label></td>
+							<td colspan="2"><h:inputText maxlength="128" size="128"
+									value="#{cadastrarOrgaoBean.entidade.bairro}"
+									styleClass="atlas-input-450 atlas-input-formata" /></td>
+						</tr>
+
+						<tr class="atlas-tabelas-formulario-tr-linha">
+							<td class="atlas-tabelas-formulario-label"><label>CEP:*</label>
+							</td>
+							<td colspan="2"><p:inputMask mask="99999-999" value="#{cadastrarOrgaoBean.entidade.cep}"
+							style="box-shadow:none;" styleClass="atlas-input-450 atlas-input-formata" /> </td>
+				
+						</tr>
+
+						<tr>
+							<td class="atlas-tabelas-formulario-label"><label>Homepage:</label>
+							</td>
+							<td colspan="2"><h:inputText maxlength="512"
+									value="#{cadastrarOrgaoBean.entidade.homePage}"
+									styleClass="atlas-input-450 atlas-input-formata" /></td>
+						</tr>
+
+						<tr class="atlas-tabelas-formulario-tr-linha">
+							<td class="atlas-tabelas-formulario-label"><label>E-mail
+									institucional:</label></td>
+							<td colspan="2"><h:inputText maxlength="512"
+									value="#{cadastrarOrgaoBean.entidade.descricaoEmailInstitucional}"
+									styleClass="atlas-input-450 atlas-input-formata" /></td>
+						</tr>
+
+						<tr>
+							<td class="atlas-tabelas-formulario-label"><label
+								for="inputPrimeiroDddOrgao">Telefone 1:</label></td>
+							<td colspan="3"><p:inputMask id="inputPrimeiroDddOrgao"
+									value="#{cadastrarOrgaoBean.entidade.primeiroDdd}" mask="999"
+									title="Informe o DDD"
+									styleClass="atlas-input-formata atlas-input-30"
+									style="box-shadow:none;" size="3" /> <h:outputLabel
+									value="    " /> <p:inputMask
+									value="#{cadastrarOrgaoBean.entidade.primeiroNumeroTelefone}"
+									id="inputPrimeiroTelefoneOrgao" mask="9999-9999?9"
+									styleClass="atlas-input-formata atlas-input-120"
+									title="Informe o telefone" style="box-shadow:none;" /> <h:outputLabel
+									value="    " /> <h:selectOneMenu
+									id="inputPrimeiroTipoTelefoneOrgao"
+									value="#{cadastrarOrgaoBean.entidade.primeiroTipoTelefone}"
+									styleClass="atlas-select-formata atlas-select-210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Celular" itemValue="C" />
+									<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+									<f:selectItem itemLabel="Fax" itemValue="F" />
+								</h:selectOneMenu> <h:outputLabel value="    " /> <a
+								href="javascript:limparDadosTelefoneOrgao1();"> Limpar</a></td>
+						</tr>
+
+						<tr class="atlas-tabelas-formulario-tr-linha">
+							<td class="atlas-tabelas-formulario-label"><label
+								for="inputSegundoDddOrgao">Telefone 2:</label></td>
+							<td colspan="3"><p:inputMask id="inputSegundoDddOrgao"
+									value="#{cadastrarOrgaoBean.entidade.segundoDdd}" mask="999" 
+									title="Informe o DDD"
+									styleClass="atlas-input-formata atlas-input-30"
+									style="box-shadow:none;" size="3" /> <h:outputLabel
+									value="    " /> <p:inputMask id="inputSegundoTelefoneOrgao"
+									value="#{cadastrarOrgaoBean.entidade.segundoNumeroTelefone}"
+									mask="9999-9999?9"
+									styleClass="atlas-input-formata atlas-input-120"
+									title="Informe o telefone" style="box-shadow:none;" /> <h:outputLabel
+									value="    " /> <h:selectOneMenu
+									id="inputSegundoTipoTelefoneOrgao"
+									value="#{cadastrarOrgaoBean.entidade.segundoTipoTelefone}"
+									styleClass="atlas-select-formata atlas-select-210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Celular" itemValue="C" />
+									<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+									<f:selectItem itemLabel="Fax" itemValue="F" />
+								</h:selectOneMenu> <h:outputLabel value="    " /><a
+								href="javascript:limparDadosTelefoneOrgao2();"> Limpar</a> </td>
+						</tr>
+
+						<tr>
+							<td class="atlas-tabelas-formulario-label"><label>Representante(s):</label>
+							</td>
+							<td colspan="2">
+								<p:dataTable id="listaDeRepresentantes"
+									resizableColumns="true"
+									var="representante"
+									value="#{cadastrarOrgaoBean.listaComRepresentantes}"
+									emptyMessage="Nenhum registro encontrado"
+									style="border: 1px solid #45897A; border-top: none;">
+
+									<p:column headerText="Nome" styleClass="label_tabela_custom">
+										<h:outputText value="#{representante.nome}" />
+									</p:column>
+ 
+									<p:column headerText="Cargo"  styleClass="label_tabela_custom">
+										<h:outputText value="#{representante.cargo.nome}" />
+									</p:column>
+
+									<p:column headerText="E-mail" styleClass="label_tabela_custom">
+										<h:outputText value="#{representante.email}" />
+									</p:column>
+
+									<p:column headerText="" width="30%" align="left">
+										<p:commandButton
+											action="#{cadastrarOrgaoBean.setRepresentanteEmFoco(representante)}"
+											value="ALTERAR" styleClass="atlas_primefaces_button"
+											title="Clique para alterar um representante"
+											oncomplete="confirmationDialogRepresentanteDoOrgaoWidget.show();" 
+											update=":form:confirmationDialogRepresentanteDoOrgao"/>
+										<p:commandButton
+											action="#{cadastrarOrgaoBean.setRepresentanteEmFoco(representante)}"
+											value="EXCLUIR" styleClass="atlas_primefaces_button"
+											title="Clique para excluir um representante"
+											oncomplete="confirmationDialogExcluirRepresentanteWidget.show();"
+											partialSubmit="true" update="listaDeRepresentantes" />
+									</p:column>
+								</p:dataTable> <br /> <p:commandButton
+									update="confirmationDialogRepresentanteDoOrgao" value="NOVO"
+									title="Clique para adicionar um representante"
+									action="#{cadastrarOrgaoBean.inicializarRepresentanteNovo()}"
+									oncomplete="confirmationDialogRepresentanteDoOrgaoWidget.show();"
+									styleClass="atlas_primefaces_button" process="@form" /></td>
+						</tr>
+						<tr class="atlas-tabelas-formulario-tr-linha">
+					        <td>
+					            <h:commandButton action="#{cadastrarOrgaoBean.cancelar()}" value="CANCELAR"
+									styleClass="atlas-button-filtrar" partialSubmit="true" process="@form"
+									title="Clique para cancelar"
+									update="@form" immediate="true" />
+					        </td>
+					        <td class="atlas-tabelas-formulario-alinha-direita">
+					            
+					                <h:commandButton action="#{cadastrarOrgaoBean.salvar()}" value="INFORMAR"
+										styleClass="atlas-button-filtrar" partialSubmit="false" process="@form"
+										update="@form"/>
+					                <h:commandButton action="#{cadastrarOrgaoBean.limpar()}" value="LIMPAR"
+										styleClass="atlas-button-limpar"/>
+					        </td>
+					    </tr>					    
+					</tbody>
+				</table>
+
+				<h:panelGroup
+					rendered="#{not empty cadastrarOrgaoBean.entidade.problemas}">
+					<br />
+					<br />
+					<h:outputText value="Erro detectado e informado pelo usuário:" />
+					<br />
+					<br />
+					<p:dataTable value="#{cadastrarOrgaoBean.entidade.problemas}"
+						var="problema" tableStyle="width:50%;">
+						<p:column headerText="Tipo de Problema">
+							<h:outputText value="#{problema.tipoProblemaFormatado}" />
+						</p:column>
+						<p:column headerText="Descrição">
+							<h:outputText value="#{problema.descricao}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+			</div>
+
+			<p:dialog id="confirmationDialogRepresentanteDoOrgao"
+				widgetVar="confirmationDialogRepresentanteDoOrgaoWidget"
+				global="true" modal="true" rendered="true">
+				<h:inputHidden id="isRepresentanteValido" value="#{cadastrarOrgaoBean.erroRepresentante}" />
+				<table class="atlas_tabela_simples">
+					<tbody>
+						<tr>
+							<th colspan="3"><span
+								style="font-weight: bold; font-size: 14px;">Representante do Órgão: </span>
+								<h:messages id="messagesRepresentante" globalOnly="true"	infoClass="atlas-mensagem-positivo"
+												warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+							</th>
+						</tr>
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Nome:*</label>
+							</td>
+							<td colspan="2"><h:inputText id="inputNomeRepresentante"
+									maxlength="128" size="128" onkeyup="validar(this,'text');"
+									value="#{cadastrarOrgaoBean.representanteEmFoco.nome}"
+									styleClass="atlas_input_formata atlas_input_400" /></td>
+						</tr>
+
+ 						 <tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Cargo:*</label>
+							</td>
+							<td colspan="2"><h:selectOneMenu
+									id="inputCargoRepresentante"
+									value="#{cadastrarOrgaoBean.representanteEmFoco.cargo}"
+									converter="selectItemConverter"
+									styleClass="atlas_select_formata atlas_select_210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{cadastrarOrgaoBean.cargos}" var="cargo"
+									itemValue="#{cargo}" itemLabel="#{cargo.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+ 						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label>Email:*</label>
+							</td>
+							<td colspan="2"><h:inputText id="inputEmailRepresentante" 
+									maxlength="128"
+									value="#{cadastrarOrgaoBean.representanteEmFoco.email}"
+									styleClass="atlas_input_formata atlas_input_400" /></td>
+						</tr> 
+
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label
+								for="inputPrimeiroDddRepresentante">Telefone 1:</label></td>
+							<td colspan="3"><p:inputMask
+									id="inputPrimeiroDddRepresentante"
+									value="#{cadastrarOrgaoBean.representanteEmFoco.primeiroDdd}"
+									title="Informe o DDD" mask="999"
+									styleClass="atlas_input_formata atlas_input_30"
+									style="box-shadow:none;" size="3" /> <h:outputLabel
+									value="    " /> <p:inputMask
+									id="inputPrimeiroTelefoneRepresentant"
+									value="#{cadastrarOrgaoBean.representanteEmFoco.primeiroTelefone}"
+									mask="9999-9999?9"
+									styleClass="atlas_input_formata atlas_input_120"
+									title="Informe o telefone" style="box-shadow:none;" /> <h:outputLabel
+									value="    " /> <h:selectOneMenu
+									id="inputPrimeiroTipoTelefoneRepresentante"
+									value="#{cadastrarOrgaoBean.representanteEmFoco.primeiroTipoTelefone}"
+									styleClass="atlas_select_formata atlas_select_210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Celular" itemValue="C" />
+									<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+									<f:selectItem itemLabel="Fax" itemValue="F" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td class="atlas_tabela_simples_label"><label
+								for="inputSegundoDddRepresentante">Telefone 2:</label></td>
+							<td colspan="3"><p:inputMask
+									id="inputSegundoDddRepresentante"
+									value="#{cadastrarOrgaoBean.representanteEmFoco.segundoDdd}"
+									title="Informe o DDD" mask="999"
+									styleClass="atlas_input_formata atlas_input_30"
+									style="box-shadow:none;" size="3" /> <h:outputLabel
+									value="    " /> <p:inputMask
+									id="inputSegundoTelefoneRepresentante"
+									value="#{cadastrarOrgaoBean.representanteEmFoco.segundoTelefone}"
+									mask="9999-9999?9"
+									styleClass="atlas_input_formata atlas_input_120"
+									title="Informe o telefone" style="box-shadow:none;" /> <h:outputLabel
+									value="    " /> <h:selectOneMenu
+									id="inputSegundoTipoTelefoneRepresentante"
+									value="#{cadastrarOrgaoBean.representanteEmFoco.segundoTipoTelefone}"
+									styleClass="atlas_select_formata atlas_select_210">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Celular" itemValue="C" />
+									<f:selectItem itemLabel="Telefone fixo" itemValue="T" />
+									<f:selectItem itemLabel="Fax" itemValue="F" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas_tabela_simples_linha_02">
+							<td colspan="3" align="center">
+								<p:commandButton
+									actionListener="#{cadastrarOrgaoBean.armazenarRepresentanteOuGravarImediatamente}"
+									update="messagesRepresentante listaDeRepresentantes isRepresentanteValido"
+									oncomplete="verificaErroRepresentante()"
+									title="Clique para gravar e fechar"
+									id="gravarRepresentanteAndFechar" value="Gravar e fechar"
+									styleClass="atlas_primefaces_button"/>
+								<p:commandButton
+									actionListener="#{cadastrarOrgaoBean.armazenarRepresentanteOuGravarImediatamente}"
+									id="gravarEsteAndIniciarOutroRepresentanteOrgao"
+									value="Gravar este e incluir novo"
+									title="Clique para incluir um novo registro"
+									styleClass="atlas_primefaces_button"
+									oncomplete="limparCamposRepresentanteOrgao();"
+									partialSubmit="false" update="messagesRepresentante listaDeRepresentantes" />
+								<p:commandButton value="Cancelar"
+									title="Clique para cancelar"
+									styleClass="atlas_primefaces_button"
+									onclick="confirmationDialogRepresentanteDoOrgaoWidget.hide();"
+									update=":form" /></td>
+						</tr>
+						
+					</tbody>					
+				</table>
+				<br />
+				<br />
+
+			</p:dialog>
+
+
+			<p:confirmDialog id="confirmationDialogExcluirRepresentante"
+				message="Tem certeza que deseja excluir este representante?"
+				header="Confirmação"
+				widgetVar="confirmationDialogExcluirRepresentanteWidget">
+				<center>
+					<p:commandButton
+						actionListener="#{cadastrarOrgaoBean.excluirRepresentante}"
+						update="listaDeRepresentantes"
+						title="Clique para excluir"
+						styleClass="atlas_primefaces_button" id="simExcluirRepresentante"
+						value="Sim"
+						oncomplete="confirmationDialogExcluirRepresentanteWidget.hide();" />
+					<p:commandButton styleClass="atlas_primefaces_button"
+						id="naoExcluirRepresentante" value="Não"
+						title="Clique para não"
+						onclick="confirmationDialogExcluirRepresentanteWidget.hide();" />
+				</center>
+			</p:confirmDialog>
+
+
+		</div>
+	</ui:define>
+</ui:composition>

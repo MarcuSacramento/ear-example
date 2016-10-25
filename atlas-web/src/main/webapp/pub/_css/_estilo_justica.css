@@ -1,0 +1,66 @@
+@charset="utf-8";
+
+#justicas {
+	margin-top: 35px;
+}
+
+.boxJustica {
+	width: 160px;
+	float: left;
+	color: #1659bf;
+	cursor: pointer;
+}
+
+#justicas .boxJustica img {
+	margin-left: 30px;
+	float: none;
+	clear: both;
+	display: block;
+}
+
+#justicas .boxJustica h3 {
+	width: 92%;
+	height: 23px;
+	padding: 7px 0 0 10px;
+	margin: 105px 0 15px 0;
+	background-color: #eeeff1;
+	font-weight: bolder;
+	float: none;
+	clear: both;
+	display: block;
+	font-size: 1.4em;
+	position: relative;
+}
+
+#justicas .boxJustica ul {
+	font-size: 1.4em;
+}
+
+#justicas .boxJustica ul li {
+	margin-bottom: 15px;
+	margin-left: 25px;
+}
+
+#justicas #jusGeral {
+	background: url('../_imagens/_icones/jusGeral.gif') no-repeat 50px 17px;
+}
+
+#justicas #jusEstadual {
+	width: 140px;
+	background: url('../_imagens/_icones/jusEstadual.gif') no-repeat 35px 15px;
+}
+
+#justicas #jusFederal {
+	width: 140px;
+	background: url('../_imagens/_icones/jusFederal.gif') no-repeat 30px 5px;
+}
+
+#justicas #jusTrabalho {
+	width: 160px;
+	background: url('../_imagens/_icones/jusTrabalho.gif') no-repeat 25px 0px;
+}
+
+#justicas #jusMulher {
+	width: 145px;
+	background: url('../_imagens/_icones/jusMulher.gif') no-repeat 43px 10px;
+}

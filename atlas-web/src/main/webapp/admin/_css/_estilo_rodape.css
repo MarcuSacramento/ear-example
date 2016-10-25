@@ -1,0 +1,94 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação do rodapé                                                                 **
+** @data: 27/05/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+footer.atlas-rodape{
+	background-color: rgba(22,89,191,1);
+	color: rgba(255,255,255,1);
+	clear: both;
+	padding: 1em 0;
+	margin-top: 1em;
+}
+
+	footer.atlas-rodape ul{
+		list-style: none;
+	}
+
+	footer.atlas-rodape h1{
+		display: none;
+	}
+
+	footer.atlas-rodape-container{
+		width: 960px;
+		margin: 0 auto;
+		height: 140px;
+		padding: 3em 0;
+	}
+	
+	nav.atlas-rodape-bloco{
+		float: left;
+		width: 22%;
+		padding: 0 1em;
+		border-left: 1px dotted rgba(255,255,255,1);
+	}
+	
+	nav.atlas-rodape-bloco h2{
+		font-size: 2em;
+	}
+	
+	nav.atlas-rodape-bloco a{
+		color: rgba(255,255,255,1);
+		text-decoration: none;
+		font-size: 1.2em;
+		line-height: 1.8em;
+	}
+
+footer.atlas-rodape-governo{
+	background-color: rgba(0,66,177,1);
+	color: rgba(255,255,255,1);
+	clear: both;
+	padding: 1em 0;
+}
+
+	footer.atlas-rodape-governo-container{
+		width: 960px;
+		margin: 0 auto;
+		display: block;
+		padding: 2em 0;
+		height: 50px;
+	}
+	
+	img.atlas-rodape-governo-container-img-informacao{
+		float: left;
+		clear: left;
+		border: none;
+	}
+	
+	img.atlas-rodape-governo-container-img-brasil{
+		float: right;
+		clear: right;
+		border: none;
+	}
+
+footer.atlas-rodape-cms{
+	background-color: rgba(255,255,255,1);
+	color: rgba(0,0,0,1);
+	clear: both;
+	padding: 1em 0;
+}
+
+	footer.atlas-rodape-cms-container{
+		width: 960px;
+		margin: 0 auto;
+		font-size: 1.2em;
+	}
+	
+	footer.atlas-rodape-cms-container a{
+		color: rgba(44,103,205,1);
+		text-decoration: none;
+	}

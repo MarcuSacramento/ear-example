@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<script>
+		$(document).keydown(function(e) {
+		    if(e.which == 13) {
+		        e.preventDefault();
+		        e.stopPropagation();
+		        $("#buttonPesquisar").click();
+		    }
+		});
+	</script>
+	<div class="atlas-miolo-logado-filtro-linha">
+		<h:panelGroup class="atlas-coluna-filtro" id="atlas_coluna_filtro"
+				layout="block">
+				<table class="atlas-tabela-filtro">
+
+					<tbody>
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Nome do Órgão: " /> <br /> <h:inputText
+									value="#{manterOrgaoBean.termoPesquisa}" id="campoPesquisa"
+									styleClass="atlas-input-formata-fonte atlas-input-160" /></td>
+						</tr>
+
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Informação de Coordenadas: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.carregarOrgaosInformacaoLatitudeLongitude}"
+									styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Sem informação" itemValue="S" />
+									<f:selectItem itemLabel="Com informação" itemValue="C" />
+									<f:selectItem itemLabel="Ambos" itemValue="A" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Erro de informação: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.carregarOrgaosErro}"
+									styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItem itemLabel="Sem erro na informação" itemValue="S" />
+									<f:selectItem itemLabel="Com erro na informação" itemValue="C" />
+									<f:selectItem itemLabel="Ambos" itemValue="A" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Situação do registro: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.carregarOrgaosSituacaoRegistro}"
+									styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.situacoes}" var="situacao"
+										itemLabel="#{situacao.descricao()}" itemValue="#{situacao.indiceSituacao()}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Tipo Órgão: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.tipoOrgao}"
+									converter="selectItemConverter"
+									styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.tiposOrgaos}"
+										var="tipoOrgao" itemLabel="#{tipoOrgao.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Âmbito atuação: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.ambitoAtuacaoOrgao}"
+									converter="selectItemConverter"
+									styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.listaAmbitoAtuacao}"
+										var="ambito" itemLabel="#{ambito.descricao}" />
+								</h:selectOneMenu></td>
+						</tr>
+						
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Tema: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.tema}"
+									converter="selectItemConverter"
+									styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.temas}"
+										var="tema" itemLabel="#{tema.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Servico: " /> <br /> <h:selectOneMenu
+									value="#{manterOrgaoBean.servicoOrgao}"
+									converter="selectItemConverter"
+									styleClass="atlas-select-formata atlas-select-170">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.servicos}"
+										var="servico" itemLabel="#{servico.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Estado: " /> <br /> <h:selectOneMenu id="ufs"
+									value="#{manterOrgaoBean.ufPesquisa}"
+									styleClass="atlas-select-formata atlas-select-170"
+									converter="selectItemConverter">
+									<p:ajax event="change" update="municipios" process="@this" />
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.ufs}" var="uf"
+										itemLabel="#{uf.nome}" itemValue="#{uf}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2" class="atlas-tabela-filtro-linha-marca"><h:outputLabel
+									value="Município: " /> <br /> <h:selectOneMenu
+									id="municipios" value="#{manterOrgaoBean.municipioPesquisa}"
+									styleClass="atlas-select-formata atlas-select-170"
+									converter="selectItemConverter">
+									<f:selectItem itemLabel="Selecione" />
+									<f:selectItems value="#{manterOrgaoBean.municipiosPesquisa}"
+										var="municipio" itemLabel="#{municipio.nome}" />
+								</h:selectOneMenu></td>
+						</tr>
+
+
+						<tr class="atlas-tabela-filtro-linha">
+							<td colspan="2">
+							   	<p:commandButton id="buttonPesquisar"
+									action="#{manterOrgaoBean.pesquisarTermo()}" 
+									update=":form:atlas_linha:" 
+									value="PESQUISAR"/>									
+								 
+								<p:commandButton
+									action="#{manterOrgaoBean.limparPesquisar()}" value="LIMPAR"
+									update=":form:atlas_coluna_filtro atlas_linha:">
+								</p:commandButton>
+							</td>
+								
+						</tr>
+					</tbody>
+				</table>
+			</h:panelGroup>
+	</div>	
+</h:body>
+
+</html>

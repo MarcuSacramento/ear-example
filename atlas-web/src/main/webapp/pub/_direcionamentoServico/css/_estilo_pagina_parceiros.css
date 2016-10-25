@@ -1,0 +1,54 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação da página parceiros                                                       **
+** @data: 09/06/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+div.atlas-miolo-conteudo-bloco-linha{
+	clear: both;
+	min-height: 230px;
+	margin-bottom: 4em;
+}
+
+div.atlas-miolo-conteudo-bloco-parceiro{
+	float: left;
+	width: 33%;
+}
+
+	div.atlas-miolo-conteudo-bloco-parceiro-imagem{
+		text-align: center;	
+		padding: 1em;
+	}
+	
+		div.atlas-miolo-conteudo-bloco-parceiro-imagem img{
+			box-shadow: 0px 0px 5px rgba(206,206,191,1);
+			-moz-border-radius: 0.5em;
+			-webkit-border-radius: 0.5em;
+			border-radius: 0.5em;
+		}
+	
+	div.atlas-miolo-conteudo-bloco-parceiro-texto{
+		text-align: left;	
+		padding: 1em 2em;
+	}
+	
+		p.atlas-miolo-conteudo-bloco-parceiro-texto-titulo{
+			font-size: 1em !important;
+			font-family: "open_sansbold", Arial, Helvetica, sans-serif !important;
+			color: rgba(0,0,0,1);
+			text-transform: uppercase;
+		}
+	
+		div.atlas-miolo-conteudo-bloco-parceiro-texto a{
+			font-size: 1.5em;
+			text-decoration: none;
+			color: rgba(21,89,191,1);
+		}
+		
+			div.atlas-miolo-conteudo-bloco-parceiro-texto a:hover{
+				color: rgba(102,102,102,1);
+				text-decoration: none;
+			}

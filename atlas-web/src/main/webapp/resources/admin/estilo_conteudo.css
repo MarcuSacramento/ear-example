@@ -1,0 +1,35 @@
+div.atlas-conteudo{
+	background-color: rgba(255,255,255,1);
+}
+
+div.atlas-conteudo-container{
+	width: 960px;
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: left;
+	max-width: 100% !important;
+}
+
+div.atlas-miolo-logado{
+	float: right;
+	width: 750px;
+}
+
+div.atlas-miolo-login{
+	float: left;
+	width: 960px;
+	clear: both;
+	min-height: 350px;
+}
+
+div.atlas-miolo-logado-lista-acoes {
+	padding: 0.5em 0.5em;
+	border: 1px solid rgba(22,89,191,1);
+	background: rgba(238,239,241,1);
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+}
+
+.atlas-miolo-logado-inline {
+	display: inline;
+}

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+<style>
+.label_tabela_custom {
+	white-space: normal !important;
+	font-size: 1.1em !important;
+}
+</style>
+	<div>
+		<h:panelGroup id="atlas_linha" layout="block">
+			<atlas:dataTable bean="manterOrgaoBean" id="dataTableTermos" value="#{manterOrgaoBean.orgaos}">
+				<p:column headerText="Órgão" styleClass="label_tabela_custom" sortBy="#{registro.nome}">
+					<h:outputText value="#{registro.nome}" rendered="#{!registro.problemaResolvido}" style="font-size: small; color:red;" />
+					<h:outputText value="#{registro.nome}" rendered="#{registro.problemaResolvido}" style="font-size: small"/>
+				</p:column>
+
+				<p:column headerText="Tipo" styleClass="label_tabela_custom" sortBy="#{registro.tipoOrgao}">
+					<h:outputText value="#{registro.tipoOrgao.nome}" style="font-size: small"/>
+				</p:column>
+
+				<p:column headerText="Estado" styleClass="label_tabela_custom" sortBy="#{registro.municipio.uf}">
+					<h:outputText value="#{registro.municipio.uf.nome}" style="font-size: small"/>
+				</p:column>
+
+				<p:column headerText="Municipio" styleClass="label_tabela_custom" sortBy="#{registro.municipio}">
+					<h:outputText value="#{registro.municipio.nome}" style="font-size: small"/>
+				</p:column>
+				
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton action="#{manterOrgaoBean.editar(registro.id)}" ajax="false" value="" style="height: 22px !important;" styleClass="icone2" />
+				</p:column>
+
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton action="#{manterOrgaoBean.excluir(registro)}" rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('001')}"
+						update=":form:atlas_linha" value="" style="height: 22px !important;" styleClass="icone"
+						ajax="false" onclick="if (!confirm('#{msg.MSG5}')) return false;" /> 
+				</p:column>
+			</atlas:dataTable>
+		</h:panelGroup>
+	</div>
+</ui:composition>

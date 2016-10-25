@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    
+    <title>Modelo 002</title>
+    
+    <script type="text/javascript" src="jquery-1.4.1.min.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".conteudoMenu").hide();
+            $(".itemMenu").click(function(){
+                $(this).next(".conteudoMenu").slideToggle(300);
+            });
+        })
+    </script>
+    
+    <style type="text/css">
+    <!--
+    body, td, th {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 11px;
+    }
+    ul#menuGeral {
+        margin:0px;
+        padding:0px;
+        font-family:Verdana, Arial, Helvetica, sans-serif;
+        font-size:11px;
+        list-style:none;
+    }
+    ul#menuGeral li {
+    }
+    /*-Para todos os atributos 'a', aqui será a marcação da sanfona-*/
+    ul#menuGeral a {
+        display:block;
+        padding:3px;
+        cursor:pointer;
+        color:#000;
+        text-decoration:none;
+    }
+    /*-Para todos os atributos 'a' dentro de uma 'li'-*/
+    ul#menuGeral li a {
+        padding-left: 20px;
+        background-color:#DDE0EF;
+        border:1px solid #D4D4D4;
+        margin-bottom:1px;
+    }
+    ul#menuGeral li a:hover {
+        background-color:#B7BDDD;
+    }
+    /*-O conteudo que fica debaixo da opção da sanfona-*/
+    ul#menuGeral .conteudoMenu {
+        border-left:1px solid #D4D4D4;
+        border-right:1px solid #D4D4D4;
+        padding:5px;
+        background-color:#F7F7F7;
+    }
+    ul#menuGeral .conteudoMenu a {
+        background-color:#F7F7F7;
+        padding-left:25px;
+        margin-bottom:0px;
+        border:0px;
+    }
+    ul#menuGeral .conteudoMenu a:hover {
+        background-color:#DADADA;
+    }
+    -->
+    </style>
+
+</head>
+<body>
+
+
+  <ul id="menuGeral">
+    <li><a href="#" class="itemMenu">Gerenciar Notícias</a>
+      <div class="conteudoMenu">
+      	<a href="#">Adicionar nova Notícia</a>
+        <a href="#">Pesquisar Notícias</a>
+      </div>
+    </li>
+    <li><a href="#" class="itemMenu">Gerenciar Eventos</a>
+      <div class="conteudoMenu">
+      	<a href="#">Adicionar novo Evento</a>
+        <a href="#">Pesquisar Eventos</a>
+      </div>
+    </li>
+    <li><a href="#">Gerenciar Meus dados</a></li>
+  </ul>
+
+
+</body>
+</html>

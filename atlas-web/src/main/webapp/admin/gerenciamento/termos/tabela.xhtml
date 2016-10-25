@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+	#{manterTermoBean.init()}
+	<h:commandLink>
+        <h:outputText value="BAIXAR LISTA DE TERMOS" /> 
+        <p:dataExporter type="xls" target="xls_export" fileName="lista_de_termos_pesquisados" pageOnly="false"/>
+    </h:commandLink>
+	<br/>
+	<br/>
+	<br/>
+	
+	<div >
+		<p:panel id="atlas_linha" layout="block">
+			<atlas:dataTable bean="manterTermoBean" id="dataTablePerfis" value="#{manterTermoBean.termos}">
+				<p:column headerText="Termos" style="white-space:normal !important; font-size: 1.1em !important;"	>
+					<h:outputText value="#{registro.nmeTermoBusca}" style="font-size: small;" styleClass="label_tabela" />
+				</p:column>
+				<p:column headerText="Total de Pesquisa" style="white-space:normal !important; font-size: 1.1em !important;"	>
+					<h:outputText value="#{registro.qtdTotal}" style="font-size: small;" styleClass="label_tabela" />
+				</p:column>
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton action="#{manterTermoBean.ativarDesativarTermo(registro)}" ajax="true"
+						value="#{manterTermoBean.getStatus(registro)}" update="@this"
+					    style="height: 22px !important;" styleClass="" />
+				</p:column>
+			</atlas:dataTable>
+			
+		</p:panel>
+			
+	</div>
+</ui:composition>

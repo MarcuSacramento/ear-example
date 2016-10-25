@@ -1,0 +1,42 @@
+body{
+	background-color: rgba(255,255,255,1);
+    color: rgba(0,0,0,1);
+    font-size: 62.5%;
+    font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+.atlas-oculta-informacao{
+	display: none;
+	background: transparent;
+	background-image: none;
+	border: none;
+	height: 0.1em;
+	overflow: hidden;
+	padding: 0;
+	margin: -0.1em 0 0 -0.1em;
+	width: 1px;
+}
+
+div.atlas-menu-ico-topo{
+	clear: both;
+	width: 100%;
+	text-align: right;
+	font-size: 1.4em;
+	margin-bottom: 1em;
+	padding-top: 1em;
+}
+
+	div.atlas-menu-ico-topo a{
+		padding-left: 0.2em;
+		text-decoration: none;
+		color: rgba(119,119,119,1);
+	}
+	
+.semBorda tr, .semBorda td {
+	border: none !important;
+}

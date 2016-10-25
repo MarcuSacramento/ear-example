@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+		<ui:define name="breadcrumb"> > <h:link
+			title="GERENCIAMENTO" value="GERENCIAMENTO"
+			outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > 
+			
+			<h:link title="TIPO DE ÓRGÃO" value="TIPO DE ÓRGÃO >"
+			outcome="/admin/gerenciamento/tipoOrgao/tipoOrgaoConsulta.xhtml" /> NOVO TIPO DE ÓRGÃO
+
+		</ui:define>
+
+	
+	<ui:define name="conteudo">
+
+		<style>
+			.div-miolo {
+				display: block;
+				clear: both;
+				min-height: 108px;
+				padding-top: 0.8em;
+			}
+			.ui-picklist .ui-picklist-list {
+				width: 240px;
+				height: 150px;
+			}
+			.ui-picklist td {
+				height: 100px;
+				vertical-align: middle;
+				border-bottom: 0px;
+			}
+			.ui-picklist .ui-picklist-list {
+				width: 238px !important;
+				height: 150px !important;
+			}
+			
+			.ui-picklist td {
+				height: 100px !important;
+				vertical-align: middle !important;
+				border-bottom: 0px !important;
+			}
+			
+			.ui-widget-content {
+				border: 1px solid #000 !important;
+			}
+			
+			#inputDataInclusao_input {
+				box-shadow: none !important;
+				-webkit-box-shadow: none !important;
+				border: none !important;
+				color: rgb(22, 89, 201);
+			}
+
+			.atlas_input_formata {
+			border: 1px solid rgb(22, 89, 201) !important;
+			color: rgb(22, 89, 201) !important;
+			font-family: Verdana, Geneva, sans-serif !important;
+			font-size: 1.3em !important;
+			padding: 0.5em 0.4em !important;
+			float: left !important;
+			background-color: transparent !important;
+			border: transparent !important;
+			padding-top:4px !important;
+			}
+			div.atlas-miolo-logado-linha-campo-full{
+				width: 532px !important;
+			}
+			div.atlas-miolo-logado-linha-campo-dual{
+				width: 175px !important;
+			}
+			div.atlas-miolo-logado-linha-campo-dual-telefone{
+				width: 200px;
+				float: left;
+				margin-left: 20px;
+			}
+			div.atlas-miolo-logado-linha-label-dual-telefone-tipo{
+				width: 100px;
+				float: left;
+			}
+			div.atlas-miolo-logado-linha-campo-dual-telefone-tipo{
+				width: 130px;
+				float: left;
+			}
+			.atlas-mensagem-erro-relatado-usuario{
+				color: rgba(242,17,17,1); 
+				font-size: 1.3em !important; 
+				font-weight: bold !important;
+			}
+			
+		</style>
+		<div class="atlas-miolo-logado">
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+				
+			<h2>Tipo de órgão</h2>
+
+			<h:head>
+				<title>Admin | Cadastro Tipo de órgão</title>
+			</h:head>
+
+			<p>Verifique e preencha os campos abaixo para realizar a inclusão do tipo de órgão:</p>
+
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados do tipo de orgão</legend>
+				<p:tabView id="tabView">
+					<p:tab title="Dados Básicos" id="aba-dados-basicos">
+						<ui:include src="/admin/gerenciamento/tipoOrgao/abaDadosBasicos.xhtml" />
+					</p:tab>
+					<p:tab title="Serviços" id="aba-servicos">
+						<ui:include src="/admin/gerenciamento/tipoOrgao/abaServicos.xhtml" />
+					</p:tab>
+				</p:tabView>
+			</fieldset>
+			
+			<div class="atlas-miolo-logado-lista-acoes">
+				<div class="atlas-miolo-logado-inline">
+					<h:commandButton value="SALVAR" action="#{manterTipoOrgaoBean.salvar()}" 
+						styleClass="atlas-button-interno"	partialSubmit="false" process="@form" update="@form" 
+						rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('015')}" style="font-size: 1.2em !important;"
+					/>
+				</div>
+				<div class="atlas-miolo-logado-inline">
+					<h:commandButton action="#{manterTipoOrgaoBean.voltarTelaPesquisa()}" value="CANCELAR" styleClass="atlas-button-interno" 
+						partialSubmit="true" process="@form"	update="@form" immediate="true" style="font-size: 1.2em !important;"/>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

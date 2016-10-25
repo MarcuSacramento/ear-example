@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:atlas="http://epaj.dpu.gov.br/tags">
+	
+	<ui:composition>
+
+		<c:if test="#{empty widthDialog}"> 
+			<c:set var="widthDialog" value="300"/> 
+		</c:if>
+		<c:if test="#{empty heightDialog}"> 
+			<c:set var="heightDialog" value="205"/> 
+		</c:if>
+		<c:if test="#{empty renderedButton}"> 
+			<c:set var="renderedButton" value="true"/> 
+		</c:if>
+		
+		<atlas:labeledSelectMany bean="#{bean}" 
+       							valueChangeMethod="#{valueChangeMethod}" 
+       							width="#{width}"  
+       							label="#{label}" 
+       							value="#{value}" 
+       							valueItens="#{valueItens}"
+       							id="#{id}"
+       							title="#{title}"
+       							onkeypress="#{onkeypress}"
+           						labelWidth="#{labelWidth}"
+           						rendered="#{rendered}"
+           						disabled="#{disabled}"
+           						readonly="#{readonly}"
+           						layout="#{layout}"
+           						required="#{required}"/>
+		
+		<p:commandButton id="#{id}DialogButton" value="+" style="margin-left:8px;" rendered="#{renderedButton}"
+       					 action="#{beanEntidadeIncluir.inicializarObjetos()}" 
+       					 onclick="#{id}Var.show();" type="button"/> 
+       					 
+       	<p:dialog id="#{id}Dialog" header="Inserir #{label}" widgetVar="#{id}Var" modal="true" height="#{heightDialog}" 
+       			  width="#{widthDialog}" rendered="#{renderedButton}" closable="false">
+      		
+      		<p:message id="msg_#{id}Dialog" for="msg_#{id}Dialog" />
+      		
+			<table class="sispaj_sistema_formulario_tabela sispaj_sistema_formulario_tabela_filtro">
+				<tr>
+			        <td>
+			        	 <atlas:labeledInputText inputTextId="descricao" width="250px" label="#{label}" rendered="true"
+			        	 						textStyle="sispaj_input_formata"  value="#{beanEntidadeIncluir.entidade.descricao}"/> 
+			        </td>
+			    </tr>
+				<tr>
+			        <td align="center">
+					    <p:commandButton value="Salvar" action="#{beanEntidadeIncluir.salvarModal(bean,listaReset)}"
+										 styleClass="sispaj_button_tabela sispaj_button_tabela_unico" oncomplete="#{id}Var.hide();"
+										 update="msg_#{id}Dialog,#{id}" id="#{id}BtnSalvar" partialSubmit="false"/>
+										 
+						<p:commandButton onclick="#{id}Var.hide();" value="Fechar" id="#{id}BtnCancelar"
+										 styleClass="sispaj_button_tabela sispaj_button_tabela_unico"
+										 immediate="true" partialSubmit="true" update="#{id}" />
+			        </td>
+			    </tr>
+			</table>
+		</p:dialog>		
+		
+	</ui:composition>
+</html>

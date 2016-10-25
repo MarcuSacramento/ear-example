@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+#{manterTipoOrgaoBean.init()}
+	<div>
+		<h:panelGroup class="atlas_linha" id="atlas_linha" layout="block">
+			<atlas:dataTable id="dataTableTiposOrgao" bean="manterTipoOrgaoBean"
+				value="#{manterTipoOrgaoBean.tiposOrgao}"
+				styleClass="atlas_tabela_simples">
+
+				<p:column headerText="Tipo de órgão" width="50%"
+					style="white-space:normal !important; font-size: 1.1em !important;">
+					<h:outputText value="#{registro.nome}" style="font-size: small"
+						styleClass="label_tabela" />
+				</p:column>
+
+				<p:column headerText="" style=" !important;">
+					<p:commandButton
+						action="#{manterTipoOrgaoBean.editarManterTipoOrgao(registro.id)}"
+						value="" style="height: 22px !important;" styleClass="icone2"
+						ajax="false" />
+				</p:column>
+
+				<p:column headerText="" style=" !important;">
+					<p:commandButton
+						action="#{manterTipoOrgaoBean.excluirTipoOrgao(registro)}"
+						update=":form:atlas_linha" value=""
+						style="height: 22px !important;" styleClass="icone" ajax="false"
+						rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('003')}"
+						onclick="if (!confirm('#{msg.MSG5}')) return false;" />
+				</p:column>
+			</atlas:dataTable>
+		</h:panelGroup>
+	</div>
+</ui:composition>

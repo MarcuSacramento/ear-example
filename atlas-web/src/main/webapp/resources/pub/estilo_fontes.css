@@ -1,0 +1,66 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação das fontes da página                                                      **
+** @data: 20/05/2014                                                                            **
+**                                                                                              **
+** @Importante:                                                                                 **
+** Formatação proveniente do site www.brasil.gov.br - Não alterar                               **
+**                                                                                              **
+*************************************************************************************************/
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: "open_sanslight";
+    src: url("../../../pub/_fonts/opensans-300-webfont.eot");
+    src: url("../../../pub/_fonts/opensans-300-webfont.eot?#iefix") format("embedded-opentype"),
+         url("../../../pub/_fonts/opensans-300-webfont.woff") format("woff"),
+         url("../../../pub/_fonts/opensans-300-webfont.ttf") format("truetype"),
+         url("../../../pub/_fonts/opensans-300-webfont.svg#open_sanslight") format("svg");
+}
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: "open_sansregular";
+    src: url("../../../pub/_fonts/opensans-400-webfont.eot");
+    src: url("../../../pub/_fonts/opensans-400-webfont.eot?#iefix") format("embedded-opentype"),
+         url("../../../pub/_fonts/opensans-400-webfont.woff") format("woff"),
+         url("../../../pub/_fonts/opensans-400-webfont.ttf") format("truetype"),
+         url("../../../pub/_fonts/opensans-400-webfont.svg#open_sansregular") format("svg");
+}
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: "open_sanssemibold";
+    src: url("../../../pub/_fonts/opensans-600-webfont.eot");
+    src: url("../../../pub/_fonts/opensans-600-webfont.eot?#iefix") format("embedded-opentype"),
+         url("../../../pub/_fonts/opensans-600-webfont.woff") format("woff"),
+         url("../../../pub/_fonts/opensans-600-webfont.ttf") format("truetype"),
+         url("../../../pub/_fonts/opensans-600-webfont.svg#open_sanssemibold") format("svg");
+}
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: "open_sansbold";
+    src: url("../../../pub/_fonts/opensans-700-webfont.eot");
+    src: url("../../../pub/_fonts/opensans-700-webfont.eot?#iefix") format("embedded-opentype"),
+         url("../../../pub/_fonts/opensans-700-webfont.woff") format("woff"),
+         url("../../../pub/_fonts/opensans-700-webfont.ttf") format("truetype"),
+         url("../../../pub/_fonts/opensans-700-webfont.svg#open_sansbold") format("svg");
+}
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: "open_sansextrabold";
+    src: url("../../../pub/_fonts/opensans-800-webfont.eot");
+    src: url("../../../pub/_fonts/opensans-800-webfont.eot?#iefix") format("embedded-opentype"),
+         url("../../../pub/_fonts/opensans-800-webfont.woff") format("woff"),
+         url("../../../pub/_fonts/opensans-800-webfont.ttf") format("truetype"),
+         url("../../../pub/_fonts/opensans-800-webfont.svg#open_sansextrabold") format("svg");
+}

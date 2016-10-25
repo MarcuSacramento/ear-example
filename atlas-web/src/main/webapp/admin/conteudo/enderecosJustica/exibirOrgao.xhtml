@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+
+
+	<ui:define name="breadcrumb"> > <h:link title="CONTEÚDO"
+			value="CONTEÚDO" outcome="/admin/conteudo/exibirConteudo.xhtml" /> > ÓRGÃOS</ui:define>
+
+	<ui:define name="conteudo">
+
+		<div class="atlas-miolo-logado">
+			<h2>Endereços da Justiça</h2>
+
+			<h:head>
+				<title>Endereços da Justiça | Atlas de Acesso à Justiça</title>
+			</h:head>
+			
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+				
+			#{manterOrgaoBean.limparPesquisar()}
+
+			<div class="atlas-miolo-logado">
+				<section class="atlas-miolo-logado-lista">
+					<div class="atlas-miolo-logado-lista-acoes">
+						<div class="atlas-miolo-logado-inline">
+
+							<p:commandButton action="#{manterOrgaoBean.novo()}" value="NOVO"
+								id="atlas_botao_novo" ajax="false"
+								title="Clique para cadastrar um novo órgão" />
+
+						</div>
+
+
+						<div class="atlas-button-download">
+							<p:commandButton actionListener="#{manterOrgaoBean.exportarRelatorio()}"
+								value="BAIXAR:" id="atlas_botao_baixar" ajax="false"
+								title="Clique para baixar o relatório no formato escolhido." />
+							<h:selectOneMenu value="#{manterOrgaoBean.formatoSelecionado}"
+								styleClass="atlas-select-formata-download" id="atlas_download"
+								title="Escolha o formato para importar os dados">
+								<f:selectItem itemLabel="PDF" itemValue="pdf" />
+								<f:selectItem itemLabel="XLS" itemValue="xls" />
+							</h:selectOneMenu>
+						</div>
+						
+						
+
+					</div>
+
+					<!-- INCLUIR A TABELA -->
+					<ui:include src="/admin/conteudo/enderecosJustica/tabela.xhtml" />
+
+				</section>
+
+				<aside class="atlas-miolo-logado-filtro">					
+						<fieldset id="atlas-area-filtro" class="atlas-area-filtro">
+							<legend>Filtrar:</legend>
+
+							<!-- INCLUIR O FILTRO -->
+							<ui:include
+								src="/admin/conteudo/enderecosJustica/orgaoFiltro.xhtml" />
+
+						</fieldset>
+				</aside>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

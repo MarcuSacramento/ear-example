@@ -1,0 +1,473 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="CENTRAIS DE CONTEÚDOS" value="CENTRAIS DE CONTEÚDOS"	outcome="/pub/centraisDeConteudo/exibirCentraisDeConteudos.xhtml" /> > 
+		<h:link title="MONITORAMENTO" value="MONITORAMENTO" outcome="/pub/centraisDeConteudo/monitoramentoIndicadores.xhtml" /> > INDICADORES 
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Relatórios - Indicadores</title>
+		</h:head>
+		<div class="atlas-miolo">
+			<h2> Relatórios </h2>
+			<div class="atlas-miolo-conteudo-limpo">
+			<p:tabView dynamic="true" cache="true">
+			<p:tab title="Brasil">
+			
+				<p:fieldset legend="INAJ" style="margin-bottom:20px" toggleable="true" toggleSpeed="500" visibility="hidden">
+					<p:dataTable id="tblInaj" var="inaj" value="1">
+				        <p:column headerText="2013">
+				            <h:outputText value="0.4885"  />
+				        </p:column>
+				        <p:column headerText="2014">
+				            <h:outputText value="0.5172"  />
+				        </p:column>
+				        <p:column headerText="2015">
+				            <h:outputText value="0.6594"  />
+				        </p:column>	
+				    </p:dataTable>	
+			    </p:fieldset>
+						 
+			    <p:fieldset legend="Operadores" style="margin-bottom:20px" toggleable="true" toggleSpeed="500" visibility="hidden">
+			        <p:dataTable id="tblOperadoresBrasil" var="tipoOrgao" value="#{exibirMonitoramentoIndicadoresBean.operadoresBrasil}">
+
+			        	<p:subTable id="subTblOperadoresBrasil" var="operador" value="#{tipoOrgao.operadores}">
+			        		<f:facet name="header">
+			        			<h:outputText value="#{tipoOrgao.ramo.nome}" />
+			        		</f:facet>
+					        <p:column colspan="2" headerText="Descrição">
+					            <h:outputText value="#{operador.tipo}"  />
+					        </p:column>
+					        <p:column headerText="Quantidade">
+					            <h:outputText value="#{operador.quantidade}"  />
+					        </p:column>	
+					                	
+			        	</p:subTable>
+				    </p:dataTable>	
+			    </p:fieldset>
+			    
+			    <p:fieldset legend="Órgãos" style="margin-bottom:20px" toggleable="true" toggleSpeed="500">
+			        <p:dataTable id="tblOrgaoBrasil" var="tipoOrgaoBrasil" value="#{exibirMonitoramentoIndicadoresBean.tiposOrgaosBrasil}" emptyMessage="">
+				        <p:column headerText="Nome" sortBy="#{tipoOrgaoBrasil.nome}">
+				            <h:outputText value="#{tipoOrgaoBrasil.nome}"  />
+				        </p:column>
+				        <p:column headerText="Quantidade" sortBy="#{tipoOrgaoBrasil.qtdTipoOrgao}">
+				            <h:outputText value="#{tipoOrgaoBrasil.qtdTipoOrgao}" />
+				        </p:column>
+				        <f:facet name="footer">
+				            <h:commandLink>
+				                <img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_icones/excel.png" 
+				                title="Exportar relatório"
+				                width="24"/>
+				                <p:dataExporter type="xls" target="tblOrgaoBrasil" fileName="orgaosBrasil" />
+				            </h:commandLink>
+				        </f:facet>		
+				    </p:dataTable>	
+				    
+			    </p:fieldset>
+
+			</p:tab>
+			<p:tab title="Região">
+				<h:outputLabel value="Região*:  "/>
+				<h:selectOneMenu id="operadoresRegiao" value="#{exibirMonitoramentoIndicadoresBean.regiaoSelecionado}"
+					converter="selectItemConverter">
+					<p:ajax event="change" update="entesPorRegiao orgaosPorRegiao" process="@this" />
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{exibirMonitoramentoIndicadoresBean.regioes}" var="regiao" itemLabel="#{regiao.nome}" itemValue="#{regiao}" />
+				</h:selectOneMenu>
+				<br/><br/>
+							 
+			    <p:fieldset legend="Operadores" style="margin-bottom:20px" toggleable="true" toggleSpeed="500" visibility="hidden">
+					<h:panelGroup>
+						<p:dataTable id="entesPorRegiao" var="tipoOrgao" value="#{exibirMonitoramentoIndicadoresBean.operadoresRegiao}" emptyMessage="Selecione uma região">
+
+				        	<p:subTable var="operador" value="#{tipoOrgao.operadores}">
+				        		<f:facet name="header">
+				        			<h:outputText value="#{tipoOrgao.ramo.nome}" />
+				        		</f:facet>
+						        <p:column colspan="2" headerText="Descrição">
+						            <h:outputText value="#{operador.tipo}"  />
+						        </p:column>
+						        <p:column headerText="Quantidade">
+						            <h:outputText value="#{operador.quantidade}"  />
+						        </p:column>	        	
+				        	</p:subTable>
+				        
+					    </p:dataTable>	
+					</h:panelGroup>			
+			    </p:fieldset>
+			    
+			    <p:fieldset legend="Órgãos" style="margin-bottom:20px" toggleable="true" toggleSpeed="500">
+			        <p:dataTable id="orgaosPorRegiao" var="regioes" value="#{exibirMonitoramentoIndicadoresBean.tiposOrgaosRegiao}" emptyMessage="Selecione uma região">
+				        <p:subTable var="tipo" value="#{regioes.orgaos}">
+			        		<f:facet name="header">
+			        			<h:outputText value="#{regioes.nome}" />
+			        		</f:facet>
+					        <p:column headerText="Nome">
+					            <h:outputText value="#{tipo.nome}"  />
+					        </p:column>
+					        <p:column headerText="Quantidade">
+					            <h:outputText value="#{tipo.qtdTipoOrgao}" />
+					        </p:column>			        	
+			        	</p:subTable>
+				    </p:dataTable>				    					    
+			    </p:fieldset>
+			</p:tab>
+			<p:tab title="Estado">			
+				<h:outputLabel value="Estado*:  "/>
+				<h:selectOneMenu id="operadoresEstado" value="#{exibirMonitoramentoIndicadoresBean.estadoSelecionado}"
+					converter="selectItemConverter">
+					<p:ajax event="change" update="entesPorEstado orgaoPorEstado" process="@this" />
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{exibirMonitoramentoIndicadoresBean.estados}" var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
+				</h:selectOneMenu>
+				<br/><br/>
+				
+			    <p:fieldset legend="Operadores" style="margin-bottom:20px" toggleable="true" toggleSpeed="500" visibility="hidden">
+					<h:panelGroup>
+						<p:dataTable id="entesPorEstado" var="tipoOrgao" value="#{exibirMonitoramentoIndicadoresBean.operadoresEstado}" emptyMessage="Selecione um estado">
+
+				        	<p:subTable var="operador" value="#{tipoOrgao.operadores}">
+				        		<f:facet name="header">
+				        			<h:outputText value="#{tipoOrgao.ramo.nome}" />
+				        		</f:facet>
+						        <p:column colspan="2" headerText="Descrição">
+						            <h:outputText value="#{operador.tipo}"  />
+						        </p:column>
+						        <p:column headerText="Quantidade">
+						            <h:outputText value="#{operador.quantidade}"  />
+						        </p:column>			
+     	
+				        	</p:subTable>
+				        
+					    </p:dataTable>	
+					</h:panelGroup>			
+			    </p:fieldset>
+			    <p:fieldset legend="Órgãos" style="margin-bottom:20px" toggleable="true" toggleSpeed="500">
+			        <p:dataTable id="orgaoPorEstado" var="estados" value="#{exibirMonitoramentoIndicadoresBean.tiposOrgaosEstado}" emptyMessage="Selecione um estado">
+				        <p:subTable var="tipo" value="#{estados.orgaos}">
+			        		<f:facet name="header">
+			        			<h:outputText value="#{estados.nome}" />
+			        		</f:facet>
+					        <p:column headerText="Nome">
+					            <h:outputText value="#{tipo.nome}"  />
+					        </p:column>
+					        <p:column headerText="Quantidade">
+					            <h:outputText value="#{tipo.qtdTipoOrgao}" />
+					        </p:column>			        	
+			        	</p:subTable>
+				    </p:dataTable>				    					    
+			    </p:fieldset>
+
+			</p:tab>
+			<p:tab title="Endereços">	
+				<p:fieldset legend="Filtro" style="margin-bottom:20px scrollable:true scrollHeight:150">
+				<p:panelGrid columns="6" styleClass="semBorda">				
+						<h:outputText value="Estado:  "/> 
+						<h:selectOneMenu id="estados" value="#{exibirMonitoramentoIndicadoresBean.estadoSelecionado}"
+							converter="selectItemConverter">
+							<p:ajax event="change" update="municipios btnExporte idTipoOrgaoPorMunicipio" process="@this" />
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{exibirMonitoramentoIndicadoresBean.estados}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}" />
+						</h:selectOneMenu>
+						<h:outputText value="Município:  "/>
+						<h:selectOneMenu id="municipios" value="#{exibirMonitoramentoIndicadoresBean.municipioSelecionado}"
+							converter="selectItemConverter">
+							<p:ajax event="change" update="idTipoOrgaoPorMunicipio" process="@this" />
+							<f:selectItem  itemLabel="Selecione" />
+							<f:selectItems value="#{exibirMonitoramentoIndicadoresBean.municipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}"/>
+						</h:selectOneMenu>		
+					    <h:commandButton id="btnExporte" 
+					             		 value="Exportar" 
+					             		 title="Exporta endereço para planilha Excel"
+					             		 alt="Exporta endereço para planilha Excel"
+					             		 actionListener="#{exibirMonitoramentoIndicadoresBean.gerarRelatorioEnderecos('xls')}"
+					             		 disabled="#{exibirMonitoramentoIndicadoresBean.exportarXls}">
+					        
+					    </h:commandButton>
+					    	    		    				 			 				 			
+				</p:panelGrid>				
+			    </p:fieldset>				    
+			    <br/>			    
+			    <p:fieldset legend="Órgãos" style="margin-bottom:20px" toggleable="true" toggleSpeed="500">
+			        <p:dataTable id="idTipoOrgaoPorMunicipio" var="tipoOrgao" value="#{exibirMonitoramentoIndicadoresBean.tiposOrgaosMunicipio}" emptyMessage="Selecione um estado e um município">
+				      	<f:facet name="header">
+		        			<h:outputText value="#{exibirMonitoramentoIndicadoresBean.municipioSelecionado.nome}" />
+		        		</f:facet>
+		        		<p:ajax event="rowToggle" listener="#{exibirMonitoramentoIndicadoresBean.setTipoOrgaoSelecionado(tipoOrgao)}" update="listaOrgaos" /> 
+				      	<p:column headerText="Endereços" style="width:20px;text-align: center">
+				      		 <p:rowToggler />				            
+				        </p:column>
+				        <p:column headerText="Nome">
+				            <h:outputText value="#{tipoOrgao.nome}"  />
+				        </p:column>
+				        <p:column headerText="Quantidade">
+				            <h:outputText value="#{tipoOrgao.qtdTipoOrgao}" />
+				        </p:column>
+						<p:rowExpansion>
+							<p:scrollPanel mode="native" style="width:675px;height:200px">
+				        	<p:dataTable id="listaOrgaos" value="#{exibirMonitoramentoIndicadoresBean.enderecosOrgao}" var="end">
+					        	<f:facet name="header">
+				        			<h:outputText value="#{tipoOrgao.nome}" />
+				        		</f:facet>
+								<p:column headerText="Nome">
+						            <h:outputText value="#{end.orgao}" />
+						        </p:column>				        
+						        <p:column headerText="Endereço">							
+									<h:outputText value="#{end.endereco}" />						
+						        </p:column>	
+						        <p:column headerText="Cep">							
+									<h:outputText value="#{end.cep}" />							
+						        </p:column>	
+						        <p:column headerText="Telefone">							
+									<h:outputText value="#{end.fone}" />							
+						        </p:column>						 
+						    </p:dataTable>		
+						    </p:scrollPanel>
+					    </p:rowExpansion>	
+				    </p:dataTable>
+			    </p:fieldset>							
+			</p:tab>
+			<p:tab title="Legendas">	
+					<p:panelGrid style="margin-top:20px">
+					    <f:facet name="header">
+					        <p:row>
+					            <p:column colspan="3">Legendas</p:column>
+					        </p:row>
+					        <p:row>
+					            <p:column>Sigla</p:column>
+					            <p:column>Órgão</p:column>
+					            <p:column>QPO - Quantidade de Operadores</p:column>					            
+					        </p:row>					 
+					    </f:facet>					 
+					     <p:row>
+					        <p:column>AGU	</p:column>
+					        <p:column>ADVOCACIA GERAL DA UNIÃO</p:column>			 
+					        <p:column>Advogado da União</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>ATMU	</p:column>
+					        <p:column>ATENDIMENTO ESPECIALIZADO À MULHER	</p:column>			 
+					        <p:column>Assistente social trabalhando em: Centro de Referência de Atendimento à Mulher; NIAM/NUAM Núcleos integrados de atendimento à mulher; Serviços de Abrigamento</p:column>
+					    </p:row>
+ 						<p:row> 
+					        <p:column>CJF	</p:column>
+					        <p:column>CONSELHO DA JUSTIÇA FEDERAL	</p:column>			 
+					        <p:column>Conselheiro, corregedor e presidente</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>CNJ	</p:column>
+					        <p:column>CONSELHO NACIONAL DE JUSTIÇA	</p:column>			 
+					        <p:column>Conselheiro, corregedor e presidente</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>CNMP	</p:column>
+					        <p:column>CONSELHO NACIONAL DO MINISTÉRIO PÚBLICO	</p:column>			 
+					        <p:column>Conselheiros</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>CSJT	</p:column>
+					        <p:column>CONSELHO SUPERIOR DA JUSTIÇA DO TRABALHO	</p:column>			 
+					        <p:column>Conselheiro, corregedor e presidente</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>CONSTU</p:column>
+					        <p:column>T	CONSELHO TUTELAR	</p:column>			 
+					        <p:column>Conselheiro</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>DPU	</p:column>
+					        <p:column>DEFENSORIA PÚBLICA DA UNIÃO	</p:column>			 
+					        <p:column>Defensor público da união</p:column>
+					    </p:row>	
+						<p:row> 
+					        <p:column>DPE	</p:column>
+					        <p:column>DEFENSORIA PÚBLICA ESTADUAL	</p:column>			 
+					        <p:column>Defensor público estadual, cargo provido</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>DPMU	</p:column>
+					        <p:column>DELEGACIAS DA MULHER	</p:column>			 
+					        <p:column>Delegado</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>JC	</p:column>
+					        <p:column>JUSTIÇA COMUNITÁRIA	</p:column>			 
+					        <p:column>Assistentes sociais, bacharéis em direito, agentes comunitários</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>JT	</p:column>
+					        <p:column>JUSTIÇA DO TRABALHO	</p:column>			 
+					        <p:column>Magistrado</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>JEL	</p:column>
+					        <p:column>JUSTIÇA ELEITORAL	</p:column>			 
+					        <p:column>Magistrado exercendo funções na Justiça Eleitoral.</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>JE	</p:column>
+					        <p:column>JUSTIÇA ESTADUAL	</p:column>			 
+					        <p:column>Magistrado</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>JF	</p:column>
+					        <p:column>JUSTIÇA FEDERAL	</p:column>			 
+					        <p:column>Magistrado</p:column>
+					    </p:row>	
+ 						<p:row> 
+					        <p:column>JM	</p:column>
+					        <p:column>JUSTIÇA MILITAR	</p:column>			 
+					        <p:column>Magistrado</p:column>
+					    </p:row>	
+						<p:row> 
+					        <p:column>MPT	</p:column>
+					        <p:column>MINISTÉRIO PÚBLICO DO TRABALHO	</p:column>			 
+					        <p:column>Procurador do trabalho, procurador regional do trabalho, procurador geral do trabalho.</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>MPE	</p:column>
+					        <p:column>MINISTÉRIO PÚBLICO ESTADUAL	</p:column>			 
+					        <p:column>Promotores em exercício - cargos providos em primeira e segunda instância</p:column>
+					    </p:row>
+						<p:row> 
+					        <p:column>MPF	</p:column>
+					        <p:column>MINISTÉRIO PÚBLICO FEDERAL	</p:column>			 
+					        <p:column>Procuradores da república nos municípios, procuradores da república, procuradores regionais da república, procurador geral da república, procuradores da república com atuação junto a tribunais superiores</p:column>
+					    </p:row>	
+ 						<p:row> 					        
+					        <p:column>MPM	</p:column>
+					        <p:column>Ministério Público Militar	</p:column>			 
+					        <p:column>Procurador Militar, Promotor Militar</p:column>
+					    </p:row>	
+						 <p:row>					        
+					        <p:column>OAB	</p:column>
+					        <p:column>ORDEM DOS ADVOGADOS DO BRASIL	</p:column>			 
+					        <p:column>Advogado</p:column>
+					    </p:row>
+						<p:row> 
+					        <p:column>DPCIV	</p:column>
+					        <p:column>POLÍCIA CIVIL	</p:column>			 
+					        <p:column>Delegado </p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>DPF	</p:column>
+					        <p:column>POLÍCIA FEDERAL	</p:column>			 
+					        <p:column>Delegado</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>BATMIL</p:column>
+					        <p:column>	POLÍCIA MILITAR	</p:column>			 
+					        <p:column>Oficiais da polícia militar, de capitão a coronel</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>DPRF	</p:column>
+					        <p:column>POLÍCIA RODOVIÁRIA FEDERAL	</p:column>			 
+					        <p:column>Delegado</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>PROCON</p:column>
+					        <p:column>	PROCON	</p:column>			 
+					        <p:column>Coordenadores, chefes de unidade de proteção ao consumidor</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>REG	</p:column>
+					        <p:column>REGISTRO PÚBLICO	</p:column>			 
+					        <p:column>Tabeliães, titulares de registro público</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>STJ	</p:column>
+					        <p:column>SUPERIOR TRIBUNAL DE JUSTIÇA	</p:column>			 
+					        <p:column>Ministro do STJ</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>STM	</p:column>
+					        <p:column>SUPERIOR TRIBUNAL MILITAR	</p:column>			 
+					        <p:column>Ministros do STM</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>STF	</p:column>
+					        <p:column>SUPREMO TRIBUNAL FEDERAL	</p:column>			 
+					        <p:column>Ministros do STF</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>TST	</p:column>
+					        <p:column>TRIBUNAL SUPERIOR DO TRABALHO	</p:column>			 
+					        <p:column>Ministros do TST</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>TSE	</p:column>
+					        <p:column>TRIBUNAL SUPERIOR ELEITORAL	</p:column>			 
+					        <p:column>Ministros do TSE</p:column>
+					    </p:row>	
+					</p:panelGrid>
+					   	
+        			<p:panelGrid style="width:100%;">
+					    <f:facet name="header" width="100%">
+					        <p:row>
+					            <p:column colspan="3">Índices</p:column>
+					        </p:row>
+					        <p:row>
+					            <p:column >Sigla</p:column>
+						        <p:column >Nome</p:column>
+					            <p:column >Unidade</p:column>							            
+					        </p:row>					 
+					    </f:facet>	
+				         
+					    <p:row> 
+					        <p:column>Pop</p:column>
+					        <p:column>População</p:column>			 
+					        <p:column>Pessoa</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>NMV</p:column>
+					        <p:column>Número de mortes violentas</p:column>			 
+					        <p:column>Morte violenta</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>NPP</p:column>
+					        <p:column>Número de pessoas pobres</p:column>			 
+					        <p:column>Pessoas pobres</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>CPP</p:column>
+					        <p:column>Coeficiente de Pessoas Pobres</p:column>			 
+					        <p:column>Índice de pessoas pobres em relação ao total da população</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>CMH</p:column>
+					        <p:column>Coeficiente de mortalidade por homicídio</p:column>			 
+					        <p:column>Mortes por 100.000 habitantes</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>Obtviol</p:column>
+					        <p:column>Óbitos violentos</p:column>			 
+					        <p:column>N. absoluto de óbitos</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>IDH</p:column>
+					        <p:column>Índice de Desenvolvimento Humano</p:column>			 
+					        <p:column>Índice de desenvolvimento humano</p:column>
+					    </p:row>
+					    <p:row> 
+					        <p:column>Gini</p:column>
+					        <p:column>Índice de Gini</p:column>			 
+					        <p:column>Índice de distribuição de renda</p:column>
+					    </p:row>
+					  </p:panelGrid>					
+			</p:tab>
+			</p:tabView>
+			</div>
+			
+		</div>
+	</ui:define>
+</ui:composition>

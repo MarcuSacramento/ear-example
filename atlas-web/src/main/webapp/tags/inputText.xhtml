@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	
+	<ui:composition>
+		<c:if test="#{empty align}"> 
+			<c:set var="align" value="left"/> 
+		</c:if> 		
+		<c:if test="#{empty width}"> 
+			<c:set var="width" value="auto"/> 
+		</c:if>
+		<c:if test="#{empty maxlength}">
+			<c:set var="maxlength" value="100"/>
+		</c:if>
+		<c:set var="beanValueChange" value="#{bean}" />
+		<c:if test="#{empty beanValueChange or empty valueChangeMethod}">
+			<c:set var="beanValueChange" value="#{autenticarUsuarioBean}" />
+			<c:set var="valueChangeMethod" value="dummyActionMethod" />
+		</c:if>
+		<c:if test="#{empty bean or empty method}">
+			<c:set var="bean" value="#{autenticarUsuarioBean}" />
+			<c:set var="method" value="dummyActionMethod" />
+		</c:if>
+		<c:if test="#{empty rendered}">
+			<c:set var="rendered" value="true" />
+		</c:if> 
+		<c:if test="#{empty disabled}">
+			<c:set var="disabled" value="false" />
+		</c:if> 
+		<c:if test="#{empty readonly}">
+			<c:set var="readonly" value="false" />
+		</c:if>
+		<c:if test="#{empty styleClass}">
+			<c:set var="styleClass" value="sirt_input_formata" />
+		</c:if> 
+		<p:inputText styleClass="#{styleClass}" 
+					value="#{value}" 
+					actionListener="#{bean[method]}"
+					valueChangeListener="#{beanValueChange[valueChangeMethod]}"
+					maxlength="#{maxlength}"
+					readonly="#{readonly}"
+					onkeypress="#{onkeypress}"
+					onkeyup="#{onkeyup}"
+					onblur="#{onblur}"
+					onfocus="#{onfocus}"
+					onclick="#{onclick}"
+					size="#{size}"
+					style="width: #{width}; text-align: #{align}; #{style}"
+					rendered="#{rendered}"
+					disabled="#{disabled}"
+					title="#{title}"
+					id="#{inputTextId}">
+					
+			<ui:insert/>
+			<p:ajax/>
+		</p:inputText><br/>
+		
+	</ui:composition>
+
+</html>

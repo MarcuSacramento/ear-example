@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+
+	<ui:define name="breadcrumb"> > 
+		<h:link title="CONTEÚDO" value="CONTEÚDO" outcome="/admin/conteudo/exibirConteudo.xhtml" /> > 
+		<h:link title="PROJETOS" value="PROJETOS >" outcome="/admin/conteudo/projetos/exibirProjetos.xhtml" /> NOVO PROJETO
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<style>
+			div.div-miolo {
+				display: block;
+				clear: both;
+				min-height: 40px;
+				padding-top: 0.8em;
+			}
+			
+			.linha{
+				display: block;
+				clear: both;
+				border-bottom: 1px solid rgba(22,89,191,1);
+				min-height: 110px;
+				padding-top: 0.8em;
+			}
+		</style>
+
+		<div class="atlas-miolo-logado">
+			<h2>Projetos</h2>
+
+			<h:messages id="messages" globalOnly="true"	infoClass="atlas-mensagem-positivo"	warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h:head>
+				<title>Novo Projeto | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+			<p style="font-size: 1.3em !important;">Verifique e preencha os campos abaixo para atualizar o cadastro do Projetos:</p>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Observações</legend>
+				<div class="atlas-miolo-logado-linha">
+					<span class="atlas-miolo-conteudo-observacao" style="font-size:1.1em !important; font-style: italic !important;">
+						*¹ Selecionar imagem: Tamanho máximo da imagem: 100Kb. Extensões permitidas:
+						PNG, GIF, JPEG. Dimensões recomendadas: 230x130px.
+					</span> <p/>
+					<span class="atlas-miolo-conteudo-observacao" style="font-size:1.1em !important; font-style: italic !important;">
+						*² Situação: Ativo (Deixa o Projetos visível no módulo público).
+					</span>
+				</div>
+			</fieldset>
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados do Projetos</legend>
+				<div class="atlas-miolo-logado-linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-projetos-nome" style="font-size:1.2em">Nome:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText value="#{manterProjetoBean.entidade.nome}" styleClass="atlas-input-formata atlas-input-520" maxlength="180"
+							id="atlas-formulario-projetos-nome" title="Informe o Nome do Projetos"	style="font-size: 1.2em !important;"/>
+						<p:watermark for="atlas-formulario-projetos-nome"	value="Nome do Projetos" />	
+					</div>
+				</div>
+
+				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque atlas-miolo-logado-linha-campo-img">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-projetos-marca" style="font-size:1.2em">Selecionar imagem:*¹</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<p:fileUpload showButtons="false" auto="true" label="Procurar" id="atlas-formulario-projetos-marca"
+							update="messages, urlArquivo, imgProjeto"	fileUploadListener="#{manterProjetoBean.doUpload}"
+							allowTypes="/(\.|\/)(PNG|png|GIF|gif|JPG|jpg|JPEG|jpeg)$/"
+							invalidFileMessage="Tipo de arquivo inválido." sizeLimit="100000"
+							styleClass="atlas-input-formata atlas-input-520"
+							invalidSizeMessage="Tamanho do arquivo ultrapassa o limite permitido." style="font-size: 1em !important;" />
+						<br /> <br />
+						<div style="font-size: 1em !important; margin-right: 1cm">
+							<h:outputText id="urlArquivo" value="#{manterProjetoBean.entidade.urlImagem}" /> 
+						</div>
+					</div>
+				</div>
+				
+				<div class="linha">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-projetos-site" style="font-size:1.2em">Imagem selecionada:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<p:outputPanel id="imgProjeto">
+							<p:graphicImage value="#{manterProjetoBean.imagemOpen}" width="77"
+								height="99"
+								rendered="#{manterProjetoBean.entidade.byteArquivo != null}">
+								<f:param name="projetoId"
+									value="#{manterProjetoBean.entidade.id}" />
+							</p:graphicImage>
+						</p:outputPanel>
+					</div>
+				</div>
+
+				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-projetos-site" style="font-size:1.2em">Site:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText value="#{manterProjetoBean.entidade.homepage}"	maxlength="512" title="Informe o site do Projetos"
+							styleClass="atlas-input-formata atlas-input-520" id="atlas-formulario-projetos-site" style="font-size: 1.2em !important;" />
+						<p:watermark for="atlas-formulario-projetos-site" value="http://" />
+					</div>
+				</div>
+
+				<div class="div-miolo">
+					<div class="atlas-miolo-logado-linha-label-dual">
+						<label for="atlas-formulario-projetos-situacao" style="font-size:1.2em">Situação:*²</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-dual">
+						<h:selectOneMenu id="inputSituacao" title="Selecione a situação do Projetos"
+							value="#{manterProjetoBean.entidade.situacao}"
+							styleClass="atlas-select-formata atlas-select-170" style="font-size: 1.2em !important;">
+							<f:selectItem itemLabel="Ativo" itemValue="S" />
+							<f:selectItem itemLabel="Inativo" itemValue="N" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+				<div class="atlas-miolo-logado-lista-acoes">
+					<atlas:barraBotoesCadastro bean="#{manterProjetoBean}" funcionalidade="004" />
+				</div>
+			</fieldset>
+		</div>
+	</ui:define>
+</ui:composition>
+

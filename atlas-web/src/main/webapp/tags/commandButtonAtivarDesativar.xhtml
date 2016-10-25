@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:atlas="http://epaj.dpu.gov.br/tags">
+	
+	<ui:composition>
+
+		<p:commandButton action="#{bean.desativar(registro.id)}" value="Desativar" id="btnDesativar" ajax="false"
+						 styleClass="sispaj_button_tabela sispaj_button_tabela_unico" rendered="#{registro.ativo}"/>
+		<p:commandButton action="#{bean.ativar(registro.id)}" value="Ativar" id="btnAtivar" ajax="false"
+						 styleClass="sispaj_button_tabela sispaj_button_tabela_unico" rendered="#{not registro.ativo}"/>
+
+	</ui:composition>
+</html>

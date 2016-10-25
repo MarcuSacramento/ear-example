@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<div class="atlas-paginacao">
+			<ul class="atlas-paginacao atlas-paginacao-max-interna">
+		
+				 <li class="atlas-paginacao-link-direcional">
+				 	<h:commandLink value="PRIMEIRO » "	action="#{exibirCartilhaBean.goToFirstPage()}"
+					styleClass="#{exibirCartilhaBean.nomeStyleClassPrimeiraPagina}"
+					title="Ir para a primeira página" alt="Ir para a primeira página"
+					disabled="#{exibirCartilhaBean.isPrimeiraPaginaSelecionada()}" /> 
+				</li>
+				<li class="atlas-paginacao-link-direcional"> 
+					<h:commandLink  value="ANTERIOR" action="#{exibirCartilhaBean.goToPreviousPage()}"
+					styleClass="#{exibirCartilhaBean.nomeStyleClassPaginaAnterior}"
+					title="Página Anterior" alt="Página Anterior"
+					disabled="#{exibirCartilhaBean.isPrimeiraPaginaSelecionada()}" /> 
+				</li>
+				
+				<ui:repeat var="link" value="#{exibirCartilhaBean.listaDeLinksDasPaginas}">
+					<li class="atlas-paginacao-link-ativo #{exibirCartilhaBean.classePaginaAtual(link.paginaAlvo)}">
+					<h:commandLink	action="#{exibirCartilhaBean.setCurrentPage(link.paginaAlvo)}"
+						value="#{link.paginaAlvo}" class="#{link.nomeClasseCss}"
+						title="Ir para a página #{link.paginaAlvo}" /> </li>
+				</ui:repeat>
+	
+				 <li class="atlas-paginacao-link-direcional"> 
+				 	<h:commandLink value="PRÓXIMO » " action="#{exibirCartilhaBean.goToNextPage()}"
+					styleClass="#{exibirCartilhaBean.nomeStyleClassProximaPagina}"
+					title="Próxima Página" alt="Próxima Página"
+					disabled="#{exibirCartilhaBean.isUltimaPaginaSelecionada()}" /> 
+				</li>
+					
+				 <li class="atlas-paginacao-link-direcional">
+				 	<h:commandLink value="ÚLTIMA » " action="#{exibirCartilhaBean.goToLastPage()}"
+					styleClass="#{exibirCartilhaBean.nomeStyleClassUltimaPagina}"
+					title="Ir para a última página" alt="Ir para a última página"
+					disabled="#{exibirCartilhaBean.isUltimaPaginaSelecionada()}" /> 
+				</li>
+				
+			</ul>
+		</div>
+	</h:body>
+</html>
+
+	

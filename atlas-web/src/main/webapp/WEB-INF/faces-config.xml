@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    
+<faces-config version="2.1" 
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+	<lifecycle>
+		<phase-listener>br.gov.atlas.seguranca.listener.SegurancaPhaseListener</phase-listener>
+	</lifecycle>
+
+	<application>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+			<supported-locale>pt</supported-locale>
+		</locale-config>
+	</application>
+
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{autenticarUsuarioBean.login}</from-action>
+			<from-outcome>sucesso</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-action>#{autenticarUsuarioBean.logout}</from-action>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>pesquisarPerfil</from-outcome>
+			<to-view-id>/admin/gerenciamento/perfil/exibirPerfil.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>pesquisarUsuario</from-outcome>
+			<to-view-id>/admin/gerenciamento/usuarios/exibirUsuarios.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>pesquisarParceiro</from-outcome>
+			<to-view-id>/admin/conteudo/parceiros/exibirParceiros.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>pesquisarParceiro</from-outcome>
+			<to-view-id>/admin/conteudo/parceiros/exibirParceiros.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>pesquisarProjeto</from-outcome>
+			<to-view-id>/admin/conteudo/projetos/exibirProjetos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>pesquisarGlossario</from-outcome>
+			<to-view-id>/admin/conteudo/abcDireitos/exibirAbcDireitos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+</faces-config>

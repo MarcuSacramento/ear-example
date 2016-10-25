@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+
+	<ui:define name="breadcrumb"> > <h:link
+			title="GERENCIAMENTO" value="GERENCIAMENTO"
+			outcome="/admin/gerenciamento/exibirGerenciamento.xhtml" /> > 
+						
+			<h:link title="PESQUISAS" value="PESQUISAS >"
+			outcome="/admin/gerenciamento/mensageria/exibirPesquisa.xhtml" /> NOVA MENSAGEM
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+	<style>
+		.div-miolo {
+		display: block !important;
+		clear: both !important;
+		min-height: 380px !important;
+		padding-top: 0.8em !important;
+	}
+	</style>
+
+		<div class="atlas-miolo-logado">
+			<h2>Mensagem</h2>
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h:head>
+				<title>Mensagem | Atlas de Acesso à Justiça</title>
+			</h:head>
+
+			<p>ATENÇÃO: Ao clicar em ENVIAR será enviado um e-mail para cada
+				representante, com cópia para o e-mail institucional do(s) órgão(s)
+				selecionado(s).</p>
+				
+			<p>Tipos de arquivos válidos para anexo: gif, png, pdf, jpe, xls, doc, jpeg, xlsx e docx.</p>
+			
+			<p>Tamanho do arquivo ultrapassa o limite permitido: 1MB.</p>
+
+
+			<fieldset class="atlas-miolo-logado-fieldset">
+				<legend>Dados da Mensagem</legend>
+
+				<div
+					class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-mensageria-assunto">Assunto:*</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<h:inputText value="#{manterMensageriaBean.entidade.assunto}"
+							id="atlas-formulario-mensageria-assunto"
+							title="Informe o assunto da Mensagem"
+							style="font-size: 1.2em !important;"
+							styleClass="atlas-input-formata atlas-input-520" />
+
+						<p:watermark for="atlas-formulario-mensageria-assunto"
+							value="Assunto da Mensagem" />
+
+					</div>
+				</div>
+				
+				<!-- DESTINATÁRIOS -->
+				<div class="atlas-miolo-logado-linha">
+					<h:panelGroup id="pnl-destinatarios">
+						<div class="atlas-miolo-logado-linha-label-full">
+							<label for="atlas-formulario-mensageria-destinatarios">Destinatários:*</label><br />
+						</div>
+						<div class="atlas-miolo-logado-linha-campo-dual">
+							<p:autoComplete id="atlas-formulario-mensageria-destinatarios" multiple="true"
+								value="#{manterMensageriaBean.destinatariosSelecionadosGeral}"
+								var="destinatario"
+								itemLabel="#{destinatario.nome}" itemValue="#{destinatario}"
+								converter="destinatarioConverter" forceSelection="true">
+								<p:ajax event="itemSelect" listener="#{manterMensageriaBean.handleSelect}" process="@this" update="@this"/>
+								<p:ajax event="itemUnselect" listener="#{manterMensageriaBean.handleUnselect}" process="@this" update="@this"/>
+								<p:column>	
+									<h:outputText value="#{destinatario.nome}" />
+								</p:column>
+							</p:autoComplete>
+						</div>
+						<div style="float: right !important; width: 118px !important;">
+							<p:commandButton value="PESQUISAR"
+								onclick="dlgInformarDestinatario.show();" action="#{manterMensageriaBean.carregarDadosDlgDestinatarios()}"
+								update="painelDestinatario"/>
+						</div>
+					</h:panelGroup>
+				</div>
+				
+				<!-- INCLUSÃO DOS DESTINATÁRIOS -->
+				<ui:include src="/admin/gerenciamento/mensageria/dlgInformarDestinatarios.xhtml" />
+				
+				<!-- INCLUSÃO DE ARQUIVOS -->
+				<div class="atlas-miolo-logado-linha atlas-miolo-logado-linha-destaque atlas-miolo-logado-linha-campo-img">
+					<div class="atlas-miolo-logado-linha-label-full">
+						<label for="atlas-formulario-anexo-mensagem-destinatario" style="font-size:1.2em">Selecionar arquivo:</label><br />
+					</div>
+					<div class="atlas-miolo-logado-linha-campo-full">
+						<p:fileUpload id="atlas-formulario-anexo-mensagem-destinatario"
+							showButtons="false" auto="true" mode="advanced" label="Procurar..."
+							update="messages idArquivos"
+							fileUploadListener="#{manterMensageriaBean.handleFileUpload}"
+							allowTypes="/(\.|\/)(gif|png|pdf|jpe|xls|doc|jpeg|xlsx|docx)$/"
+							invalidFileMessage="Tipo de arquivo inválido."
+							invalidSizeMessage="Tamanho do arquivo ultrapassa o limite permitido: 1MB."
+							sizeLimit="1048576"
+							styleClass="atlas-input-formata atlas-input-520"
+							style="font-size: 1em !important;" />
+					</div>
+				</div>
+				
+				<div class="atlas-miolo-logado-linha">
+					<p:dataTable id="idArquivos" var="file" value="#{manterMensageriaBean.files}" emptyMessage="Não há arquivos anexados.">
+						<f:facet name="header">
+				            Arquivo anexados
+				        </f:facet>
+				        <p:column width="90%">
+				            <h:outputText value="#{file.nome} " />
+				            <h:outputText value="#{file.tamanho} KB" />
+				        </p:column>
+				        <p:column width="10%">    
+   				        	<p:commandButton icon="ui-icon-circle-close" title="Remover Anexo" 
+   				        			action="#{manterMensageriaBean.removerArquivo(file)}"
+   				        			update="idArquivos"
+   				        			style="display: inline-block;  font-family: FontAwesome;  font-style: normal;
+									height: 22px; font-size: 1.4em; color: #1659BF; background-color: #A8A8A8 ;
+									font-weight: normal; line-height: 1.2; -webkit-font-smoothing: antialiased;  -moz-osx-font-smoothing: grayscale;" />
+				        </p:column>
+					</p:dataTable>
+				</div>
+
+				<!-- EDITOR E TAGS -->
+				<div class="div-miolo">
+					<p:editor styleClass="atlas-input-formata" id="idTextoMensagem" style="width: 535px!important; float: left;"
+								controls="bold italic underline strikethrough font size style color highlight bullets numbering 
+										  alignleft center alignright justify undo redo cut copy paste pastetext print"
+						width="535" height="350" value="#{manterMensageriaBean.entidade.mensagem}">
+
+					</p:editor>
+					<p:scrollPanel mode="native" style="width:200px;height:360px">
+						<p:dataTable id="idTagDisponiveis" var="tagDisponivel" value="#{manterMensageriaBean.tagsGerais}" 
+									 selection="#{manterMensageriaBean.selectedTag}" selectionMode="single" rowKey="#{tagDisponivel}"
+									 emptyMessage="">
+							<p:ajax event="rowSelect" listener="#{manterMensageriaBean.onRowSelectTags}"/>
+					        <f:facet name="header">
+					            Tags Disponiveis
+					        </f:facet>
+					        <p:column>
+					            <h:outputText value="#{tagDisponivel}" />
+					        </p:column>				
+						</p:dataTable>
+					</p:scrollPanel>
+				</div>
+			</fieldset>
+
+			<div class="atlas-miolo-logado-lista-acoes">
+
+				<div class="atlas-miolo-logado-inline">
+					<h:commandButton action="#{manterMensageriaBean.enviarMensagem()}" value="ENVIAR"
+						styleClass="atlas-button-interno" id="atlas-botao-novo"
+						rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('019')}"
+						title="Clique para enviar a mensagem" ajax="false"
+						style="font-size: 1.2em !important;" />
+				</div>
+
+				<div class="atlas-miolo-logado-inline">
+					<h:commandButton
+						action="#{manterMensageriaBean.voltarTelaPesquisa()}"
+						value="VOLTAR" styleClass="atlas-button-interno" update="@form"
+						title="Clique para voltar à tela de listagem das mensagens"
+						style="font-size: 1.2em !important;" />
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript">
+			function inserirTexto(textoNovo) {	
+				try{
+					$(".ui-editor-button[title='Paste as Text']").click();
+					$(".ui-editor-prompt textarea").val(textoNovo).parent().parent().find("input[type='button']").click();
+				  }
+				  catch(e){
+				    alert("Houve um erro de execução.[ERRO]"+e.message);
+				  }
+			}
+		</script>
+	</ui:define>
+</ui:composition>

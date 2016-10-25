@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/pub/template/template_atlas.xhtml">
+	<ui:define name="direcionamento-servico">
+    <h:head>
+		<link href="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+		<link href="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/css/docs.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link href="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/css/style.css" rel="stylesheet" type="text/css"/>
+	    
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/jquery/jquery.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/bootstrap.min.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/angular/angular.min.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/angular/angular-sanitize.min.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/angular/i18n/angular-locale_pt-br.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/angular/angular-resource.min.js"></script>   
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/angular-ui/ui-bootstrap-tpls-0.13.0.min.js"></script>           
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/ngGeolocation.min.js"></script>   
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/vendor/angular/angular-route.min.js"></script>   
+	
+	    <!--Import jQuery before materialize.js-->
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/materialize.min.js" type="text/javascript"></script>
+	
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/angular-ui/angular-error.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/angular-ui/ui-bootstrap-tpls-0.13.0.min.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/servicos.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/app.js"></script>
+	    <script src="${facesContext.externalContext.requestContextPath}/pub/_direcionamentoServico/js/main.js"></script>
+    </h:head>
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+	<script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/pub/_javascript/geolocalizacao.js" />
+	<script>
+		window.onload = function(){
+			var precisao = position.coords.accuracy;
+			if(precisao > 200){
+				precisao = 200;
+			}
+			
+			var latlng = new google.maps.LatLng(latitude, longitude);
+
+			mapObject = w_gmap.getMap();
+			mapObject.setCenter(latlng);
+   
+			var circle = new google.maps.Circle({
+				center: latlng,
+				radius: precisao,
+				map: mapObject,
+				fillColor: '#0000FF',
+				fillOpacity: 0.5,
+				strokeColor: '#0000FF',
+				strokeOpacity: 1.0
+			});
+    };
+
+	function siteConsumidor(url, target){
+		window.open(url, target);
+	}
+	</script>
+
+    <h:body>
+    
+    <div ng-app="solrSearchApp" ng-controller="SearchController as searchController" ng-init="searchController.init()">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="container" id="corpo">
+            <div id="conteudo">
+                <h2>Acesso à Justiça, um direito seu!</h2>
+
+					<p class="descricao-acesso-a-justica"> 
+						O ACESSO À JUSTIÇA disponibiliza para você este poderoso serviço de busca que lhe dá um direcionamento de acordo com a sua necessidade.
+						Para usar é simples! Digite no campo abaixo o serviço ou atendimento que procura e clique em pesquisar que nós faremos a busca para você.
+						Se a pesquisa não retornar um resultado, não se preocupe, nossa base de dados está em constante evolução para atender às necessidades diversas.
+						<a title="Clique para saber mais sobre o serviço de busca da justiça."
+							onclick="$('#textoPesquisaAjuda').toggle();">Saiba mais...</a> 
+						<div class="texto-pesquisa-ajuda" id="textoPesquisaAjuda">
+							<p>Para pesquisar, informe uma palavra ou frase de que você precisa e clique em <b>PESQUISAR</b>.</p>
+							Exemplos:
+							<ul> 
+								<li>Emitir segunda via de certidão;</li>
+								<li>Fui agredida em casa;</li>
+								<li>Produto sem garantia.</li>
+							</ul>
+							Demais Observações:
+							<ul id="lista-observacoes"> 
+								<li>Para realizar a pesquisa em uma cidade específica selecione as opções <b>ESTADO</b> e <b>MUNICÍPIO</b>;</li>
+								<li>Clique em uma palavra "Mais Pesquisadas" para pesquisar automaticamente;</li>
+								<li>Após pesquisar, um <b>mapa com a localização dos
+									órgãos</b> será exibido, e a listagem dos órgãos que poderão atender à sua necessidade;
+								</li>
+								<li>Ao clicar em um órgão serão exibidos: Endereço completo, telefone de contato, site e os serviços que ele realiza;</li>
+								<li>Caso você realize uma pesquisa que não retorne resultado, não se preocupe, <b>o ACESSO A JUSTIÇA possui uma equipe
+									que está evoluindo a nossa base constantemente</b>.</li>
+							</ul>
+						</div>
+					</p>
+
+					<div>
+                    <h:form class="form-horizontal css-form"  name="formSearch" id="formSearch">
+                    <h:panelGroup styleClass="atlas-miolo-conteudo-limpo">
+                    	<div class="atlas-miolo-conteudo-filtro">
+							<div class="pesquisa-filtro-campos">                    	
+								<input ng-model="searchController.texto" type="text" name="j_idt61"
+									class="txt-pesquisar"
+									title="Informe o termo que deseja localizar"
+									placeholder="Ex: Violência doméstica, Perdi meus documentos, Cobrança indevida... "
+									required="required" /> 
+								<input 
+									ng-click="searchController.pesquisar(1)" type="button" name="j_idt63"
+									value="PESQUISAR" title="Clique para pesquisar o termo desejado"
+									class="btn-pesquisar" /><br />
+							</div>
+	                   	</div>
+                    	<div class="atlas-miolo-conteudo-filtro">
+                    		<h:panelGrid styleClass="pesquisa-filtro-localidade" columns="2">
+                    			<h:panelGroup>
+									<label for="selectUfInstituicao">Estado</label><br/>
+									<select id="selectUfInstituicao" name="selectUfInstituicao"
+										class="atlas-select-360 atlas-select-formata"
+										ng-options="item.nome for item in searchController.ufs track by item.sigla"
+										ng-model="searchController.ufSelecionada"
+										ng-change="searchController.recuperarMunicipios(searchController.ufSelecionada.sigla)">
+										<option value="">Selecione um estado</option>
+									</select>
+                    			</h:panelGroup>
+                    			<h:panelGroup>
+		                            <label for="selectCidadeInstituicao">Município</label><br/>
+		                            <select id="selectCidadeInstituicao" 
+		                                    name="selectCidadeInstituicao" 
+		                                    class="atlas-select-360 atlas-select-formata" 
+		                                    ng-options="item.nome for item in searchController.municipios | orderBy: 'nome' track by item.nome" 
+		                                    ng-model="searchController.municipioSelecionado">
+		                                <option value="">Selecione um município</option>
+		                            </select>
+                    			</h:panelGroup>
+                    		</h:panelGrid>
+                    	</div>
+                    	<div class="atlas-miolo-conteudo-filtro">
+							<div class="pesquisa-termos">
+	                            <label>Mais Pesquisadas: </label><br/>
+	                            <a href="#"
+									ng-repeat="termo in searchController.termosMais"
+									ng-click="searchController.pesquisar(1, termo.nmeTermoBusca)"
+									style="text-decoration: none !important;">
+									<span class="label label-primary pesquisa-termos-tag">{{termo.nmeTermoBusca}}</span>
+								</a>
+	                            <br /><br /> 
+							</div>
+                    	</div>
+                    </h:panelGroup>
+					</h:form>
+                </div>
+                <div class="quebra"></div>
+                <div id="mensagemIndisponibilidade" class="text-center atlas-mensagem-erro">
+                    <p>ATENÇÃO: Serviço de pesquisa indisponível no momento!</p>
+                </div>
+                <div ng-show="searchController.pesquisou">
+	                <div id="mensagemPesquisaSemResultado" class="text-center atlas-mensagem-alerta">
+	                    <p>A pesquisa não encontrou nenhum resultado.</p>
+	                </div>
+                </div>
+                <div ng-show="searchController.encontrou" class="text-center">
+                    <h4 class="resultado-mensagem">Aproximadamente {{searchController.getTotalDocumentos()}} órgão(s) encontrado(s) para <span class="label label-warning">{{searchController.getTextoPesquisado()}}</span></h4>
+                    <pagination total-items="searchController.totalItems" 
+                                ng-model="searchController.currentPage" 
+                                ng-change="searchController.pesquisar(searchController.currentPage)"
+                                max-size="10"
+                                class="pagination" 
+                                boundary-links="true" 
+                                first-text="inicio"
+                                previous-text="anterior"
+                                next-text="próximo"
+                                last-text="fim"
+                                rotate="false">
+                    </pagination>
+                </div>
+                <div ng-show="searchController.encontrou">
+					<ul class="mapa-servico collapsible popout" style="list-style-type: none !important;" data-collapsible="expandable">
+						<li>
+							<div class="tituloMapa collapsible-header">Localização dos órgãos</div>
+							<div id="mapa" class="collapsible-body" 
+								style="padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;" 
+								ng-controller="ServicoMapaController as mapaCtrl" ng-init="searchController.setMapaController(mapaCtrl);">
+								<div id="mapa-direcionamento-servico"/>
+							</div>
+						</li>
+					</ul>
+					<a href="javascript:siteConsumidor('http://www.consumidor.gov.br','_blank');" ng-show="searchController.exibirBannerConsumidor">
+						<div class="resultado-servico-banner-consumidor" />
+					</a>
+					<div class="resultado-servico-banner-mulher" ng-show="searchController.exibirBannerMulher"></div>
+					<ul class="collapsible" style="list-style-type: none !important;" data-collapsible="accordion" ng-repeat="doc in searchController.getDocumentos()" on-last-repeat="true">
+                        <li>
+                            <div class="resultado collapsible-header" ng-click="searchController.processarDadosDocumento(doc);">
+                                <div class="nome">
+                                	<a href="#" style="text-decoration: none;">
+                                		<span style="color:rgba(22,89,191,1); font-size:1.25em;">
+                                			{{searchController.limitarTexto(doc.cod_sigla_orgao + ' - ' + doc.nme_orgao, 65, doc.ativado)}}
+                                		</span>
+                                	</a>
+                                </div> 
+                                <div class="distancia">{{searchController.calcularDistancia(doc.localidade) | number:2}}</div>
+                                <div class="quebra"></div>
+                                <hr />
+                                <div class="endereco">{{doc.dsc_endereco}}, {{doc.dsc_bairro}}, {{doc.nu_cep}}, {{doc.nme_municipio}} - {{doc.cod_uf}} 
+                                </div>
+                                <div class="contato" id="contato{{doc.id}}">
+                                    <b>Fone:</b> (061) 2104-4344 <br />
+                                    <b>Site:</b> <a href="{{doc.nme_homepage}}" target="_blank">{{doc.nme_homepage}}</a><br />
+                                </div>
+							</div>
+							<div class="collapsible-body">
+								<div class="row">
+									<div class="col s12">
+										<div class="resultado-servico-corpo">
+										
+											<div ng-show="doc.servicos"><span><h4>SERVIÇOS DISPONÍVEIS</h4></span></div>
+											<div ng-show="doc.servicos.length > 0">
+												<ul class="resultado-servico">
+													<li ng-repeat="servico in doc.servicos" ng-controller="ServicoController as servicoCtrl">
+														<div>
+															<a class="text-right" ng-click="searchController.pesquisar(1, servico.nme_servico)">
+																<span ng-class="{'resultado-servico-titulo': !servicoCtrl.aberto, 'resultado-servico-titulo-ativo': servicoCtrl.aberto}">
+																	{{servico.nme_servico}} 
+																	{{servicoCtrl.setPropriedadeManipulada(servico.id+'_'+doc.id)}}
+																</span> 
+															</a>
+															<a ng-show="servico.nota" ng-click="servicoCtrl.expandirNota(servico.id, servicoCtrl.propriedadeManipulada)">
+																<span ng-class="{'label-link-mais': !servicoCtrl.aberto, 'label-link-menos': servicoCtrl.aberto}">{{servicoCtrl.verMaisVerMenos}}</span>
+															</a>
+														</div>
+														<div id="bodyServico{{servicoCtrl.propriedadeManipulada}}"
+															 class="resultado-servico-detalhe">
+															<div class="resultado-nota-corpo" ng-repeat="nota in servico.nota">
+																<div ng-bind-html="nota"></div>
+															</div>
+															<br />
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div ng-hide="doc.servicos.length > 0">
+												Não há serviço relacionado com esse órgão no momento.
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+                    </ul>
+                    <div ng-show="searchController.encontrou" class="text-center" style="padding-bottom:50px;">
+                        <h4 class="resultado-mensagem" style="margin-bottom: 19px !important;">
+                        	Aproximadamente {{searchController.getTotalDocumentos()}} órgão(s) encontrado(s) para <span class="label label-warning">{{searchController.getTextoPesquisado()}}</span>
+                        </h4>
+                        <pagination total-items="searchController.totalItems" 
+                                    ng-model="searchController.currentPage" 
+                                    ng-change="searchController.pesquisar(searchController.currentPage)"
+                                    max-size="10"
+                                    class="pagination-sm paginacao" 
+                                    boundary-links="true" 
+	                                first-text="inicio"
+	                                previous-text="anterior"
+	                                next-text="próximo"
+	                                last-text="fim"
+                                    rotate="false">
+                        </pagination>
+                    </div>
+                </div>
+				<div class="atlas-conteudo-container">
+					<div class="atlas-miolo"><br /><br />
+						<div class="atlas-miolo-conteudo-inicio-linha-principal">
+							<h2>Mapa da Justiça</h2>
+							<div class="atlas-miolo-conteudo-inicio">
+								<div class="atlas-miolo-conteudo-inicio-porta-esquerda">
+									<div
+										class="atlas-miolo-conteudo-inicio-porta-esquerda-container">
+										<h3>Encontre uma porta da Justiça perto de você</h3>
+										<div class="atlas-miolo-conteudo-bloco-mapa-conteudo">
+											<p class="descricao-acesso-a-justica">
+												O Mapa da Justiça também possibilita a busca
+												avançada selecionando o Tipo do órgão (Tribunal de
+												Justiça, Delegacia da Mulher, Procon, entre outros) ou o
+												Tema abordado (Atendimento à Mulher, Criança e
+												Adolescente, etc).</p>
+										</div>
+									</div>
+									<div class="atlas-miolo-conteudo-bloco-link">
+										<h:link outcome="/pub/sobre/portasDaJustica/consultarPortasDaJustica.xhtml">Acesse o sistema <img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link.png" /></h:link>
+									</div>
+								</div>
+								<div class="atlas-miolo-conteudo-inicio-porta-direita">
+									<p:gmap id="mapa-convencional" widgetVar="w_gmap" center="-15.7997256, -47.866052800000034" zoom="14" type="HYBRID" style="width:480px;height:330px" streetView="true"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+		</div>
+        
+        <script type="text/javascript">
+
+            $('#mapa').click(function () {
+                $('iframe').css("pointer-events", "auto");
+            });
+
+            $('.tituloMapa').click(function () {
+                $('iframe').css("pointer-events", "none");
+            });
+
+            $('.servico').click(function () {
+                $('iframe').css("pointer-events", "none");
+            });
+
+        </script>        
+
+    </h:body>
+</ui:define>
+</ui:composition>

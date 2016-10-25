@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="conteudo">
+		<f:metadata>
+		     <f:viewParam name="emailUsuario" value="#{manterUsuarioBean.loginUsuario}"></f:viewParam>
+		     <f:viewParam name="logar" value="#{manterUsuarioBean.logar}"></f:viewParam>
+		</f:metadata>		
+
+		<h:head>
+			<title>Admin | Alteração de Senha</title>
+		</h:head>
+
+		<div class="atlas-miolo-logado">
+
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+
+			<h2>Alteração de Senha</h2>
+
+			<div class="atlas-miolo-logado-linha" style="display: #{manterUsuarioBean.alterado ? 'none' : 'block'}">
+				<table class="atlas-tabela-simples">
+					<tbody>
+						<h:inputHidden id="isRepresentanteValido" value="#{manterOrgaoBean.erroRepresentante}" />
+						<tr class="atlas-tabela-simples-linha-02">
+							<td class="atlas-tabela-simples-label">
+								<label for="inputSenha">Senha:*</label>
+							</td>
+							<td colspan="3"><p:password
+									value="#{manterUsuarioBean.senha}" id="inputSenha"
+									title="Informe a senha" autocomplete="off"
+									styleClass="atlas-input-formata atlas-input-150"
+									style="box-shadow:none;" /></td>
+						</tr>
+						<tr class="atlas-tabela-simples-linha-01">
+							<td class="atlas-tabela-simples-label">
+								<label for="inputNovaSenha">Nova senha:*</label>
+							</td>
+							<td colspan="3"><p:password
+									value="#{manterUsuarioBean.novaSenha}" id="inputNovaSenha"
+									title="Informe a nova senha" autocomplete="off"
+									styleClass="atlas-input-formata atlas-input-150"
+									style="box-shadow:none;" /></td>
+						</tr>
+						<tr class="atlas-tabela-simples-linha-02">
+							<td class="atlas-tabela-simples-label"><label
+								for="inputConfirmaSenha">Confirmação de senha:*</label></td>
+							<td colspan="3"><p:password
+									value="#{manterUsuarioBean.confirmacaoSenha}" id="inputConfirmaSenha"
+									title="Confirme a nova a senha"
+									styleClass="atlas-input-formata atlas-input-150"
+									style="box-shadow:none;" /></td>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+			
+			<div class="atlas-miolo-logado-lista-acoes" align="center">
+				<div class="atlas-miolo-logado-inline" style="display: #{manterUsuarioBean.alterado ? 'none' : 'block'}">
+					<h:commandButton action="#{manterUsuarioBean.redefenirSenha()}" 
+									 value="ALTERAR SENHA" 
+									 styleClass="atlas-button-interno" 
+									 update="@form"/>
+				</div>
+				
+				<div class="atlas-miolo-logado-inline" style="display: #{manterUsuarioBean.alterado  ? 'block' : 'none'}">
+					<h:commandButton action="#{autenticarUsuarioBean.logout()}" 
+									 value="OK" styleClass="atlas-button-interno" update="@form" />
+				</div>
+			</div>
+			
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,59 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação do breadcrumb                                                             **
+** @data: 20/05/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+div.atlas-conteudo-breadcrumb {
+	margin: 2em 0;
+}
+
+div.atlas-conteudo-breadcrumb-container{
+	width: 960px;
+	margin: 0 auto;
+	position: relative;
+    overflow: hidden;
+	text-transform: uppercase;
+	color: rgba(44,102,206,1);
+}
+
+	span.atlas-conteudo-breadcrumb-container-inicial{
+		margin-right: 0.5em;
+		color: #000;
+	}
+	
+	span.atlas-conteudo-usuario-container-inicial{
+		margin-right: 0.5em;
+		color: #000;
+	}
+	
+	.atlas-label{
+	margin-bottom: 0.6em;
+		font-size:1em;
+		font-family: Verdana, Geneva, sans-serif;
+	}
+
+	div.atlas-conteudo-breadcrumb-container a{
+		color: rgba(44,102,206,1);
+		text-decoration: none;
+	}
+	
+	div.atlas-conteudo-breadcrumb-container a:hover{
+		color: rgba(44,102,206,0.9);
+		text-decoration: underline;
+	}
+	
+	.atlas_imagem{
+	display: block;
+	float: right;
+	width: 15%;
+	margin-top: -4.3em;
+	position: relative;
+	padding-left: 0em;
+	padding-right: 3em;
+
+	}
+	

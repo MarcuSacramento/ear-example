@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+	#{manterPerfilBean.init()}
+	<div >
+		<h:panelGroup id="atlas_linha" layout="block">
+
+			<atlas:dataTable bean="manterPerfilBean" id="dataTablePerfis" value="#{manterPerfilBean.perfis}">
+				<p:column headerText="Perfil" styleClass="atlas_tabela_simples">
+					<h:outputText value="#{registro.nome}" style="font-size: small;" />
+				</p:column>
+
+				<p:column headerText="Descrição" styleClass="label_tabela" style="width:220px !important; text-align:justify !important;">
+					<h:outputText value="#{registro.descricao}" style="font-size: small" />
+				</p:column>
+
+				<p:column headerText="Situação">
+					<h:outputText value="#{registro.situacaoFormatada}"	style="font-size: small" />
+				</p:column>
+
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton action="#{manterPerfilBean.editarManterPerfil(registro.id)}" ajax="false" value="" style="height: 22px !important;" styleClass="icone2" update="@form" />
+				</p:column>
+
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton action="#{manterPerfilBean.excluirPerfil(registro)}" update=":form:atlas_linha" value="" ajax="false"
+						rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('009')}" style="height: 22px !important;" styleClass="icone"
+						onclick="if (!confirm('#{msg.MSG5}')) return false;" />
+				</p:column>
+			</atlas:dataTable>
+		</h:panelGroup>
+	</div>
+
+</ui:composition>

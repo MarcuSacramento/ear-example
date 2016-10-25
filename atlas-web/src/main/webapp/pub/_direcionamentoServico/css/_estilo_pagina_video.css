@@ -1,0 +1,222 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação da página Vídeos                                                          **
+** @data: 09/06/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+div.atlas-miolo-conteudo-video{
+	background-color: rgba(7,45,108,1);
+	color: rgba(255,255,255,1);
+	min-height: 490px;
+	border-bottom: 1px dotted rgba(48,84,146,1);
+	-moz-border-radius: 0.5em 0.5em 0 0;
+	-webkit-border-radius: 0.5em 0.5em 0 0;
+	border-radius: 0.5em 0.5em 0 0;
+}
+
+div.atlas-miolo-conteudo-video p{
+	color: rgba(205,225,227	,1) !important;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif !important;
+	font-size: 1.2em !important;
+}
+
+	div.atlas-miolo-conteudo-video-destaque{
+		float: left;
+		width: 450px;
+		margin: 2em 0em 2em 2em;
+	}
+	
+	div.atlas-miolo-conteudo-video p.atlas-miolo-conteudo-video-destaque-titulo{
+		color: rgba(205,225,227	,1) !important;
+		font-family: "open_sansbold", Arial, Helvetica, sans-serif !important;
+		font-size: 1.5em !important;
+		padding-top: 1em !important; 
+	}
+
+div.atlas-miolo-conteudo-video-lista{
+	float: right;
+	width: 260px;
+	min-height: 470px;
+	margin: 2em 0em 2em 0em;
+	border-left: 1px dotted rgba(48,84,146,1);
+	border-top: 1px dotted rgba(48,84,146,1);
+}
+
+div.atlas-miolo-conteudo-video-lista-item,
+div.atlas-miolo-conteudo-video-lista-item-final
+{
+	padding: 2em 2em;
+	clear: both;
+	min-height: 50px;
+}
+
+	div.atlas-miolo-conteudo-video-lista-item{
+		border-bottom: 1px dotted rgba(48,84,146,1);
+	}
+
+	div.atlas-miolo-conteudo-video-lista-item img,
+	div.atlas-miolo-conteudo-video-lista-item-final img
+	{
+		vertical-align: top;
+		float: left;
+		padding-right: 1em;
+	}
+	
+	div.atlas-miolo-conteudo-video-lista-item a,
+	div.atlas-miolo-conteudo-video-lista-item-final a
+	{
+		color: rgba(205,225,227	,1);
+		font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+		font-size: 1.2em;
+		text-decoration: none;
+		line-height: 17px;
+	}
+	
+	div.atlas-miolo-conteudo-video-lista-item a:hover,
+	div.atlas-miolo-conteudo-video-lista-item-final a:hover
+	{
+		color: rgba(255,255,255,1);
+	}
+
+div.atlas-miolo-conteudo-video-todos{
+	background-color: rgba(6,36,88,1);
+	color: rgba(255,255,255,1);
+	padding: 2em;
+	-moz-border-radius: 0 0 0.5em 0.5em;
+	-webkit-border-radius: 0 0 0.5em 0.5em;
+	border-radius: 0 0 0.5em 0.5em;
+	margin-bottom: 2em;
+	text-align: right;
+}
+
+	div.atlas-miolo-conteudo-video-todos img{
+		vertical-align: middle;
+		padding-left: 0.5em;
+		margin-top: -0.6em;
+	}
+	
+	div.atlas-miolo-conteudo-video-todos a
+	{
+		text-transform: uppercase;
+		color: rgba(205,225,227	,1);
+		font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+		font-size: 1.2em;
+		text-decoration: none;
+		line-height: 17px;
+	}
+	
+	div.atlas-miolo-conteudo-video-todos a:hover
+	{
+		color: rgba(255,255,255,1);
+	}
+	
+	div.atlas-miolo-conteudo-video-todos img.atlas-miolo-conteudo-video-todos
+	{
+		background-image: url(../_imagens/_miolo/ico_bloco_link_videos.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		width: 20px;
+		height: 20px;
+	}
+
+div.atlas-miolo-lista-video-clear{
+	border-bottom: 1px solid rgba(211,211,211,1);
+	clear: both;
+	padding-bottom: 1.5em;
+	margin-bottom: 1.5em;
+	height: 1px;
+	width: 100%;
+}
+
+.atlas-miolo-lista-video-data{
+	float: left;
+	width: 90px;
+}
+
+	.atlas-miolo-lista-video-data p.atlas-miolo-lista-video-data-p{
+		font-family: "open_sansregular", Arial, Helvetica, sans-serif !important;
+		font-size: 1.2em !important;
+		color: rgba(102,102,102,1) !important;
+		line-height: 0.7em !important;
+	}
+	
+	.atlas-miolo-lista-video-data p.atlas-miolo-lista-video-data-p img{
+		vertical-align: middle;
+		margin-right: 0.3em;
+		border: none;
+	}
+
+.atlas-miolo-lista-video-detalha{
+	float: right;
+	width: 630px;
+	border-left: 1px dotted rgba(211,211,211,1);
+	padding-left: 2.5em;
+}
+
+	.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-titulo{
+		font-weight: bold;
+		font-size: 1.5em;
+	}
+	
+		.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-titulo a{
+			color: rgba(26,42,57,1);
+			text-decoration: none;
+		}
+		
+		.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-titulo a:hover{
+			color: rgba(102,102,102,1);
+		}
+
+	.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-descricao{
+		font-size: 1.4em !important;
+		line-height: 1.5em !important;
+	}
+	
+	.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-tag{
+		font-size: 1.2em;
+		color: rgba(102,102,102,1);
+	}
+	
+		.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-tag a{
+			color: rgba(44,103,205,1);
+			text-decoration: none;
+		}
+		
+		.atlas-miolo-lista-video-detalha p.atlas-miolo-lista-video-detalha-tag a:hover{
+			color: rgba(102,102,102,1);
+		}
+
+.atlas-miolo-conteudo-video-exibe{
+	text-align: center;
+	margin: 3em 0;
+}
+
+img.atlas-miolo-lista-video-data-img{
+	background-image: url(../_imagens/_miolo/ico_calendario.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 16px;
+	height: 16px;
+	border: none;
+}
+
+img.atlas-miolo-lista-video-hora-img{
+	background-image: url(../_imagens/_miolo/ico_hora.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 16px;
+	height: 16px;
+	border: none;
+}
+
+img.atlas-miolo-lista-video-multimidia-img{
+	background-image: url(../_imagens/_miolo/ico_multimidia.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 16px;
+	height: 16px;
+	border: none;
+}

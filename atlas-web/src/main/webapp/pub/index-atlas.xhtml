@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/pub/template/template_atlas.xhtml">
+
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Pub | Página Inicial</title>
+		</h:head>
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+		<script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/pub/_javascript/geolocalizacao.js" />
+		<script>
+			window.onload = function(){
+				var precisao = position.coords.accuracy;
+				if(precisao > 200){
+					precisao = 200;
+				}
+				
+				var latlng = new google.maps.LatLng(latitude, longitude);
+	
+				mapObject = w_gmap.getMap();
+				mapObject.setCenter(latlng);
+	   
+				var circle = new google.maps.Circle({
+					center: latlng,
+					radius: precisao,
+					map: mapObject,
+					fillColor: '#0000FF',
+					fillOpacity: 0.5,
+					strokeColor: '#0000FF',
+					strokeOpacity: 1.0
+				});
+	    };
+	
+		</script>
+		<div class="atlas-conteudo">
+			<div class="atlas-conteudo-container">
+				<div class="atlas-miolo">
+					<a name="atlas-ancora-conteudo"></a>
+					<div class="atlas-miolo">
+						<div class="atlas-miolo-conteudo-inicio-linha-principal">
+							<h2>Mapa da Justiça</h2>
+							<div class="atlas-miolo-conteudo-inicio">
+								<div class="atlas-miolo-conteudo-inicio-porta-esquerda">
+									<div
+										class="atlas-miolo-conteudo-inicio-porta-esquerda-container">
+										<h3>Encontre uma porta da Justiça perto de você</h3>
+										<div class="atlas-miolo-conteudo-bloco-mapa-conteudo">
+											<p>Busque as unidades do sistema de justiça que desejar nos municípios brasileiros, resultados com endereços e contatos completos.</p>
+										</div>
+									</div>
+									<div class="atlas-miolo-conteudo-bloco-link">
+										<h:link outcome="/pub/sobre/portasDaJustica/consultarPortasDaJustica.xhtml">Acesse o sistema <img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link.png" /></h:link>
+									</div>
+								</div>
+								<div class="atlas-miolo-conteudo-inicio-porta-direita">
+<!-- 									<div id="google_canvas"></div> -->
+									<p:gmap id="mapa" widgetVar="w_gmap" center="-15.7997256, -47.866052800000034" zoom="14" type="HYBRID" style="width:480px;height:330px" streetView="true"/>
+								</div>
+							</div>
+						</div>
+						<div class="atlas-miolo-conteudo-inicio-linha">
+							<div class="atlas-miolo-conteudo-inicio-bloco-3-1">
+								<h2>Publicações</h2>
+								<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_publicacoes.png" />
+								<div class="atlas-miolo-conteudo-inicio-bloco-container">
+									<p>Encontre material de referência sobre direitos básicos para educação em direitos e instrução para casos específicos.</p>
+								</div>
+								<div class="atlas-miolo-conteudo-bloco-link">
+									<h:link outcome="/pub/centraisDeConteudo/publicacoes.xhtml">Acesse as Publicações<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link.png" />
+									</h:link>
+								</div>
+							</div>
+
+							<div class="atlas-miolo-conteudo-inicio-bloco-3-2">
+								<h2>ABC dos Direitos</h2>
+								<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_abc_direitos.png" />
+								<div class="atlas-miolo-conteudo-inicio-bloco-container">
+									<p>Encontre referências e explicações sobre termos e conceitos básicos do Direito e do Acesso à Justiça.</p>
+								</div>
+								<div class="atlas-miolo-conteudo-bloco-link">
+									<h:link outcome="/pub/sobre/dicionario/exibirDicionario.xhtml">Acesse o ABC dos Direitos<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link.png" /></h:link>
+								</div>
+							</div>
+
+							<div class="atlas-miolo-conteudo-inicio-bloco-3-3">
+								<h2>Indicadores</h2>
+								<img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_banners/banner_infografico_predefinido.png" />
+								<div class="atlas-miolo-conteudo-inicio-bloco-container">
+									<p>Avaliação sobre o acesso à justiça no Brasil e informações sobre o sistema de justiça.</p>
+								</div>
+								<div class="atlas-miolo-conteudo-bloco-link">
+									<h:link outcome="/pub/centraisDeConteudo/indicadores.xhtml">Acesse os Indicadores <img src="${facesContext.externalContext.requestContextPath}/pub/_imagens/_miolo/ico_bloco_link.png" />
+									</h:link>
+								</div>
+							</div>
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

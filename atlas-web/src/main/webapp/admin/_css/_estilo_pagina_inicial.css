@@ -1,0 +1,68 @@
+@charset="utf-8";
+/*************************************************************************************************
+**                                                                                              **
+** @autor: Narmer Abouhassan                                                                    **
+** @brief: Formatação do breadcrumb                                                             **
+** @data: 20/05/2014                                                                            **
+**                                                                                              **
+*************************************************************************************************/
+
+div.atlas-miolo-conteudo-inicio-linha-principal{
+	clear: both;
+	margin: 0 0 5em 0;
+	height: 410px;
+}
+
+div.atlas-miolo-conteudo-inicio-linha{
+	clear: both;
+}
+
+div.atlas-miolo-conteudo-inicio-porta-esquerda{
+	float: left;
+	width: 250px;
+}
+
+div.atlas-miolo-conteudo-inicio-porta-esquerda-container{
+	padding: 0 1em;
+}
+
+div.atlas-miolo-conteudo-bloco-mapa-conteudo{
+	height: 210px;
+}
+
+div.atlas-miolo-conteudo-inicio-porta-direita{
+	float: right;
+	width: 480px;
+}
+
+div.atlas-miolo-conteudo-inicio-bloco-3-1{
+	width: 232px;
+	float: left;
+	margin-right: 1.3em;
+}
+
+div.atlas-miolo-conteudo-inicio-bloco-3-2{
+	width: 232px;
+	float: left;
+	margin-right: 1.3em;
+	margin-left: 1.3em;
+}
+
+div.atlas-miolo-conteudo-inicio-bloco-3-3{
+	width: 232px;
+	float: left;
+	margin-left: 1.3em;
+}
+
+div.atlas-miolo-conteudo-inicio-bloco-container{
+	height: 240px;
+	padding: 0 1em;
+}
+
+div.atlas-miolo-conteudo-inicio-bloco-container img{
+	margin: 0 -1em 1em -1em;
+	box-shadow: 0px 0px 5px rgba(206,206,191,1);
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
+	border-radius: 0.5em;
+}

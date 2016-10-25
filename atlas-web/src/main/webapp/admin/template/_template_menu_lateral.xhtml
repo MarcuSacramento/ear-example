@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h1>Menu de navegação</h1>
+
+<c:if test="#{autenticarUsuarioBean.possuiAcessoGerenciamento}">
+	<nav class="atlas-menu-lateral-bloco">
+		<h2>GERENCIAMENTO</h2>
+		<ul>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('008')}">
+				<li><h:link title="Clique gerenciar a área Usuários"
+						value="Usuários"
+						outcome="/admin/gerenciamento/usuarios/exibirUsuarios.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('009')}">
+				<li><h:link title="Clique gerenciar a área Perfil"
+						value="Perfil"
+						outcome="/admin/gerenciamento/perfil/exibirPerfil.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('010')}">
+				<li><h:link title="Clique gerenciar a área Temas" value="Temas"
+						outcome="/admin/gerenciamento/temas/exibirTemas.xhtml" /></li>
+			</c:if>			
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('011')}">
+				<li><h:link title="Clique gerenciar a área Dados em Bloco"
+						value="Dados em Bloco"
+						outcome="/admin/gerenciamento/dadosEmBloco/exibirDadosEmBloco.xhtml" />
+				</li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('012')}">
+				<li><h:link title="Clique gerenciar a área Funcionalidades"
+						value="Funcionalidades"
+						outcome="/admin/gerenciamento/funcionalidades/exibirFuncionalidades.xhtml" />
+				</li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('015')}">
+				<li><h:link value="Tipos de órgão"
+						title="Clique para gerenciar tipos de órgão"
+						class="atlas_geral_menu_link"
+						outcome="/admin/gerenciamento/tipoOrgao/tipoOrgaoConsulta.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('016')}">
+				<li><h:link value="Importar órgão"
+						title="Clique para importar órgão"
+						class="atlas_geral_menu_link"
+						outcome="/admin/conteudo/enderecosJustica/orgaoImportacao.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('017')}">
+				<li><h:link title="Clique gerenciar a área serviços" value="Serviços"
+						class="atlas_geral_menu_link"
+						outcome="/admin/gerenciamento/servicos/exibirServicos.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('018')}">
+				<li><h:link title="Clique gerenciar a área cargos" value="Cargos"
+						class="atlas_geral_menu_link"
+						outcome="/admin/gerenciamento/cargos/exibirCargos.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('019')}">
+					<li><h:link title="Clique gerenciar a área mensageria" 
+							value="Mensageria" class="atlas_geral_menu_link"
+							outcome="/admin/gerenciamento/mensageria/exibirPesquisa.xhtml" />
+					</li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('020')}">
+					<li><h:link title="Clique gerenciar a área termos de pesquisa" 
+							value="Gerenciar Termos" class="atlas_geral_menu_link"
+							outcome="/admin/gerenciamento/termos/exibirTermos.xhtml" />
+					</li>
+			</c:if>
+
+		</ul>
+	</nav>
+</c:if>
+<c:if test="#{autenticarUsuarioBean.possuiAcessoConteudo}">
+	<nav class="atlas-menu-lateral-bloco">
+		<h2>CONTEÚDO</h2>
+		<ul>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('001')}">
+				<li><h:link
+						title="Clique gerenciar a área Endereços da Justiça."
+						value="Endereços da Justiça"
+						outcome="/admin/conteudo/enderecosJustica/exibirOrgao.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('002')}">
+				<li><h:link title="Clique gerenciar a área ABC dos Direitos"
+						value="ABC dos Direitos"
+						outcome="/admin/conteudo/abcDireitos/exibirAbcDireitos.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('004')}">
+				<li><h:link title="Clique gerenciar a área Projetos"
+						value="Projetos"
+						outcome="/admin/conteudo/projetos/exibirProjetos.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('003')}">
+				<li><h:link title="Clique gerenciar a área Parceiros"
+						value="Parceiros"
+						outcome="/admin/conteudo/parceiros/exibirParceiros.xhtml" /></li>
+			</c:if>
+		</ul>
+	</nav>
+</c:if>
+<c:if test="#{autenticarUsuarioBean.possuiAcessoMultimidia}">
+	<nav class="atlas-menu-lateral-bloco">
+		<h2>MULTIMÍDIA</h2>
+		<ul>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('006')}">
+				<li><h:link title="Clique gerenciar a área Downloads"
+						value="Downloads"
+						outcome="/admin/multimidia/downloads/exibirDownloads.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('005')}">
+				<li><h:link title="Clique gerenciar a área Publicações"
+						value="Publicações"
+						outcome="/admin/multimidia/publicacoes/exibirPublicacoes.xhtml" /></li>
+			</c:if>
+			<c:if
+				test="#{autenticarUsuarioBean.isPossuiAcessoFuncionalidade('007')}">
+				<li><h:link title="Clique gerenciar a área Vídeos"
+						value="Vídeos" outcome="/admin/multimidia/videos/exibirVideos.xhtml" />
+				</li>
+			</c:if>
+		</ul>
+	</nav>
+</c:if>
+</html>

@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+<style>
+.label_tabela_custom {
+	white-space: normal !important;
+	font-size: 1.1em !important;
+}
+
+.label{
+	font-family: "open_sanssemibold", Arial, Helvetica, sans-serif;
+	font-size: 1.2em !important;
+}
+
+</style>
+	<h:outputStylesheet name="./css/default.css"/>
+	<h:outputStylesheet name="./css/fontes.css"/>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> </link>
+	#{manterMensageriaBean.init()}
+	<div>
+
+		<h:panelGroup id="atlas_linha" layout="block">
+			<atlas:dataTable bean="manterMensageriaBean" id="dataTableTermos" value="#{manterMensageriaBean.mensagens}">
+				<p:column headerText="N°" styleClass="label_tabela_custom">
+					<h:outputText value="#{registro.id}" style="font-size: small; width:10px !important;" />
+				</p:column>
+
+				<p:column headerText="Dt. Envio" styleClass="label_tabela_custom" style="width:21px !important;">
+					<h:outputText value="#{registro.dataEnvio}" style="font-size: small"/>
+				</p:column>
+
+				<p:column headerText="Assunto" styleClass="label_tabela_custom">
+					<h:outputText value="#{registro.assunto}" style="font-size: small"/>
+				</p:column>
+
+				<p:column headerText="De" styleClass="label_tabela_custom" style="width:21px !important;">
+					<h:outputText value="#{registro.remetente}" style="font-size: small"/>
+				</p:column>
+
+				<p:column headerText="Nº Dest." styleClass="label_tabela_custom" style="width:21px !important;">
+					<h:outputText value="#{registro.totalDestinatarios}" style="font-size: small"/>
+				</p:column>
+
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton value="" style="display: inline-block;  font-family: FontAwesome;  font-style: normal;
+					height: 22px; font-size: 1.4em; color: #1659BF; background-color: #A8A8A8 ;
+					font-weight: normal; line-height: 1.2; -webkit-font-smoothing: antialiased;  -moz-osx-font-smoothing: grayscale;" 
+					styleClass="fa fa-pencil" title="Editar" ajax="false" action="#{manterMensageriaBean.editarMensagem(registro)}"/>
+				</p:column>
+
+				<p:column headerText="" style="width:21px !important;">						
+					<p:commandButton value="" style="display: inline-block;  font-family: FontAwesome;  font-style: normal;
+					height: 22px; font-size: 1.4em; color: #1659BF; background-color: #A8A8A8 ;
+					font-weight: normal; line-height: 1.2; -webkit-font-smoothing: antialiased;  -moz-osx-font-smoothing: grayscale;"  
+					styleClass="fa fa-group" title="Ver Destinatários" 
+					ajax="true" action="#{manterMensageriaBean.consultarDestinatarios(registro)}" 
+					update=":form:consultaDestinatario"
+					oncomplete="dlgConsultarDestinatario.show();"/> 
+						
+				</p:column>
+
+			</atlas:dataTable>
+		</h:panelGroup>
+	</div>
+<br /> <br />
+
+	<fieldset class="atlas-miolo-logado-fieldset">
+		<legend>Estatística da Consulta realizada </legend>
+
+		<br />
+			<h:outputText styleClass="label" value="Total De Mensagens Enviadas: " />
+			<h:outputText styleClass="label" value="#{manterMensageriaBean.totalMensagensEnviadas}" />
+		<br />
+
+			<h:outputText styleClass="label" value="Total De Destinatários: " />
+			<h:outputText styleClass="label" value="#{manterMensageriaBean.totalDestinatarios}" />
+		<br />
+
+			<h:outputText styleClass="label" value="Total De Mensagens Abertas: " />
+			<h:outputText styleClass="label" value="#{manterMensageriaBean.totalMensagensAbertas}" />
+		<br />
+			
+	</fieldset>
+	
+	<!-- CONSULTA DOS DESTINÁRIOS -->
+
+	<p:dialog header="Consultar Destinatários" id="dialogConsultarDestinatario"
+		widgetVar="dlgConsultarDestinatario" width="500px;" height="300px;"
+		style="z-index:5;" resizable="false" modal="true" closable="true">
+		<p:panel  id="consultaDestinatario" style="border: none !important;">
+
+			<div class="div-miolo ">
+
+				<h:panelGroup id="atlas_linha_destinatarios" layout="block">
+
+					<p:scrollPanel id="spDataTableDestinatarios" mode="native" style="width:500px;height:300px">
+						<p:dataTable var="registro"
+							value="#{manterMensageriaBean.listaDestinatarios}"
+							emptyMessage="Nenhum registro encontrado"
+							style="border: 1px solid #45897A; border-top: none;"
+							id="dataTableDestinatarios" scrollable="true" scrollHeight="200">
+
+							<p:column headerText="Órgão" styleClass="label_tabela_custom">
+								<h:outputText value="#{registro.nomeOrgao}"
+									style="font-size: small; word-wrap:break-word; " />
+							</p:column>
+
+							<p:column headerText="Responsável"
+								styleClass="label_tabela_custom">
+								<h:outputText value="#{registro.nomeDestinatario}"
+									style="font-size: small; word-wrap:break-word;" />
+							</p:column>
+
+							<p:column headerText="E-mail Cadastrado"
+								styleClass="label_tabela_custom">
+								<h:outputText value="#{registro.emailDestinatario}"
+									style="font-size: small;" />
+							</p:column>
+
+						</p:dataTable>
+					</p:scrollPanel>
+				</h:panelGroup>
+			</div>
+
+			<div class="atlas-miolo-logado-lista-acoes">
+				<div class="atlas-miolo-logado-inline">
+					<h:commandButton
+						onclick="dlgConsultarDestinatario.hide();"
+						value="FECHAR" styleClass="atlas-button-interno"
+						title="Clique para fechar a consulta dos destinatários"
+						style="font-size: 1.2em !important;" />
+				</div>
+				
+			</div>
+		</p:panel>
+	</p:dialog>
+</ui:composition>

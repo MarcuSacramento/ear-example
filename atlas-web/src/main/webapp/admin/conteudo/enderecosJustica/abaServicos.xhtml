@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+	<div>
+       	<p:commandButton value="ADICIONAR" 
+       		actionListener="#{manterOrgaoBean.limparFiltroDlgServicos}"
+       		ajax="true"
+       		oncomplete="dlgSelecionarServicos.show();"
+       		update="painelServicos" />
+	</div>
+	
+	<br />
+	<p:dataTable var="servico"
+		value="#{manterOrgaoBean.entidade.servicos}"
+		emptyMessage="Nenhum registro encontrado"
+		style="border: 1px solid #45897A; border-top: none;"
+		id="tabelaServicos" 
+		scrollable="true" scrollHeight="200">
+
+		<p:column headerText="Nome" width="30%" style="white-space:normal !important; font-size: 1.1em !important;">
+			<h:outputText value="#{servico.nome}"  />
+		</p:column>
+		
+		<p:column headerText="" style="width:21px !important;">
+			<p:commandButton action="#{manterOrgaoBean.excluirServico(servico)}"
+				update=":form:atlas_linha" value="" style="height: 22px !important;" styleClass="icone"
+				ajax="false" onclick="if (!confirm('#{msg.MSG5}')) return false;" /> 
+		</p:column>
+		
+	</p:dataTable >
+	
+	<p:dialog header="Selecionar serviços" widgetVar="dlgSelecionarServicos"
+		width="500px;" height="200px;" style="z-index:5;" resizable="false" modal="true">
+		<p:panel id="painelServicos" style="border: none !important; ">
+			<div class="atlas-miolo-logado-linha">
+				<div class="atlas-miolo-logado-linha-label-full">
+					<label for="atlas-formulario-nome-servico" style="font-size:1.2em; color: rgb(0, 0, 0);">Nome:*</label><br />
+				</div>
+			
+				<div class="atlas-miolo-logado-linha-campo-full">
+					<h:inputText maxlength="512" id="atlas-formulario-nome-servico"
+						name="atlas-formulario-nome-servico"
+						value="#{manterOrgaoBean.servicoEmFoco.nome}"
+						styleClass="atlas-input-formata atlas-input-470"
+						style=" height: 20px !important; position: block !important; background-color: rgb(0,0,0,1) !important;
+						border: 1px solid rgb(21,89,191) !important; color: rgb(255,255,255,1) !important;
+						box-shadow:none; width: 520px !important; font-size: 1.1em !important;"/>
+					<p:watermark for="atlas-formulario-nome-servico"
+						value="Nome do serviço" />
+				</div>
+			</div>
+			
+			<div class="atlas-miolo-logado-lista-acoes">
+				<p:commandButton value="Pesquisar"
+					update="pnlFiltroResultadoServicos, btnSelecionarServicos"
+					actionListener="#{manterOrgaoBean.pesquisarServicos}" />
+			</div>
+			
+			<div style="width: 700px !important; height: 250px;">
+				<p:panel id="pnlFiltroResultadoServicos" layout="block" style="border: none !important; ">
+					<p:dataTable 
+						id="dataTableServicosParaSelecao" var="registro" 
+						value="#{manterOrgaoBean.servicosParaSelecao}"
+						emptyMessage="Nenhum registro encontrado"
+						style="border: 1px solid #45897A; border-top: none;"
+						selection="#{manterOrgaoBean.servicosSelecionados}" rowKey="#{registro.id}"
+						scrollable="true" scrollHeight="200">
+						
+						<p:column selectionMode="multiple" style="width:14px;text-align:center"/>
+						
+						<p:column headerText="Nome" style="white-space:normal !important; font-size: 1.1em !important;"	>
+							<h:outputText value="#{registro.nome}" style="font-size: small;" styleClass="label_tabela" />
+						</p:column>
+
+					</p:dataTable>
+				</p:panel>
+			</div>
+			
+			<div class="atlas-miolo-logado-lista-acoes">
+				<p:commandButton id="btnSelecionarServicos" value="SELECIONAR"
+					actionListener="#{manterOrgaoBean.adicionarServicoAction}"
+					update="messagesDialog, tabelaServicos"
+					oncomplete="dlgSelecionarServicos.hide();"/>
+			</div>
+		</p:panel>
+	</p:dialog>
+	
+	
+</ui:composition>

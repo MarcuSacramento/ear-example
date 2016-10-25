@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags">
+
+	<div>
+		<h:panelGroup id="atlas_linha" layout="block">
+			<atlas:dataTable bean="manterCartilhaBean" id="dataTableParceiros" value="#{manterCartilhaBean.cartilhas}">
+				<p:column headerText="Publicação" style="white-space:normal !important; font-size: 1.1em !important;">
+					<h:outputText value="#{registro.titulo}" style="font-size: small;" styleClass="label_tabela" />
+				</p:column>
+
+				<p:column headerText="Arquivo" style="white-space:normal !important; font-size: 1.1em !important;" width="28%">
+					<h:outputText value=" Arquivo no formato #{manterCartilhaBean.recuperarTipoArquivo(registro)}" style="font-size: small"	styleClass="label_tabela"/>
+				</p:column>
+
+				<p:column headerText=""  style="width:21px !important;">
+					<p:commandButton action="#{manterCartilhaBean.editar(registro.id)}" ajax="false" value="" style="height: 22px !important;" styleClass="icone2" />
+				</p:column>
+
+				<p:column headerText="" style="width:21px !important;">
+					<p:commandButton action="#{manterCartilhaBean.excluir(registro)}" ajax="false" update=":form:atlas_linha" value="" style="height: 22px !important;" 
+						styleClass="icone"	rendered="#{autenticarUsuarioBean.isPossuiAcessoAdministrador('005')}"
+						onclick="if (!confirm('#{msg.MSG5}')) return false;" /> 
+				</p:column>
+			</atlas:dataTable>
+		</h:panelGroup>
+	</div>
+</ui:composition>

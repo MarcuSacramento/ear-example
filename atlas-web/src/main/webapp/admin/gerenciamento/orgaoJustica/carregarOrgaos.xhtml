@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_atlas.xhtml">
+
+	<ui:define name="conteudo">
+		<h:head>
+			<title>Admin | Carregar Órgãos</title>
+		</h:head>
+		
+		<script type="text/javascript">
+			function adicionarCirculos() {
+
+				map = cliMap.getMap();
+
+				var markers = cliMap.cfg.markers;
+
+				var markerCluster = new MarkerClusterer(map, markers);
+			}
+		</script>
+
+		<script type="text/javascript"
+			src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript"
+			src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
+
+#{carregarOrgaosBean.init()}
+<div>
+			<h:messages id="messages" globalOnly="true"
+				infoClass="atlas_mensagem_positivo"
+				warnClass="atlas_mensagem_alerta" errorClass="atlas_mensagem_erro" />
+			<h:panelGroup styleClass="atlas-miolo-conteudo-limpo">
+				<h:panelGrid styleClass="atlas-miolo-conteudo-filtro" columns="2" >
+					<h:outputLabel value="Id de início: " />
+					<p:inputText id="numeroInicioRegistro"
+						value="#{carregarOrgaosBean.numeroInicioRegistro}"
+						label="Iniciar no registro:"></p:inputText>
+					
+					<h:outputLabel value="Quantidade de registros: " />
+					<p:inputText id="quantidadeRegistros"
+						value="#{carregarOrgaosBean.quantidadeRegistros}"
+						label="Número de registros a carregar:"></p:inputText>
+				</h:panelGrid>
+				<h:panelGrid styleClass="atlas-miolo-conteudo-filtro" columns="3" >
+					<h:outputLabel value="Estado:"/> <br />
+					<h:selectOneMenu id="ufs" value="#{carregarOrgaosBean.uf}"
+						converter="selectItemConverter"
+						styleClass="atlas-select-330 atlas-select-formata">
+						<p:ajax event="change" update="municipios" process="@this" />
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{carregarOrgaosBean.ufs}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}" />
+					</h:selectOneMenu>
+					<h:outputLabel value="Município:"/><br />
+					<h:selectOneMenu id="municipios" value="#{carregarOrgaosBean.municipioPesquisa}"
+						converter="selectItemConverter"
+						styleClass="atlas-select-330 atlas-select-formata">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{carregarOrgaosBean.municipios}" var="municipio" itemLabel="#{municipio.nome}" />
+					</h:selectOneMenu>
+					<h:outputLabel value="Tipo de órgão:"/><br />
+					<h:selectOneMenu id="tipoOrgaos" value="#{carregarOrgaosBean.tipoOrgaoPesquisa}"
+						converter="selectItemConverter"
+						styleClass="atlas-select-330 atlas-select-formata">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{carregarOrgaosBean.tipoOrgaos}" var="tipoOrgao" itemLabel="#{tipoOrgao.nome}" />
+					</h:selectOneMenu>
+				</h:panelGrid>
+			</h:panelGroup>
+			<p:commandButton value="Carregar Órgãos por filtro"
+				update="mapa, listaNaoEncontrados, messages, numeroInicioRegistro"
+				process="@this, ufs, municipios, tipoOrgaos"
+				actionListener="#{carregarOrgaosBean.carregarOrgaosPorFiltro()}"
+				oncomplete="adicionarCirculos();" />
+			
+			<p:commandButton value="Carregar Órgãos"
+				update="mapa, listaNaoEncontrados, messages, numeroInicioRegistro"
+				process="@this, numeroInicioRegistro, quantidadeRegistros"
+				actionListener="#{carregarOrgaosBean.carregarOrgaos(false)}"
+				oncomplete="adicionarCirculos();" />
+
+			<p:commandButton value="Carregar Órgãos Sem Latitude"
+				update="mapa, listaNaoEncontrados, messages, numeroInicioRegistro"
+				process="@this, numeroInicioRegistro, quantidadeRegistros"
+				actionListener="#{carregarOrgaosBean.carregarOrgaos(true)}"
+				oncomplete="adicionarCirculos();" />
+
+			<h:commandButton value="Gerar CSV Seccionais OAB"
+				actionListener="#{carregarOrgaosBean.gerarCSVSeccionais()}" />
+
+			<h:commandButton value="Gerar CSV Advogados"
+				actionListener="#{carregarOrgaosBean.gerarCSVAdvogados()}" />
+
+			<h:commandButton value="Gerar Total de Inscritos por Estado"
+				actionListener="#{carregarOrgaosBean.gerarCSVTotalInscritosPorEstado}" />
+
+			<h:commandButton value="Carregar Coordenadas Municípios"
+				actionListener="#{carregarOrgaosBean.carregarCoordenadasMunicipios()}" />
+			<br />
+		</div>
+		<p:gmap id="mapa"
+			center="#{carregarOrgaosBean.latitudeBase}, #{carregarOrgaosBean.longitudeBase}"
+			zoom="#{carregarOrgaosBean.zoom}" type="ROADMAP" widgetVar="cliMap"
+			fitBounds="true" model="#{carregarOrgaosBean.mapModel}"
+			style="width:100%;height:800px">
+			<p:ajax event="overlaySelect"
+				listener="#{carregarOrgaosBean.onMarkerSelect}" />
+
+			<p:gmapInfoWindow>
+				<p:outputPanel style="text-align:center;display:block;margin:auto:">
+
+					<h:outputText value="#{carregarOrgaosBean.marker.title}" />
+
+				</p:outputPanel>
+
+			</p:gmapInfoWindow>
+		</p:gmap>
+
+
+		<h:outputLabel value="Órgãos não encontrados:" />
+		<br />
+		<p:dataList value="#{carregarOrgaosBean.orgaosNaoEncontrados}"
+			var="orgao" itemType="disc" id="listaNaoEncontrados">  
+    			#{orgao.nome} - #{orgao.endereco} - #{orgao.municipio.nome} - #{orgao.municipio.uf.sigla}
+		</p:dataList>
+
+	</ui:define>
+</ui:composition>

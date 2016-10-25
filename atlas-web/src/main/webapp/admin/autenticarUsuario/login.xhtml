@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:atlas="http://epaj.dpu.gov.br/tags"
+	template="/admin/template/template_login.xhtml">
+	
+	<ui:define name="conteudo"> 
+	
+		<h:head>
+			<title>Área Administrativa | Autenticação de Usuário</title>
+		</h:head>
+		<div class="atlas-miolo">
+		
+		<h:messages id="messages" globalOnly="true"
+				infoClass="atlas-mensagem-positivo"
+				warnClass="atlas-mensagem-alerta" errorClass="atlas-mensagem-erro" />
+		
+			<h2>Acesso Identificado</h2>
+    		<div class="atlas-miolo-login-form">
+
+				<a name="atlas-ancora-login"></a>
+				<p><span style="font-weight:bold; font-size: 0.9em">Usuário:</span></p>
+				<p>
+					<h:inputText value="#{autenticarUsuarioBean.login}"
+						styleClass="atlas-input-formata atlas-input-280" id="atlas-loga-usuario" name="atlas-loga-usuario"
+						title="Informe o seu usuário para acessar o sistema"/>
+				</p>
+
+				<p><span style="font-weight:bold;font-size: 0.9em">Senha:</span></p>
+				<p>
+					<h:inputSecret value="#{autenticarUsuarioBean.senha}"
+						styleClass="atlas-input-formata atlas-input-280" id="atlas-loga-senha" name="atlas-loga-senha"
+						title="Informe a sua senha de acesso ao sistema" autocomplete="off"/>
+				</p>
+				 <div class="atlas-loga-botao">
+
+				 
+  					<p><h:commandButton value="ACESSAR"
+						title="Clique para efetuar o acesso ao sistema"
+						action="#{autenticarUsuarioBean.login}" update="messages"
+						styleClass="atlas-button" 
+						name="atlas-loga-botao"
+						id="atlas-loga-botao"/></p>
+				</div>
+ 				<div class="atlas-loga-link">
+					<h:link style=" font-size: 1.2em !important;"
+							title="Clique aqui caso tenha esquecido a sua senha" value="Não consegue acessar a sua conta?"
+							outcome="/admin/autenticarUsuario/redefinirSenhaUsuario.xhtml" />
+							
+				</div> 
+				<br/>
+			</div>
+			<!-- INÍCIO: Bloco com informações de acesso /-->
+	   			<div class="atlas-miolo-login-instrucoes">
+	    			<p><span style="font-weight:bold">Seja bem vindo ao sistema de gerenciamento do Atlas de Acesso à Justiça.</span></p>
+	        		<p>Para acessar o sistema, informe o seu login (e-mail) e senha.</p>
+	    		</div>
+			<!-- FIM: Bloco com informações de acesso /-->
+		</div>
+	 </ui:define>
+
+</ui:composition>
+
